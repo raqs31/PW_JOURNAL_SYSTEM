@@ -46,6 +46,32 @@
 
 				</p:dataTable>
 			</p:tab>
+			<p:tab title="User table">
+				<p:dataTable id="tUserTestTable" value="#{testBean.users}"
+					resizableColumns="true" var="u" border="1" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15">
+					<p:column id="cName" resizable="true">
+						<f:facet name="header">
+							<h:outputText value="Imię" />
+						</f:facet>
+						<h:outputText value="#{u.name}" />
+					</p:column>
+					<p:column id="cLogin" resizable="true">
+						<f:facet name="header">
+							<h:outputText value="Login" />
+						</f:facet>
+						<h:outputText value="#{u.login}" />
+					</p:column>
+					<p:column id="cEmail" resizable="true">
+						<f:facet name="header">
+							<h:outputText value="e-mail" />
+						</f:facet>
+						<h:outputText value="#{u.email}" />
+					</p:column>
+				</p:dataTable>
+			</p:tab>
 			<p:tab title="ringTestTab">
 				<p:ring id="ringTest" value="#{testBean.testList}" var="car"
 					styleClass="image-ring" easing="easeInOutBack">

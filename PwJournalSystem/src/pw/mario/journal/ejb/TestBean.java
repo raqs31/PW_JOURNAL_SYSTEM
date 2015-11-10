@@ -1,4 +1,4 @@
-package pw.mario.journal.ejb;
+	package pw.mario.journal.ejb;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -12,11 +12,13 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
 
 import lombok.Data;
+import pw.mario.journal.model.User;
 
 @Data
 @ManagedBean(name="testBean")
@@ -27,6 +29,7 @@ public class TestBean implements Serializable {
 	private String selected;
 	private List<String> testList;
 	private List<Theme> themes;
+	private List<User> users;
 	
 	@PersistenceContext(unitName="PwJournalSystem")
 	EntityManager em;
@@ -92,9 +95,9 @@ public class TestBean implements Serializable {
         themes.add(new Theme(35, "UI-Darkness", "ui-darkness"));
         themes.add(new Theme(36, "UI-Lightness", "ui-lightness"));
         themes.add(new Theme(37, "Vader", "vader"));
-        System.out.println("##################################################################################");
-        
-        System.out.println("EM: " + em);
+
+        Query q = em.createQuery("SELECT u FROM User u"); 
+        users = q.getResultList();
     }
     
     @Data
