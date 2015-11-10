@@ -8,17 +8,15 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.persistence.Query;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
 
 import lombok.Data;
-import pw.mario.journal.model.User;
-import pw.mario.journal.service.DBTransactionService;
 
 @Data
 @ManagedBean(name="testBean")
@@ -29,10 +27,9 @@ public class TestBean implements Serializable {
 	private String selected;
 	private List<String> testList;
 	private List<Theme> themes;
-	private List<User> users;
 	
-	@ManagedProperty(value="#{dbSession}")
-	DBTransactionService db;
+	@PersistenceContext(unitName="PwJournalSystem")
+	EntityManager em;
 	
 	public TestBean() {
 		testList = new LinkedList<>();
@@ -49,6 +46,7 @@ public class TestBean implements Serializable {
 	public void onTabOpen(TabChangeEvent e) {
 		FacesMessage msg = new FacesMessage("TabChange", e.getTab().getTitle());
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		System.out.println("EM: " + em);
 	}
 	
 	
@@ -95,8 +93,8 @@ public class TestBean implements Serializable {
         themes.add(new Theme(36, "UI-Lightness", "ui-lightness"));
         themes.add(new Theme(37, "Vader", "vader"));
         System.out.println("##################################################################################");
-        Query q = db.getEm().createQuery("SELECT u FROM User u");
-        users = q.getResultList();
+        
+        System.out.println("EM: " + em);
     }
     
     @Data

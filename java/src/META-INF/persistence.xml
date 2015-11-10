@@ -9,7 +9,7 @@
 			<property name="hibernate.connection.username" value="mario"/> 
 			<property name="hibernate.connection.password" value="mario"/>
 			<property name="hibernate.connectionn.autocommit" value="false"/>
-			<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+			<property name="hibernate.hbm2ddl.auto" value="drop-create"/>
 			<property name="shared-cache-mode" value="ENABLE_SELECTIVE "/>
 			<property name="javax.persistence.lock.timeout" value="100"/>
 			<property name="javax.persistence.query.timeout" value="100"/>

@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name="USERS",schema="MARIO",
+@Table(name="USERS", schema="MARIO",
 	indexes={
 			@Index(columnList="login", unique=true),
 			@Index(columnList="email", unique=true),

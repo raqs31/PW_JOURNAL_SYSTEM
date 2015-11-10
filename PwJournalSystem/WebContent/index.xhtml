@@ -1,16 +1,15 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 	<title><ui:insert name="title">Jest git</ui:insert></title>
 	<script src="http://maps.google.com/maps/api/js?sensor=true|false"
 		type="text/javascript"></script>
 </h:head>
-
 <h:body>
 	<h1>Hello World PrimeFaces</h1>
 	<h:form id="form">
@@ -27,29 +26,24 @@
 			</p:tab>
 
 			<p:tab title="Tab with table">
-				<p:dataTable id="tTestTable" value="#{testBean.users}"
+				<p:dataTable id="tTestTable" value="#{testBean.themes}"
 					resizableColumns="true" var="u" border="1" rows="10"
 					paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,15">
 					<p:column id="cName" resizable="true">
 						<f:facet name="header">
-							<h:outputText value="Imię" />
+							<h:outputText value="Nazwa" />
 						</f:facet>
 						<h:outputText value="#{u.name}" />
 					</p:column>
 					<p:column id="cLogin" resizable="true">
 						<f:facet name="header">
-							<h:outputText value="Login" />
+							<h:outputText value="Nazwa wyświetlana" />
 						</f:facet>
-						<h:outputText value="#{u.login}" />
+						<h:outputText value="#{u.displayName}" />
 					</p:column>
-					<p:column id="cEmail" resizable="true">
-						<f:facet name="header">
-							<h:outputText value="e-mail" />
-						</f:facet>
-						<h:outputText value="#{u.email}" />
-					</p:column>
+
 				</p:dataTable>
 			</p:tab>
 			<p:tab title="ringTestTab">
@@ -59,7 +53,7 @@
 				</p:ring>
 			</p:tab>
 			<p:tab title="GMAP">
-				<p:gmap center="41.381542, 2.122893" zoom="15" type="terrain"
+				<p:gmap center="52.0, 56.0" zoom="15" type="hybrid"
 					style="width:600px;height:400px;"></p:gmap>
 			</p:tab>
 		</p:accordionPanel>
@@ -69,11 +63,10 @@
 		<h:panelGrid columns="2" cellpadding="10">
 			<p:outputLabel for="basic" value="Basic:" />
 			<p:themeSwitcher id="basic" style="width:165px">
-				<f:selectItems value="#{testBean.themes}"/>
+				<f:selectItems value="#{testBean.themes}" />
 			</p:themeSwitcher>
 
 		</h:panelGrid>
 	</h:form>
 </h:body>
-
 </html>
