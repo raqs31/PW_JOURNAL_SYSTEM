@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Przykład konfiguracji połączenia JTA dla persistence.xml i konfigruracja sterownikow
+	w katalogu domowym JBoss/WildFly w modules\system\layers\base\ utworzyc katalog z modulem
+	w tym przypadku com.oracle a w nim katalog main i tam wrzucis jar ze starownikami oraz 
+	utworzyc plik module.xml z zawartoscia
+	
+<module xmlns="urn:jboss:module:1.3" name="com.oracle">
+
+    <resources>
+        <resource-root path="ojdbc7.jar"/>
+    </resources>
+    <dependencies>
+        <module name="javax.api"/>
+        <module name="javax.transaction.api"/>
+    </dependencies>
+</module>
+	
+ -->
+ <datasources>
+	<datasource jndi-name="java:/OracleDS" pool-name="OracleDS"
+		enabled="true" use-java-context="true">
+		<connection-url>jdbc:oracle:thin:@localhost:1521:xe</connection-url>
+		<driver>oracle</driver>
+		<security>
+			<user-name>MARIO</user-name>
+			<password>mario</password>
+		</security>
+	</datasource>
+	<drivers>
+		<driver name="h2" module="com.h2database.h2">
+			<xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
+		</driver>
+		<driver name="oracle" module="com.oracle" />
+	</drivers>
+</datasources>

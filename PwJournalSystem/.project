@@ -41,11 +41,6 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.m2e.core.maven2Builder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.zeroturnaround.eclipse.rebelXmlBuilder</name>
 			<arguments>
 			</arguments>
@@ -56,7 +51,7 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.zeroturnaround.eclipse.remoting.remotingBuilder</name>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -74,6 +69,5 @@
 		<nature>org.jboss.tools.ws.jaxrs.nature</nature>
 		<nature>org.zeroturnaround.eclipse.jrebelNature</nature>
 		<nature>org.hibernate.eclipse.console.hibernateNature</nature>
-		<nature>org.zeroturnaround.eclipse.remoting.remotingNature</nature>
 	</natures>
 </projectDescription>

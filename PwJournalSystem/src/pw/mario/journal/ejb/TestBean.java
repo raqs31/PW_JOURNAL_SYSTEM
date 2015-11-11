@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.Transactional;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
@@ -23,6 +24,7 @@ import pw.mario.journal.model.User;
 @Data
 @ManagedBean(name="testBean")
 @SessionScoped
+@Transactional
 public class TestBean implements Serializable {
 	private static final long serialVersionUID = 2488630010545497455L;
 	
@@ -39,6 +41,8 @@ public class TestBean implements Serializable {
 		for (int i = 0; i < 20; i++) {
 			testList.add("test"+i);
 		}
+		
+		
 
 	}
 
@@ -98,6 +102,10 @@ public class TestBean implements Serializable {
 
         Query q = em.createQuery("SELECT u FROM User u"); 
         users = q.getResultList();
+        
+        for (User u : users) {
+        	System.out.println(u);
+        }
     }
     
     @Data

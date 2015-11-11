@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name="USERS",
+@Table(name="USERS", schema="MARIO",
 	indexes={
 			@Index(columnList="login", unique=true),
 			@Index(columnList="email", unique=true),
@@ -31,7 +31,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	@Id
 	@Column(name="USER_ID")
-	@SequenceGenerator(name="userSeq", sequenceName ="USERS_SEQ", initialValue=1)
+	@SequenceGenerator(name="userSeq", sequenceName ="USERS_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="userSeq", strategy=GenerationType.SEQUENCE)
 	private long id;
 	
