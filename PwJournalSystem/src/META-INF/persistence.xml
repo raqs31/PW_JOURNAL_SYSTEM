@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <persistence version="2.1"
-	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	
 	<persistence-unit name="PwJournalSystem" transaction-type="JTA">
 		<jta-data-source>java:/OracleDS</jta-data-source>
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
@@ -9,15 +11,21 @@
 		<properties>
 			<property name="hibernate.connectionn.autocommit" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="shared-cache-mode" value="ENABLE_SELECTIVE " />
+			<property name="javax.persistence.lock.timeout" value="100" />
+			<property name="javax.persistence.query.timeout" value="100" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
 		</properties>
 	</persistence-unit>
 	
-	<persistence-unit name="PwJournalSystemLocalTest" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="PwJournalSystemLocalTest"
+		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>pw.mario.journal.model.User</class>
 		<properties>
 			<property name="hibernate.connectionn.autocommit" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 		</properties>
-	</persistence-unit> 
+	</persistence-unit>
 </persistence>

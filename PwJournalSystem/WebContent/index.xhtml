@@ -3,7 +3,9 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:my="http://java.sun.com/jsf/composite/jsf/components"	
+>
 
 <h:head>
 	<title><ui:insert name="title">Jest git</ui:insert></title>
@@ -81,6 +83,11 @@
 			<p:tab title="GMAP">
 				<p:gmap center="52.0, 56.0" zoom="15" type="hybrid"
 					style="width:600px;height:400px;"></p:gmap>
+			</p:tab>
+			<p:tab title="MyComponent">
+	        	<my:rating score="60" /><br />
+    	    	<my:rating score="5" maxScore="10" /><br />
+        		<my:rating score="80" totalStars="5" /><br />
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>

@@ -52,8 +52,7 @@ public class TestBean implements Serializable {
 	}
 	public void onTabOpen(TabChangeEvent e) {
 		FacesMessage msg = new FacesMessage("TabChange", e.getTab().getTitle());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		System.out.println("EM: " + em);
+		FacesContext.getCurrentInstance().addMessage(e.getTab().getId(), msg);
 	}
 	
 	
@@ -100,12 +99,6 @@ public class TestBean implements Serializable {
         themes.add(new Theme(36, "UI-Lightness", "ui-lightness"));
         themes.add(new Theme(37, "Vader", "vader"));
 
-        Query q = em.createQuery("SELECT u FROM User u"); 
-        users = q.getResultList();
-        
-        for (User u : users) {
-        	System.out.println(u);
-        }
     }
     
     @Data
