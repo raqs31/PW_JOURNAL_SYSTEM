@@ -32,6 +32,7 @@ public class TestBean implements Serializable {
 	private List<String> testList;
 	private List<Theme> themes;
 	private List<User> users;
+	private Integer testInt;
 	
 	@PersistenceContext(unitName="PwJournalSystem")
 	EntityManager em;

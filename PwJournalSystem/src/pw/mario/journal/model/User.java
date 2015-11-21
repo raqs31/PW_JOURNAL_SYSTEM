@@ -1,23 +1,24 @@
 package pw.mario.journal.model;
 
-import java.util.Calendar;
-import java.util.Date;
+
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pw.mario.journal.model.ext.AuditTable;
 
 @Data
 @NoArgsConstructor
@@ -28,7 +29,7 @@ import lombok.NoArgsConstructor;
 			@Index(columnList="email", unique=true),
 	}
 )
-public class User {
+public class User extends AuditTable {
 	@Id
 	@Column(name="USER_ID")
 	@SequenceGenerator(name="userSeq", sequenceName ="USERS_SEQ", initialValue=1, allocationSize=1)
@@ -42,28 +43,23 @@ public class User {
 	@Column(name="EMAIL", length=60, unique=true, nullable=false)
 	private String email;
 	
+	@Column(name="PASSWD", length=240, nullable=false)
+	private String passwd;
+	
 	@Column(name="NAME", length=25, nullable=true)
 	private String name;
 	
 	@Column(name="SECOND_NAME", length=25, nullable=true)
 	private String secondName;
 	
-	@Column(name="CREATION_DATE", updatable=false)
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date creationDate;
+
+	@OneToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="USER_SYSTEM_ROLES",
+		joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")},
+		inverseJoinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID")},
+		indexes={@Index(columnList="USER_ID", unique=false)}
+	)
+	private List<SystemRoles> systemRoles;
 	
-	@Column(name="LAST_UPDATE_DATE")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date lastUpdateDate;
-	
-	@PrePersist
-	public void beforeInsert() {
-		setCreationDate(Calendar.getInstance().getTime());
-		setLastUpdateDate(Calendar.getInstance().getTime());
-	}
-	
-	@PreUpdate
-	public void beforeUpdate() {
-		setLastUpdateDate(Calendar.getInstance().getTime());
-	}
+
 }

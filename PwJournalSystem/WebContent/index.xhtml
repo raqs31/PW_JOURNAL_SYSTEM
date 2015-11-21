@@ -89,6 +89,12 @@
     	    	<my:rating score="5" maxScore="10" /><br />
         		<my:rating score="80" totalStars="5" /><br />
 			</p:tab>
+			
+			<p:tab title="Converter Integer on h">
+				<h:inputText id="testConvertnt" value="#{testBean.testInt}">
+					<f:convertNumber type="Integer"/>
+				</h:inputText>
+			</p:tab>
 		</p:accordionPanel>
 	</h:form>
 	<h:form>
