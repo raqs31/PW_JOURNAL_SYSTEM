@@ -52,6 +52,11 @@
                     <properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
                 </authorization>
             </security-realm>
+<!--             <security-realm name="JournalRealm">
+                <authentication> 
+                    <jaas name="journal-jaas-auth" />
+                </authentication>
+            </security-realm> -->
         </security-realms>
         <audit-log>
             <formatters>
@@ -85,7 +90,7 @@
     <profile>
         <subsystem xmlns="urn:jboss:domain:logging:3.0">
             <console-handler name="CONSOLE">
-                <level name="INFO"/>
+                <level name="TRACE"/>
                 <formatter>
                     <named-formatter name="COLOR-PATTERN"/>
                 </formatter>
@@ -120,7 +125,7 @@
                 <level name="TRACE"/>
             </logger>
             <root-logger>
-                <level name="INFO"/>
+                <level name="DEBUG"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILE"/>
@@ -221,7 +226,7 @@
                     <keepalive-time time="100" unit="milliseconds"/>
                 </thread-pool>
             </thread-pools>
-            <default-security-domain value="other"/>
+            <default-security-domain value="journal-jaas-auth"/>
             <default-missing-method-permissions-deny-access value="true"/>
             <log-system-exceptions value="true"/>
         </subsystem>
@@ -314,6 +319,7 @@
         <subsystem xmlns="urn:jboss:domain:remoting:3.0">
             <endpoint worker="default"/>
             <http-connector name="http-remoting-connector" connector-ref="default" security-realm="ApplicationRealm"/>
+            <!-- <connector name="remoting-connector" socket-binding="remoting" security-realm="JournalRealm"/> -->
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:resource-adapters:3.0"/>
         <subsystem xmlns="urn:jboss:domain:request-controller:1.0"/>
@@ -348,24 +354,21 @@
                     </authorization>
                 </security-domain>
                 <security-domain name="journal-jaas-auth">
-                	<authentication>
-                		<login-module flag="required" code="login.database">
-					         <module-option name="dsJndiName" value="java:/OracleDS"/>
-					         <module-option name="principalsQuery" value="select passwd password from users where l"/>
-					         <module-option name="rolesQuery" 
-					         	value="SELECT 
-										ROLE_NAME rolename, 'Roles'
-									FROM
-									USERS u
-									join USER_SYSTEM_ROLES us on (u.user_id = us.user_id)
-									JOIN SYSTEM_ROLES sr
-									ON(sr.system_role_id = us.system_role_id)
-									WHERE
-										u.login = ?"/>
-					         <module-option name="hashAlgorithm" value="SHA-256"/>
-					         <module-option name="hashEncoding" value="base64"/>
-                		</login-module>
-                	</authentication>
+                    <authentication>
+                        <!-- <login-module code="Remoting" flag="optional"> -->
+                             <!-- <module-option name="password-stacking" value="useFirstPass"/> -->
+                        <!-- </login-module> -->
+                        <login-module flag="required" code="Database">
+                             <module-option name="dsJndiName" value="java:/OracleDS"/>
+                             <module-option name="principalsQuery" value="select passwd from users where login = upper(?)"/>
+                             <module-option name="rolesQuery" value="SELECT sr.ROLE_NAME, 'Roles' FROM USERS u join USER_SYSTEM_ROLES us on (u.user_id = us.user_id) JOIN SYSTEM_ROLES sr ON(sr.system_role_id = us.system_role_id) WHERE u.login = upper(?)"/>
+                             <!-- <module-option name="hashAlgorithm" value="SHA-256"/> -->
+                             <!-- <module-option name="hashEncoding" value="BASE64"/> -->
+                             <module-option name="hashCharset" value="UTF-8"/>
+                             <module-option name="password-stacking" value="useFirstPass"/>
+                             <module-option name="hashStorePassword" value="false"/> 
+                        </login-module>
+                    </authentication>
                 </security-domain>
             </security-domains>
         </subsystem>

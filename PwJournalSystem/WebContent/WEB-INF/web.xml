@@ -1,110 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>PwJournalSystem</display-name>
-  <welcome-file-list>
-    <welcome-file>index.xhtml</welcome-file>
-  </welcome-file-list>
-  <servlet>
-    <servlet-name>Faces Servlet</servlet-name>
-    <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>/faces/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>Faces Servlet</servlet-name>
-    <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping>
-  <context-param>
-    <description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
-    <param-name>javax.faces.PROJECT_STAGE</param-name>
-    <param-value>Development</param-value>
-  </context-param>
-  <context-param>
-    <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
-    <param-value>resources.application</param-value>
-  </context-param>
-  
-   <login-config>
-      <auth-method>FORM</auth-method>
-      <realm-name>journal-jaas-auth</realm-name>
-      <form-login-config>
-         <form-login-page>/login.html</form-login-page>
-         <form-error-page>/access-denied.html</form-error-page>
-      </form-login-config>
-   </login-config>
-  
-   <security-constraint>
-      <display-name>pages_auth</display-name>
-      <web-resource-collection>
-         <web-resource-name>pages_auth</web-resource-name>
-         <url-pattern>/*</url-pattern>
-      </web-resource-collection>
-      <auth-constraint>
-         <role-name>administrator</role-name>
-      </auth-constraint>
-   </security-constraint>
-   <security-role>
-      <role-name>administrator</role-name>
-   </security-role>
-  
-  <error-page>
-    <error-code>401</error-code>
-    <location>/errors/general-error.html</location>
-  </error-page>
-  <error-page>
-    <error-code>403</error-code>
-    <location>/errors/general-error.html</location>
-  </error-page>
-  <error-page>
-    <error-code>404</error-code>
-    <location>/errors/404.html</location>
-  </error-page>
-  <error-page>
-    <error-code>500</error-code>
-    <location>/errors/general-error.html</location>
-  </error-page>
-  <error-page>
-    <error-code>503</error-code>
-    <location>/errors/general-error.html</location>
-  </error-page>
-  
-  
-  
-  <session-config>
-    <session-timeout>10</session-timeout>
-  </session-config>
-  
-  <context-param>
-    <param-name>primefaces.THEME</param-name>
-    <param-value>glass-x</param-value>
-  </context-param>
-  
-  
-  
-  
-  
-  
-  <mime-mapping>
-    <extension>eot</extension>
-    <mime-type>application/vnd.ms-fontobject</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>otf</extension>
-    <mime-type>font/opentype</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>ttf</extension>
-    <mime-type>application/x-font-ttf</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>woff</extension>
-    <mime-type>application/x-font-woff</mime-type>
-  </mime-mapping>
-  <mime-mapping>
-    <extension>svg</extension>
-    <mime-type>image/svg+xml</mime-type>
-  </mime-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>PwJournalSystem</display-name>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<context-param>
+		<description>State saving method: 'client' or 'server' (=default). See JSF Specification 2.5.2</description>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Development</param-value>
+	</context-param>
+	<context-param>
+		<param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+		<param-value>resources.application</param-value>
+	</context-param>
+
+	<login-config>
+		<auth-method>FORM</auth-method>
+		<realm-name>journal-jaas-auth</realm-name>
+		<form-login-config>
+			<form-login-page>/auth/login.html</form-login-page>
+			<form-error-page>/auth/access-denied.html</form-error-page>
+		</form-login-config>
+	</login-config>
+
+	<security-constraint>
+		<display-name>pages_auth</display-name>
+		<web-resource-collection>
+			<web-resource-name>pages_auth</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<auth-constraint>
+			<role-name>ADMIN</role-name>
+			<role-name>USER</role-name>
+		</auth-constraint>
+	</security-constraint>
+
+	<security-role>
+		<role-name>ADMIN</role-name>
+	</security-role>
+	<security-role>
+		<role-name>USER</role-name>
+	</security-role>
+
+	<error-page>
+		<error-code>401</error-code>
+		<location>/errors/general-error.html</location>
+	</error-page>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/errors/general-error.html</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/errors/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/errors/general-error.html</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/errors/general-error.html</location>
+	</error-page>
+
+
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>glass-x</param-value>
+	</context-param>
+
+
+
+
+
+
+	<mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/vnd.ms-fontobject</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>otf</extension>
+		<mime-type>font/opentype</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>application/x-font-ttf</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>woff</extension>
+		<mime-type>application/x-font-woff</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>svg</extension>
+		<mime-type>image/svg+xml</mime-type>
+	</mime-mapping>
 </web-app>

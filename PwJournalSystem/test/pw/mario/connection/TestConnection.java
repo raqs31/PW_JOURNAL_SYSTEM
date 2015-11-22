@@ -8,6 +8,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.jboss.security.auth.spi.Util;
 import org.junit.Test;
 
 import pw.mario.journal.model.User;
@@ -17,6 +18,7 @@ public class TestConnection {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testEclipseLink() {
+		System.out.println(Util.createPasswordHash("SHA-256", "BASE64", null, null,"test"));
 		EntityManagerFactory emf;
 		EntityManager em;
 		emf = Persistence.createEntityManagerFactory("PwJournalSystem");
