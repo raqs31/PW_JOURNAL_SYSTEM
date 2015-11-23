@@ -24,13 +24,12 @@ public class ArticleDAOImpl extends AbstractDAOImpl implements ArticleDAO {
 		ver.setLastVersion(Boolean.TRUE);
 		ver.setStatus("WRK");
 		ver.setArticle(a);
-//		a.setManagementId(us);
+		a.setManagementId(us);
 		List<ArticleVersion> versions = new LinkedList<>();
 		versions.add(ver);
 		a.setVersions(versions);
-		
+
 		em.persist(a);
-		
 
 	}
 

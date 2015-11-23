@@ -16,6 +16,7 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -35,8 +36,9 @@ public class Article extends AuditTable {
 	@GeneratedValue(generator="articleSeq", strategy=GenerationType.SEQUENCE)
 	private long articleId;
 
-	
-//	private User managementId;
+	@ManyToOne
+	@JoinColumn(name="MANAGEMENT_USER_ID", referencedColumnName="USER_ID",  updatable=true, nullable=false)
+	private User managementId;
 	
 	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinTable(
