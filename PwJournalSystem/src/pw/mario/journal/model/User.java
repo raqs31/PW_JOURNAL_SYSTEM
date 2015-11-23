@@ -3,6 +3,7 @@ package pw.mario.journal.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +18,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.ext.AuditTable;
 
 @Data
+@EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @Entity
 @Table(name="USERS", schema="MARIO",
@@ -53,7 +56,7 @@ public class User extends AuditTable {
 	private String secondName;
 	
 
-	@OneToMany(fetch=FetchType.LAZY)
+	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name="USER_SYSTEM_ROLES",
 		joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")},
 		inverseJoinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID")},
