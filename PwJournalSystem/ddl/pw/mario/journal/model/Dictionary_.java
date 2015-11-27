@@ -6,7 +6,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import pw.mario.journal.model.dictionaries.DictionaryId;
 import pw.mario.locale.LocaleEnum;
 
-@Generated(value="Dali", date="2015-11-23T23:00:12.409+0100")
+@Generated(value="Dali", date="2015-11-25T19:41:46.076+0100")
 @StaticMetamodel(Dictionary.class)
 public class Dictionary_ {
 	public static volatile SingularAttribute<Dictionary, DictionaryId> id;
@@ -16,7 +16,7 @@ public class Dictionary_ {
 	public static volatile SingularAttribute<Dictionary, String> attr2;
 	public static volatile SingularAttribute<Dictionary, String> attr3;
 	public static volatile SingularAttribute<Dictionary, String> attr4;
-	public static volatile SingularAttribute<Dictionary, LocaleEnum> locale;
 	public static volatile SingularAttribute<Dictionary, Long> nAttr1;
 	public static volatile SingularAttribute<Dictionary, Long> nAttr2;
+	public static volatile SingularAttribute<Dictionary, LocaleEnum> locale;
 }

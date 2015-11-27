@@ -21,8 +21,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name="DICTIONARIES", schema="MARIO")
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="DICTIONARY_NAME")
 public class Dictionary {
 	
 	@EmbeddedId
@@ -55,4 +53,14 @@ public class Dictionary {
 	@Column(name="LOCALE")
 	@Enumerated(EnumType.STRING)
 	private LocaleEnum locale;
+	
+	public Dictionary(String code) {
+		if (id == null)
+			id = new DictionaryId();
+		id.setCode(code);
+	}
+	
+	public Dictionary(String code, String dictionaryName) {
+			id = new DictionaryId(code, dictionaryName);
+	}
 }

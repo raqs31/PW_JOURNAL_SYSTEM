@@ -20,4 +20,19 @@ public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
 		return q.getResultList();
 	}
 
+	@Override
+	public void addUser(User u) {
+		em.persist(u);
+	}
+
+	@Override
+	public void deleteUser(User u) {
+		em.remove(u);
+	}
+
+	@Override
+	public void updateUser(User u) {
+		em.merge(u);
+	}
+
 }
