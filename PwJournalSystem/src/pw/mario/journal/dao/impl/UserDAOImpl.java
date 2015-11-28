@@ -3,9 +3,7 @@ package pw.mario.journal.dao.impl;
 import java.util.List;
 
 import javax.ejb.Singleton;
-import javax.ejb.Stateless;
 import javax.persistence.Query;
-import javax.transaction.Transactional;
 
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.User;

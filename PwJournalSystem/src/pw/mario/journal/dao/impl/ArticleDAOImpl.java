@@ -4,8 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Singleton;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.model.Article;

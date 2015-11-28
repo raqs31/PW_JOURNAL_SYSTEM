@@ -1,9 +1,7 @@
 package pw.mario.journal.dao.impl;
 
 import javax.persistence.EntityManager;
-
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 
 public abstract class AbstractDAOImpl {

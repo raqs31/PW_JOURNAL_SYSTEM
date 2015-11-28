@@ -1,7 +1,6 @@
 package util;
 
 import org.jboss.security.auth.spi.Util;
-import org.junit.Test;
 
 
 public class PasswordGenerator {
