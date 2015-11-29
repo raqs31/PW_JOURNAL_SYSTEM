@@ -26,8 +26,8 @@
     <auth-method>FORM</auth-method>
     <realm-name>journal-jaas-auth</realm-name>
     <form-login-config>
-      <form-login-page>/auth/login.html</form-login-page>
-      <form-error-page>/auth/access-denied.html</form-error-page>
+      <form-login-page>/auth/login.xhtml</form-login-page>
+      <form-error-page>/auth/access-denied.xhtml</form-error-page>
     </form-login-config>
   </login-config>
   <security-constraint>
@@ -49,23 +49,23 @@
   </security-role>
   <error-page>
     <error-code>401</error-code>
-    <location>/errors/general-error.html</location>
+    <location>/errors/general-error.xhtml</location>
   </error-page>
   <error-page>
     <error-code>403</error-code>
-    <location>/errors/general-error.html</location>
+    <location>/errors/general-error.xhtml</location>
   </error-page>
   <error-page>
     <error-code>404</error-code>
-    <location>/errors/404.html</location>
+    <location>/errors/404.xhtml</location>
   </error-page>
   <error-page>
     <error-code>500</error-code>
-    <location>/errors/general-error.html</location>
+    <location>/errors/general-error.xhtml</location>
   </error-page>
   <error-page>
     <error-code>503</error-code>
-    <location>/errors/general-error.html</location>
+    <location>/errors/general-error.xhtml</location>
   </error-page>
   <session-config>
     <session-timeout>10</session-timeout>

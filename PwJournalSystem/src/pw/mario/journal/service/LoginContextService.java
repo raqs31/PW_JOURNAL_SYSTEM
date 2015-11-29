@@ -13,4 +13,9 @@ public class LoginContextService {
 	private SessionContext ctx;
 	
 	public String getLogin() {return ctx.getCallerPrincipal().getName();} 
+	
+	public boolean isLogged() {
+			return ctx.isCallerInRole("USER");
+	
+	}
 }

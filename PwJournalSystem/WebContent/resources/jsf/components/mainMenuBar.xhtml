@@ -1,0 +1,23 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:cc="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui">
+		<cc:interface>
+		</cc:interface>
+		<cc:implementation>
+				<p:menubar id="mainMenuBar">
+						<f:facet name="options">
+								<h:form method="POST" action="j_security_check">
+										<p:outputLabel id="loggedAs" value="#{authBean.ctx.login}" />
+										<p:spacer width="5" />
+										<p:selectOneMenu id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade" converter="#{localeConverter}" onchange="submit()" valueChangeListener="#{authBean.changeLocale}">
+												<f:selectItems value="#{authBean.supportedLocales}" var="locale" itemLabel="#{locale.displayName}" itemValue="#{locale}" />
+												<p:column>
+														#{loc.displayName}
+												</p:column>
+										</p:selectOneMenu>
+										<p:spacer width="5" />
+										<p:button id="bLogout" value="#{auth.logoutTittle}" outcome="/auth/logout" rendered="#{authBean.renderLogout()}" />
+								</h:form>
+						</f:facet>
+				</p:menubar>
+				<p:sticky target="mainMenuBar" />
+		</cc:implementation>
+</ui:component>

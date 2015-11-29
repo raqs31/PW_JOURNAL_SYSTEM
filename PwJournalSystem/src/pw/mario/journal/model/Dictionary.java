@@ -3,14 +3,11 @@ package pw.mario.journal.model;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.dictionaries.DictionaryId;
-import pw.mario.locale.LocaleEnum;
 
 @Data
 @NoArgsConstructor
@@ -46,8 +43,7 @@ public class Dictionary {
 	private long nAttr2;
 	
 	@Column(name="LOCALE")
-	@Enumerated(EnumType.STRING)
-	private LocaleEnum locale;
+	private String  locale;
 	
 	public Dictionary(String code) {
 		if (id == null)

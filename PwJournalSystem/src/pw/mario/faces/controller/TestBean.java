@@ -1,4 +1,4 @@
-package pw.mario.faces;
+package pw.mario.faces.controller;
 
 import java.io.Serializable;
 import java.util.LinkedList;
