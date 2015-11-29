@@ -8,12 +8,10 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
+import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
-@ManagedBean(name = "localeService", eager = true)
-@ApplicationScoped
+@Stateless
 public class LocaleService {
 	private Map<String, Locale> supportedLocales;
 	

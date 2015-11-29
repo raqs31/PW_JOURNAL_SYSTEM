@@ -8,8 +8,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
@@ -22,8 +24,8 @@ import pw.mario.journal.model.User;
 import pw.mario.journal.service.LoginContextService;
 
 @Data
-@ManagedBean(name="testBean")
-@SessionScoped
+@Named("testBean")
+@ViewScoped
 public class TestBean implements Serializable {
 	private static final long serialVersionUID = 2488630010545497455L;
 	
@@ -65,6 +67,5 @@ public class TestBean implements Serializable {
     public void init() {
         
         users = ud.getUsersList();
-        ad.addArticle(new Article(), null);
     }
 }

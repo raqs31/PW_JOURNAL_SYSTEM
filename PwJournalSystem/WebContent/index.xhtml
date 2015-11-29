@@ -27,59 +27,9 @@
 			<p:ajax event="tabChange" listener="#{testBean.onTabOpen}"
 				update=":form:msgs" />
 			<p:tab title="Time">
-				<p:clock mode="server" pattern="HH:mm:ss dd-MM-yyyy"></p:clock>
+				<p:clock mode="server" pattern="HH:mm:ss dd-MM-yyyy"/>
 				<p:commandButton value="Teścik" icon="fa fa-fw fa-remove"
 					type="button" />
-			</p:tab>
-
-			<p:tab title="User table">
-				<p:dataTable id="tUserTestTable" value="#{testBean.users}"
-					resizableColumns="true" var="u" border="1" rows="10"
-					paginator="true"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,15">
-					<p:column id="cName" resizable="true">
-						<f:facet name="header">
-							<h:outputText value="Imię" />
-						</f:facet>
-						<h:outputText value="#{u.name}" />
-					</p:column>
-					<p:column id="cLogin" resizable="true">
-						<f:facet name="header">
-							<h:outputText value="Login" />
-						</f:facet>
-						<h:outputText value="#{u.login}" />
-					</p:column>
-					<p:column id="cEmail" resizable="true">
-						<f:facet name="header">
-							<h:outputText value="e-mail" />
-						</f:facet>
-						<h:outputText value="#{u.email}" />
-					</p:column>
-					<p:column id="cRoles" resizable="false">
-						<f:facet name="header">
-							<h:outputText value="role" />
-						</f:facet>
-						<p:rowToggler />
-					</p:column>
-					<p:rowExpansion>
-						<p:dataList id="dlRoles" value="#{u.systemRoles}" var="sr" lazy="true">
-							#{sr.roleName}, #{sr.description}
-						</p:dataList>
-					</p:rowExpansion>
-				</p:dataTable>
-			</p:tab>
-			<p:tab title="GMAP">
-				<p:gmap center="52.0, 56.0" zoom="15" type="hybrid"
-					style="width:600px;height:400px;"></p:gmap>
-			</p:tab>
-			<p:tab title="MyComponent">
-				<my:rating score="60" />
-				<br />
-				<my:rating score="5" maxScore="10" />
-				<br />
-				<my:rating score="80" totalStars="5" />
-				<br />
 			</p:tab>
 		</p:accordionPanel>
 	</h:form>

@@ -1,4 +1,4 @@
-package pw.mario.journal.filter;
+package pw.mario.faces.filter;
 
 import java.io.IOException;
 
@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
  * Servlet Filter implementation class LogoutFilter
  */
 @NoArgsConstructor
-@WebFilter(urlPatterns = {"/auth/logout.xhtml", "/logout.xhtml"})
+@WebFilter(urlPatterns = {"/auth/logout.xhtml"})
 public class LogoutFilter implements Filter {
 
 	/**

@@ -1,6 +1,7 @@
 package pw.mario.faces.controller;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -21,7 +22,12 @@ import pw.mario.journal.service.LoginContextService;
 @Data
 @ManagedBean(name="authBean")
 @SessionScoped
-public class AuthMenuBarController {
+public class MainMenuBarController implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	LoginContextService ctx; 
 	
@@ -33,7 +39,7 @@ public class AuthMenuBarController {
 	
 	public void logout() throws IOException {
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-        Logger.getLogger(AuthMenuBarController.class).debug("Trying to logout user");
+        Logger.getLogger(MainMenuBarController.class).debug("Trying to logout user");
         session.invalidate();
     }
 	
@@ -49,5 +55,9 @@ public class AuthMenuBarController {
 	
 	public boolean renderLogout() {
 		return ctx.isLogged();
+	}
+	
+	public boolean renderLogin() {
+		return !ctx.isLogged() && !FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath().contains("login");
 	}
 }

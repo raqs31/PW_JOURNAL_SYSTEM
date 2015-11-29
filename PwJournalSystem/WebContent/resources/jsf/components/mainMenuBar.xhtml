@@ -15,6 +15,7 @@
 										</p:selectOneMenu>
 										<p:spacer width="5" />
 										<p:button id="bLogout" value="#{auth.logoutTittle}" outcome="/auth/logout" rendered="#{authBean.renderLogout()}" />
+										<p:button id="bLogin" value="#{auth.bLogin}" outcome="/auth/login" rendered="#{authBean.renderLogin()}" />
 								</h:form>
 						</f:facet>
 				</p:menubar>

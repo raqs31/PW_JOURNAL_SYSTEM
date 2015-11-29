@@ -1,16 +1,19 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <meta charset="UTF-8" />
-      <title>Login example</title>
-   </head>
-   <body>
-      <form method="POST" action="j_security_check">
-         <label for="username">user name:</label>
-         <input id="username" autofocus="autofocus" placeholder="user name" required="required" type="text" name="j_username"/>
-         <label for="password">password:</label>
-         <input id="password" placeholder="password" required="required" type="password" name="j_password"/>
-         <button type="submit">Login</button>
-      </form>
-   </body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:my="http://java.sun.com/jsf/composite/jsf/components">
+<h:head />
+<h:body>
+		<my:mainMenuBar />
+		<h:form>
+				<p:growl id="growl" life="2000" />
+				<h:panelGrid columns="2">
+						<p:outputLabel for="j_username" value="Login" />
+						<p:inputText type="text" id="j_username" value="#{loginCO.userName}" required="true" />
+						<p:outputLabel for="j_password" value="Password" />
+						<p:password id="j_password" value="#{loginCO.password}" required="true" />
+						<p:commandButton id="submit" value="Login" ajax="true" action="#{loginCO.loginAction()}" update="growl" process="@all" />
+						<p:button id="homePage" value="Strona główna" outcome="/index"/>
+				</h:panelGrid>
+		</h:form>
+</h:body>
 </html>
