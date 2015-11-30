@@ -1,23 +1,23 @@
 package pw.mario.faces.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.service.IDepartmentService;
 
-@ManagedBean("deptPaneCo")
+@ManagedBean(name="deptPaneCo")
 @ViewScoped
 @RolesAllowed({"ADMIN"})
-public class DepartmentPanelController {
+public class DepartmentPanelController implements Serializable {
 	@Inject private IDepartmentService deptService;
 	
 	@Getter @Setter private List<Department> departmentsList;

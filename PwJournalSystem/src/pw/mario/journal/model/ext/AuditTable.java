@@ -39,7 +39,7 @@ public class AuditTable {
 		setLastUpdateDate(current);
 		setCreationDate(current);
 		setObjectVersionNumber(1);
-		//TODO zmieniæ na konkretnego usera
+		//TODO zmieniï¿½ na konkretnego usera
 		setCreatedBy(-1L);
 		setLastUpdateBy(-1L);
 	}
@@ -48,8 +48,7 @@ public class AuditTable {
 	public void beforeUpdate() {
 		Date current = Calendar.getInstance().getTime();
 		setLastUpdateDate(current);
-		//TODO zmieniæ na konkretnego usera
-		setCreatedBy(-1L);
+		//TODO zmieniï¿½ na konkretnego usera
 		setLastUpdateBy(-1L);
 	}
 

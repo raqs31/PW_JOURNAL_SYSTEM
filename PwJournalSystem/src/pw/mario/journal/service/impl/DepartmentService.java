@@ -29,8 +29,7 @@ public class DepartmentService implements IDepartmentService {
 	}
 
 	@Override
-	@Transactional
-	@TransactionAttribute(TransactionAttributeType.MANDATORY)
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void saveDepartment(Department d) {
 		deptDao.addDepartment(d);
 	}
