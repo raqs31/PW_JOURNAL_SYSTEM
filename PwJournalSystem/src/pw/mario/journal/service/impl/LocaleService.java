@@ -1,4 +1,4 @@
-package pw.mario.journal.service;
+package pw.mario.journal.service.impl;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -11,8 +11,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
+import pw.mario.journal.service.ILocaleService;
+
 @Stateless
-public class LocaleService {
+public class LocaleService implements ILocaleService {
 	private Map<String, Locale> supportedLocales;
 	
 	@PostConstruct
@@ -27,10 +29,18 @@ public class LocaleService {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see pw.mario.journal.service.impl.ILocaleService#getLocaleByName(java.lang.String)
+	 */
+	@Override
 	public Locale getLocaleByName(String name) {
 		return supportedLocales.get(name);
 	}
 	
+	/* (non-Javadoc)
+	 * @see pw.mario.journal.service.impl.ILocaleService#getSupportedLocales()
+	 */
+	@Override
 	public List<Locale> getSupportedLocales() {
 		List<Locale> localeList = new LinkedList<>();
 		

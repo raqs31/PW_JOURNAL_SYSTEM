@@ -5,7 +5,7 @@
 <h:body>
 		<my:mainMenuBar />
 		<h:form>
-				<p:growl id="growl" life="2000" />
+				<p:messages id="growl" life="2000" />
 				<h:panelGrid columns="2">
 						<p:outputLabel for="j_username" value="Login" />
 						<p:inputText type="text" id="j_username" value="#{loginCO.userName}" required="true" />

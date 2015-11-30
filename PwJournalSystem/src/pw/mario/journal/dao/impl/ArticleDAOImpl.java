@@ -3,15 +3,17 @@ package pw.mario.journal.dao.impl;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.ejb.Singleton;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.User;
 
-@Singleton
-public class ArticleDAOImpl extends AbstractDAOImpl implements ArticleDAO {
+@Default
+@Dependent
+public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleDAO {
 
 	@Override
 	public void addArticle(Article a, User u) {

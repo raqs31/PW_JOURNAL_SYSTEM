@@ -15,11 +15,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import lombok.Data;
-import pw.mario.journal.service.LocaleService;
-import pw.mario.journal.service.LoginContextService;
+import lombok.Getter;
+import lombok.Setter;
+import pw.mario.journal.service.ILocaleService;
+import pw.mario.journal.service.ILoginService;
 
-@Data
 @ManagedBean(name="authBean")
 @SessionScoped
 public class MainMenuBarController implements Serializable {
@@ -29,13 +29,13 @@ public class MainMenuBarController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	LoginContextService ctx; 
+	private ILoginService ctx; 
 	
 	@Inject
-	LocaleService localeService;
+	private ILocaleService localeService;
 	
-	private Locale currentLocale;
-	private List<Locale> supportedLocales;
+	@Getter @Setter private Locale currentLocale;
+	@Getter private List<Locale> supportedLocales;
 	
 	public void logout() throws IOException {
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
@@ -59,5 +59,9 @@ public class MainMenuBarController implements Serializable {
 	
 	public boolean renderLogin() {
 		return !ctx.isLogged() && !FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath().contains("login");
+	}
+	
+	public String getLogin() {
+		return ctx.getLogin();
 	}
 }

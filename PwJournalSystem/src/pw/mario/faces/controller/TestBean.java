@@ -6,8 +6,6 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -19,9 +17,8 @@ import org.primefaces.event.TabCloseEvent;
 import lombok.Data;
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.dao.UserDAO;
-import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
-import pw.mario.journal.service.LoginContextService;
+import pw.mario.journal.service.ILoginService;
 
 @Data
 @Named("testBean")
@@ -40,7 +37,7 @@ public class TestBean implements Serializable {
 	ArticleDAO ad;
 	
 	@Inject
-	LoginContextService ctx; 
+	ILoginService ctx; 
 	
 	public TestBean() {
 		testList = new LinkedList<>();

@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 
-public abstract class AbstractDAOImpl {
+public abstract class AbstractDAOImpl<T> {
 	@PersistenceContext
 	protected EntityManager em;
 	
@@ -12,19 +12,19 @@ public abstract class AbstractDAOImpl {
 		em.getTransaction().begin();
 	}
 	
-	protected void commit() {
+	public void commit() {
 		em.getTransaction().commit();
 	}
 	
-	protected void rollback() {
+	public void rollback() {
 		em.getTransaction().rollback();
 	}
 	
-	protected void persist(Object o) {
+	public void persist(T o) {
 		em.persist(o);
 	}
 	
-	protected void delete(Object o) {
+	public void delete(T o) {
 		em.remove(o);
 	}
 	

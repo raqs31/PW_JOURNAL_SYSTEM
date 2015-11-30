@@ -6,7 +6,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import pw.mario.journal.model.ext.AuditTable_;
 
-@Generated(value="Dali", date="2015-11-21T21:28:13.049+0100")
+@Generated(value="Dali", date="2015-11-29T21:23:31.569+0100")
 @StaticMetamodel(User.class)
 public class User_ extends AuditTable_ {
 	public static volatile SingularAttribute<User, Long> id;
@@ -16,4 +16,6 @@ public class User_ extends AuditTable_ {
 	public static volatile SingularAttribute<User, String> name;
 	public static volatile SingularAttribute<User, String> secondName;
 	public static volatile ListAttribute<User, SystemRoles> systemRoles;
+	public static volatile SingularAttribute<User, Department> dept;
+	public static volatile SingularAttribute<User, Boolean> isActive;
 }

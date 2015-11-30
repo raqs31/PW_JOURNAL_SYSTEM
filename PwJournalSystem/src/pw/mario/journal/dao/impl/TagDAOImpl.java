@@ -2,13 +2,16 @@ package pw.mario.journal.dao.impl;
 
 import java.util.List;
 
-import javax.ejb.Singleton;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.TagDAO;
+import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Tag;
 
-@Singleton
-public class TagDAOImpl extends AbstractDAOImpl implements TagDAO {
+@Default
+@Dependent
+public class TagDAOImpl extends AbstractDAOImpl<Tag> implements TagDAO {
 
 	@Override
 	public void addTag(Tag t) {

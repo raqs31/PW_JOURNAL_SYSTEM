@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
+>
+<h:head>
+	<title><ui:insert name="title">#{deptRes.deptTable}</ui:insert></title>
+</h:head>
+<h:body>
+	<my:mainMenuBar />
+	<h:form>
+		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		<p:panelGrid columns="2">
+			<f:facet name="header">
+				#{deptRes.hNewDepartment}
+			</f:facet>
+			<p:outputLabel for="deptCode" value="#{deptRes.cDeptName}" />
+			<p:inputText id="deptCode" value="#{deptPaneCo.newDept.deptCode}" />
+			
+			<p:outputLabel for="deptName" value="#{deptRes.cDeptLabel}" />
+			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" />
+			
+			<p:outputLabel for="deptFullName" value="#{deptRes.cDeptFulName}" />
+			<p:inputTextarea id="deptFullName" value="#{deptPaneCo.newDept.description}" />
+			
+			<p:commandButton action="#{deptPaneCo.addDepartment}"/>
+		</p:panelGrid>
+	</h:form>
+	<p:panel id="deptPanel" header="#{deptRes.deptTable}">
+		<p:dataTable id="dtDataTable" resizableColumns="true" var="d" value="#{deptPaneCo.departmentsList}" border="1" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10, 20, 30" filteredValue="#{deptPaneCo.filteredDepartments}" filterDelay="300" lazy="true" sortMode="multiple"
+			expandedRow="true" rowExpandMode="multiple" reflow="true"
+		>
+			<p:column style="width:16px">
+				<p:rowToggler />
+			</p:column>
+			<p:column id="cDeptName" resizable="true" sortBy="#{d.deptCode}" sortable="true" filterBy="#{d.deptCode}">
+				<f:facet name="header">#{deptRes.cDeptLabel}</f:facet>
+				#{d.deptCode}
+			</p:column>
+			<p:column id="cDeptFullName" resizable="true" sortBy="#{d.fullName}" sortable="true" filterBy="#{d.fullName}">
+				<f:facet name="header">#{deptRes.cDeptFulName}</f:facet>
+				#{d.fullName}
+			</p:column>
+			<p:rowExpansion>
+				<p:panelGrid columns="1" style="width:300px">
+					<f:facet name="header">#{deptRes.reDept}</f:facet>
+					<p:outputLabel id="deptDetails" value="#{d.description}" />
+				</p:panelGrid>
+			</p:rowExpansion>
+		</p:dataTable>
+	</p:panel>
+</h:body>
+</html>

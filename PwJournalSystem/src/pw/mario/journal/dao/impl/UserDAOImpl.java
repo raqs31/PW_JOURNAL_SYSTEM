@@ -2,14 +2,16 @@ package pw.mario.journal.dao.impl;
 
 import java.util.List;
 
-import javax.ejb.Singleton;
+import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.Default;
 import javax.persistence.Query;
 
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.User;
 
-@Singleton
-public class UserDAOImpl extends AbstractDAOImpl implements UserDAO {
+@Default
+@Dependent
+public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
 	@SuppressWarnings("unchecked")
 	@Override
