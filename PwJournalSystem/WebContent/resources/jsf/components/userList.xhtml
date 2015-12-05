@@ -1,0 +1,48 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:cc="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
+>
+	<cc:interface>
+		<cc:attribute name="userCC" type="pw.mario.faces.api.IUserList" required="true" />
+	</cc:interface>
+	<cc:implementation>
+		<h:form>
+			<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
+				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{userCC.users}" border="1" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="true" reflow="true" rendered="true"
+				>
+					<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
+						<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
+		    				#{u.login}
+		    		</p:column>
+					<p:column id="cName" resizable="true" sortBy="#{u.name}">
+						<f:facet name="header">#{ccRes.cUserName}</f:facet>
+		    				#{u.name}
+		    		</p:column>
+					<p:column id="cSecondName" resizable="true" sortBy="#{u.secondName}">
+						<f:facet name="header">#{ccRes.cSecondName}</f:facet>
+		    				#{u.secondName}
+		    		</p:column>
+					<p:column id="cEmail" resizable="true" sortBy="#{u.email}">
+						<f:facet name="header">#{ccRes.cUserEmail}</f:facet>
+		    				#{u.email}
+		    		</p:column>
+					<p:column id="cDepartment" resizable="true" sortBy="#{u.dept}">
+						<f:facet name="header">#{ccRes.cUserDepartment}</f:facet>
+		    				#{not empty  u.dept ? u.dept.code : 'n/d'}
+		    		</p:column>
+					<p:column style="width:16px">
+						<p:rowToggler />
+					</p:column>
+					<p:rowExpansion>
+						<p:panelGrid columns="1">
+							<f:facet name="header">TODO</f:facet>
+							<p>TODO system Roles</p>
+						</p:panelGrid>
+					</p:rowExpansion>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
+	</cc:implementation>
+</ui:component>

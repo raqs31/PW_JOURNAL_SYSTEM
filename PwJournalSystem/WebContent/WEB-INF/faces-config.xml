@@ -20,6 +20,10 @@
 			<base-name>bundle.lang.admin.departments</base-name>
 			<var>deptRes</var>
 		</resource-bundle>
+		<resource-bundle>
+			<base-name>bundle.lang.components.component</base-name>
+			<var>ccRes</var>
+		</resource-bundle>
 	</application>
 	<factory>
 		<exception-handler-factory>pw.mario.faces.handler.JournalExceptionHandlerFactory</exception-handler-factory>

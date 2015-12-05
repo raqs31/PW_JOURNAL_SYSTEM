@@ -8,14 +8,18 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
+import lombok.Data;
 import pw.mario.journal.service.ILocaleService;
 
-@Stateless
+@Data
+@Stateful
 public class LocaleService implements ILocaleService {
 	private Map<String, Locale> supportedLocales;
+	
 	
 	@PostConstruct
 	private void init() {
@@ -26,7 +30,6 @@ public class LocaleService implements ILocaleService {
 			Locale locale = localeIter.next();
 			supportedLocales.put(locale.getDisplayName(), locale);
 		}
-
 	}
 
 	/* (non-Javadoc)

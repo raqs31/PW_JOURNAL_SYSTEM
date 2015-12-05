@@ -2,6 +2,8 @@ package pw.mario.journal.dao.impl;
 
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.persistence.Query;

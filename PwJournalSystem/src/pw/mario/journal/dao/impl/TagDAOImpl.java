@@ -6,7 +6,6 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.TagDAO;
-import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Tag;
 
 @Default

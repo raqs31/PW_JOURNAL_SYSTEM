@@ -14,10 +14,10 @@
 				#{deptRes.hNewDepartment}
 			</f:facet>
 			<p:outputLabel for="deptCode" value="#{deptRes.cDeptName}" />
-			<p:inputText id="deptCode" value="#{deptPaneCo.newDept.deptCode}" />
+			<p:inputText id="deptCode" value="#{deptPaneCo.newDept.deptCode}" required="true" />
 			
 			<p:outputLabel for="deptName" value="#{deptRes.cDeptLabel}" />
-			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" />
+			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" required="true"/>
 			
 			<p:outputLabel for="deptFullName" value="#{deptRes.cDeptFulName}" />
 			<p:inputTextarea id="deptFullName" value="#{deptPaneCo.newDept.description}" />
@@ -43,9 +43,11 @@
 				#{d.fullName}
 			</p:column>
 			<p:rowExpansion>
-				<p:panelGrid columns="1" style="width:300px">
+				<p:panelGrid columns="1" >
 					<f:facet name="header">#{deptRes.reDept}</f:facet>
-					<p:outputLabel id="deptDetails" value="#{d.description}" />
+					<p:outputPanel id="deptDetails"  deferred="true" deferredMode="visible" layout="inline" autoUpdate="true">
+						<p>#{d.description}</p>
+					</p:outputPanel>
 				</p:panelGrid>
 			</p:rowExpansion>
 		</p:dataTable>

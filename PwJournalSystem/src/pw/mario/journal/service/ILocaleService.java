@@ -8,5 +8,4 @@ public interface ILocaleService {
 	Locale getLocaleByName(String name);
 
 	List<Locale> getSupportedLocales();
-
 }

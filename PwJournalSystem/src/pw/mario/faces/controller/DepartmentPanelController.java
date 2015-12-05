@@ -18,6 +18,11 @@ import pw.mario.journal.service.IDepartmentService;
 @ViewScoped
 @RolesAllowed({"ADMIN"})
 public class DepartmentPanelController implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Inject private IDepartmentService deptService;
 	
 	@Getter @Setter private List<Department> departmentsList;
