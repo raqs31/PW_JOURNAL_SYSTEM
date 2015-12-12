@@ -3,6 +3,9 @@ package pw.mario.faces.api;
 import java.io.Serializable;
 import java.util.List;
 
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
+
 import pw.mario.journal.model.User;
 
 /**
@@ -19,5 +22,11 @@ public interface IUserList extends Serializable  {
 	
 	void setReadOnly(boolean isReadOnly);
 	
+	User getSelectedUser();
+
+	void setSelectedUser(User u);
 	
+	void onRowSelect(SelectEvent e);
+	
+	void onRowUnselect(UnselectEvent e);
 } 

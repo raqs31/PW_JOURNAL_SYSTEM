@@ -1,14 +1,19 @@
 package pw.mario.faces.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.log4j.Logger;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,31 +27,19 @@ import pw.mario.journal.service.IUserService;
 @ManagedBean(name = "userAdminPanelCo", eager = true)
 @ViewScoped
 @NoArgsConstructor
-public class UserAdminPanelController {
+public class UserAdminPanelController implements Serializable {
+	private static final long serialVersionUID = 4310678656945508259L;
 	private static final Logger log = Logger.getLogger(UserAdminPanelController.class);
-	@Inject
-	private IUserService userService;
-	@Inject
-	private ISystemRolesService sysRolesService;
 	
-	@Getter
-	@Setter
-	private IUserList userList;
-	@Getter
-	@Setter
-	private List<User> users;
+	@Inject private IUserService userService;
+	@Inject private ISystemRolesService sysRolesService;
+	
+	@Getter @Setter private IUserList userList;
+	@Getter @Setter private List<User> users;
+	@Getter @Setter private User newUser;
 
-	@Getter
-	@Setter
-	private User newUser;
-	
-	@Getter
-	@Setter
-	private List<SystemRole> allSystemRoles;
-	
-	@Getter
-	@Setter
-	private List<SystemRole> exclusiveSystemRoles;
+	@Getter @Setter private List<SystemRole> allSystemRoles;
+	@Getter @Setter private List<SystemRole> exclusiveSystemRoles;
 	
 	
 	@PostConstruct
@@ -60,27 +53,25 @@ public class UserAdminPanelController {
 	@NoArgsConstructor
 	private class UserList implements IUserList {
 		private static final long serialVersionUID = -6930829924611447508L;
-		private List<User> users;
-		private boolean readOnly;
-
+		@Getter @Setter private List<User> users;
+		@Setter private boolean readOnly;
+		@Getter @Setter private User selectedUser;
+		
 		@Override
 		public boolean getReadOnly() {
 			return readOnly;
 		}
 
 		@Override
-		public List<User> getUsers() {
-			return users;
+		public void onRowSelect(SelectEvent e) {
+			FacesMessage msg = new FacesMessage("Wybrano użytkownika", ((User)e.getObject()).getLogin());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 
 		@Override
-		public void setUsers(List<User> users) {
-			this.users = users;
-		}
-
-		@Override
-		public void setReadOnly(boolean isReadOnly) {
-			this.readOnly = isReadOnly;
+		public void onRowUnselect(UnselectEvent e) {
+			FacesMessage msg = new FacesMessage("Odznaczono użytkownika", e.getObject().toString());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
 }
