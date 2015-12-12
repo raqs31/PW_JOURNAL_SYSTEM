@@ -57,13 +57,13 @@ public class User extends AuditTable {
 	private String secondName;
 	
 
-	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinTable(name="USER_SYSTEM_ROLES",
 		joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")},
 		inverseJoinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID")},
 		indexes={@Index(columnList="USER_ID", unique=false)}
 	)
-	private List<SystemRoles> systemRoles;
+	private List<SystemRole> systemRoles;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	@JoinColumn(name="DEPARTMENT_ID")

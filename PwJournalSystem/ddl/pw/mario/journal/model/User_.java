@@ -15,7 +15,7 @@ public class User_ extends AuditTable_ {
 	public static volatile SingularAttribute<User, String> passwd;
 	public static volatile SingularAttribute<User, String> name;
 	public static volatile SingularAttribute<User, String> secondName;
-	public static volatile ListAttribute<User, SystemRoles> systemRoles;
+	public static volatile ListAttribute<User, SystemRole> systemRoles;
 	public static volatile SingularAttribute<User, Department> dept;
 	public static volatile SingularAttribute<User, Boolean> isActive;
 }

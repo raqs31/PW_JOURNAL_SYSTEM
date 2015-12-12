@@ -1,5 +1,6 @@
 package pw.mario.faces.api;
 
+import java.io.Serializable;
 import java.util.List;
 
 import pw.mario.journal.model.User;
@@ -9,7 +10,7 @@ import pw.mario.journal.model.User;
  * @author MarioBross
  *
  */
-public interface IUserList {
+public interface IUserList extends Serializable  {
 	List<User> getUsers();
 	
 	void setUsers(List<User> users);

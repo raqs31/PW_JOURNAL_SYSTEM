@@ -14,7 +14,6 @@ import pw.mario.journal.model.Department;
 @SuppressWarnings("unchecked")
 public class DepartmentDAOImpl extends AbstractDAOImpl<Department> implements DepartmentDAO {
 
-	@Override
 	public List<Department> getAllDepartments() {
 		return em.createQuery("select d from Department d").getResultList();
 	}

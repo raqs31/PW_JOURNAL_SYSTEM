@@ -8,9 +8,9 @@
 	<cc:implementation>
 		<h:form>
 			<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
-				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{userCC.users}" border="1" rows="10" paginator="true"
+				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{cc.attrs. userCC.getUsers()}" border="1" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="true" reflow="true" rendered="true"
+					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
 				>
 					<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
 						<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
@@ -36,10 +36,10 @@
 						<p:rowToggler />
 					</p:column>
 					<p:rowExpansion>
-						<p:panelGrid columns="1">
-							<f:facet name="header">TODO</f:facet>
-							<p>TODO system Roles</p>
-						</p:panelGrid>
+							<p:dataList value="#{u.systemRoles}" var="sr" rows="10" type="ordered" paginator="true" itemType="none" emptyMessage="#{ccRes.dlNoneRoles}" paginatorAlwaysVisible="false">
+									<f:facet name="header">#{ccRes.hUserSystemRoles}</f:facet>
+									<h:outputText value="#{sr.roleName}" style="display:inline-block"/>
+							</p:dataList>
 					</p:rowExpansion>
 				</p:dataTable>
 			</p:panel>
