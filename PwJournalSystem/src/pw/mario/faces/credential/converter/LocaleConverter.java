@@ -1,8 +1,7 @@
-package pw.mario.faces.converter;
+package pw.mario.faces.credential.converter;
 
 import java.util.Locale;
 
-import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -12,7 +11,6 @@ import javax.inject.Inject;
 import pw.mario.journal.service.ILocaleService;
 
 @ManagedBean(name="localeConverter", eager=true)
-@ApplicationScoped
 public class LocaleConverter implements Converter {
 	@Inject
 	ILocaleService localeService;

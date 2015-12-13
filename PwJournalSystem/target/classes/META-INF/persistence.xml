@@ -7,6 +7,7 @@
 		transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/OracleDS</jta-data-source>
+		<shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
 		<properties>
 			<property name="hibernate.connectionn.autocommit" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- validate / update / create / create-drop / auto -->
@@ -21,7 +22,6 @@
 			<property name="hibernate.connection.pool_size" value="10" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
 			<property name="hibernate.connection.driver_class" value="oracle.jdbc.driver.OracleDriver" />
-
 		</properties>
 	</persistence-unit>
 

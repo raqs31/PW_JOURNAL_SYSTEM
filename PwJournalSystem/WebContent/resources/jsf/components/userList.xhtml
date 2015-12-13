@@ -7,15 +7,15 @@
 	</cc:interface>
 	<cc:implementation>
 		<h:form>
-			<p:growl id="userMsg" showDetail="true" autoUpdate="true" />
+			<p:growl id="userMsg" showDetail="true" />
 			<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
 				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{cc.attrs. userCC.users}" border="1" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
 					selectionMode="single" selection="#{cc.attrs. userCC.selectedUser}" rowKey="#{u.id}"
 				>
-					<p:ajax event="rowSelect" listener="#{cc.attrs. userCC.onRowSelect}" />
-			        <p:ajax event="rowUnselect" listener="#{cc.attrs. userCC.onRowUnselect}" />
+					<p:ajax event="rowSelect" listener="#{cc.attrs. userCC.onRowSelect}" update="@this" />
+			        <p:ajax event="rowUnselect" listener="#{cc.attrs. userCC.onRowUnselect}" update="@this"/>
 					<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
 						<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
 		    				#{u.login}

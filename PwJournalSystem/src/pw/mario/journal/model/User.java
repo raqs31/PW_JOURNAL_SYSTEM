@@ -1,8 +1,8 @@
 package pw.mario.journal.model;
 
-
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +14,8 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -26,6 +28,7 @@ import pw.mario.journal.model.ext.AuditTable;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
+@Cacheable(true)
 @Entity
 @Table(name="USERS", schema="MARIO",
 	indexes={
@@ -33,7 +36,17 @@ import pw.mario.journal.model.ext.AuditTable;
 			@Index(columnList="email", unique=true),
 	}
 )
+@NamedQueries({
+	@NamedQuery(name=User.Queries.GET_BY_LOGIN, 
+			query = "select u from User u where u.login = ?1"),
+	@NamedQuery(name=User.Queries.GET_BY_EMAIL, 
+		query = "select u from User u where u.email = ?1")
+})
 public class User extends AuditTable {
+	public interface Queries {
+		String GET_BY_LOGIN = "User.getByLogin";
+		String GET_BY_EMAIL = "User.getByEmail";
+	}
 	@Id
 	@Column(name="USER_ID")
 	@SequenceGenerator(name="userSeq", sequenceName ="USERS_SEQ", initialValue=1, allocationSize=1)

@@ -12,4 +12,12 @@ public interface UserDAO {
 	public void deleteUser(User u);
 	
 	public void updateUser(User u);
+	
+	public User getUserByEmail(User u);
+	
+	public User getUserByLogin(User u);
+	
+	public User getUserByEmail(String email);
+	
+	public User getUserByLogin(String login);
 }

@@ -7,7 +7,16 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	
+	<h:form id="newUser" rendered="#{request.isUserInRole('ADMIN')}" >
+		<f:facet name="header">Dodaj użytkownika</f:facet>
+		<p:outputLabel for="userLogin" value="Login"/>
+		<p:inputText id="userLogin" value="#{userAdminPanelCo.newUser.login}">
+			<f:validator binding="#{loginValidator}"/>
+		</p:inputText>
+		
+		
+		<p:commandButton value="Submit" id="submitUser" styleClass="ui-priority-primary" ajax="true"/>
+	</h:form>
 	<my:userList userCC="#{userAdminPanelCo.userList}"></my:userList>
 </h:body>
 </html>

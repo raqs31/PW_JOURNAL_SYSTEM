@@ -28,7 +28,6 @@ public class DepartmentDAOImpl extends AbstractDAOImpl<Department> implements De
 
 	@Override
 	public void deactiveDepartment(Department d) {
-		//TODO dodać sprawdzenie czy zaden uzytkownik nie znajduje sie dalej w departamencie
 		d.setIsActive(false);
 	}
 

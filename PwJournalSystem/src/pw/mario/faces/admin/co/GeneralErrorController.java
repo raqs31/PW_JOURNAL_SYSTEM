@@ -1,4 +1,4 @@
-package pw.mario.faces.controller;
+package pw.mario.faces.admin.co;
 
 public class GeneralErrorController {
 

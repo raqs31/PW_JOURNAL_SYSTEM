@@ -6,4 +6,6 @@ import pw.mario.journal.model.User;
 
 public interface IUserService {
 	List<User> getUserList();
+	
+	User createUser(User u);
 }

@@ -1,9 +1,11 @@
-package pw.mario.faces.controller;
+package pw.mario.faces.admin.co;
 
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -24,7 +26,7 @@ import pw.mario.journal.model.User;
 import pw.mario.journal.service.ISystemRolesService;
 import pw.mario.journal.service.IUserService;
 
-@ManagedBean(name = "userAdminPanelCo", eager = true)
+@ManagedBean(name = "userAdminPanelCo")
 @ViewScoped
 @NoArgsConstructor
 public class UserAdminPanelController implements Serializable {
@@ -48,9 +50,11 @@ public class UserAdminPanelController implements Serializable {
 		userList.setUsers(userService.getUserList());
 		allSystemRoles = sysRolesService.getSystemRoles();
 		exclusiveSystemRoles = sysRolesService.getExclusiveSystemRoles(userList.getUsers().get(0));
+		newUser = new User();
 	}
 
 	@NoArgsConstructor
+	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
 	private class UserList implements IUserList {
 		private static final long serialVersionUID = -6930829924611447508L;
 		@Getter @Setter private List<User> users;

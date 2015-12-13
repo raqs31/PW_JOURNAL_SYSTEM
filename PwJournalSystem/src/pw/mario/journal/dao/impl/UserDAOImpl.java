@@ -2,8 +2,6 @@ package pw.mario.journal.dao.impl;
 
 import java.util.List;
 
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.persistence.Query;
@@ -24,6 +22,7 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
 	@Override
 	public void addUser(User u) {
+		
 		em.persist(u);
 	}
 
@@ -35,6 +34,30 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	@Override
 	public void updateUser(User u) {
 		em.merge(u);
+	}
+
+	@Override
+	public User getUserByEmail(User u) {
+		return getUserByEmail(u.getEmail());
+	}
+
+	@Override
+	public User getUserByLogin(User u) {
+		return getUserByLogin(u.getLogin());
+	}
+
+	@Override
+	public User getUserByEmail(String email) {
+		return createNamedTypedQuery(User.Queries.GET_BY_EMAIL)
+				.setParameter(1, email)
+				.getSingleResult();
+	}
+
+	@Override
+	public User getUserByLogin(String login) {
+		return createNamedTypedQuery(User.Queries.GET_BY_LOGIN)
+				.setParameter(1, login)
+				.getSingleResult();
 	}
 
 }

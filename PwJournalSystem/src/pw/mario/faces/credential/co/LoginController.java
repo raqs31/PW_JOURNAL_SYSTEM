@@ -1,4 +1,4 @@
-package pw.mario.faces.controller;
+package pw.mario.faces.credential.co;
 
 import java.io.IOException;
 import java.io.Serializable;

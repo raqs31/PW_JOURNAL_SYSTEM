@@ -1,4 +1,4 @@
-package pw.mario.faces.filter;
+package pw.mario.faces.credential.filter;
 
 import java.io.IOException;
 
