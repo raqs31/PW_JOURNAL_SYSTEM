@@ -1,4 +1,4 @@
-package pw.mario.faces.admin.validators;
+package pw.mario.faces.common.validator;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -20,7 +20,6 @@ public class LoginValidator implements Validator {
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		String toVal = (String) value;
-		
 		if (Strings.isNullOrEmpty(toVal)) {
 			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Należy podać login", null));
 		} else {

@@ -21,8 +21,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pw.mario.faces.api.IUserList;
+import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
+import pw.mario.journal.service.IDepartmentService;
 import pw.mario.journal.service.ISystemRolesService;
 import pw.mario.journal.service.IUserService;
 
@@ -35,6 +37,7 @@ public class UserAdminPanelController implements Serializable {
 	
 	@Inject private IUserService userService;
 	@Inject private ISystemRolesService sysRolesService;
+	@Inject private IDepartmentService deptService;
 	
 	@Getter @Setter private IUserList userList;
 	@Getter @Setter private List<User> users;
@@ -42,6 +45,7 @@ public class UserAdminPanelController implements Serializable {
 
 	@Getter @Setter private List<SystemRole> allSystemRoles;
 	@Getter @Setter private List<SystemRole> exclusiveSystemRoles;
+	@Getter @Setter private List<Department> departments;
 	
 	
 	@PostConstruct
@@ -51,6 +55,7 @@ public class UserAdminPanelController implements Serializable {
 		allSystemRoles = sysRolesService.getSystemRoles();
 		exclusiveSystemRoles = sysRolesService.getExclusiveSystemRoles(userList.getUsers().get(0));
 		newUser = new User();
+		departments = deptService.getActiveDepartmentList();
 	}
 
 	@NoArgsConstructor

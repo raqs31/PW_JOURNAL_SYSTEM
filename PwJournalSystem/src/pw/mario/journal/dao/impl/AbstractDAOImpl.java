@@ -6,10 +6,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.Session;
+
 
 public abstract class AbstractDAOImpl<T> {
 	@PersistenceContext
 	protected EntityManager em;
+	
 	private Class<T> clazz;
 	
 	{

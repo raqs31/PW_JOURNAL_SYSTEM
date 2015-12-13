@@ -12,4 +12,8 @@ public interface DepartmentDAO {
 	public void deactiveDepartment(Department d);
 	
 	public void addDepartment(Department d);
+	
+	public Department getDepartment(Long id);
+	
+	public Department getDepartment(String code);
 }

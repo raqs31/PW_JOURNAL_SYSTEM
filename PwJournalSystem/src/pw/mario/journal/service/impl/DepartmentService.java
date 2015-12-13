@@ -24,7 +24,7 @@ public class DepartmentService implements IDepartmentService {
 	@Override
 	public List<Department> getActiveDepartmentList() {
 		// TODO Auto-generated method stub
-		return getActiveDepartmentList();
+		return deptDao.getActiveDepartment();
 	}
 
 	@Override
