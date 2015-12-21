@@ -1,6 +1,6 @@
 package pw.mario.journal.service;
 
-public interface ILoginService {
+public interface LoginService {
 
 	String getLogin();
 

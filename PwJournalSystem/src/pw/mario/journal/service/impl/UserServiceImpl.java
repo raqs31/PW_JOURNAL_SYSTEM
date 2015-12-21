@@ -8,12 +8,12 @@ import javax.inject.Inject;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.User;
-import pw.mario.journal.service.IUserService;
+import pw.mario.journal.service.UserService;
 import pw.mario.journal.util.MD5Passwd;
 
 @NoArgsConstructor
 @Stateless
-public class UserService implements IUserService {
+public class UserServiceImpl implements UserService {
 	@Inject private UserDAO userDao;
 	@Inject private MD5Passwd md5Passwd;
 	

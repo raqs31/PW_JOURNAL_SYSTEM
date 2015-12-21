@@ -5,7 +5,7 @@ import java.util.List;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
 
-public interface ISystemRolesService {
+public interface SystemRolesService {
 
 	List<SystemRole> getSystemRoles();
 

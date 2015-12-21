@@ -8,10 +8,10 @@ import javax.inject.Inject;
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
-import pw.mario.journal.service.ISystemRolesService;
+import pw.mario.journal.service.SystemRolesService;
 
 @Stateless
-public class SystemRolesService implements ISystemRolesService {
+public class SystemRolesServiceImpl implements SystemRolesService {
 	@Inject
 	private  SystemRolesDAO sysRolesDao;
 	

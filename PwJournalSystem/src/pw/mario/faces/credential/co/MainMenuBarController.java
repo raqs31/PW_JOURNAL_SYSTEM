@@ -17,8 +17,8 @@ import org.apache.log4j.Logger;
 
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.journal.service.ILocaleService;
-import pw.mario.journal.service.ILoginService;
+import pw.mario.journal.service.LocaleService;
+import pw.mario.journal.service.LoginService;
 
 @ManagedBean(name="authBean")
 @SessionScoped
@@ -29,10 +29,10 @@ public class MainMenuBarController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private ILoginService ctx; 
+	private LoginService ctx; 
 	
 	@Inject
-	private ILocaleService localeService;
+	private LocaleService localeService;
 	
 	@Getter @Setter private Locale currentLocale;
 	@Getter private List<Locale> supportedLocales;

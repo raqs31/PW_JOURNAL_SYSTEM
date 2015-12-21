@@ -13,11 +13,11 @@ import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
 
 import lombok.Data;
-import pw.mario.journal.service.ILocaleService;
+import pw.mario.journal.service.LocaleService;
 
 @Data
 @Stateful
-public class LocaleService implements ILocaleService {
+public class LocaleServiceImpl implements LocaleService {
 	private Map<String, Locale> supportedLocales;
 	
 	

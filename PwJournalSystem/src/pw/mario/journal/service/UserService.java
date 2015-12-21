@@ -4,7 +4,7 @@ import java.util.List;
 
 import pw.mario.journal.model.User;
 
-public interface IUserService {
+public interface UserService {
 	List<User> getUserList();
 	
 	User createUser(User u);

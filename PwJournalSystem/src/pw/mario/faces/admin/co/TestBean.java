@@ -18,7 +18,7 @@ import lombok.Data;
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.User;
-import pw.mario.journal.service.ILoginService;
+import pw.mario.journal.service.LoginService;
 
 @Data
 @Named("testBean")
@@ -37,7 +37,7 @@ public class TestBean implements Serializable {
 	ArticleDAO ad;
 	
 	@Inject
-	ILoginService ctx; 
+	LoginService ctx; 
 	
 	public TestBean() {
 		testList = new LinkedList<>();

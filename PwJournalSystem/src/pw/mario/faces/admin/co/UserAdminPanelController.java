@@ -20,13 +20,13 @@ import org.primefaces.event.UnselectEvent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pw.mario.faces.api.IUserList;
+import pw.mario.faces.api.UserList;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
-import pw.mario.journal.service.IDepartmentService;
-import pw.mario.journal.service.ISystemRolesService;
-import pw.mario.journal.service.IUserService;
+import pw.mario.journal.service.DepartmentService;
+import pw.mario.journal.service.SystemRolesService;
+import pw.mario.journal.service.UserService;
 
 @ManagedBean(name = "userAdminPanelCo")
 @ViewScoped
@@ -35,11 +35,11 @@ public class UserAdminPanelController implements Serializable {
 	private static final long serialVersionUID = 4310678656945508259L;
 	private static final Logger log = Logger.getLogger(UserAdminPanelController.class);
 	
-	@Inject private IUserService userService;
-	@Inject private ISystemRolesService sysRolesService;
-	@Inject private IDepartmentService deptService;
+	@Inject private UserService userService;
+	@Inject private SystemRolesService sysRolesService;
+	@Inject private DepartmentService deptService;
 	
-	@Getter @Setter private IUserList userList;
+	@Getter @Setter private UserList userList;
 	@Getter @Setter private List<User> users;
 	@Getter @Setter private User newUser;
 
@@ -50,7 +50,7 @@ public class UserAdminPanelController implements Serializable {
 	
 	@PostConstruct
 	private void init() {
-		this.userList = new UserList();
+		this.userList = new EditableUserList();
 		userList.setUsers(userService.getUserList());
 		allSystemRoles = sysRolesService.getSystemRoles();
 		exclusiveSystemRoles = sysRolesService.getExclusiveSystemRoles(userList.getUsers().get(0));
@@ -59,8 +59,7 @@ public class UserAdminPanelController implements Serializable {
 	}
 
 	@NoArgsConstructor
-	@TransactionAttribute(TransactionAttributeType.SUPPORTS)
-	private class UserList implements IUserList {
+	private class EditableUserList implements UserList {
 		private static final long serialVersionUID = -6930829924611447508L;
 		@Getter @Setter private List<User> users;
 		@Setter private boolean readOnly;

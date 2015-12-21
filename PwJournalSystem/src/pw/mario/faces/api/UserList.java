@@ -13,7 +13,7 @@ import pw.mario.journal.model.User;
  * @author MarioBross
  *
  */
-public interface IUserList extends Serializable  {
+public interface UserList extends Serializable  {
 	List<User> getUsers();
 	
 	void setUsers(List<User> users);

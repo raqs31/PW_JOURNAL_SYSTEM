@@ -5,11 +5,11 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
 
 import lombok.Data;
-import pw.mario.journal.service.ILoginService;
+import pw.mario.journal.service.LoginService;
 
 @Data
 @Stateful
-public class LoginContextService implements ILoginService {
+public class LoginContextServiceImpl implements LoginService {
 	@Resource
 	private SessionContext ctx;
 	

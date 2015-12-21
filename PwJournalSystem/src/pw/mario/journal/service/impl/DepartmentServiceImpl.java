@@ -9,10 +9,10 @@ import javax.inject.Inject;
 
 import pw.mario.journal.dao.DepartmentDAO;
 import pw.mario.journal.model.Department;
-import pw.mario.journal.service.IDepartmentService;
+import pw.mario.journal.service.DepartmentService;
 
 @Stateless
-public class DepartmentService implements IDepartmentService {
+public class DepartmentServiceImpl implements DepartmentService {
 	@Inject
 	private DepartmentDAO deptDao;
 	

@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.journal.model.Department;
-import pw.mario.journal.service.IDepartmentService;
+import pw.mario.journal.service.DepartmentService;
 
 @ManagedBean(name="deptPaneCo")
 @ViewScoped
@@ -23,7 +23,7 @@ public class DepartmentPanelController implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	@Inject private IDepartmentService deptService;
+	@Inject private DepartmentService deptService;
 	
 	@Getter @Setter private List<Department> departmentsList;
 	@Getter @Setter private List<Department> filteredDepartments;

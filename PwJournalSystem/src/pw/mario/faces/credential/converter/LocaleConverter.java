@@ -8,12 +8,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
-import pw.mario.journal.service.ILocaleService;
+import pw.mario.journal.service.LocaleService;
 
 @ManagedBean(name="localeConverter", eager=true)
 public class LocaleConverter implements Converter {
 	@Inject
-	ILocaleService localeService;
+	LocaleService localeService;
 	
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		if (value != null && !value.isEmpty()) {
