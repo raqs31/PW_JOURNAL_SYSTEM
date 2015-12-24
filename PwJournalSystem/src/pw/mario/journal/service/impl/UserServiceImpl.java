@@ -3,6 +3,8 @@ package pw.mario.journal.service.impl;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public User createUser(User u) {
 		if (u == null)
 			throw new NullPointerException();

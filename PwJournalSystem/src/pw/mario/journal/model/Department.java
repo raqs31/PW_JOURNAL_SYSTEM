@@ -42,7 +42,7 @@ public class Department extends AuditTable{
 	@Column(name="IS_ACTIVE", nullable=false)
 	private Boolean isActive;
 	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="dept", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="dept")
 	private Set<User> users;
 	
 	{

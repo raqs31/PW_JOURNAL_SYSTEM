@@ -3,13 +3,13 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
 >
 	<cc:interface>
-		<cc:attribute name="userCC" type="pw.mario.faces.api.IUserList" required="true" />
+		<cc:attribute name="userCC" type="pw.mario.faces.api.UserList" required="true" />
 	</cc:interface>
 	<cc:implementation>
 		<h:form>
 			<p:growl id="userMsg" showDetail="true" />
 			<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
-				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{cc.attrs. userCC.users}" border="1" rows="10" paginator="true"
+				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{cc.attrs.userCC.users}" border="1" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
 					selectionMode="single" selection="#{cc.attrs. userCC.selectedUser}" rowKey="#{u.id}"
@@ -34,7 +34,7 @@
 		    		</p:column>
 					<p:column id="cDepartment" resizable="true" sortBy="#{u.dept}">
 						<f:facet name="header">#{ccRes.cUserDepartment}</f:facet>
-		    				#{not empty  u.dept ? u.dept.code : 'n/d'}
+		    				#{not empty  u.dept ? u.dept.deptCode : 'n/d'}
 		    		</p:column>
 					<p:column style="width:16px">
 						<p:rowToggler />

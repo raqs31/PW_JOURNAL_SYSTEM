@@ -32,6 +32,7 @@ public class LoginController implements Serializable {
 			request.login(userName, password);
 			ctx.redirect(request.getContextPath());
 		} catch (ServletException e1) {
+			e1.printStackTrace();
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Niepoprawny login i/lub hasło", null);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		} catch (IOException e) {

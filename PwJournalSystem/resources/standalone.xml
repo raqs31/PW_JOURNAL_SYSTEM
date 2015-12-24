@@ -117,10 +117,10 @@
                 <level name="ERROR"/>
             </logger>
             <logger category="org.hibernate">
-                <level name="TRACE"/>
+                <level name="DEBUG"/>
             </logger>
             <root-logger>
-                <level name="DEBUG"/>
+                <level name="INFO"/>
                 <handlers>
                     <handler name="CONSOLE"/>
                     <handler name="FILE"/>
@@ -351,11 +351,11 @@
                     <authentication>
                         <login-module code="Database" flag="required">
                             <module-option name="dsJndiName" value="java:/OracleDS"/>
-                            <module-option name="principalsQuery" value="select passwd from users where login = upper(?)"/>
-                            <module-option name="rolesQuery" value="SELECT sr.ROLE_NAME, 'Roles' FROM USERS u join USER_SYSTEM_ROLES us on (u.user_id = us.user_id) JOIN SYSTEM_ROLES sr ON(sr.system_role_id = us.system_role_id) WHERE u.login = upper(?)"/>
+                            <module-option name="principalsQuery" value="select passwd from users where upper(?) in (upper(login), upper(email))"/>
+                            <module-option name="rolesQuery" value="SELECT sr.ROLE_NAME, 'Roles' FROM USERS u join USER_SYSTEM_ROLES us on (u.user_id = us.user_id) JOIN SYSTEM_ROLES sr ON(sr.system_role_id = us.system_role_id) WHERE upper(?) in (upper(u.login), upper(u.email))"/>
                             <module-option name="hashCharset" value="UTF-8"/>
-                            <module-option name="hashAlgorithm" value="SHA-256" />
-                            <module-option name="hashEncoding" value="base64" /> 
+                            <module-option name="hashAlgorithm" value="SHA-256"/>
+                            <module-option name="hashEncoding" value="base64"/>
                             <module-option name="password-stacking" value="useFirstPass"/>
                             <module-option name="hashStorePassword" value="false"/>
                         </login-module>
@@ -430,4 +430,5 @@
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
+
 </server>

@@ -1,6 +1,7 @@
 package pw.mario.faces.admin.co;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,7 +21,10 @@ import org.primefaces.event.UnselectEvent;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pw.mario.faces.api.PickListRoles;
 import pw.mario.faces.api.UserList;
+import pw.mario.faces.api.impl.EditableUserList;
+import pw.mario.faces.api.impl.EditableUserPickListRoles;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
@@ -46,40 +50,32 @@ public class UserAdminPanelController implements Serializable {
 	@Getter @Setter private List<SystemRole> allSystemRoles;
 	@Getter @Setter private List<SystemRole> exclusiveSystemRoles;
 	@Getter @Setter private List<Department> departments;
-	
+	@Getter @Setter private PickListRoles userRoles;
 	
 	@PostConstruct
 	private void init() {
 		this.userList = new EditableUserList();
 		userList.setUsers(userService.getUserList());
 		allSystemRoles = sysRolesService.getSystemRoles();
-		exclusiveSystemRoles = sysRolesService.getExclusiveSystemRoles(userList.getUsers().get(0));
+		exclusiveSystemRoles = new LinkedList<>();
 		newUser = new User();
 		departments = deptService.getActiveDepartmentList();
-	}
-
-	@NoArgsConstructor
-	private class EditableUserList implements UserList {
-		private static final long serialVersionUID = -6930829924611447508L;
-		@Getter @Setter private List<User> users;
-		@Setter private boolean readOnly;
-		@Getter @Setter private User selectedUser;
 		
-		@Override
-		public boolean getReadOnly() {
-			return readOnly;
-		}
-
-		@Override
-		public void onRowSelect(SelectEvent e) {
-			FacesMessage msg = new FacesMessage("Wybrano użytkownika", ((User)e.getObject()).getLogin());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-		}
-
-		@Override
-		public void onRowUnselect(UnselectEvent e) {
-			FacesMessage msg = new FacesMessage("Odznaczono użytkownika", e.getObject().toString());
-			FacesContext.getCurrentInstance().addMessage(null, msg);
-		}
+		userRoles = new EditableUserPickListRoles(sysRolesService.getSystemRoles(), new LinkedList<>());
+		userRoles.setEditable(true);
 	}
+	
+	public void createUser() {		
+		newUser.setSystemRoles(userRoles.getPickListSystemRoles().getTarget());
+		userService.createUser(newUser);
+		userList.getUsers().add(newUser);
+		
+		
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Utworzono użytkownika", newUser.getLogin());
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		newUser = new User();
+	}
+
+	
 }

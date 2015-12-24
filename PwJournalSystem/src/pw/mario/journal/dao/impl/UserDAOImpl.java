@@ -2,6 +2,8 @@ package pw.mario.journal.dao.impl;
 
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.persistence.Query;
@@ -21,17 +23,20 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addUser(User u) {
 		
 		em.persist(u);
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void deleteUser(User u) {
 		em.remove(u);
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void updateUser(User u) {
 		em.merge(u);
 	}

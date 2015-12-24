@@ -46,7 +46,10 @@
 				</p:selectOneMenu>
 				<p:message for="userDept" />
 			</h:panelGrid>
-			<p:commandButton value="Submit" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser" />
+			<p:separator />
+			<my:pickListSystemRoles sysRoles="#{userAdminPanelCo.userRoles}"/>
+			<p:separator />
+			<p:commandButton value="Submit" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser" actionListener="#{userAdminPanelCo.createUser}"/>
 		</p:panel>
 	</h:form>
 	<my:userList userCC="#{userAdminPanelCo.userList}"></my:userList>
