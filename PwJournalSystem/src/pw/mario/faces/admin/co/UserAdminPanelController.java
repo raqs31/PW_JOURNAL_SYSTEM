@@ -47,10 +47,12 @@ public class UserAdminPanelController implements Serializable {
 	@Getter @Setter private List<User> users;
 	@Getter @Setter private User newUser;
 
-	@Getter @Setter private List<SystemRole> allSystemRoles;
+	@Getter @Setter private List<SystemRole> allSystemRoles;		
 	@Getter @Setter private List<SystemRole> exclusiveSystemRoles;
 	@Getter @Setter private List<Department> departments;
 	@Getter @Setter private PickListRoles userRoles;
+
+	
 	
 	@PostConstruct
 	private void init() {

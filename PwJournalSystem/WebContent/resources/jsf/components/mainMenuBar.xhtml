@@ -5,25 +5,32 @@
 	<cc:interface>
 	</cc:interface>
 	<cc:implementation>
-		<p:menubar id="mainMenuBar">
-			<f:facet name="options">
-				<h:form method="POST" action="j_security_check">
-					<p:outputLabel id="loggedAs" value="#{authBean.login}" />
-					<p:spacer width="5" />
-					<p:selectOneMenu id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade" converter="#{localeConverter}" onchange="submit()"
-						valueChangeListener="#{authBean.changeLocale}"
-					>
-						<f:selectItems value="#{authBean.supportedLocales}" var="locale" itemLabel="#{locale.displayName}" itemValue="#{locale}" />
-						<p:column>
+		<h:form>
+			<p:menubar id="mainMenuBar">
+				<p:submenu label="Administracja" rendered="#{request.isUserInRole('ADMIN')}">
+					<p:menuitem id="miUsers" value="Użytkownicy" outcome="/faces/admin/users" />
+					<p:menuitem id="miDepartments" value="Departamenty" outcome="/faces/admin/departments" />
+				</p:submenu>
+				<p:menuitem id="goToStart" value="Home" icon="fa fa-home" outcome="/index" />
+				<f:facet name="options">
+					<h:form method="POST" action="j_security_check">
+						<p:outputLabel id="loggedAs" value="#{authBean.login}" />
+						<p:spacer width="5" />
+						<p:selectOneMenu id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade" converter="#{localeConverter}" onchange="submit()"
+							valueChangeListener="#{authBean.changeLocale}"
+						>
+							<f:selectItems value="#{authBean.supportedLocales}" var="locale" itemLabel="#{locale.displayName}" itemValue="#{locale}" />
+							<p:column>
 														#{loc.displayName}
 												</p:column>
-					</p:selectOneMenu>
-					<p:spacer width="5" />
-					<p:button id="bLogout" value="#{auth.logoutTittle}" outcome="/auth/logout" rendered="#{authBean.renderLogout()}" />
-					<p:button id="bLogin" value="#{auth.bLogin}" outcome="/auth/login" rendered="#{authBean.renderLogin()}" />
-				</h:form>
-			</f:facet>
-		</p:menubar>
-		<p:sticky target="mainMenuBar" />
+						</p:selectOneMenu>
+						<p:spacer width="5" />
+						<p:button id="bLogout" value="#{auth.logoutTittle}" outcome="/auth/logout" rendered="#{authBean.renderLogout()}" />
+						<p:button id="bLogin" value="#{auth.bLogin}" outcome="/auth/login" rendered="#{authBean.renderLogin()}" />
+					</h:form>
+				</f:facet>
+			</p:menubar>
+			<p:sticky target="mainMenuBar" />
+		</h:form>
 	</cc:implementation>
 </ui:component>

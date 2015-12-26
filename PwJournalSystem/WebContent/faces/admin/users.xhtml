@@ -7,51 +7,56 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<h:form id="newUser" rendered="#{request.isUserInRole('ADMIN')}">
-		<p:panel header="Nowy użytkownik">
-			<p:growl autoUpdate="true" sticky="false" life="6000" showDetail="false" />
-			<h:panelGrid id="newUser" columns="3" cellpadding="5">
-				<p:outputLabel for="userLogin" value="Login" />
-				<p:inputText id="userLogin" value="#{userAdminPanelCo.newUser.login}">
-					<f:validator binding="#{loginValidator}" />
-				</p:inputText>
-				<p:message for="userLogin" />
-				<p:outputLabel for="email" value="E-Mail" />
-				<p:inputText id="email" value="#{userAdminPanelCo.newUser.email}" />
-				<p:message for="email" />
-				<p:outputLabel for="userName" value="Imię" />
-				<p:inputText id="userName" value="#{userAdminPanelCo.newUser.name}" />
-				<p:message for="userName" />
-				<p:outputLabel for="userSecondName" value="Nazwisko" />
-				<p:inputText id="userSecondName" value="#{userAdminPanelCo.newUser.secondName}" />
-				<p:message for="userSecondName" />
-				<p:outputLabel for="userPassword" value="Hasło" />
-				<p:password id="userPassword" value="#{userAdminPanelCo.newUser.passwd}" feedback="true" promptLabel="Siła" weakLabel="Cieniutko"
-					goodLabel="Lepiej" strongLabel="Nice :)" match="userPassword2" required="true"
-				/>
-				<p:message for="userPassword" />
-				<p:outputLabel for="userPassword2" value="Powtórz hasło" />
-				<p:password id="userPassword2" value="#{userAdminPanelCo.newUser.passwd}" required="true" />
-				<p:message for="userPassword2" />
-				<p:outputLabel for="userDept" value="Departament" />
-				<p:selectOneMenu id="userDept" value="#{userAdminPanelCo.newUser.dept}" converter="#{deptConverter}" effect="fade" var="d">
-					<f:selectItem itemLabel="Wybierz departament" itemValue=""/>
-					<f:selectItems value="#{userAdminPanelCo.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
-					<p:column>
-						<h:outputText value="#{d.deptCode}" />
-					</p:column>
-					<p:column>
-						<h:outputText value="#{d.fullName}" />
-					</p:column>
-				</p:selectOneMenu>
-				<p:message for="userDept" />
-			</h:panelGrid>
-			<p:separator />
-			<my:pickListSystemRoles sysRoles="#{userAdminPanelCo.userRoles}"/>
-			<p:separator />
-			<p:commandButton value="Submit" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser" actionListener="#{userAdminPanelCo.createUser}"/>
-		</p:panel>
-	</h:form>
 	<my:userList userCC="#{userAdminPanelCo.userList}"></my:userList>
+	<p:spacer width="10px" />
+	<h:form id="newUser" rendered="#{request.isUserInRole('ADMIN')}">
+		<p:accordionPanel multiple="false">
+			<p:tab title="Dodaj nowego użytkownika">
+				<p:growl autoUpdate="true" sticky="false" life="6000" showDetail="false" />
+				<h:panelGrid id="newUser" columns="3" cellpadding="5">
+					<p:outputLabel for="userLogin" value="Login" />
+					<p:inputText id="userLogin" value="#{userAdminPanelCo.newUser.login}">
+						<f:validator binding="#{loginValidator}" />
+					</p:inputText>
+					<p:message for="userLogin" />
+					<p:outputLabel for="email" value="E-Mail" />
+					<p:inputText id="email" value="#{userAdminPanelCo.newUser.email}" />
+					<p:message for="email" />
+					<p:outputLabel for="userName" value="Imię" />
+					<p:inputText id="userName" value="#{userAdminPanelCo.newUser.name}" />
+					<p:message for="userName" />
+					<p:outputLabel for="userSecondName" value="Nazwisko" />
+					<p:inputText id="userSecondName" value="#{userAdminPanelCo.newUser.secondName}" />
+					<p:message for="userSecondName" />
+					<p:outputLabel for="userPassword" value="Hasło" />
+					<p:password id="userPassword" value="#{userAdminPanelCo.newUser.passwd}" feedback="true" promptLabel="Siła" weakLabel="Cieniutko"
+						goodLabel="Lepiej" strongLabel="Nice :)" match="userPassword2" required="true"
+					/>
+					<p:message for="userPassword" />
+					<p:outputLabel for="userPassword2" value="Powtórz hasło" />
+					<p:password id="userPassword2" value="#{userAdminPanelCo.newUser.passwd}" required="true" />
+					<p:message for="userPassword2" />
+					<p:outputLabel for="userDept" value="Departament" />
+					<p:selectOneMenu id="userDept" value="#{userAdminPanelCo.newUser.dept}" converter="#{deptConverter}" effect="fade" var="d">
+						<f:selectItem itemLabel="Wybierz departament" itemValue="" />
+						<f:selectItems value="#{userAdminPanelCo.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
+						<p:column>
+							<h:outputText value="#{d.deptCode}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{d.fullName}" />
+						</p:column>
+					</p:selectOneMenu>
+					<p:message for="userDept" />
+				</h:panelGrid>
+				<p:separator />
+				<my:pickListSystemRoles sysRoles="#{userAdminPanelCo.userRoles}" />
+				<p:separator />
+				<p:commandButton value="Submit" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser"
+					actionListener="#{userAdminPanelCo.createUser}"
+				/>
+			</p:tab>
+		</p:accordionPanel>
+	</h:form>
 </h:body>
 </html>
