@@ -52,11 +52,11 @@ public class SystemRole {
 	@Column(name="IS_ACTIVE")
 	private boolean isActive;
 	
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="USER_SYSTEM_ROLES", 
-		joinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID", unique=false)},
-		inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", unique=false)},
-		indexes={@Index(columnList="USER_ID, SYSTEM_ROLE_ID", unique=false)}
-	)
-	private List<User> users;
+//	@OneToMany(fetch=FetchType.EAGER)
+//	@JoinTable(name="USER_SYSTEM_ROLES", 
+//		joinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID", unique=false)},
+//		inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", unique=false)},
+//		indexes={@Index(columnList="USER_ID, SYSTEM_ROLE_ID", unique=false)}
+//	)
+//	private List<User> users;
 }

@@ -5,18 +5,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.log4j.Logger;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -56,12 +51,14 @@ public class UserAdminPanelController implements Serializable {
 	
 	@PostConstruct
 	private void init() {
-		this.userList = new EditableUserList();
-		userList.setUsers(userService.getUserList());
 		allSystemRoles = sysRolesService.getSystemRoles();
 		exclusiveSystemRoles = new LinkedList<>();
 		newUser = new User();
 		departments = deptService.getActiveDepartmentList();
+		
+		this.userList = new EditableUserList(userService);
+		userList.setUsers(userService.getUserList());
+		userList.setDepartments(departments);
 		
 		userRoles = new EditableUserPickListRoles(sysRolesService.getSystemRoles(), new LinkedList<>());
 		userRoles.setEditable(true);
@@ -77,7 +74,5 @@ public class UserAdminPanelController implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		
 		newUser = new User();
-	}
-
-	
+	}	
 }

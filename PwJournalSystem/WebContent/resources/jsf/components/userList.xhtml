@@ -7,43 +7,79 @@
 	</cc:interface>
 	<cc:implementation>
 		<h:form>
-			<p:growl id="userMsg" showDetail="true" />
 			<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
 				<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{cc.attrs.userCC.users}" border="1" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
-					selectionMode="single" selection="#{cc.attrs. userCC.selectedUser}" rowKey="#{u.id}"
+					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true" selectionMode="single"
+					selection="#{cc.attrs.userCC.selectedUser}" rowKey="#{u.id}" editable="true"
 				>
-					<p:ajax event="rowSelect" listener="#{cc.attrs. userCC.onRowSelect}" update="@this" />
-			        <p:ajax event="rowUnselect" listener="#{cc.attrs. userCC.onRowUnselect}" update="@this"/>
+					<p:ajax event="rowSelect" listener="#{cc.attrs.userCC.onRowSelect}" />
+					<p:ajax event="rowUnselect" listener="#{cc.attrs.userCC.onRowUnselect}" />
+					<p:ajax event="rowEdit" listener="#{cc.attrs.userCC.onUserEdit}"/>
+					
 					<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
 						<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
-		    				#{u.login}
-		    		</p:column>
+						<h:outputText value="#{u.login}" />
+					</p:column>
 					<p:column id="cName" resizable="true" sortBy="#{u.name}">
 						<f:facet name="header">#{ccRes.cUserName}</f:facet>
-		    				#{u.name}
-		    		</p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{u.name}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{u.name}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
 					<p:column id="cSecondName" resizable="true" sortBy="#{u.secondName}">
 						<f:facet name="header">#{ccRes.cSecondName}</f:facet>
-		    				#{u.secondName}
-		    		</p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{u.secondName}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:inputText value="#{u.secondName}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
 					<p:column id="cEmail" resizable="true" sortBy="#{u.email}">
 						<f:facet name="header">#{ccRes.cUserEmail}</f:facet>
-		    				#{u.email}
-		    		</p:column>
+						<h:outputText value="#{u.email}" />
+					</p:column>
 					<p:column id="cDepartment" resizable="true" sortBy="#{u.dept}">
 						<f:facet name="header">#{ccRes.cUserDepartment}</f:facet>
-		    				#{not empty  u.dept ? u.dept.deptCode : 'n/d'}
-		    		</p:column>
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{not empty  u.dept ? u.dept.deptCode : null}" />
+							</f:facet>
+							<f:facet name="input">
+								<p:selectOneMenu id="userEditDept" value="#{u.dept}" converter="#{deptConverter}" effect="fade">
+									<f:selectItem itemLabel="" itemValue="" />
+									<f:selectItems value="#{cc.attrs.userCC.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
+									<p:column>
+										<h:outputText value="#{dept.deptCode}" />
+									</p:column>
+									<p:column>
+										<h:outputText value="#{dept.fullName}" />
+									</p:column>
+								</p:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
 					<p:column style="width:16px">
 						<p:rowToggler />
+					</p:column >
+					<p:column style="width:16px">
+						<p:rowEditor />
 					</p:column>
 					<p:rowExpansion>
-							<p:dataList value="#{u.systemRoles}" var="sr" rows="10" type="ordered" paginator="true" itemType="none" emptyMessage="#{ccRes.dlNoneRoles}" paginatorAlwaysVisible="false">
-									<f:facet name="header">#{ccRes.hUserSystemRoles}</f:facet>
-									<h:outputText value="#{sr.roleName}" style="display:inline-block"/>
-							</p:dataList>
+						<p:dataList value="#{u.systemRoles}" var="sr" rows="10" type="ordered" paginator="true" itemType="none" emptyMessage="#{ccRes.dlNoneRoles}"
+							paginatorAlwaysVisible="false"
+						>
+							<f:facet name="header">#{ccRes.hUserSystemRoles}</f:facet>
+							<h:outputText value="#{sr.roleName}" style="display:inline-block" />
+						</p:dataList>
 					</p:rowExpansion>
 				</p:dataTable>
 			</p:panel>

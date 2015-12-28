@@ -10,4 +10,6 @@ public interface DepartmentService {
 	public List<Department> getActiveDepartmentList();
 	
 	public void saveDepartment(Department d);
+	
+	public List<Department> getActiveDepartmentsNonPersis();
 }

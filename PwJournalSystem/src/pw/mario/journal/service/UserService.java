@@ -8,4 +8,6 @@ public interface UserService {
 	List<User> getUserList();
 	
 	User createUser(User u);
+	
+	void updateUser(User u);
 }

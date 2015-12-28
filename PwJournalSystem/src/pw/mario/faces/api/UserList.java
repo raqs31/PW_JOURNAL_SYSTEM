@@ -3,9 +3,11 @@ package pw.mario.faces.api;
 import java.io.Serializable;
 import java.util.List;
 
+import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
+import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 
 /**
@@ -29,4 +31,10 @@ public interface UserList extends Serializable  {
 	void onRowSelect(SelectEvent e);
 	
 	void onRowUnselect(UnselectEvent e);
+	
+	void setDepartments(List<Department> dept);
+	
+	List<Department> getDepartments();
+	
+	void onUserEdit(RowEditEvent e);
 } 

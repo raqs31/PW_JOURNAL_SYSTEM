@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -70,11 +71,11 @@ public class User extends AuditTable {
 	private String secondName;
 	
 
-	@OneToMany(fetch=FetchType.LAZY)
-	@JoinTable(name="USER_SYSTEM_ROLES",
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="USER_SYSTEM_ROLES",	
 		joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", unique=false)},
 		inverseJoinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID", unique=false)},
-		indexes={@Index(columnList="USER_ID, SYSTEM_ROLE_ID", unique=false)}
+		indexes={@Index(columnList="USER_ID, SYSTEM_ROLE_ID", unique=true)}
 	)
 	private List<SystemRole> systemRoles;
 	
@@ -88,5 +89,4 @@ public class User extends AuditTable {
 	{
 		isActive=true;
 	}
-
 }

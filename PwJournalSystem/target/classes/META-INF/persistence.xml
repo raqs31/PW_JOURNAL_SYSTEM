@@ -6,7 +6,6 @@
 	<persistence-unit name="PwJournalSystem"
 		transaction-type="JTA">
 		<exclude-unlisted-classes>false</exclude-unlisted-classes>
-		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:/OracleDS</jta-data-source>
 		<shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
 		<properties>

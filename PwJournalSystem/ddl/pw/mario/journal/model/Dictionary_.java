@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import pw.mario.journal.model.dictionaries.DictionaryId;
 
-@Generated(value="Dali", date="2015-11-28T11:58:13.649+0100")
+@Generated(value="Dali", date="2015-12-28T10:47:26.053+0100")
 @StaticMetamodel(Dictionary.class)
 public class Dictionary_ {
 	public static volatile SingularAttribute<Dictionary, DictionaryId> id;

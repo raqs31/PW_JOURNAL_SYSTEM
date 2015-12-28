@@ -7,8 +7,10 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<my:userList userCC="#{userAdminPanelCo.userList}"></my:userList>
-	<p:spacer width="10px" />
+	<h:form id="userList">
+		<my:userList userCC="#{userAdminPanelCo.userList}" />
+	</h:form>
+	<p:spacer width="10" />
 	<h:form id="newUser" rendered="#{request.isUserInRole('ADMIN')}">
 		<p:accordionPanel multiple="false">
 			<p:tab title="Dodaj nowego użytkownika">
@@ -20,7 +22,9 @@
 					</p:inputText>
 					<p:message for="userLogin" />
 					<p:outputLabel for="email" value="E-Mail" />
-					<p:inputText id="email" value="#{userAdminPanelCo.newUser.email}" />
+					<p:inputText id="email" value="#{userAdminPanelCo.newUser.email}">
+						<f:validator binding="#{mailValidator}" />
+					</p:inputText>
 					<p:message for="email" />
 					<p:outputLabel for="userName" value="Imię" />
 					<p:inputText id="userName" value="#{userAdminPanelCo.newUser.name}" />
@@ -52,7 +56,7 @@
 				<p:separator />
 				<my:pickListSystemRoles sysRoles="#{userAdminPanelCo.userRoles}" />
 				<p:separator />
-				<p:commandButton value="Submit" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser"
+				<p:commandButton value="Dodaj" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser userList"
 					actionListener="#{userAdminPanelCo.createUser}"
 				/>
 			</p:tab>

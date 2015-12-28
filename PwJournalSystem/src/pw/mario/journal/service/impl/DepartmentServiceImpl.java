@@ -33,4 +33,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 		deptDao.addDepartment(d);
 	}
 
+	@Override
+	public List<Department> getActiveDepartmentsNonPersis() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

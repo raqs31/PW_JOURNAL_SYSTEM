@@ -12,4 +12,5 @@ begin
   loop
     Insert into USER_SYSTEM_ROLES (USER_ID,SYSTEM_ROLE_ID) values (l_admin_id,u.system_role_id);
   end loop;
+  commit;
 end;
