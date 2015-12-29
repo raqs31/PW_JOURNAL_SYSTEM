@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateful;
 
+import com.google.common.base.Strings;
+
 import lombok.Data;
 import pw.mario.journal.service.LoginService;
 
@@ -24,7 +26,7 @@ public class LoginContextServiceImpl implements LoginService {
 	 */
 	@Override
 	public boolean isLogged() {
-			return ctx.isCallerInRole("USER");
+			return !Strings.isNullOrEmpty(ctx.getCallerPrincipal().getName()) &&  !"anonymous".equals(ctx.getCallerPrincipal().getName());
 	
 	}
 }
