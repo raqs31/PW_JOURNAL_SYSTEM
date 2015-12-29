@@ -23,7 +23,6 @@ public class DepartmentDAOImpl extends AbstractDAOImpl<Department> implements De
 		Query q = em.createQuery("from Department d where d.isActive = ?1");
 		q.setParameter(1, Boolean.TRUE);
 		return q.getResultList();
-	
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class DepartmentDAOImpl extends AbstractDAOImpl<Department> implements De
 
 	@Override
 	public Department getDepartment(Long id) {
-		return em.find(Department.class, id);
+		return getReference(id);
 	}
 
 	@Override

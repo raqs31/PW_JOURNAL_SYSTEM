@@ -24,33 +24,41 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 		em.getTransaction().begin();
 	}
 	
-	public void commit() {
+	protected void commit() {
 		em.getTransaction().commit();
 	}
 	
-	public void rollback() {
+	protected void rollback() {
 		em.getTransaction().rollback();
 	}
 	
-	public void persist(T o) {
+	protected void persist(T o) {
 		em.persist(o);
 	}
 	
-	public void delete(T o) {
+	protected void delete(T o) {
 		em.remove(reAttachEntity(o));
 	}
 	
-	public TypedQuery<T> createTypedQuery(String query) {
+	protected TypedQuery<T> createTypedQuery(String query) {
 		return em.createQuery(query, clazz); 
 	}
 	
-	public TypedQuery<T> createNamedTypedQuery(String namedQuery) {
+	protected TypedQuery<T> createNamedTypedQuery(String namedQuery) {
 		return em.createNamedQuery(namedQuery, clazz);
 	}
 	
-	public T reAttachEntity(T o) {
+	protected T reAttachEntity(T o) {
 		if (!em.contains(o))
 			o = em.find(clazz, o.getId());
 		return o;
+	}
+	
+	protected T getReference(Object id) {
+		return em.getReference(clazz, id);
+	}
+	
+	protected T find(Object id) {
+		return em.find(clazz, id);
 	}
 }
