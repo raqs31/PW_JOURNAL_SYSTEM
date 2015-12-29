@@ -8,12 +8,13 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.dictionaries.DictionaryId;
+import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name="DICTIONARIES", schema="MARIO")
-public class Dictionary {
+public class Dictionary implements IdTable{
 	
 	@EmbeddedId
 	private DictionaryId id;

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
+>
+<h:head>
+	<title><ui:insert name="title">Jest git</ui:insert></title>
+</h:head>
+<h:body>
+	<my:mainMenuBar />
+	<h:form id="editUser" rendered="#{request.isUserInRole('ADMIN')}">
+		<p:growl autoUpdate="true" sticky="false" life="6000" showDetail="false" />
+		<h:panelGrid id="editUser" columns="3" cellpadding="5">
+			<p:outputLabel for="userLogin" value="Login" />
+			<p:outputLabel id="userLogin" value="#{editUserController.editUser.login}" />
+			<p:message for="userLogin" />
+			<p:outputLabel for="email" value="E-Mail" />
+			<p:outputLabel id="email" value="#{editUserController.editUser.email}" />
+			<p:message for="email" />
+			<p:outputLabel for="userName" value="Imię" />
+			<p:inputText id="userName" value="#{editUserController.editUser.name}" />
+			<p:message for="userName" />
+			<p:outputLabel for="userSecondName" value="Nazwisko" />
+			<p:inputText id="userSecondName" value="#{editUserController.editUser.secondName}" />
+			<p:message for="userSecondName" />
+			<p:outputLabel for="userDept" value="Departament" />
+			<p:selectOneMenu id="userDept" value="#{editUserController.editUser.dept}" converter="#{deptConverter}" effect="fade" var="d">
+				<f:selectItem itemLabel="Wybierz departament" itemValue="" />
+				<f:selectItems value="#{editUserController.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
+				<p:column>
+					<h:outputText value="#{d.deptCode}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{d.fullName}" />
+				</p:column>
+			</p:selectOneMenu>
+			<p:message for="userDept" />
+		</h:panelGrid>
+		<my:pickListSystemRoles sysRoles="#{editUserController.userRoles}" />
+		<p:commandButton value="Aktualizuj" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="editUser"
+			actionListener="#{editUserController.updateUser()}"
+		/>
+		<p:button value="Powrót" validateClient="false" styleClass="ui-priority-primary" outcome="users" />
+		<my:confirmDialog onConfirmAction="#{editUserController.confirmDeleteAction}" />
+	</h:form>
+</h:body>
+</html>

@@ -10,12 +10,13 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @NoArgsConstructor
 @Entity
 @Table(name="DICT_LOCALES", schema="MARIO")
-public class Locale {
+public class Locale implements IdTable {
 	@Id
 	@SequenceGenerator(name="localeIdSeq", sequenceName="LOCALE_ID_SEQ", schema="MARIO", initialValue=1, allocationSize=10)
 	@GeneratedValue(generator="localeIdSeq", strategy=GenerationType.SEQUENCE)
@@ -27,4 +28,9 @@ public class Locale {
 		
 	@Column(name="VALUE")
 	private String valuel;
+
+	@Override
+	public Object getId() {
+		return localeId;
+	}
 }

@@ -3,7 +3,6 @@ package pw.mario.journal.model;
 import java.util.List;
 
 import javax.persistence.Cacheable;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +16,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,6 +23,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.ext.AuditTable;
+import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -43,7 +42,7 @@ import pw.mario.journal.model.ext.AuditTable;
 	@NamedQuery(name=User.Queries.GET_BY_EMAIL, 
 		query = "select u from User u where u.email = ?1")
 })
-public class User extends AuditTable {
+public class User extends AuditTable implements IdTable {
 	public interface Queries {
 		String GET_BY_LOGIN = "User.getByLogin";
 		String GET_BY_EMAIL = "User.getByEmail";
@@ -52,7 +51,7 @@ public class User extends AuditTable {
 	@Column(name="USER_ID")
 	@SequenceGenerator(name="userSeq", sequenceName ="USERS_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="userSeq", strategy=GenerationType.SEQUENCE)
-	private long id;
+	private long userId;
 	
 	
 	@Column(name="LOGIN", length=25, unique=true, nullable=false)
@@ -79,7 +78,7 @@ public class User extends AuditTable {
 	)
 	private List<SystemRole> systemRoles;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade={CascadeType.DETACH, CascadeType.MERGE})
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="DEPARTMENT_ID")
 	private Department dept;
 	
@@ -88,5 +87,9 @@ public class User extends AuditTable {
 	
 	{
 		isActive=true;
+	}
+	@Override
+	public Object getId() {
+		return userId;
 	}
 }

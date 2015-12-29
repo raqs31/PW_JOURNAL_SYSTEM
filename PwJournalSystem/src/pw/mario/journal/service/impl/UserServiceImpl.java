@@ -32,15 +32,25 @@ public class UserServiceImpl implements UserService {
 		
 		u.setPasswd(md5Passwd.generate(u.getPasswd()));
 		
-		//TODO validate
-		
 		userDao.addUser(u);
 		return u;
 	}
 
 	@Override
-	public void updateUser(User u) {
-		userDao.updateUser(u);
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public User updateUser(User u) {
+		return userDao.updateUser(u);
+	}
+
+	@Override
+	public User getUser(long id) {
+		return userDao.getUser(id);
+	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteUser(User u) {
+		userDao.deleteUser(u);
 	}
 
 

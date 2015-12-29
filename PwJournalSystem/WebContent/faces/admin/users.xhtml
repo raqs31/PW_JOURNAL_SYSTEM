@@ -7,60 +7,88 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<h:form id="userList">
-		<my:userList userCC="#{userAdminPanelCo.userList}" />
-	</h:form>
-	<p:spacer width="10" />
-	<h:form id="newUser" rendered="#{request.isUserInRole('ADMIN')}">
-		<p:accordionPanel multiple="false">
-			<p:tab title="Dodaj nowego użytkownika">
-				<p:growl autoUpdate="true" sticky="false" life="6000" showDetail="false" />
-				<h:panelGrid id="newUser" columns="3" cellpadding="5">
-					<p:outputLabel for="userLogin" value="Login" />
-					<p:inputText id="userLogin" value="#{userAdminPanelCo.newUser.login}">
-						<f:validator binding="#{loginValidator}" />
-					</p:inputText>
-					<p:message for="userLogin" />
-					<p:outputLabel for="email" value="E-Mail" />
-					<p:inputText id="email" value="#{userAdminPanelCo.newUser.email}">
-						<f:validator binding="#{mailValidator}" />
-					</p:inputText>
-					<p:message for="email" />
-					<p:outputLabel for="userName" value="Imię" />
-					<p:inputText id="userName" value="#{userAdminPanelCo.newUser.name}" />
-					<p:message for="userName" />
-					<p:outputLabel for="userSecondName" value="Nazwisko" />
-					<p:inputText id="userSecondName" value="#{userAdminPanelCo.newUser.secondName}" />
-					<p:message for="userSecondName" />
-					<p:outputLabel for="userPassword" value="Hasło" />
-					<p:password id="userPassword" value="#{userAdminPanelCo.newUser.passwd}" feedback="true" promptLabel="Siła" weakLabel="Cieniutko"
-						goodLabel="Lepiej" strongLabel="Nice :)" match="userPassword2" required="true"
-					/>
-					<p:message for="userPassword" />
-					<p:outputLabel for="userPassword2" value="Powtórz hasło" />
-					<p:password id="userPassword2" value="#{userAdminPanelCo.newUser.passwd}" required="true" />
-					<p:message for="userPassword2" />
-					<p:outputLabel for="userDept" value="Departament" />
-					<p:selectOneMenu id="userDept" value="#{userAdminPanelCo.newUser.dept}" converter="#{deptConverter}" effect="fade" var="d">
-						<f:selectItem itemLabel="Wybierz departament" itemValue="" />
-						<f:selectItems value="#{userAdminPanelCo.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
-						<p:column>
-							<h:outputText value="#{d.deptCode}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{d.fullName}" />
-						</p:column>
-					</p:selectOneMenu>
-					<p:message for="userDept" />
-				</h:panelGrid>
-				<p:separator />
-				<my:pickListSystemRoles sysRoles="#{userAdminPanelCo.userRoles}" />
-				<p:separator />
-				<p:commandButton value="Dodaj" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser userList"
-					actionListener="#{userAdminPanelCo.createUser}"
-				/>
-			</p:tab>
-		</p:accordionPanel>
+	<h:form>
+	<p:growl autoUpdate="true" sticky="false" life="3000" showDetail="true" />
+		<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
+			<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{usersController.users}" border="1" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true" selectionMode="single"
+				selection="#{usersController.selectedUser}" rowKey="#{u.id}" editable="true"
+			>
+				<p:ajax event="rowEdit" listener="#{usersController.onUserEdit}" />
+
+				<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
+					<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
+					<h:outputText value="#{u.login}" />
+				</p:column>
+				<p:column id="cName" resizable="true" sortBy="#{u.name}">
+					<f:facet name="header">#{ccRes.cUserName}</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{u.name}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{u.name}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column id="cSecondName" resizable="true" sortBy="#{u.secondName}">
+					<f:facet name="header">#{ccRes.cSecondName}</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{u.secondName}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:inputText value="#{u.secondName}" />
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column id="cEmail" resizable="true" sortBy="#{u.email}">
+					<f:facet name="header">#{ccRes.cUserEmail}</f:facet>
+					<h:outputText value="#{u.email}" />
+				</p:column>
+				<p:column id="cDepartment" resizable="true" sortBy="#{u.dept}">
+					<f:facet name="header">#{ccRes.cUserDepartment}</f:facet>
+					<p:cellEditor>
+						<f:facet name="output">
+							<h:outputText value="#{not empty  u.dept ? u.dept.deptCode : null}" />
+						</f:facet>
+						<f:facet name="input">
+							<p:selectOneMenu id="userEditDept" value="#{u.dept}" converter="#{deptConverter}" effect="fade">
+								<f:selectItem itemLabel="" itemValue="" />
+								<f:selectItems value="#{usersController.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
+								<p:column>
+									<h:outputText value="#{dept.deptCode}" />
+								</p:column>
+								<p:column>
+									<h:outputText value="#{dept.fullName}" />
+								</p:column>
+							</p:selectOneMenu>
+						</f:facet>
+					</p:cellEditor>
+				</p:column>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
+				<p:column style="width:16px">
+					<p:rowEditor />
+				</p:column>
+				<p:column style="width:24px">
+					<p:link outcome="editUser" value="Edit" style="font-size:12px">
+						<f:param name="userId" value="#{u.id}"/>
+					</p:link>
+				</p:column>
+				<p:rowExpansion>
+					<p:dataList value="#{u.systemRoles}" var="sr" rows="10" type="ordered" paginator="true" itemType="none" emptyMessage="#{ccRes.dlNoneRoles}"
+						paginatorAlwaysVisible="false"
+					>
+						<f:facet name="header">#{ccRes.hUserSystemRoles}</f:facet>
+						<h:outputText value="#{sr.roleName}" style="display:inline-block" />
+					</p:dataList>
+				</p:rowExpansion>
+			</p:dataTable>
+		</p:panel>
+		<p:button id="newUser" value="Utwórz użytkownika" outcome="createUser" icon="fa fa-plus"/>
 	</h:form>
 </h:body>
 </html>

@@ -6,18 +6,15 @@
 		<cc:attribute name="sysRoles" type="pw.mario.faces.api.PickListRoles" required="true" />
 	</cc:interface>
 	<cc:implementation>
-		<h:form>
-			<p:pickList id="sysRolesPickList" value="#{cc.attrs.sysRoles.pickListSystemRoles}" var="role" effect="bounce" itemValue="#{role}" itemLabel="#{role.roleName}"
-				showSourceControls="true" showTargetControls="true" showCheckbox="true" responsive="true" showSourceFilter="true" showTargetFilter="true"
-				filterMatchMode="contains" converter="sysRoleConverter"
-			>
-				<f:facet name="sourceCaption">Available</f:facet>
-				<f:facet name="targetCaption">Starting</f:facet>
-
-				<p:column style="width:90%;">
-					<h:outputText value="#{role.roleName}" />
-				</p:column>
-			</p:pickList>
-		</h:form>
+		<p:pickList id="sysRolesPickList" value="#{cc.attrs.sysRoles.pickListSystemRoles}" var="role" effect="bounce" itemValue="#{role}"
+			itemLabel="#{role.roleName}" showSourceControls="true" showTargetControls="true" showCheckbox="true" responsive="true" showSourceFilter="true"
+			showTargetFilter="true" filterMatchMode="contains" converter="sysRoleConverter"
+		>
+			<f:facet name="sourceCaption">Available</f:facet>
+			<f:facet name="targetCaption">Starting</f:facet>
+			<p:column style="width:90%;">
+				<h:outputText value="#{role.roleName}" />
+			</p:column>
+		</p:pickList>
 	</cc:implementation>
 </ui:component>

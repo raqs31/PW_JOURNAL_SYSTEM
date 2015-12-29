@@ -10,11 +10,12 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @Entity
 @Table(name="TAGS", indexes={@Index(columnList="NAME", unique=true)})
-public class Tag {
+public class Tag implements IdTable {
 	@Id
 	@Column(name="TAG_ID")
 	@SequenceGenerator(name="tagIdSeq", sequenceName="TAGS_SEQ", initialValue=1)
@@ -26,4 +27,9 @@ public class Tag {
 	
 	@Column(name="DESCRIPTION", length=240)
 	private String description;
+
+	@Override
+	public Object getId() {
+		return tagId;
+	}
 }

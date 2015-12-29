@@ -25,20 +25,20 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addUser(User u) {
-		
-		em.persist(u);
+		persist(u);
 	}
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void deleteUser(User u) {
-		em.remove(u);
+		delete(u);
 	}
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void updateUser(User u) {
+	public User updateUser(User u) {
 		em.merge(u);
+		return getUser(u.getUserId());
 	}
 
 	@Override
@@ -63,6 +63,11 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 		return createNamedTypedQuery(User.Queries.GET_BY_LOGIN)
 				.setParameter(1, login)
 				.getSingleResult();
+	}
+
+	@Override
+	public User getUser(long id) {
+		return em.find(User.class, id);
 	}
 
 }

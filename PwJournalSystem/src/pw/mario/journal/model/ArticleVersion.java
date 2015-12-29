@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pw.mario.journal.model.ext.AuditTable;
+import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
@@ -24,7 +25,7 @@ import pw.mario.journal.model.ext.AuditTable;
 			@Index(columnList="STATUS")
 	}
 )
-public class ArticleVersion extends AuditTable{
+public class ArticleVersion extends AuditTable implements IdTable {
 	@Id
 	@SequenceGenerator(name="versionSeq", sequenceName="VERSIONS_SEQ", initialValue=1)
 	@GeneratedValue(generator="versionSeq", strategy=GenerationType.SEQUENCE)
@@ -46,4 +47,9 @@ public class ArticleVersion extends AuditTable{
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ARTICLE_ID", nullable=false, updatable=false)
 	private Article article;
+
+	@Override
+	public Object getId() {
+		return versionId;
+	}
 }

@@ -20,12 +20,13 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pw.mario.journal.model.ext.AuditTable;
+import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="ARTICLES", schema="MARIO")
-public class Article extends AuditTable {
+public class Article extends AuditTable implements IdTable {
 	@Id
 	@Column(name="ARTICLE_ID")
 	@SequenceGenerator(name="articleSeq", sequenceName="ARTICLES_SEQ", initialValue=1)
@@ -56,4 +57,9 @@ public class Article extends AuditTable {
 	
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL)
 	private List<ArticleVersion> versions;
+
+	@Override
+	public Object getId() {
+		return getArticleId();
+	}
 }

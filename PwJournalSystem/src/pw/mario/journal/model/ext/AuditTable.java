@@ -1,12 +1,9 @@
 package pw.mario.journal.model.ext;
 
-import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 import java.util.Calendar;
 import java.util.Date;
 
-import javax.annotation.Resource;
-import javax.ejb.SessionContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;

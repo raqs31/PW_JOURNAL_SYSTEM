@@ -1,0 +1,17 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:cc="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
+>
+	<cc:interface>
+		<cc:attribute name="onConfirmAction" type="pw.mario.faces.api.action.OnConfirmAction" required="true"/>
+	</cc:interface>
+	<cc:implementation>
+			<p:commandButton value="#{cc.attrs.onConfirmAction.buttonValue()}" actionListener="#{cc.attrs.onConfirmAction.doAction()}">
+				<p:confirm header="${cc.attrs.onConfirmAction.getHeader()}" message="${cc.attrs.onConfirmAction.getMessage()}" icon="${cc.attrs.onConfirmAction.getIcon()}" />
+			</p:commandButton>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+	</cc:implementation>
+</ui:component>

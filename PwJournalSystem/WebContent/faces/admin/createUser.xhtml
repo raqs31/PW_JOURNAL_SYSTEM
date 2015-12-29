@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
+>
+<h:head>
+	<title><ui:insert name="title">Jest git</ui:insert></title>
+</h:head>
+<h:body>
+	<my:mainMenuBar />
+	<h:form id="newUser" rendered="#{request.isUserInRole('ADMIN')}">
+		<p:growl autoUpdate="true" sticky="false" life="6000" showDetail="false" />
+		<h:panelGrid id="newUser" columns="3" cellpadding="5">
+			<p:outputLabel for="userLogin" value="Login" />
+			<p:inputText id="userLogin" value="#{createUserController.newUser.login}">
+				<f:validator binding="#{loginValidator}" />
+			</p:inputText>
+			<p:message for="userLogin" />
+			<p:outputLabel for="email" value="E-Mail" />
+			<p:inputText id="email" value="#{createUserController.newUser.email}">
+				<f:validator binding="#{mailValidator}" />
+			</p:inputText>
+			<p:message for="email" />
+			<p:outputLabel for="userName" value="Imię" />
+			<p:inputText id="userName" value="#{createUserController.newUser.name}" />
+			<p:message for="userName" />
+			<p:outputLabel for="userSecondName" value="Nazwisko" />
+			<p:inputText id="userSecondName" value="#{createUserController.newUser.secondName}" />
+			<p:message for="userSecondName" />
+			<p:outputLabel for="userPassword" value="Hasło" />
+			<p:password id="userPassword" value="#{createUserController.newUser.passwd}" feedback="true" promptLabel="Siła" weakLabel="Cieniutko"
+				goodLabel="Lepiej" strongLabel="Nice :)" match="userPassword2" required="true"
+			/>
+			<p:message for="userPassword" />
+			<p:outputLabel for="userPassword2" value="Powtórz hasło" />
+			<p:password id="userPassword2" value="#{createUserController.newUser.passwd}" required="true" />
+			<p:message for="userPassword2" />
+			<p:outputLabel for="userDept" value="Departament" />
+			<p:selectOneMenu id="userDept" value="#{createUserController.newUser.dept}" converter="#{deptConverter}" effect="fade" var="d">
+				<f:selectItem itemLabel="Wybierz departament" itemValue="" />
+				<f:selectItems value="#{createUserController.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
+				<p:column>
+					<h:outputText value="#{d.deptCode}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{d.fullName}" />
+				</p:column>
+			</p:selectOneMenu>
+			<p:message for="userDept" />
+		</h:panelGrid>
+		<p:separator />
+		<my:pickListSystemRoles sysRoles="#{createUserController.userRoles}" />
+		<p:separator />
+		<p:commandButton value="Dodaj" id="submitUser" styleClass="ui-priority-primary" ajax="true" validateClient="true" update="newUser"
+			actionListener="#{createUserController.createUser}"
+		/>
+		<p:button value="Anuluj" validateClient="false" styleClass="ui-priority-primary" outcome="users"/>
+	</h:form>
+</h:body>
+</html>
