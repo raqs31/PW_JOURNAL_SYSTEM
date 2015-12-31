@@ -7,7 +7,7 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<h:form>
+	<h:form rendered="#{request.isUserInRole('ADMIN')}">
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 		<p:panelGrid columns="2">
 			<f:facet name="header">
