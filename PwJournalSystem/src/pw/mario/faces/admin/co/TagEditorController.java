@@ -1,19 +1,14 @@
 package pw.mario.faces.admin.co;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.annotation.Resource;
-import javax.ejb.Stateful;
-import javax.enterprise.context.Conversation;
-import javax.enterprise.context.ConversationScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,7 +19,9 @@ import pw.mario.journal.service.TagService;
 @NoArgsConstructor
 @ManagedBean(name="tagEditorController")
 @ViewScoped
-public class TagEditorController {
+public class TagEditorController implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Inject
 	private TagService tagService;
 
@@ -34,9 +31,6 @@ public class TagEditorController {
 	@Getter
 	@Setter
 	private Tag selectedTag;
-	@Getter
-	@Setter
-	private Tag editTag;
 	@Getter
 	@Setter
 	private Tag newTag;
@@ -56,11 +50,15 @@ public class TagEditorController {
 	}
 	
 	public void removeTag() {
-		
+		tags.remove(selectedTag);
+		tagService.removeTag(selectedTag);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto", selectedTag.getName()));
 	}
 	
 	public void updateTag() {
-		tagService.updateTag(editTag);
-		
+		tagService.updateTag(selectedTag);
+		FacesContext.getCurrentInstance().addMessage(null,
+				new FacesMessage(FacesMessage.SEVERITY_INFO, "Zaktualizowano etykietę", selectedTag.getName()));
 	}
 }

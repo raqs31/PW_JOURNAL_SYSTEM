@@ -63,7 +63,6 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected T merge(T o) {
-		o = reAttachEntity(o);
 		return em.merge(o);
 	}
 }

@@ -2,17 +2,15 @@ package pw.mario.journal.service.impl;
 
 import java.util.List;
 
-	import javax.ejb.Stateless;
+import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
-import pw.mario.journal.dao.TagDAO;
 
-import lombok.Data;
+import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.service.TagService;
 
-@Data
 @Stateless
 public class TagServiceImpl implements TagService {
 	@Inject

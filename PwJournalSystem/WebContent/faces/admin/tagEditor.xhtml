@@ -7,9 +7,10 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
+	<p:growl id="tagMsg"/>
+	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	<h:panelGrid columns="2" style="width:70%">
 		<h:form id="addTag" rendered="#{request.isUserInRole('ADMIN')}">
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 			<p:panelGrid columns="3">
 				<f:facet name="header">Dodaj tag</f:facet>
 				<p:outputLabel for="tagName" value="Nazwa" />
@@ -31,8 +32,8 @@
 				>
 					<f:setPropertyActionListener value="#{tag}" target="#{tagEditorController.selectedTag}" />
 				</p:commandLink>
-				<p:commandLink rendered="#{request.isUserInRole('ADMIN')}" update=":tagEditor:editTag" oncomplete="PF('widgetTagEdit').show()" title="Edytuj" styleClass="ui-icon ui-icon-pencil"
-					style="float:left;margin-right:10px"
+				<p:commandLink rendered="#{request.isUserInRole('ADMIN')}" update=":tagEditor:editTag" oncomplete="PF('widgetTagEdit').show()" title="Edytuj"
+					styleClass="ui-icon ui-icon-pencil" style="float:left;margin-right:10px"
 				>
 					<f:setPropertyActionListener value="#{tag}" target="#{tagEditorController.selectedTag}" />
 				</p:commandLink>
@@ -52,15 +53,15 @@
 				<p:outputPanel id="editTag" style="text-align:center;">
 					<p:panelGrid columns="2" rendered="#{not empty tagEditorController.selectedTag}" columnClasses="label,value">
 						<h:outputText value="Nazwa:" />
-						<h:outputText value="#{tagEditorController.selectedTag.name}" />
+						<p:inputText value="#{tagEditorController.selectedTag.name}" maxlength="20"/>
 						<h:outputText value="Opis:" />
 						<p:inputTextarea value="#{tagEditorController.selectedTag.description}" rows="5" cols="30" counter="charCount" maxlength="120"
 							counterTemplate="pozostało znaków {0}" autoResize="true"
 						/>
-						<p:spacer/>
+						<p:spacer />
 						<h:outputText id="charCount" />
-						<p:spacer/>
-						<p:commandButton actionListener="#{tagEditorController.updateTag()}" value="Zapisz" icon="fa fa-save" onclick="PF('widgetTagEdit').close()" />
+						<p:commandButton actionListener="#{tagEditorController.removeTag()}" value="Usuń" icon="fa fa-trash" onclick="PF('widgetTagEdit').close()" update="tagMsg"/>
+						<p:commandButton actionListener="#{tagEditorController.updateTag()}" value="Zapisz" icon="fa fa-save" onclick="PF('widgetTagEdit').close()" update="tagMsg"/>
 					</p:panelGrid>
 				</p:outputPanel>
 			</p:dialog>
