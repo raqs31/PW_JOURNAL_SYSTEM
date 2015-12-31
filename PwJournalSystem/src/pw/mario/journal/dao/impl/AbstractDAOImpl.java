@@ -61,4 +61,9 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	protected T find(Object id) {
 		return em.find(clazz, id);
 	}
+	
+	protected T merge(T o) {
+		o = reAttachEntity(o);
+		return em.merge(o);
+	}
 }

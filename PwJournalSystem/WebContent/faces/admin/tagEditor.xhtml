@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
+>
+<h:head>
+	<title><ui:insert name="title">Tagi systemowe</ui:insert></title>
+</h:head>
+<h:body>
+	<my:mainMenuBar />
+	<h:panelGrid columns="2" style="width:70%">
+		<h:form id="addTag" rendered="#{request.isUserInRole('ADMIN')}">
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			<p:panelGrid columns="3">
+				<f:facet name="header">Dodaj tag</f:facet>
+				<p:outputLabel for="tagName" value="Nazwa" />
+				<p:inputText id="tagName" value="#{tagEditorController.newTag.name}" required="true" maxlength="20">
+					<f:validator binding="#{tagValidator}" />
+				</p:inputText>
+				<p:message for="tagName" />
+				<p:outputLabel for="tagDescription" value="Opis" />
+				<p:inputText id="tagDescription" value="#{tagEditorController.newTag.description}" maxlength="120" />
+				<p:spacer />
+				<p:commandButton action="#{tagEditorController.addTag()}" value="Dodaj tag" update="tagEditor addTag" />
+			</p:panelGrid>
+		</h:form>
+		<h:form id="tagEditor" style="width:600px">
+			<p:dataList value="#{tagEditorController.tags}" var="tag" type="ordered" itemType="none" paginator="true" rows="15" styleClass="paginated">
+				<f:facet name="header">Tagi systemowey</f:facet>
+				<p:commandLink update=":tagEditor:tagDetail" oncomplete="PF('widgetTagDetail').show()" title="Szczegóły" styleClass="ui-icon ui-icon-search"
+					style="float:left;margin-right:10px"
+				>
+					<f:setPropertyActionListener value="#{tag}" target="#{tagEditorController.selectedTag}" />
+				</p:commandLink>
+				<p:commandLink rendered="#{request.isUserInRole('ADMIN')}" update=":tagEditor:editTag" oncomplete="PF('widgetTagEdit').show()" title="Edytuj" styleClass="ui-icon ui-icon-pencil"
+					style="float:left;margin-right:10px"
+				>
+					<f:setPropertyActionListener value="#{tag}" target="#{tagEditorController.selectedTag}" />
+				</p:commandLink>
+				<h:outputText value="#{tag.name}" style="display:inline-block" />
+			</p:dataList>
+			<p:dialog header="Tag info" widgetVar="widgetTagDetail" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="tagDetail" style="text-align:center;">
+					<p:panelGrid columns="2" rendered="#{not empty tagEditorController.selectedTag}" columnClasses="label,value">
+						<h:outputText value="Nazwa:" />
+						<h:outputText value="#{tagEditorController.selectedTag.name}" />
+						<h:outputText value="Opis:" />
+						<h:outputText value="#{tagEditorController.selectedTag.description}" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+			<p:dialog header="Edycja" widgetVar="widgetTagEdit" modal="true" showEffect="fade" hideEffect="fade" resizable="true">
+				<p:outputPanel id="editTag" style="text-align:center;">
+					<p:panelGrid columns="2" rendered="#{not empty tagEditorController.selectedTag}" columnClasses="label,value">
+						<h:outputText value="Nazwa:" />
+						<h:outputText value="#{tagEditorController.selectedTag.name}" />
+						<h:outputText value="Opis:" />
+						<p:inputTextarea value="#{tagEditorController.selectedTag.description}" rows="5" cols="30" counter="charCount" maxlength="120"
+							counterTemplate="pozostało znaków {0}" autoResize="true"
+						/>
+						<p:spacer/>
+						<h:outputText id="charCount" />
+						<p:spacer/>
+						<p:commandButton actionListener="#{tagEditorController.updateTag()}" value="Zapisz" icon="fa fa-save" onclick="PF('widgetTagEdit').close()" />
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+	</h:panelGrid>
+</h:body>
+</html>

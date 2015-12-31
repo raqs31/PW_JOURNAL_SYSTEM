@@ -13,8 +13,9 @@ import pw.mario.journal.model.Tag;
 public class TagDAOImpl extends AbstractDAOImpl<Tag> implements TagDAO {
 
 	@Override
-	public void addTag(Tag t) {
+	public Tag addTag(Tag t) {
 		persist(t);
+		return find(t.getId());
 	}
 
 	@Override
@@ -30,7 +31,12 @@ public class TagDAOImpl extends AbstractDAOImpl<Tag> implements TagDAO {
 	
 	@Override
 	public Tag getTag(String tagName) {
-		return (Tag) em.createQuery("selet t from Tag t where t.name = ?").setParameter(1, tagName).getSingleResult();
+		return (Tag) em.createQuery("select t from Tag t where t.name = ?").setParameter(1, tagName).getSingleResult();
+	}
+
+	@Override
+	public Tag updateTag(Tag t) {
+		return merge(t);
 	}
 
 }
