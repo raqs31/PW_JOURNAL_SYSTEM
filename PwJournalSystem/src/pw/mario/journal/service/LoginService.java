@@ -1,6 +1,8 @@
 package pw.mario.journal.service;
 
-public interface LoginService {
+import java.io.Serializable;
+
+public interface LoginService extends Serializable {
 
 	String getLogin();
 

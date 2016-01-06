@@ -1,17 +1,19 @@
 package pw.mario.journal.service.impl;
 
+
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
-import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 
 import com.google.common.base.Strings;
 
-import lombok.Data;
+import lombok.NoArgsConstructor;
 import pw.mario.journal.service.LoginService;
 
-@Data
-@Stateful
+@NoArgsConstructor
+@SessionScoped
 public class LoginContextServiceImpl implements LoginService {
+	private static final long serialVersionUID = 1L;
 	@Resource
 	private SessionContext ctx;
 	
@@ -26,7 +28,6 @@ public class LoginContextServiceImpl implements LoginService {
 	 */
 	@Override
 	public boolean isLogged() {
-			return !Strings.isNullOrEmpty(ctx.getCallerPrincipal().getName()) &&  !"anonymous".equals(ctx.getCallerPrincipal().getName());
-	
+		return !Strings.isNullOrEmpty(ctx.getCallerPrincipal().getName()) &&  !"anonymous".equals(ctx.getCallerPrincipal().getName());
 	}
 }

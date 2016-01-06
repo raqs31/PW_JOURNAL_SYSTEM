@@ -7,12 +7,15 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.service.TagService;
 
+@NoArgsConstructor
 @Stateless
 public class TagServiceImpl implements TagService {
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private TagDAO tagDao;
 	

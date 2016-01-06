@@ -5,13 +5,16 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.SystemRolesService;
 
+@NoArgsConstructor
 @Stateless
 public class SystemRolesServiceImpl implements SystemRolesService {
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private  SystemRolesDAO sysRolesDao;
 	

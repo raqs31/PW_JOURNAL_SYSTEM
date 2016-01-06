@@ -88,7 +88,7 @@
 				</p:rowExpansion>
 			</p:dataTable>
 		</p:panel>
-		<p:button id="newUser" value="Utwórz użytkownika" outcome="createUser" icon="fa fa-plus"/>
+		<p:button id="newUser" value="Utwórz użytkownika" outcome="createUser" icon="fa fa-plus" rendered="${request.isUserInRole('ADMIN')}"/>
 	</h:form>
 </h:body>
 </html>

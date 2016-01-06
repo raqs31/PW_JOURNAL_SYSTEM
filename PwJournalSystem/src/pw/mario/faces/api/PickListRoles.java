@@ -1,10 +1,12 @@
 package pw.mario.faces.api;
 
+import java.io.Serializable;
+
 import org.primefaces.model.DualListModel;
 
 import pw.mario.journal.model.SystemRole;
 
-public interface PickListRoles {
+public interface PickListRoles extends Serializable {
 	boolean isEditable();
 	void setEditable(boolean isEditable);
 	

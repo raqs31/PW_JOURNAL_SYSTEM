@@ -6,11 +6,13 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.annotation.security.PermitAll;
+import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -20,12 +22,11 @@ import lombok.Setter;
 import pw.mario.journal.service.LocaleService;
 import pw.mario.journal.service.LoginService;
 
-@ManagedBean(name="authBean")
+@Named("authBean")
 @SessionScoped
+@Stateful
+@PermitAll
 public class MainMenuBarController implements Serializable {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Inject

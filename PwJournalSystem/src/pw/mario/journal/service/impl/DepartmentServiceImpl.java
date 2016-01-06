@@ -7,12 +7,15 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
+import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.DepartmentDAO;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.service.DepartmentService;
 
+@NoArgsConstructor
 @Stateless
 public class DepartmentServiceImpl implements DepartmentService {
+	private static final long serialVersionUID = 1L;
 	@Inject
 	private DepartmentDAO deptDao;
 	
@@ -23,7 +26,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public List<Department> getActiveDepartmentList() {
-		// TODO Auto-generated method stub
 		return deptDao.getActiveDepartment();
 	}
 

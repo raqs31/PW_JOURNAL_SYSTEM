@@ -2,6 +2,7 @@ package pw.mario.journal.service.impl;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -16,6 +17,7 @@ import pw.mario.journal.util.MD5Passwd;
 @NoArgsConstructor
 @Stateless
 public class UserServiceImpl implements UserService {
+	private static final long serialVersionUID = 1L;
 	@Inject private UserDAO userDao;
 	@Inject private MD5Passwd md5Passwd;
 	
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@RolesAllowed("ADMIN")
 	public User createUser(User u) {
 		if (u == null)
 			throw new NullPointerException();
@@ -38,6 +41,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@RolesAllowed("TEST")
 	public User updateUser(User u) {
 		return userDao.updateUser(u);
 	}
@@ -49,6 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@RolesAllowed("ADMIN")
 	public void deleteUser(User u) {
 		userDao.deleteUser(u);
 	}

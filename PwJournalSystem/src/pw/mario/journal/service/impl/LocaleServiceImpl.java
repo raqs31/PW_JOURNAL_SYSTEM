@@ -8,15 +8,16 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateful;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
-import lombok.Data;
+import lombok.NoArgsConstructor;
 import pw.mario.journal.service.LocaleService;
 
-@Data
-@Stateful
+@NoArgsConstructor
+@SessionScoped
 public class LocaleServiceImpl implements LocaleService {
+	private static final long serialVersionUID = 1L;
 	private Map<String, Locale> supportedLocales;
 	
 	

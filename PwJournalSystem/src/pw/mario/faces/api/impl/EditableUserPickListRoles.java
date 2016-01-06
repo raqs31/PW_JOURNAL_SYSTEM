@@ -6,11 +6,14 @@ import org.apache.log4j.Logger;
 import org.primefaces.model.DualListModel;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j;
 import pw.mario.faces.api.PickListRoles;
 import pw.mario.journal.model.SystemRole;
 
 @Data
+@Log4j
 public class EditableUserPickListRoles implements PickListRoles {
+	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(EditableUserList.class);
 	private boolean editable;
 	private DualListModel<SystemRole> pickListSystemRoles;

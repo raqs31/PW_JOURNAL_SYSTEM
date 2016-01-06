@@ -221,7 +221,7 @@
                     <keepalive-time time="100" unit="milliseconds"/>
                 </thread-pool>
             </thread-pools>
-            <default-security-domain value="journal-jaas-auth"/>
+            <default-security-domain value="journal"/>
             <default-missing-method-permissions-deny-access value="true"/>
             <log-system-exceptions value="true"/>
         </subsystem>
@@ -347,7 +347,7 @@
                         <policy-module code="Delegating" flag="required"/>
                     </authorization>
                 </security-domain>
-                <security-domain name="journal-jaas-auth">
+                <security-domain name="journal">
                     <authentication>
                         <login-module code="Database" flag="required">
                             <module-option name="dsJndiName" value="java:/OracleDS"/>
