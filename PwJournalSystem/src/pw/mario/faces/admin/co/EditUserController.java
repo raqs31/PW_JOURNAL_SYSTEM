@@ -1,16 +1,19 @@
 package pw.mario.faces.admin.co;
 
+import static pw.mario.faces.common.util.AccessDenied.addAccessDeniedMessage;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.EJBAccessException;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.Getter;
@@ -27,7 +30,7 @@ import pw.mario.journal.service.DepartmentService;
 import pw.mario.journal.service.SystemRolesService;
 import pw.mario.journal.service.UserService;
 
-@ManagedBean(name = "editUserController")
+@Named
 @ViewScoped
 @NoArgsConstructor
 @Log4j
@@ -73,11 +76,15 @@ public class EditUserController implements Serializable {
 	}
 	
 	public void updateUser() {
-		editUser.setSystemRoles(userRoles.getPickListSystemRoles().getTarget());
-		editUser = userService.updateUser(editUser);
-		
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zaktualizowano użytkownika", editUser.getLogin());
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		try {
+			editUser.setSystemRoles(userRoles.getPickListSystemRoles().getTarget());
+			editUser = userService.updateUser(editUser);
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zaktualizowano użytkownika", editUser.getLogin());
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+		} catch(EJBAccessException ejbEx) {
+			addAccessDeniedMessage();
+		}
 	}
 
 	

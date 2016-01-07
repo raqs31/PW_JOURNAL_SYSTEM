@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import pw.mario.journal.model.Tag;
 import pw.mario.journal.service.TagService;
 
 @NoArgsConstructor
-@ManagedBean(name="tagEditorController")
+@Named
 @ViewScoped
 public class TagEditorController implements Serializable {
 	private static final long serialVersionUID = 1L;

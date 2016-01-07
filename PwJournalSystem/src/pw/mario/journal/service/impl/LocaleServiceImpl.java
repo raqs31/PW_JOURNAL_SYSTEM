@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.service.LocaleService;

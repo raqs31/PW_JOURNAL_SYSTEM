@@ -2,10 +2,12 @@ package pw.mario.journal.service.impl;
 
 import java.util.List;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.DepartmentDAO;
@@ -14,6 +16,7 @@ import pw.mario.journal.service.DepartmentService;
 
 @NoArgsConstructor
 @Stateless
+@Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 	private static final long serialVersionUID = 1L;
 	@Inject
@@ -31,13 +34,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@RolesAllowed("ADMIN")
 	public void saveDepartment(Department d) {
 		deptDao.addDepartment(d);
 	}
 
 	@Override
 	public List<Department> getActiveDepartmentsNonPersis() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -1,22 +1,23 @@
 package pw.mario.faces.admin.co;
 
+import static pw.mario.faces.common.util.AccessDenied.addAccessDeniedMessage;
+
 import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.security.RolesAllowed;
-import javax.faces.bean.ManagedBean;
+import javax.ejb.EJBAccessException;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.service.DepartmentService;
 
-@ManagedBean(name="deptPaneCo")
+@Named("deptPaneCo")
 @ViewScoped
-@RolesAllowed({"ADMIN"})
 public class DepartmentPanelController implements Serializable {
 	/**
 	 * 
@@ -36,9 +37,12 @@ public class DepartmentPanelController implements Serializable {
 	}
 	
 	public void addDepartment() {
-		deptService.saveDepartment(newDept);
-		departmentsList.add(newDept);
-		newDept = new Department();
-		
+		try {
+			deptService.saveDepartment(newDept);
+			departmentsList.add(newDept);
+			newDept = new Department();
+		} catch(EJBAccessException ejbEx) {
+			addAccessDeniedMessage();
+		}
 	}
 }

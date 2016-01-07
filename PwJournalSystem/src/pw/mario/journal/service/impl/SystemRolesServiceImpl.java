@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.SystemRolesDAO;
@@ -13,6 +14,7 @@ import pw.mario.journal.service.SystemRolesService;
 
 @NoArgsConstructor
 @Stateless
+@Transactional
 public class SystemRolesServiceImpl implements SystemRolesService {
 	private static final long serialVersionUID = 1L;
 	@Inject
