@@ -41,11 +41,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	@RolesAllowed("TEST")
+	@RolesAllowed("ADMIN")
 	public User updateUser(User u) {
 		return userDao.updateUser(u);
 	}
-
+	
 	@Override
 	public User getUser(long id) {
 		return userDao.getUser(id);
