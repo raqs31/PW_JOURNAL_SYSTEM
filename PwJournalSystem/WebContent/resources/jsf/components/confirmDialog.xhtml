@@ -3,7 +3,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
 >
 	<cc:interface>
-		<cc:attribute name="onConfirmAction" type="pw.mario.faces.api.action.OnConfirmAction" required="true"/>
+		<cc:attribute name="onConfirmAction" type="pw.mario.faces.common.action.OnConfirmAction" required="true"/>
 	</cc:interface>
 	<cc:implementation>
 			<p:commandButton value="#{cc.attrs.onConfirmAction.buttonValue()}" actionListener="#{cc.attrs.onConfirmAction.doAction()}">

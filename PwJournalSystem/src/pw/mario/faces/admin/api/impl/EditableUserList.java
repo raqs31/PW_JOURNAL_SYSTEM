@@ -1,4 +1,4 @@
-package pw.mario.faces.api.impl;
+package pw.mario.faces.admin.api.impl;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.primefaces.event.UnselectEvent;
 
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.faces.api.UserList;
+import pw.mario.faces.common.api.UserList;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.UserService;

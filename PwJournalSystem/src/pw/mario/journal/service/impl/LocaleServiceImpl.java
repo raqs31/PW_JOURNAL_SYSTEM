@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.service.LocaleService;
@@ -20,7 +19,6 @@ import pw.mario.journal.service.LocaleService;
 public class LocaleServiceImpl implements LocaleService {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Locale> supportedLocales;
-	
 	
 	@PostConstruct
 	private void init() {

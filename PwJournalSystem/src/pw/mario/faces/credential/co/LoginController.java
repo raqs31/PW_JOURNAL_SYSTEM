@@ -3,24 +3,21 @@ package pw.mario.faces.credential.co;
 import java.io.IOException;
 import java.io.Serializable;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import lombok.Data;
 
 @Data
-@ManagedBean(name="loginCO")
+@Named(value="loginCO")
 @SessionScoped
 public class LoginController implements Serializable {
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String userName;
 	private String password;

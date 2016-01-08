@@ -1,5 +1,7 @@
 package pw.mario.faces.admin.co;
 
+import static pw.mario.faces.common.util.AccessDenied.addAccessDeniedMessage;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,7 +23,6 @@ import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.DepartmentService;
 import pw.mario.journal.service.UserService;
-import static pw.mario.faces.common.util.AccessDenied.addAccessDeniedMessage;
 
 @Log4j
 @NoArgsConstructor

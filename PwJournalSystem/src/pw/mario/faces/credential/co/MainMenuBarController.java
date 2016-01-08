@@ -28,10 +28,8 @@ import pw.mario.journal.service.LoginService;
 @PermitAll
 public class MainMenuBarController implements Serializable {
 	private static final long serialVersionUID = 1L;
-
 	@Inject
 	private LoginService ctx; 
-	
 	@Inject
 	private LocaleService localeService;
 	

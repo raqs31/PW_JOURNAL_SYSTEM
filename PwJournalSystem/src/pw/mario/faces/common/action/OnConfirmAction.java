@@ -1,4 +1,6 @@
-package pw.mario.faces.api.action;
+package pw.mario.faces.common.action;
+
+import pw.mario.faces.common.api.Action;
 
 public interface OnConfirmAction extends Action {
 	

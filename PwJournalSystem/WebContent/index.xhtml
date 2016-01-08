@@ -13,25 +13,6 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	
-	<h1>Hello World PrimeFaces</h1>
-	<h2>
-		Logged as
-		<p:outputLabel value="#{testBean.ctx.login}" />
-	</h2>
-	<h:form id="form">
-		<p:growl id="msgs" showDetail="true" sticky="true" />
-		<p:accordionPanel multiple="true" dynamic="true" cache="true">
-			<p:ajax event="tabClose" listener="#{testBean.onTabClose}"
-				update=":form:msgs" />
-			<p:ajax event="tabChange" listener="#{testBean.onTabOpen}"
-				update=":form:msgs" />
-			<p:tab title="Time">
-				<p:clock mode="server" pattern="HH:mm:ss dd-MM-yyyy"/>
-				<p:commandButton value="Teścik" icon="fa fa-fw fa-remove"
-					type="button" />
-			</p:tab>
-		</p:accordionPanel>
-	</h:form>
+	<p:panel header="#{welcomePageController.message}" />		
 </h:body>
 </html>

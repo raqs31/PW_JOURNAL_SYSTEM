@@ -4,7 +4,6 @@ package pw.mario.journal.service.impl;
 import javax.annotation.Resource;
 import javax.ejb.SessionContext;
 import javax.enterprise.context.SessionScoped;
-import javax.transaction.Transactional;
 
 import com.google.common.base.Strings;
 

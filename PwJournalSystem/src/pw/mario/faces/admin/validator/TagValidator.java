@@ -1,4 +1,4 @@
-package pw.mario.faces.common.validator;
+package pw.mario.faces.admin.validator;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;

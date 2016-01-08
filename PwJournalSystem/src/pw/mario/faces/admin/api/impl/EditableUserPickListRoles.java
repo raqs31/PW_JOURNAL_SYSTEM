@@ -1,4 +1,4 @@
-package pw.mario.faces.api.impl;
+package pw.mario.faces.admin.api.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import org.primefaces.model.DualListModel;
 
 import lombok.Data;
 import lombok.extern.log4j.Log4j;
-import pw.mario.faces.api.PickListRoles;
+import pw.mario.faces.common.api.PickListRoles;
 import pw.mario.journal.model.SystemRole;
 
 @Data
