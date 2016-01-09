@@ -11,4 +11,6 @@ public interface OnConfirmAction extends Action {
 	String getIcon();
 	
 	String buttonValue();
+	
+	String afterAction();
 }

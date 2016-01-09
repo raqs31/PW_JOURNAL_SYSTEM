@@ -25,6 +25,7 @@ import pw.mario.faces.common.action.ConfirmWarning;
 import pw.mario.faces.common.action.OnConfirmAction;
 import pw.mario.faces.common.api.Action;
 import pw.mario.faces.common.api.PickListRoles;
+import pw.mario.faces.common.exception.PerformActionException;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
@@ -113,26 +114,20 @@ public class EditUserController implements Serializable {
 	
 	private class DeleteAction implements Action {
 		@Override
-		public void doAction() {
+		public void doAction() throws PerformActionException {
 			FacesContext ctx = FacesContext.getCurrentInstance();
 
 			try {
 				userService.deleteUser(editUser);
 
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto użytkownika",
-						editUser.getLogin());
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Usunięto użytkownika", editUser.getLogin());
 				ctx.getExternalContext().getFlash().setKeepMessages(true);
-				ctx.addMessage(null, msg);
-				ctx.getExternalContext().redirect("users.xhtml");
-			} catch (IOException e) {
-				log.error("Error while redirect", e);
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Błąd podczas przekierowania", null);
 				ctx.addMessage(null, msg);
 			} catch (Exception ex) {
 				log.error("Error while delete users", ex);
-				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Błąd podczas usuwania użytkownika",
-						null);
+				FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Błąd podczas usuwania użytkownika", null);
 				ctx.addMessage(null, msg);
+				throw new PerformActionException();
 			}
 		}
 	}

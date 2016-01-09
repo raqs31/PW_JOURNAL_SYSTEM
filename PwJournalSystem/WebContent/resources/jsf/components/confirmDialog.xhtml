@@ -7,7 +7,7 @@
 		<cc:attribute name="toUpdate" required="false"/>
 	</cc:interface>
 	<cc:implementation>
-			<p:commandButton value="#{cc.attrs.onConfirmAction.buttonValue()}" actionListener="#{cc.attrs.onConfirmAction.doAction()}" update="#{cc.attrs.toUpdate}">
+			<p:commandButton action="#{cc.attrs.onConfirmAction.afterAction()}" value="#{cc.attrs.onConfirmAction.buttonValue()}" actionListener="#{cc.attrs.onConfirmAction.doAction()}" update="#{cc.attrs.toUpdate}">
 				<p:confirm header="${cc.attrs.onConfirmAction.getHeader()}" message="${cc.attrs.onConfirmAction.getMessage()}" icon="${cc.attrs.onConfirmAction.getIcon()}" />
 			</p:commandButton>
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
