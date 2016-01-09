@@ -7,7 +7,7 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<h:form rendered="#{request.isUserInRole('ADMIN')}">
+	<h:form id="newDept" rendered="#{request.isUserInRole('ADMIN')}">
 		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 		<p:panelGrid columns="2">
 			<f:facet name="header">
@@ -15,42 +15,43 @@
 			</f:facet>
 			<p:outputLabel for="deptCode" value="#{deptRes.cDeptName}" />
 			<p:inputText id="deptCode" value="#{deptPaneCo.newDept.deptCode}" required="true" />
-			
 			<p:outputLabel for="deptName" value="#{deptRes.cDeptLabel}" />
-			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" required="true"/>
-			
+			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" required="true" />
 			<p:outputLabel for="deptFullName" value="#{deptRes.cDeptFulName}" />
 			<p:inputTextarea id="deptFullName" value="#{deptPaneCo.newDept.description}" />
-			
-			<p:commandButton action="#{deptPaneCo.addDepartment}" value="#{deptRes.bAddDept}" update="messages dtDataTable"/>
+			<p:commandButton action="#{deptPaneCo.addDepartment}" value="#{deptRes.bAddDept}" update="newDept depts:dtDataTable" />
 		</p:panelGrid>
 	</h:form>
 	<p:panel id="deptPanel" header="#{deptRes.deptTable}">
-		<p:dataTable id="dtDataTable" resizableColumns="true" var="d" value="#{deptPaneCo.departmentsList}" border="1" rows="10" paginator="true"
-			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="10, 20, 30" filteredValue="#{deptPaneCo.filteredDepartments}" filterDelay="300" lazy="true" sortMode="multiple"
-			expandedRow="false" rowExpandMode="multiple" reflow="true" 
-		>
-			<p:column style="width:16px">
-				<p:rowToggler />
-			</p:column>
-			<p:column id="cDeptName" resizable="true" sortBy="#{d.deptCode}" sortable="true" filterBy="#{d.deptCode}">
-				<f:facet name="header">#{deptRes.cDeptLabel}</f:facet>
+		<h:form id="depts">
+			<p:dataTable id="dtDataTable" resizableColumns="true" var="d" value="#{deptPaneCo.departmentsList}" border="1" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10, 20, 30" filteredValue="#{deptPaneCo.filteredDepartments}" filterDelay="300" lazy="true" sortMode="multiple"
+				expandedRow="false" rowExpandMode="multiple" reflow="true" selection="#{deptPaneCo.selectedDepts}" rowKey="#{d.deptId}" 
+			>
+				<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+				<p:column style="width:16px">
+					<p:rowToggler />
+				</p:column>
+				<p:column id="cDeptName" resizable="true" sortBy="#{d.deptCode}" sortable="true" filterBy="#{d.deptCode}">
+					<f:facet name="header">#{deptRes.cDeptLabel}</f:facet>
 				#{d.deptCode}
-			</p:column>
-			<p:column id="cDeptFullName" resizable="true" sortBy="#{d.fullName}" sortable="true" filterBy="#{d.fullName}">
-				<f:facet name="header">#{deptRes.cDeptFulName}</f:facet>
-				#{d.fullName}
-			</p:column>
-			<p:rowExpansion>
-				<p:panelGrid columns="1" >
-					<f:facet name="header">#{deptRes.reDept}</f:facet>
-					<p:outputPanel id="deptDetails"  deferred="true" deferredMode="visible" layout="inline" autoUpdate="true">
-						<p>#{d.description}</p>
-					</p:outputPanel>
-				</p:panelGrid>
-			</p:rowExpansion>
-		</p:dataTable>
+				</p:column>
+					<p:column id="cDeptFullName" resizable="true" sortBy="#{d.fullName}" sortable="true" filterBy="#{d.fullName}">
+						<f:facet name="header">#{deptRes.cDeptFulName}</f:facet>
+					#{d.fullName}
+				</p:column>
+				<p:rowExpansion>
+					<p:panelGrid columns="1">
+						<f:facet name="header">#{deptRes.reDept}</f:facet>
+						<p:outputPanel id="deptDetails" deferred="true" deferredMode="visible" layout="inline" autoUpdate="true">
+							<p>#{d.description}</p>
+						</p:outputPanel>
+					</p:panelGrid>
+				</p:rowExpansion>
+			</p:dataTable>
+			<my:confirmDialog onConfirmAction="#{deptPaneCo.deleteAction}" toUpdate=":depts:dtDataTable" />
+		</h:form>
 	</p:panel>
 </h:body>
 </html>

@@ -47,4 +47,9 @@ public class DepartmentDAOImpl extends AbstractDAOImpl<Department> implements De
 					.getSingleResult();
 	}
 
+	@Override
+	public void removeDepartment(Department d) {
+		em.remove(reAttachEntity(d));
+	}
+
 }

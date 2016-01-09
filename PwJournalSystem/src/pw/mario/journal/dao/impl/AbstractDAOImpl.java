@@ -7,9 +7,10 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 
+import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.ext.IdTable;
 
-
+@Log4j
 public abstract class AbstractDAOImpl<T extends IdTable> {
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	protected EntityManager em;
@@ -33,10 +34,12 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected void persist(T o) {
+		log.debug("Attempt to persis: " + o);
 		em.persist(o);
 	}
 	
 	protected void delete(T o) {
+		log.debug("Attempt to delete: " + o);
 		em.remove(reAttachEntity(o));
 	}
 	
@@ -63,6 +66,7 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected T merge(T o) {
+		log.debug("Attempt to merge: " + o);
 		return em.merge(o);
 	}
 }

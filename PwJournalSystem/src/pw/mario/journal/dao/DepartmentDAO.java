@@ -16,4 +16,6 @@ public interface DepartmentDAO {
 	public Department getDepartment(Long id);
 	
 	public Department getDepartment(String code);
+	
+	public void removeDepartment(Department d);
 }

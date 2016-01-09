@@ -1,6 +1,6 @@
 package pw.mario.faces.admin.co;
 
-import static pw.mario.faces.common.util.AccessDenied.addAccessDeniedMessage;
+import static pw.mario.faces.common.util.Messages.addAccessDeniedMessage;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -94,6 +94,7 @@ public class EditUserController implements Serializable {
 		ConfirmWarning onConfirm = new ConfirmWarning();
 		onConfirm.setMessage("Czy na pewno chcesz usunąć użytkownika " + editUser.getLogin());
 		onConfirm.setAction(new DeleteAction());
+		onConfirm.setButtonValue("Usuń użytkownika");
 		confirmDeleteAction = onConfirm;
 	}
 

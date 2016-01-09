@@ -1,6 +1,6 @@
 package pw.mario.faces.admin.co;
 
-import static pw.mario.faces.common.util.AccessDenied.addAccessDeniedMessage;
+import static pw.mario.faces.common.util.Messages.addAccessDeniedMessage;
 
 import java.io.Serializable;
 import java.util.List;

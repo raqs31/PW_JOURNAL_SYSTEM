@@ -44,4 +44,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 		return null;
 	}
 
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@RolesAllowed("ADMIN")
+	public void deleteDepartment(Department d) {
+		deptDao.removeDepartment(d);
+	}
+
 }
