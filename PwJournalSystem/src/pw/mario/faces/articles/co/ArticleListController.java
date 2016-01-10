@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import pw.mario.faces.articles.model.ArticlesTab;
+import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleTab;
 
 @Log4j
@@ -25,6 +26,7 @@ public class ArticleListController implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject @ArticleTab private Instance<ArticlesTab> articleTabsModel;
 	@Getter @Setter List<ArticlesTab> articlesTabs;
+	@Getter @Setter Article articleDetail;
 	
 	@PostConstruct
 	private void init() {

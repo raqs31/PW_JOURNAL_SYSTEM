@@ -1,5 +1,6 @@
 package pw.mario.journal.model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -21,7 +22,11 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Transient;
+
+import org.primefaces.model.tagcloud.DefaultTagCloudModel;
+import org.primefaces.model.tagcloud.TagCloudItem;
+import org.primefaces.model.tagcloud.TagCloudModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -47,9 +52,15 @@ public class Article extends AuditTable implements IdTable {
 	@GeneratedValue(generator="articleSeq", strategy=GenerationType.SEQUENCE)
 	private long articleId;
 
+	@Column(name="NAME", length=30)
+	private String name;
+	
+	@Column(name="DESCRIPTION", length=1024)
+	private String description;
+	
 	@ManyToOne
 	@JoinColumn(name="MANAGEMENT_USER_ID", referencedColumnName="USER_ID",  updatable=true, nullable=false)
-	private User managementId;
+	private User management;
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(
@@ -69,7 +80,6 @@ public class Article extends AuditTable implements IdTable {
 	)
 	private Set<Tag> tagList;
 	
-	@NotNull
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL)
 	private List<ArticleVersion> versions;
 

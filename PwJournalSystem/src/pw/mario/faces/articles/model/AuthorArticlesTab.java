@@ -31,7 +31,8 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	@Inject private LoginService ctx;
 	
 	@Getter @Setter private Article selectedArticle;
-	
+	@Getter private final String id = "authors";
+
 	@Override
 	public List<Article> getArticles() {
 		return articleService.getArticles(ctx.getCurrentUser());

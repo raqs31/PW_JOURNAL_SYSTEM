@@ -12,6 +12,7 @@ import javax.inject.Inject;
 import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;
@@ -33,13 +34,15 @@ public class StubArticleManagerService implements ArticleService {
 		Set<Tag> tags = new HashSet<>(tagDao.getTagList());
 		
 		
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 25; i++) {
 			Article a = new Article();
 			a.setArticleId(i);
 			a.setAuthors(new HashSet<>());
 			a.getAuthors().add(u);
-			a.setManagementId(u);
+			a.setManagement(u);
 			a.setTagList(tags);
+			a.setName("ArticleStub" + i);
+			a.setDescription("DescriptionStub" + i);
 			addArticle(a);
 		}
 	}

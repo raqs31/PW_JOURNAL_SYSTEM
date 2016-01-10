@@ -7,10 +7,41 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<p:tabView dynamic="true" cache="true" value="#{articleListController.articlesTabs}" var="tab" orientation="left">
-		<p:tab title="#{tab.tittle}" >
-			#{tab}
-		</p:tab>
-	</p:tabView>
+	<h:form id="articleTabs">
+		<p:tabView id="articleTabView" dynamic="true" cache="true" value="#{articleListController.articlesTabs}" var="articles" orientation="left">
+			<p:tab id="t${articles.id}" title="#{articles.tittle}">
+				<p:dataTable id="dt${articles.id}" var="article" value="#{articles.articles}" border="1" rows="10" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true" selectionMode="single"
+					rowKey="#{article.articleId}" emptyMessage="Brak artykułów"
+				>
+					<p:column id="c${articles.id}ID">
+						<f:facet name="header">ID</f:facet>
+						<h:outputText value="#{article.articleId}" />
+					</p:column>
+					<p:column id="c${articles.id}Name">
+						<f:facet name="header">Nazwa</f:facet>
+						<h:outputText value="#{article.name}" />
+					</p:column>
+					<p:column id="c${articles.id}Mngt">
+						<f:facet name="header">Zarządzający</f:facet>
+						<h:outputText value="#{empty article.management ? null : article.management.login}" />
+					</p:column>
+					<p:column style="width:16px">
+						<p:commandLink update=":articleTabs:authors" oncomplete="PF('authorsDialog').show()" title="Szczegóły" styleClass="ui-icon ui-icon-search"
+							style="float:left;margin-right:10px"
+						>
+							<f:setPropertyActionListener value="#{article}" target="#{articleListController.articleDetail}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</p:tab>
+		</p:tabView>
+		<p:dialog header="Autorzy" widgetVar="authorsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="400">
+			<p:dataList id="authors" value="#{articleListController.articleDetail.authors}" var="user" type="ordered">
+				<p>#{user.login} - #{user.name} #{user.secondName}</p>
+			</p:dataList>
+		</p:dialog>
+	</h:form>
 </h:body>
 </html>

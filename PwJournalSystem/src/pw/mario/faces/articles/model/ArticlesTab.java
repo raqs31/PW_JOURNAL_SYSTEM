@@ -14,4 +14,6 @@ public interface ArticlesTab {
 	
 	Article getSelectedArticle();
 	void setSelectedArticle(Article a);
+	
+	String getId();
 }

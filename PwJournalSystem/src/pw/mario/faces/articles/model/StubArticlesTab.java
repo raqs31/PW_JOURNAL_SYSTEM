@@ -3,6 +3,7 @@ package pw.mario.faces.articles.model;
 import java.util.Collections;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -24,10 +25,12 @@ import pw.mario.journal.service.article.ArticleService;
 public class StubArticlesTab implements ArticlesTab {
 	@Inject @ArticleManagement(ArticleManager.STUB) private ArticleService articleService;
 	@Getter @Setter private Article selectedArticle;
+	@Getter private final String id = "stub";
+	@Getter @Setter private List<Article> articles;
 	
-	@Override
-	public List<Article> getArticles() {
-		return articleService.getArticles(null);
+	@PostConstruct
+	private void init() {
+		articles = articleService.getArticles(null);
 	}
 
 	@Override

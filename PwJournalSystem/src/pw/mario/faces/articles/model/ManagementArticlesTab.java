@@ -33,6 +33,7 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	
 	@Getter @Setter private List<Article> articles;
 	@Getter @Setter private Article selectedArticle;
+	@Getter private final String id = "articleMgmt";
 	
 	@PostConstruct
 	private void init() {
