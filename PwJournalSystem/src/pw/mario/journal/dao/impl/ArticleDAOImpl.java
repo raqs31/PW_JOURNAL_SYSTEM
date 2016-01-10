@@ -1,6 +1,5 @@
 package pw.mario.journal.dao.impl;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
@@ -8,7 +7,6 @@ import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.model.Article;
-import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.User;
 
 @Default
@@ -16,21 +14,29 @@ import pw.mario.journal.model.User;
 public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleDAO {
 
 	@Override
-	public void addArticle(Article a, User u) {
-		User us = em.find(User.class, 1L);
-		ArticleVersion ver = new ArticleVersion();
-		ver.setArticle(a);
-		ver.setVersionNum(1L);
-		ver.setLastVersion(Boolean.TRUE);
-		ver.setStatus("WRK");
-		ver.setArticle(a);
-		a.setManagementId(us);
-		List<ArticleVersion> versions = new LinkedList<>();
-		versions.add(ver);
-		a.setVersions(versions);
+	public Article addArticle(Article a) {
+		persist(a);
+		em.refresh(a);
+		return a;
+	}
 
-		em.persist(a);
+	@Override
+	public List<Article> getUserArticles(User u) {
+		return createNamedTypedQuery(Article.Queries.USER_ARTICLES)
+				.setParameter(1, u.getId())
+				.getResultList();
+	}
 
+	@Override
+	public List<Article> getArticlesToAccept(User u) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Article> getArticlesToManagement(User u) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

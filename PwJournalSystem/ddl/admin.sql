@@ -5,6 +5,9 @@ begin
   returning user_id into l_admin_id;
   Insert into SYSTEM_ROLES (SYSTEM_ROLE_ID,DESCRIPTION,IS_ACTIVE,ROLE_NAME) values (SYSTEM_ROLES_SEQ.nextval,'Rola Administracyjna','1','ADMIN');
   Insert into SYSTEM_ROLES (SYSTEM_ROLE_ID,DESCRIPTION,IS_ACTIVE,ROLE_NAME) values (SYSTEM_ROLES_SEQ.nextval,'Rola użytkownika uprawniająca do podstawowych formularzy','1','USER');
+	Insert into SYSTEM_ROLES (SYSTEM_ROLE_ID,DESCRIPTION,IS_ACTIVE,ROLE_NAME) values (SYSTEM_ROLES_SEQ.nextval,'Rola autora publikacji','1','AUTHOR');
+	Insert into SYSTEM_ROLES (SYSTEM_ROLE_ID,DESCRIPTION,IS_ACTIVE,ROLE_NAME) values (SYSTEM_ROLES_SEQ.nextval,'Rola recenzenta publikacji','1','ACCEPTOR');
+	Insert into SYSTEM_ROLES (SYSTEM_ROLE_ID,DESCRIPTION,IS_ACTIVE,ROLE_NAME) values (SYSTEM_ROLES_SEQ.nextval,'Rola zarządzającego publikacją','1','ARTICLE_MANAGER');
 
   select user_id into l_admin_id from users where login = 'ADMIN';
 

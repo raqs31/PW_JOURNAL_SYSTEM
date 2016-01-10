@@ -1,4 +1,4 @@
-package pw.mario.faces.common.api;
+package pw.mario.faces.common.action;
 
 import pw.mario.faces.common.exception.PerformActionException;
 

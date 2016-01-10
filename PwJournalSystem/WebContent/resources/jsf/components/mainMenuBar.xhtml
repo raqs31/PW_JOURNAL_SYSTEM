@@ -12,6 +12,9 @@
 					<p:menuitem id="miDepartments" value="Departamenty" outcome="/faces/admin/departments" />
 					<p:menuitem id="miTags" value="Etykiety" outcome="/faces/admin/tagEditor" />
 				</p:submenu>
+				<p:submenu label="Artykuły">
+				<p:menuitem id="miArticles" value="Artykuły" outcome="/faces/article/articles"/>
+				</p:submenu>
 				<p:menuitem id="goToStart" value=" Home" icon="fa fa-home" outcome="/index" />
 				<f:facet name="options">
 					<h:form method="POST" action="j_security_check">

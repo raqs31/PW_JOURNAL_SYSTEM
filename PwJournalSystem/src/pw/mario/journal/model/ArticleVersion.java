@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -44,7 +44,7 @@ public class ArticleVersion extends AuditTable implements IdTable {
 	@Column(name="ATTACHEMENT")
 	private String attachement;
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ARTICLE_ID", nullable=false, updatable=false)
 	private Article article;
 

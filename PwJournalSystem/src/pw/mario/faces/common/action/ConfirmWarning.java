@@ -10,7 +10,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import pw.mario.faces.common.api.Action;
 import pw.mario.faces.common.exception.PerformActionException;
 
 @Log4j

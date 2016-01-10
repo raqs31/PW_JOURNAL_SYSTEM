@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import pw.mario.journal.model.dictionaries.DictionaryId;
 
-@Generated(value="Dali", date="2015-12-28T10:47:26.053+0100")
+@Generated(value="Dali", date="2016-01-09T22:08:46.766+0100")
 @StaticMetamodel(Dictionary.class)
 public class Dictionary_ {
 	public static volatile SingularAttribute<Dictionary, DictionaryId> id;
@@ -17,5 +17,4 @@ public class Dictionary_ {
 	public static volatile SingularAttribute<Dictionary, String> attr4;
 	public static volatile SingularAttribute<Dictionary, Long> nAttr1;
 	public static volatile SingularAttribute<Dictionary, Long> nAttr2;
-	public static volatile SingularAttribute<Dictionary, String> locale;
 }

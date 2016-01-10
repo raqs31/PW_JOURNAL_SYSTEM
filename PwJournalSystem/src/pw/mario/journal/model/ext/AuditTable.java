@@ -39,7 +39,7 @@ public class AuditTable {
 	private String lastUpdateBy;
 
 	@PrePersist
-	public void beforeInsert() {
+	private void beforeInsert() {
 		Date current = Calendar.getInstance().getTime();
 		setCreationDate(current);
 		setLastUpdateDate(current);
@@ -55,7 +55,7 @@ public class AuditTable {
 	}
 	
 	@PreUpdate
-	public void beforeUpdate() {
+	private void beforeUpdate() {
 		Date current = Calendar.getInstance().getTime();
 		setLastUpdateDate(current);
 		try {

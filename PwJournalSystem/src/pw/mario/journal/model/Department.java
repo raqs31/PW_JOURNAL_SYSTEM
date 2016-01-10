@@ -39,9 +39,6 @@ public class Department extends AuditTable implements IdTable {
 	@Column(name="IS_ACTIVE", nullable=false)
 	private Boolean isActive;
 	
-//	@OneToMany(fetch=FetchType.LAZY, mappedBy="dept")
-//	private Set<User> users;
-	
 	{
 		isActive = true;
 	}

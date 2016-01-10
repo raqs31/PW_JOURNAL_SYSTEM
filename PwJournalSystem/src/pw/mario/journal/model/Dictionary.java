@@ -43,9 +43,6 @@ public class Dictionary implements IdTable{
 	@Column(name="NUM_ATTR2")
 	private long nAttr2;
 	
-	@Column(name="LOCALE")
-	private String  locale;
-	
 	public Dictionary(String code) {
 		if (id == null)
 			id = new DictionaryId();

@@ -54,14 +54,14 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	@Override
 	public User getUserByEmail(String email) {
 		return createNamedTypedQuery(User.Queries.GET_BY_EMAIL)
-				.setParameter(1, email)
+				.setParameter(1, email.toUpperCase())
 				.getSingleResult();
 	}
 
 	@Override
 	public User getUserByLogin(String login) {
 		return createNamedTypedQuery(User.Queries.GET_BY_LOGIN)
-				.setParameter(1, login)
+				.setParameter(1, login.toUpperCase())
 				.getSingleResult();
 	}
 

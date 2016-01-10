@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Embeddable
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="DICTIONARY_NAME")
+@Embeddable
 public class DictionaryId implements Serializable {
 	private static final long serialVersionUID = 9044085564285601027L;
 	@Column(name="CODE", length=20, nullable=false)
