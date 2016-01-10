@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
+>
+<h:head>
+	<title><ui:insert>Artykuł #{articleDetailsController.article.name}</ui:insert></title>
+</h:head>
+<body>
+	<my:mainMenuBar />
+	<h:form>
+		<p:messages />
+		<h3>#{articleDetailsController.article.description}</h3>
+	</h:form>
+</body>
+</html>

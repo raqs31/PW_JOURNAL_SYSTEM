@@ -1,6 +1,5 @@
 package pw.mario.journal.model;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,11 +21,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.primefaces.model.tagcloud.DefaultTagCloudModel;
-import org.primefaces.model.tagcloud.TagCloudItem;
-import org.primefaces.model.tagcloud.TagCloudModel;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Priority;
 import javax.enterprise.context.Dependent;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -47,6 +48,12 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	public List<UserAction> getActions() {
 		// TODO Auto-generated method stub
 		return Collections.emptyList();
+	}
+
+	@Override
+	public String onEdit() {
+		// TODO Auto-generated method stub
+		return "articleDetail";
 	}
 
 }

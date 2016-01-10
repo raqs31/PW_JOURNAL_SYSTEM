@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui" xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui"
+	xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
 >
 <h:head>
 	<title><ui:insert name="title">Użytkownicy</ui:insert></title>
@@ -8,15 +9,15 @@
 <h:body>
 	<my:mainMenuBar />
 	<h:form>
-	<p:growl autoUpdate="true" sticky="false" life="3000" showDetail="true" />
+		<p:growl autoUpdate="true" sticky="false" life="3000" showDetail="true" />
 		<p:panel id="tUserTable" header="#{ccRes.tUsersTittle}">
-			<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{usersController.users}" border="1" rows="10" paginator="true"
+			<p:dataTable id="dtUserList" resizableColumns="true" var="u" value="#{usersController.users}" border="1" rows="10"
+				paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true" selectionMode="single"
-				selection="#{usersController.selectedUser}" rowKey="#{u.id}" editable="true"
+				rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
+				selectionMode="single" selection="#{usersController.selectedUser}" rowKey="#{u.id}" editable="true"
 			>
 				<p:ajax event="rowEdit" listener="#{usersController.onUserEdit}" />
-
 				<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
 					<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
 					<h:outputText value="#{u.login}" />
@@ -56,7 +57,9 @@
 						<f:facet name="input">
 							<p:selectOneMenu id="userEditDept" value="#{u.dept}" converter="#{deptConverter}" effect="fade">
 								<f:selectItem itemLabel="" itemValue="" />
-								<f:selectItems value="#{usersController.departments}" var="dept" itemLabel="#{dept.deptCode}" itemValue="#{dept}" />
+								<f:selectItems value="#{usersController.departments}" var="dept" itemLabel="#{dept.deptCode}"
+									itemValue="#{dept}"
+								/>
 								<p:column>
 									<h:outputText value="#{dept.deptCode}" />
 								</p:column>
@@ -75,12 +78,12 @@
 				</p:column>
 				<p:column style="width:24px">
 					<p:link outcome="editUser" value="Edit" style="font-size:12px">
-						<f:param name="userId" value="#{u.id}"/>
+						<f:param name="userId" value="#{u.id}" />
 					</p:link>
 				</p:column>
 				<p:rowExpansion>
-					<p:dataList value="#{u.systemRoles}" var="sr" rows="10" type="ordered" paginator="true" itemType="none" emptyMessage="#{ccRes.dlNoneRoles}"
-						paginatorAlwaysVisible="false"
+					<p:dataList value="#{u.systemRoles}" var="sr" rows="10" type="ordered" paginator="true" itemType="none"
+						emptyMessage="#{ccRes.dlNoneRoles}" paginatorAlwaysVisible="false"
 					>
 						<f:facet name="header">#{ccRes.hUserSystemRoles}</f:facet>
 						<h:outputText value="#{sr.roleName}" style="display:inline-block" />
@@ -88,7 +91,9 @@
 				</p:rowExpansion>
 			</p:dataTable>
 		</p:panel>
-		<p:button id="newUser" value="Utwórz użytkownika" outcome="createUser" icon="fa fa-plus" rendered="${request.isUserInRole('ADMIN')}"/>
+		<p:button id="newUser" value="Utwórz użytkownika" outcome="createUser" icon="fa fa-plus"
+			rendered="${request.isUserInRole('ADMIN')}"
+		/>
 	</h:form>
 </h:body>
 </html>

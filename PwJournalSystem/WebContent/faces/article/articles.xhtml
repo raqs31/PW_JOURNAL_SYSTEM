@@ -8,6 +8,7 @@
 <h:body>
 	<my:mainMenuBar />
 	<h:form id="articleTabs">
+		<p:messages id="exceptionMsg" closable="true" autoUpdate="true" />
 		<p:tabView id="articleTabView" dynamic="true" cache="true" value="#{articleListController.articlesTabs}" var="articles" orientation="left">
 			<p:tab id="t${articles.id}" title="#{articles.tittle}">
 				<p:dataTable id="dt${articles.id}" var="article" value="#{articles.articles}" border="1" rows="10" paginator="true"
@@ -32,6 +33,11 @@
 							style="float:left;margin-right:10px"
 						>
 							<f:setPropertyActionListener value="#{article}" target="#{articleListController.articleDetail}" />
+						</p:commandLink>
+					</p:column>
+					<p:column style="width:16px">
+						<p:commandLink styleClass="fa fa-pencil" action="#{articles.onEdit}" ajax="false" >
+							<f:setPropertyActionListener value="#{article}" target="#{articles.selectedArticle}" />
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>

@@ -6,11 +6,16 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
+import pw.mario.faces.articles.ArticleDetailMode;
+import pw.mario.faces.articles.ArticleFlow;
 import pw.mario.faces.common.action.UserAction;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
@@ -41,5 +46,13 @@ public class StubArticlesTab implements ArticlesTab {
 	@Override
 	public String getTittle() {
 		return "STUBS";
+	}
+
+	@Override
+	public String onEdit() {
+		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
+		flash.put(ArticleFlow.ARTICLE_DETAIL_MODE,ArticleDetailMode.STUB);
+		flash.put(ArticleFlow.ARTICLE_DETAIL, selectedArticle);
+		return "articleDetails?faces-redirect=true";
 	}
 }

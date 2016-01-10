@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
 import javax.enterprise.context.Dependent;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -49,6 +50,12 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	@Override
 	public String getTittle() {
 		return TITTLE;
+	}
+
+	@Override
+	public String onEdit() {
+		// TODO Auto-generated method stub
+		return "articleDetail";
 	}
 
 }

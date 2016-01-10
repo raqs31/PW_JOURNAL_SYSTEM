@@ -25,4 +25,8 @@ public class Messages {
 	public static void addAccessDeniedMessage() {
 		addAccessDeniedMessage(null);
 	}
+	
+	public static void keepMessages() {
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+	}
 }
