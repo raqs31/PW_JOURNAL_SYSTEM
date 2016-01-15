@@ -14,7 +14,6 @@ import pw.mario.journal.service.SystemRolesService;
 
 @NoArgsConstructor
 @Stateless
-@Transactional
 public class SystemRolesServiceImpl implements SystemRolesService {
 	private static final long serialVersionUID = 1L;
 	@Inject

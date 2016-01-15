@@ -20,7 +20,6 @@ import pw.mario.journal.util.MD5Passwd;
 @Log4j
 @NoArgsConstructor
 @Stateless
-@Transactional
 public class UserServiceImpl implements UserService {
 	private static final long serialVersionUID = 1L;
 	@Inject private UserDAO userDao;

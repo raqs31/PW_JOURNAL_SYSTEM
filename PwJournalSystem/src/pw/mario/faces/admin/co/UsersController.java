@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.ToggleEvent;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.DepartmentService;
+import pw.mario.journal.service.LazyLoadInitializator;
 import pw.mario.journal.service.UserService;
 
 @Log4j
@@ -34,7 +36,8 @@ public class UsersController implements Serializable {
 	private UserService userService;
 	@Inject
 	private DepartmentService deptService;
-
+	@Inject
+	private LazyLoadInitializator initializator;
 	@Getter
 	@Setter
 	private List<User> users;
@@ -64,5 +67,11 @@ public class UsersController implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Nie udało się zaktualizować użytkownika" + u.getLogin(), ex.getMessage()));
 		}
+	}
+	public void onRowToggle(ToggleEvent event) {
+		User u = (User)event.getData();
+		initializator.refresh(u);
+		initializator.initialize(u);
+		System.out.println("asdsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	}
 }

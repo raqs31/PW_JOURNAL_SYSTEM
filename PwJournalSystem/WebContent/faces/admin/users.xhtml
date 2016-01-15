@@ -18,6 +18,8 @@
 				selectionMode="single" selection="#{usersController.selectedUser}" rowKey="#{u.id}" editable="true"
 			>
 				<p:ajax event="rowEdit" listener="#{usersController.onUserEdit}" />
+				<p:ajax event="rowToggle" listener="#{usersController.onRowToggle}" process="@none" />
+				
 				<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
 					<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
 					<h:outputText value="#{u.login}" />

@@ -15,7 +15,6 @@ import pw.mario.journal.service.TagService;
 
 @NoArgsConstructor
 @Stateless
-@Transactional
 public class TagServiceImpl implements TagService {
 	private static final long serialVersionUID = 1L;
 	@Inject

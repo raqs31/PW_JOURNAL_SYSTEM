@@ -10,7 +10,17 @@
 	<my:mainMenuBar />
 	<h:form>
 		<p:messages />
-		<h3>#{articleDetailsController.article.description}</h3>
+		<div class="ui-grid ui-grid-responsive">
+			<div class="ui-grid-row">
+				<div class="ui-grid-col-8" style="border: 1px solid black">
+					<h1>#{articleDetailsController.article.description}</h1>
+				</div>
+			</div>
+			<div class="ui-grid-row">
+				
+			</div>
+		</div>
+		<div></div>
 	</h:form>
 </body>
 </html>

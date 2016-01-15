@@ -16,7 +16,6 @@ import pw.mario.journal.service.DepartmentService;
 
 @NoArgsConstructor
 @Stateless
-@Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 	private static final long serialVersionUID = 1L;
 	@Inject
