@@ -1,13 +1,18 @@
 package pw.mario.journal.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -50,11 +55,6 @@ public class SystemRole implements IdTable {
 		return sysRoleId;
 	}
 	
-//	@OneToMany(fetch=FetchType.EAGER)
-//	@JoinTable(name="USER_SYSTEM_ROLES", 
-//		joinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID", unique=false)},
-//		inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", unique=false)},
-//		indexes={@Index(columnList="USER_ID, SYSTEM_ROLE_ID", unique=false)}
-//	)
-//	private List<User> users;
+	@ManyToMany(fetch=FetchType.LAZY, mappedBy="systemRoles")
+	private List<User> users;
 }

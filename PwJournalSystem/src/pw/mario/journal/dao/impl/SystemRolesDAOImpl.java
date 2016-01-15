@@ -6,6 +6,8 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.criterion.Restrictions;
+
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
@@ -31,5 +33,10 @@ public class SystemRolesDAOImpl extends AbstractDAOImpl<SystemRole> implements S
 		
 		return q.getResultList();
 		
+	}
+
+	@Override
+	public List<SystemRole> getUserSystemRoles(User u) {
+		return session().createCriteria(SystemRole.class).add(Restrictions.eq("users", u)).list();
 	}
 }

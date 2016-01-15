@@ -5,14 +5,13 @@ import java.util.List;
 import pw.mario.journal.model.Tag;
 
 public interface TagDAO {
-	public Tag addTag(Tag t);
-	
-	public List<Tag> getTagList();
-	
-	public void removeTag(Tag t);
-	
-	public Tag getTag(String tagName);
-	
-	
-	public Tag updateTag(Tag t);
+	Tag addTag(Tag t);
+
+	List<Tag> getTagList();
+
+	void removeTag(Tag t);
+
+	Tag getTag(String tagName);
+
+	Tag updateTag(Tag t);
 }

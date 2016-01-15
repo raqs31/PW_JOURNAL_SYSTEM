@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.UserService;
@@ -23,6 +24,7 @@ import pw.mario.journal.util.MD5Passwd;
 public class UserServiceImpl implements UserService {
 	private static final long serialVersionUID = 1L;
 	@Inject private UserDAO userDao;
+	@Inject private SystemRolesDAO systemRolesDao;
 	@Inject private MD5Passwd md5Passwd;
 	
 	@Override
@@ -70,6 +72,11 @@ public class UserServiceImpl implements UserService {
 			log.warn("Cannot find user with login: " + login);
 		}
 		return null;
+	}
+
+	@Override
+	public void loadDetails(User u) {
+		u.setSystemRoles(systemRolesDao.getUserSystemRoles(u));
 	}
 
 

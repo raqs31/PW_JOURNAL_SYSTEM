@@ -5,21 +5,21 @@ import java.util.List;
 import pw.mario.journal.model.User;
 
 public interface UserDAO {
-	public List<User> getUsersList();
-	
-	public void addUser(User u);
-	
-	public void deleteUser(User u);
-	
-	public User updateUser(User u);
-	
-	public User getUserByEmail(User u);
-	
-	public User getUserByLogin(User u);
-	
-	public User getUserByEmail(String email);
-	
-	public User getUserByLogin(String login);
-	
-	public User getUser(long id);
+	List<User> getUsersList();
+
+	void addUser(User u);
+
+	void deleteUser(User u);
+
+	User updateUser(User u);
+
+	User getUserByEmail(User u);
+
+	User getUserByLogin(User u);
+
+	User getUserByEmail(String email);
+
+	User getUserByLogin(String login);
+
+	User getUser(long id);
 }

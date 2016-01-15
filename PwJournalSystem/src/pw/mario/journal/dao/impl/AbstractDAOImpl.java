@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 
+import org.hibernate.Session;
+
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.ext.IdTable;
 
@@ -68,5 +70,9 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	protected T merge(T o) {
 		log.debug("Attempt to merge: " + o);
 		return em.merge(o);
+	}
+	
+	protected Session session() {
+		return em.unwrap(Session.class);
 	}
 }

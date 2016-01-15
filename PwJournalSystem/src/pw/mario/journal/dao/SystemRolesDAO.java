@@ -10,5 +10,6 @@ public interface SystemRolesDAO {
 	List<SystemRole> getSystemRolesList();
 
 	List<SystemRole> getExcludedSystemRoles(User u);
-
+	
+	List<SystemRole> getUserSystemRoles(User u);
 }

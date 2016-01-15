@@ -17,4 +17,6 @@ public interface UserService extends Serializable {
 	void deleteUser(User u);
 	
 	User getUserByLogin(String login);
+	
+	void loadDetails(User u);
 }
