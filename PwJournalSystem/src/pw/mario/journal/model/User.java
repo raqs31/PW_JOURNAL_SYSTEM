@@ -22,10 +22,12 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 
 @Data
+@ToString(exclude={"systemRoles"})
 @EqualsAndHashCode(callSuper=false)
 @NoArgsConstructor
 @Cacheable(true)

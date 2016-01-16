@@ -8,7 +8,7 @@
 <h:body>
 	<my:mainMenuBar />
 	<h:form id="editUser" rendered="#{request.isUserInRole('ADMIN')}">
-		<p:growl autoUpdate="true" sticky="false" life="6000" showDetail="false" />
+		<p:messages autoUpdate="true" closable="true" showDetail="true" />
 		<h:panelGrid id="editUser" columns="3" cellpadding="5">
 			<p:outputLabel for="userLogin" value="Login" />
 			<p:outputLabel id="userLogin" value="#{editUserController.editUser.login}" />

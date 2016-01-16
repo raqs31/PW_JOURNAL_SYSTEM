@@ -22,8 +22,8 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import pw.mario.faces.admin.api.impl.EditableUserPickListRoles;
 import pw.mario.faces.common.action.Action;
-import pw.mario.faces.common.action.ConfirmWarning;
-import pw.mario.faces.common.action.OnConfirmAction;
+import pw.mario.faces.common.action.form.ConfirmWarning;
+import pw.mario.faces.common.action.form.OnConfirmAction;
 import pw.mario.faces.common.api.PickListRoles;
 import pw.mario.faces.common.exception.PerformActionException;
 import pw.mario.journal.model.Department;
@@ -76,6 +76,7 @@ public class EditUserController implements Serializable {
 				.getRequest();
 		if (request.getParameter("userId") != null) {
 			editUser = userService.getUser(Long.parseLong(request.getParameter("userId")));
+			userService.loadDetails(editUser);
 		} else {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_WARN,
 					"Nie przekazano użytkownika do aktualizacji", null);
@@ -92,11 +93,12 @@ public class EditUserController implements Serializable {
 		userRoles = new EditableUserPickListRoles(sysRolesService.getExclusiveSystemRoles(editUser),
 				editUser.getSystemRoles());
 
-		ConfirmWarning onConfirm = new ConfirmWarning();
-		onConfirm.setMessage("Czy na pewno chcesz usunąć użytkownika " + editUser.getLogin());
-		onConfirm.setAction(new DeleteAction());
-		onConfirm.setButtonValue("Usuń użytkownika");
-		confirmDeleteAction = onConfirm;
+		confirmDeleteAction = ConfirmWarning
+								.builder()
+								.message("Czy na pewno chcesz usunąć użytkownika " + editUser.getLogin())
+								.action(new DeleteAction())
+								.buttonValue("Usuń użytkownika")
+								.build();
 	}
 
 	public void updateUser() {

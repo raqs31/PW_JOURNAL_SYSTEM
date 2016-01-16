@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.faces.common.action.UserAction;
+import pw.mario.faces.common.action.form.ButtonAction;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.ArticleManager;
@@ -42,7 +42,7 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	}
 
 	@Override
-	public List<UserAction> getActions() {
+	public List<ButtonAction> getActions() {
 		// TODO Auto-generated method stub
 		return Collections.emptyList();
 	}

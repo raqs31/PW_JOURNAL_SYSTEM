@@ -23,7 +23,6 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.DepartmentService;
-import pw.mario.journal.service.LazyLoadInitializator;
 import pw.mario.journal.service.UserService;
 
 @Log4j
@@ -36,8 +35,6 @@ public class UsersController implements Serializable {
 	private UserService userService;
 	@Inject
 	private DepartmentService deptService;
-	@Inject
-	private LazyLoadInitializator initializator;
 	@Getter
 	@Setter
 	private List<User> users;
@@ -70,8 +67,6 @@ public class UsersController implements Serializable {
 	}
 	public void onRowToggle(ToggleEvent event) {
 		User u = (User)event.getData();
-		initializator.refresh(u);
-		initializator.initialize(u);
-		System.out.println("asdsdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		userService.loadDetails(u);
 	}
 }

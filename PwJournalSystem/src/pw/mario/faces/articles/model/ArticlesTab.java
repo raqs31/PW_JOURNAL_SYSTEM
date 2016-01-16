@@ -4,13 +4,13 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import pw.mario.faces.common.action.UserAction;
+import pw.mario.faces.common.action.form.ButtonAction;
 import pw.mario.journal.model.Article;
 
 public interface ArticlesTab {
 	List<Article> getArticles();
 	
-	List<UserAction> getActions();
+	List<ButtonAction> getActions();
 
 	String getTittle();
 	

@@ -1,4 +1,4 @@
-package pw.mario.faces.common.action;
+package pw.mario.faces.common.action.form;
 
 
 import java.io.IOException;
@@ -6,14 +6,16 @@ import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import pw.mario.faces.common.action.Action;
 import pw.mario.faces.common.exception.PerformActionException;
 
 @Log4j
-@NoArgsConstructor
+@Builder
 public class ConfirmWarning implements OnConfirmAction {
 	@Setter private Action action;
 	@Getter @Setter private String message;
@@ -21,9 +23,9 @@ public class ConfirmWarning implements OnConfirmAction {
 	private boolean actionSucces = false;
 	@Setter @Getter private String toRedirect;
 	
-	public ConfirmWarning(String toRedirect) {
-		this.toRedirect = toRedirect;
-	}
+//	public ConfirmWarning(String toRedirect) {
+//		this.toRedirect = toRedirect;
+//	}
 	
 	@Override
 	public void doAction() {

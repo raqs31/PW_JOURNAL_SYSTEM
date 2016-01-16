@@ -17,8 +17,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pw.mario.faces.common.action.Action;
-import pw.mario.faces.common.action.ConfirmWarning;
-import pw.mario.faces.common.action.OnConfirmAction;
+import pw.mario.faces.common.action.form.ConfirmWarning;
+import pw.mario.faces.common.action.form.OnConfirmAction;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.service.DepartmentService;
 
@@ -40,11 +40,11 @@ public class DepartmentPanelController implements Serializable {
 	private void init() {
 		departmentsList = deptService.getDepartmentList();
 		newDept = new Department();
-		ConfirmWarning confirm = new ConfirmWarning();
-		confirm.setButtonValue("Usuń wybrane");
-		confirm.setAction(new DeleteSelectedDepartmentsAction());
-		confirm.setMessage("Usuniętp wybrame departamenty");
-		deleteAction = confirm;
+		deleteAction = ConfirmWarning.builder()
+						.buttonValue("Usuń wybrane")
+						.action(new DeleteSelectedDepartmentsAction())
+						.message("Usunąć wybrame departamenty")
+						.build();
 	}
 	
 	public void addDepartment() {
