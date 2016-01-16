@@ -11,7 +11,7 @@ import org.primefaces.event.UnselectEvent;
 
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.faces.common.api.UserList;
+import pw.mario.common.api.UserList;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.UserService;

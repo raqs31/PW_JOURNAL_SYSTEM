@@ -1,6 +1,6 @@
 package pw.mario.faces.admin.co;
 
-import static pw.mario.faces.common.util.Messages.addAccessDeniedMessage;
+import static pw.mario.common.util.Messages.addAccessDeniedMessage;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -20,12 +20,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import pw.mario.common.action.Action;
+import pw.mario.common.action.form.ConfirmWarning;
+import pw.mario.common.action.form.OnConfirmAction;
+import pw.mario.common.api.PickListRoles;
+import pw.mario.common.exception.PerformActionException;
 import pw.mario.faces.admin.api.impl.EditableUserPickListRoles;
-import pw.mario.faces.common.action.Action;
-import pw.mario.faces.common.action.form.ConfirmWarning;
-import pw.mario.faces.common.action.form.OnConfirmAction;
-import pw.mario.faces.common.api.PickListRoles;
-import pw.mario.faces.common.exception.PerformActionException;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;

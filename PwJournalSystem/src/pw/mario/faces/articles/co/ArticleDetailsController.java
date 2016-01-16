@@ -9,9 +9,9 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
+import pw.mario.common.util.JSFUtil;
 import pw.mario.faces.articles.ArticleDetailMode;
 import pw.mario.faces.articles.ArticleFlow;
-import pw.mario.faces.common.util.JSFUtil;
 import pw.mario.journal.model.Article;
 
 @Named

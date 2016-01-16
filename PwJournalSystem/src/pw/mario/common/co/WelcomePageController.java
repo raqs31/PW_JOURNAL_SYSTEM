@@ -1,4 +1,4 @@
-package pw.mario.faces.common.co;
+package pw.mario.common.co;
 
 
 

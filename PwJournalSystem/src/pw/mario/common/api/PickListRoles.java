@@ -1,4 +1,4 @@
-package pw.mario.faces.common.api;
+package pw.mario.common.api;
 
 import java.io.Serializable;
 

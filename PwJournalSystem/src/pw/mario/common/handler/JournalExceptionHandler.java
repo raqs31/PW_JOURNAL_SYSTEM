@@ -1,4 +1,4 @@
-package pw.mario.faces.common.handler;
+package pw.mario.common.handler;
 
 import java.util.Iterator;
 import java.util.Map;

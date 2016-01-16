@@ -26,6 +26,6 @@
 		</resource-bundle>
 	</application>
 	<factory>
-		<exception-handler-factory>pw.mario.faces.common.handler.JournalExceptionHandlerFactory</exception-handler-factory>
+		<exception-handler-factory>pw.mario.common.handler.JournalExceptionHandlerFactory</exception-handler-factory>
 	</factory>
 </faces-config>

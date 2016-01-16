@@ -14,9 +14,9 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
+import pw.mario.common.action.form.ButtonAction;
 import pw.mario.faces.articles.ArticleDetailMode;
 import pw.mario.faces.articles.ArticleFlow;
-import pw.mario.faces.common.action.form.ButtonAction;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.ArticleManager;

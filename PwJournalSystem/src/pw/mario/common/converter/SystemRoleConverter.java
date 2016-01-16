@@ -1,4 +1,4 @@
-package pw.mario.faces.common.converter;
+package pw.mario.common.converter;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;

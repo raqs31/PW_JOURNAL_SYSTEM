@@ -13,7 +13,7 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.faces.common.action.form.ButtonAction;
+import pw.mario.common.action.form.ButtonAction;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.ArticleManager;

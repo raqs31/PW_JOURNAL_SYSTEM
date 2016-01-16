@@ -1,7 +1,7 @@
 package pw.mario.faces.admin.co;
 
-import static pw.mario.faces.common.util.Messages.addAccessDeniedMessage;
-import static pw.mario.faces.common.util.Messages.addMessage;
+import static pw.mario.common.util.Messages.addAccessDeniedMessage;
+import static pw.mario.common.util.Messages.addMessage;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,9 +16,9 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pw.mario.faces.common.action.Action;
-import pw.mario.faces.common.action.form.ConfirmWarning;
-import pw.mario.faces.common.action.form.OnConfirmAction;
+import pw.mario.common.action.Action;
+import pw.mario.common.action.form.ConfirmWarning;
+import pw.mario.common.action.form.OnConfirmAction;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.service.DepartmentService;
 

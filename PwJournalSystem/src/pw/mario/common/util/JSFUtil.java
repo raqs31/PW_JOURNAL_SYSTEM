@@ -1,4 +1,4 @@
-package pw.mario.faces.common.util;
+package pw.mario.common.util;
 
 import java.io.IOException;
 

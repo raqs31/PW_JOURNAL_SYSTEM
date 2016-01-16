@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.faces.event.ActionEvent;
 
-import pw.mario.faces.common.action.form.ButtonAction;
+import pw.mario.common.action.form.ButtonAction;
 import pw.mario.journal.model.Article;
 
 public interface ArticlesTab {

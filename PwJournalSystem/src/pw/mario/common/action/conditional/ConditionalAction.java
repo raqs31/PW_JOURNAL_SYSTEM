@@ -1,6 +1,6 @@
-package pw.mario.faces.common.action.conditional;
+package pw.mario.common.action.conditional;
 
-import pw.mario.faces.common.action.Action;
+import pw.mario.common.action.Action;
 
 public interface ConditionalAction extends Action {
 	boolean allowed(ConditionValidator validator);

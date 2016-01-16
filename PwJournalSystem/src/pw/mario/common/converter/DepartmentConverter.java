@@ -1,4 +1,4 @@
-package pw.mario.faces.common.converter;
+package pw.mario.common.converter;
 
 import javax.ejb.Singleton;
 import javax.enterprise.context.ApplicationScoped;

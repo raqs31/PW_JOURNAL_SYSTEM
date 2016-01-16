@@ -1,4 +1,4 @@
-package pw.mario.faces.common.handler;
+package pw.mario.common.handler;
 
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerFactory;

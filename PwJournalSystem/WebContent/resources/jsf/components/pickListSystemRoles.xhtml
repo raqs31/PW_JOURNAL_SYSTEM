@@ -3,7 +3,7 @@
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
 >
 	<cc:interface>
-		<cc:attribute name="sysRoles" type="pw.mario.faces.common.api.PickListRoles" required="true" />
+		<cc:attribute name="sysRoles" type="pw.mario.common.api.PickListRoles" required="true" />
 	</cc:interface>
 	<cc:implementation>
 		<h:outputText value="#{not empty  cc.attrs.sysRoles ? 'git' : 'fak'}" />

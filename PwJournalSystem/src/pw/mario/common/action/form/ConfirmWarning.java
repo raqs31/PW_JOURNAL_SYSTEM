@@ -1,12 +1,12 @@
-package pw.mario.faces.common.action.form;
+package pw.mario.common.action.form;
 
 
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.faces.common.action.Action;
-import pw.mario.faces.common.exception.PerformActionException;
+import pw.mario.common.action.Action;
+import pw.mario.common.exception.PerformActionException;
 
 @Builder
 public class ConfirmWarning implements OnConfirmAction {
