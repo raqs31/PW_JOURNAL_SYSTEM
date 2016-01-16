@@ -105,7 +105,7 @@ public class EditUserController implements Serializable {
 		try {
 			editUser.setSystemRoles(userRoles.getPickListSystemRoles().getTarget());
 			editUser = userService.updateUser(editUser);
-
+			
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zaktualizowano użytkownika",
 					editUser.getLogin());
 			FacesContext.getCurrentInstance().addMessage(null, msg);

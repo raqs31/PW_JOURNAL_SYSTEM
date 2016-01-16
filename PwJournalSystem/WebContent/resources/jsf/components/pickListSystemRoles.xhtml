@@ -9,9 +9,9 @@
 		<h:outputText value="#{not empty  cc.attrs.sysRoles ? 'git' : 'fak'}" />
 		<br />
 		<h:outputText value="sadfsg" />
-		<p:pickList id="sysRolesPickList" value="#{cc.attrs.sysRoles.pickListSystemRoles}" var="role" effect="bounce" itemValue="#{role}"
+		<p:pickList id="sysRolesPickList" value="#{cc.attrs.sysRoles.pickListSystemRoles}" var="role" effect="fade" itemValue="#{role}"
 			itemLabel="#{role.roleName}" showSourceControls="true" showTargetControls="true" showCheckbox="true" responsive="true" showSourceFilter="true"
-			showTargetFilter="true" filterMatchMode="contains" converter="sysRoleConverter"
+			showTargetFilter="true" filterMatchMode="contains" converter="#{sysRoleConverter}"
 		>
 			<f:facet name="sourceCaption">Available</f:facet>
 			<f:facet name="targetCaption">Starting</f:facet>

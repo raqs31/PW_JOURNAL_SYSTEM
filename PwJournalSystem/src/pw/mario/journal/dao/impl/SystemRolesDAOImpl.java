@@ -41,4 +41,9 @@ public class SystemRolesDAOImpl extends AbstractDAOImpl<SystemRole> implements S
 		List<SystemRole> roles = session().createCriteria(SystemRole.class).createCriteria("users").add(Restrictions.idEq(u.getId())).list();
 		return roles;
 	}
+
+	@Override
+	public SystemRole getSystemRole(String name) {
+		return (SystemRole) session().createCriteria(SystemRole.class).add(Restrictions.eq("roleName", name)).uniqueResult();
+	}
 }

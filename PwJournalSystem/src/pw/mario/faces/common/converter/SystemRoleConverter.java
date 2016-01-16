@@ -1,40 +1,33 @@
 package pw.mario.faces.common.converter;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.inject.Named;
 
+import org.jboss.security.jacc.SecurityService;
 import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
+import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.model.SystemRole;
+import pw.mario.journal.service.SystemRolesService;
 
-@FacesConverter(forClass = SystemRole.class, value = "sysRoleConverter")
+@Named("sysRoleConverter")
+@ApplicationScoped
 public class SystemRoleConverter implements Converter {
-
+	@Inject private SystemRolesDAO dao;
 	@Override
-	@SuppressWarnings("unchecked")
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		try {
-			PickList p = (PickList) component;
-			DualListModel<SystemRole> dl = (DualListModel<SystemRole>) p.getValue();
-			return dl.getSource().get(Integer.valueOf(value));
-		} catch (Exception ee) {
-			return null;
-		}
+		return dao.getSystemRole(value);
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		try {
-			PickList p = (PickList) component;
-			DualListModel<SystemRole> dl = (DualListModel<SystemRole>) p.getValue();
-			return String.valueOf(dl.getSource().indexOf(value));
-		} catch (Exception ee) {
-			return null;
-		}
+		return ((SystemRole)value).getRoleName();
 	}
 
 }

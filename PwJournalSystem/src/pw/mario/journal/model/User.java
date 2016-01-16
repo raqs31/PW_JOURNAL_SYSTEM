@@ -3,6 +3,7 @@ package pw.mario.journal.model;
 import java.util.List;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -72,7 +74,7 @@ public class User extends AuditTable implements IdTable {
 	private String secondName;
 	
 
-	@ManyToMany(fetch=FetchType.LAZY)
+	@ManyToMany(fetch=FetchType.LAZY, cascade={CascadeType.MERGE, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinTable(name="USER_SYSTEM_ROLES",	
 		joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", unique=false)},
 		inverseJoinColumns={@JoinColumn(name="SYSTEM_ROLE_ID", referencedColumnName="SYSTEM_ROLE_ID", unique=false)},
@@ -80,7 +82,7 @@ public class User extends AuditTable implements IdTable {
 	)
 	private List<SystemRole> systemRoles;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToOne(optional=true, fetch=FetchType.EAGER)
 	@JoinColumn(name="DEPARTMENT_ID")
 	private Department dept;
 	

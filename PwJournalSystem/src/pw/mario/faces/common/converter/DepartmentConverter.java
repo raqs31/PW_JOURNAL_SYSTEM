@@ -1,11 +1,13 @@
 package pw.mario.faces.common.converter;
 
 import javax.ejb.Singleton;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.NoResultException;
 
 import com.google.common.base.Strings;
@@ -13,8 +15,8 @@ import com.google.common.base.Strings;
 import pw.mario.journal.dao.DepartmentDAO;
 import pw.mario.journal.model.Department;
 
-@ManagedBean(eager = true, name = "deptConverter")
-@Singleton
+@Named("deptConverter")
+@ApplicationScoped
 public class DepartmentConverter implements Converter {
 	@Inject
 	DepartmentDAO deptDao;

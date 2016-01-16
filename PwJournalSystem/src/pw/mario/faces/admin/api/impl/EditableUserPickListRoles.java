@@ -11,7 +11,6 @@ import pw.mario.faces.common.api.PickListRoles;
 import pw.mario.journal.model.SystemRole;
 
 @Data
-@Log4j
 public class EditableUserPickListRoles implements PickListRoles {
 	private static final long serialVersionUID = 1L;
 	private Logger log = Logger.getLogger(EditableUserList.class);
