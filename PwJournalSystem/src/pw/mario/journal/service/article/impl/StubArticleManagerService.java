@@ -9,10 +9,10 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import pw.mario.common.action.form.ButtonAction;
 import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Article;
-import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;
@@ -47,18 +47,15 @@ public class StubArticleManagerService implements ArticleService {
 		}
 	}
 	
-	@Override
 	public Article addArticle(Article a) {
 		getArticles(null).add(a);
 		return a;
 	}
 
-	@Override
 	public Article updateArticle(Article a) {
 		return a;
 	}
 
-	@Override
 	public void removeArticle(Article a) {
 		getArticles(null).remove(a);
 	}
@@ -73,6 +70,12 @@ public class StubArticleManagerService implements ArticleService {
 	@Override
 	public String[] rolesAllowed() {
 		return new String[]{};
+	}
+
+	@Override
+	public Iterable<ButtonAction<Article>> getActions(Article a, User u) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

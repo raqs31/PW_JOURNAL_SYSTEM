@@ -1,8 +1,7 @@
 package pw.mario.faces.articles.model;
 
+import java.util.Comparator;
 import java.util.List;
-
-import javax.faces.event.ActionEvent;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.journal.model.Article;
@@ -10,7 +9,7 @@ import pw.mario.journal.model.Article;
 public interface ArticlesTab {
 	List<Article> getArticles();
 	
-	List<ButtonAction> getActions();
+	Iterable<ButtonAction<Article>> getActions();
 
 	String getTittle();
 	
@@ -20,4 +19,13 @@ public interface ArticlesTab {
 	String getId();
 
 	String onEdit();
+	
+	public class ArticleTabComparator implements Comparator<ArticlesTab> {
+
+		@Override
+		public int compare(ArticlesTab o1, ArticlesTab o2) {
+			return o1.getId().compareTo(o2.getId());
+		}
+		
+	}
 }

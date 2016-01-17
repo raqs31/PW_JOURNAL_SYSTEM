@@ -6,7 +6,6 @@ import org.apache.log4j.Logger;
 import org.primefaces.model.DualListModel;
 
 import lombok.Data;
-import lombok.extern.log4j.Log4j;
 import pw.mario.common.api.PickListRoles;
 import pw.mario.journal.model.SystemRole;
 

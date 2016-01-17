@@ -1,19 +1,20 @@
-package pw.mario.faces.articles.model;
+package pw.mario.faces.articles.model.tabs;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Priority;
 import javax.enterprise.context.Dependent;
-import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.faces.articles.model.ArticlesTab;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.ArticleManager;
@@ -24,27 +25,25 @@ import pw.mario.journal.service.article.ArticleService;
 @Named
 @ArticleTab
 @Dependent
-@Priority(1)
-public class ManagementArticlesTab implements Serializable, ArticlesTab {
+public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	private static final long serialVersionUID = 1L;
-	private static final String TITTLE = "Artykuły zarządzane";
+	private static final String TITTLE = "Artykuły autora";
 	
-	@Inject @ArticleManagement(ArticleManager.ARTICLE_MANAGER) private ArticleService articleService;
+	@Inject @ArticleManagement(ArticleManager.AUTHOR) private ArticleService articleService;
 	@Inject private LoginService ctx;
 	
-	@Getter @Setter private List<Article> articles;
 	@Getter @Setter private Article selectedArticle;
-	@Getter private final String id = "articleMgmt";
+	@Getter private final String id = "authors";
+	@Getter private List<ButtonAction<Article>> actions;
 	
 	@PostConstruct
 	private void init() {
-		articles = articleService.getArticles(ctx.getCurrentUser());
+		refreshAction();
 	}
-
+	
 	@Override
-	public List<ButtonAction> getActions() {
-		// TODO Auto-generated method stub
-		return Collections.emptyList();
+	public List<Article> getArticles() {
+		return articleService.getArticles(ctx.getCurrentUser());
 	}
 
 	@Override
@@ -57,5 +56,14 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 		// TODO Auto-generated method stub
 		return "articleDetail";
 	}
-
+	
+	private void refreshAction() {
+		if (actions == null)
+			actions = new LinkedList<>();
+		else
+			actions.clear();
+		
+		for (ButtonAction<Article> b: articleService.getActions(selectedArticle, ctx.getCurrentUser()))
+			actions.add(b);
+	}
 }

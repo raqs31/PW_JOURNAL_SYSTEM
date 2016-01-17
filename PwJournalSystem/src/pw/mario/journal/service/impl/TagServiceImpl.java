@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.TagDAO;

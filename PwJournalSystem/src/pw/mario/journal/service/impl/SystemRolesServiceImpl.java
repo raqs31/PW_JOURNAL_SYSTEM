@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.SystemRolesDAO;

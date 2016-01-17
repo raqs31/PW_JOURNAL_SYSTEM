@@ -1,8 +1,6 @@
 package pw.mario.common.converter;
 
-import javax.ejb.Singleton;
 import javax.enterprise.context.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;

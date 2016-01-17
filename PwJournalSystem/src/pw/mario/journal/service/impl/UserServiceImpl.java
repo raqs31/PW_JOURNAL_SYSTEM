@@ -8,7 +8,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
-import javax.transaction.Transactional;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;

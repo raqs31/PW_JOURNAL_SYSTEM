@@ -41,6 +41,10 @@
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>
+				<p:spacer width="100%" height="5px"/>
+				<p:dataList value="#{articles.actions}" var="b" rendered="#{not empty articles.actions}" styleClass="display:inline;" lazy="true" type="none">
+					<p:commandButton value="#{b.value}" action="#{b.getAction()}"  actionListener="#{b.doAction()}" ajax="false"/>
+				</p:dataList>
 			</p:tab>
 		</p:tabView>
 		<p:dialog header="Autorzy" widgetVar="authorsDialog" modal="true" showEffect="fade" hideEffect="fade" resizable="false" width="400">

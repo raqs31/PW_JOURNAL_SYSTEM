@@ -1,6 +1,7 @@
 package pw.mario.faces.articles.co;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,5 +36,6 @@ public class ArticleListController implements Serializable {
 			log.debug("Instance of articleTab: " + t.getTittle());
 			articlesTabs.add(t);
 		}
+		Collections.sort(articlesTabs, new ArticlesTab.ArticleTabComparator());
 	}
 }

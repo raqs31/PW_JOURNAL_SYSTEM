@@ -8,6 +8,7 @@ import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import pw.mario.common.action.form.ButtonAction;
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
@@ -21,24 +22,6 @@ import pw.mario.journal.service.article.ArticleService;
 public class ArticleManagerService implements ArticleService, Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject private ArticleDAO articleDao;
-	
-	@Override
-	public Article addArticle(Article a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Article updateArticle(Article a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeArticle(Article a) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	@PermitAll
@@ -49,6 +32,12 @@ public class ArticleManagerService implements ArticleService, Serializable {
 	@Override
 	@PermitAll
 	public String[] rolesAllowed() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Iterable<ButtonAction<Article>> getActions(Article a, User u) {
 		// TODO Auto-generated method stub
 		return null;
 	}

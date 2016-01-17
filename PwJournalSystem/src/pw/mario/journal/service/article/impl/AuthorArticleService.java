@@ -5,11 +5,14 @@ import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
+import pw.mario.common.action.form.ButtonAction;
 import pw.mario.journal.dao.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
+import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.ArticleManager;
 import pw.mario.journal.service.article.ArticleService;
@@ -18,27 +21,13 @@ import pw.mario.journal.service.article.ArticleService;
 @ArticleManagement(value=ArticleManager.AUTHOR)
 @RolesAllowed("AUTHOR")
 public class AuthorArticleService implements ArticleService {
-
 	private static final long serialVersionUID = 1L;
-	@Inject private ArticleDAO articleDao;
 	private final String[] rolesAllowed = {"AUTHOR"};
+
+	@Inject private ArticleDAO articleDao;
+	@Inject @Action(actionFor=ArticleManager.AUTHOR) 
+	private Instance<ButtonAction<Article>> actions;
 	
-	@Override
-	public Article addArticle(Article a) {
-		return null;
-	}
-
-	@Override
-	public Article updateArticle(Article a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void removeArticle(Article a) {
-		// TODO Auto-generated method stub
-	}
-
 	@Override
 	@PermitAll
 	public List<Article> getArticles(User u) {
@@ -49,6 +38,11 @@ public class AuthorArticleService implements ArticleService {
 	@PermitAll
 	public String[] rolesAllowed() {
 		return rolesAllowed;
+	}
+
+	@Override
+	public Iterable<ButtonAction<Article>> getActions(Article a, User u) {
+		return actions;
 	}
 
 }
