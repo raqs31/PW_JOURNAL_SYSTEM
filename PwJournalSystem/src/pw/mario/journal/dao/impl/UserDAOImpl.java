@@ -8,6 +8,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.persistence.Query;
 
+import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.User;
 

@@ -78,10 +78,7 @@ public class Article extends AuditTable implements IdTable {
 	private List<ArticleVersion> versions;
 
 	@ManyToOne
-	@JoinColumns({
-		@JoinColumn(name="STATUS", referencedColumnName="CODE"),
-		@JoinColumn(name="DICT_NAME", referencedColumnName="DICTIONARY_NAME")
-	})
+	@JoinColumn(name="STATUS_ID", referencedColumnName="DICT_ID")
 	private ArticleStatus status;
 	
 	@Override

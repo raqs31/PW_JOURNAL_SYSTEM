@@ -1,4 +1,4 @@
-package pw.mario.journal.qualifiers;
+package pw.mario.journal.qualifiers.enums;
 
 public enum ArticleManager {
 	AUTHOR,

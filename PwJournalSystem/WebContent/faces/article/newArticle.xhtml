@@ -8,7 +8,10 @@
 </h:head>
 <body>
 	<h:form>
-		TU BEDZIE NOWY ARTYKUL
+		TU BEDZIE NOWY ARTYKUL<br/>
+		<p:dataList value="#{newArticleController.statuses}" var="s">
+			<h:outputText value="#{s.desciption}" />
+		</p:dataList>
 		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false"/>
 	</h:form>
 	</body>

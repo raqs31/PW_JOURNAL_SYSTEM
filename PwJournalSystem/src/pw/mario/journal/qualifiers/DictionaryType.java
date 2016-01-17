@@ -10,11 +10,11 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
-import pw.mario.journal.qualifiers.enums.ArticleManager;
+import pw.mario.journal.qualifiers.enums.DictType;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 @Target({TYPE,FIELD,PARAMETER})
-public @interface Action {
-	ArticleManager actionFor();
+public @interface DictionaryType {
+	DictType value();
 }

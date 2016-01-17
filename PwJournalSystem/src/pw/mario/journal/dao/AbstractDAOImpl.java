@@ -1,4 +1,4 @@
-package pw.mario.journal.dao.impl;
+package pw.mario.journal.dao;
 
 import java.lang.reflect.ParameterizedType;
 

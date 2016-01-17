@@ -10,7 +10,4 @@ import pw.mario.journal.model.Dictionary;
 @NoArgsConstructor
 @DiscriminatorValue("ACCEPTOR_STATUS")
 public class AcceptorStatus  extends Dictionary{
-	public AcceptorStatus(String code) {
-		super(code);
-	}
 }

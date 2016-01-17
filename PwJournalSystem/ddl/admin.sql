@@ -15,5 +15,7 @@ begin
   loop
     Insert into USER_SYSTEM_ROLES (USER_ID,SYSTEM_ROLE_ID) values (l_admin_id,u.system_role_id);
   end loop;
+  
+  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'NEW', 'Zarejestrowany');
   commit;
 end;

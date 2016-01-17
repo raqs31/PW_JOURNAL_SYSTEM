@@ -8,6 +8,7 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.criterion.Restrictions;
 
+import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;

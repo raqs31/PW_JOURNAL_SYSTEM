@@ -16,7 +16,7 @@ import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;
-import pw.mario.journal.qualifiers.ArticleManager;
+import pw.mario.journal.qualifiers.enums.ArticleManager;
 import pw.mario.journal.service.article.ArticleService;
 
 @Stateless

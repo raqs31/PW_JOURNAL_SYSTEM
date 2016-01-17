@@ -11,6 +11,8 @@ import java.lang.annotation.Target;
 
 import javax.inject.Qualifier;
 
+import pw.mario.journal.qualifiers.enums.ArticleManager;
+
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
 @Target({TYPE,METHOD,FIELD,PARAMETER})

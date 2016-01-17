@@ -17,8 +17,8 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.faces.articles.model.ArticlesTab;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
-import pw.mario.journal.qualifiers.ArticleManager;
 import pw.mario.journal.qualifiers.ArticleTab;
+import pw.mario.journal.qualifiers.enums.ArticleManager;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleService;
 
