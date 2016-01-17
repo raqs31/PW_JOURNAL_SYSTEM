@@ -12,7 +12,7 @@ import pw.mario.journal.model.SystemRole;
 @Data
 public class EditableUserPickListRoles implements PickListRoles {
 	private static final long serialVersionUID = 1L;
-	private Logger log = Logger.getLogger(EditableUserList.class);
+	private Logger log = Logger.getLogger(EditableUserPickListRoles.class);
 	private boolean editable;
 	private DualListModel<SystemRole> pickListSystemRoles;
 	

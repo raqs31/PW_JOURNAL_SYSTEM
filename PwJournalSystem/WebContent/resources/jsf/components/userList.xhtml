@@ -17,7 +17,7 @@
 					<p:ajax event="rowUnselect" listener="#{cc.attrs.userCC.onRowUnselect}" />
 					<p:ajax event="rowEdit" listener="#{cc.attrs.userCC.onUserEdit}"/>
 					
-					<p:column id="cLogin" resizable="true" sortBy="#{u.login}">
+					<p:column id="cLogin" resizable="true" sortBy="#{u.login}" rendered="#{not cc.attrs.userCC.readOnly}">
 						<f:facet name="header">#{ccRes.cUserLogin}</f:facet>
 						<h:outputText value="#{u.login}" />
 					</p:column>
@@ -43,7 +43,7 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-					<p:column id="cEmail" resizable="true" sortBy="#{u.email}">
+					<p:column id="cEmail" resizable="true" sortBy="#{u.email}" rendered="#{not cc.attrs.userCC.readOnly}">
 						<f:facet name="header">#{ccRes.cUserEmail}</f:facet>
 						<h:outputText value="#{u.email}" />
 					</p:column>
@@ -67,10 +67,10 @@
 							</f:facet>
 						</p:cellEditor>
 					</p:column>
-					<p:column style="width:16px">
+					<p:column style="width:16px" rendered="#{not cc.attrs.userCC.readOnly}">
 						<p:rowToggler />
 					</p:column >
-					<p:column style="width:16px">
+					<p:column style="width:16px" rendered="#{not cc.attrs.userCC.readOnly}">
 						<p:rowEditor />
 					</p:column>
 					<p:rowExpansion>

@@ -9,6 +9,8 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
+import org.hibernate.Hibernate;
+
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.SystemRolesDAO;
@@ -75,7 +77,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void loadDetails(User u) {
-		u.setSystemRoles(systemRolesDao.getUserSystemRoles(u));
+		if (!Hibernate.isInitialized(u.getSystemRoles()))
+			u.setSystemRoles(systemRolesDao.getUserSystemRoles(u));
 	}
 
 
