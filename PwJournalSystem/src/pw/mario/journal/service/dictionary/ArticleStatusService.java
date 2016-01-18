@@ -9,8 +9,6 @@ import javax.inject.Inject;
 
 import pw.mario.journal.dao.DictionaryDAO;
 import pw.mario.journal.model.Dictionary;
-import pw.mario.journal.model.dictionaries.AcceptorStatus;
-import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.qualifiers.DictionaryType;
 import pw.mario.journal.qualifiers.enums.DictType;
 import pw.mario.journal.service.DictionaryService;

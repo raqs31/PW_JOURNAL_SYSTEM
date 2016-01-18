@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.dao.UserDAO;
+import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.UserService;
 import pw.mario.journal.util.MD5Passwd;
@@ -79,6 +80,12 @@ public class UserServiceImpl implements UserService {
 	public void loadDetails(User u) {
 		if (!Hibernate.isInitialized(u.getSystemRoles()))
 			u.setSystemRoles(systemRolesDao.getUserSystemRoles(u));
+	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public List<User> getUsersFromDepartment(Department d) {
+		return userDao.getUsersWithDepartment(d);
 	}
 
 

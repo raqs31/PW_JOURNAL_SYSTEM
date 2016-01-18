@@ -4,15 +4,73 @@
 	xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
 >
 <h:head>
-	<title>Nowy</title>
+	<title>Nowy artykuł</title>
 </h:head>
 <body>
-	<h:form>
-		TU BEDZIE NOWY ARTYKUL<br/>
-		<p:dataList value="#{newArticleController.statuses}" var="s">
-			<h:outputText value="#{s.desciption}" />
-		</p:dataList>
-		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false"/>
+	<my:mainMenuBar />
+	<h:form id="newArticle">
+		<p:messages autoUpdate="true" />
+		<p:growl id="gMsg" life="2000" showSummary="false" showDetail="false" autoUpdate="false" />
+		<p:wizard flowListener="#{newArticleController.onFlowProcess}" showStepStatus="true">
+			<p:tab id="main" title="Krok 1. Opis">
+				<p:panel header="Podstawowe dane">
+					<h:panelGrid columns="3" columnClasses="label, value">
+						<p:outputLabel value="Nazwa artykułu:" />
+						<p:inputText value="#{newArticleController.article.name}" required="true"
+							requiredMessage="Nazwa arykułu jest wymagana" maxlength="30"
+						/>
+						<p:spacer />
+						<p:outputLabel value="Opis artykułu:" />
+						<p:inputTextarea value="#{newArticleController.article.description}" autoResize="true"
+							counterTemplate="Pozostało znaków: {0}" counter="charCount" maxlength="1024" cols="60" rows="5"
+						/>
+						<h:outputText id="charCount" />
+					</h:panelGrid>
+				</p:panel>
+				<p:panel header="Autorzy">
+					<p:pickList id="plAuthors" value="#{newArticleController.articleAuthors}" var="user" effect="fade"
+						itemValue="#{user}" itemLabel="#{user.login}" showSourceControls="true" showTargetControls="true"
+						showCheckbox="true" responsive="true" showSourceFilter="true" showTargetFilter="true"
+						converter="#{userLoginConverter}"
+					>
+						<f:facet name="sourceCaption">Dostępni</f:facet>
+						<f:facet name="targetCaption">Wybrani</f:facet>
+						<p:column>
+							<h:outputText value="#{user.name}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{user.secondName}" />
+						</p:column>
+					</p:pickList>
+				</p:panel>
+			</p:tab>
+			<p:tab id="tags" title="Krok 2. Dodatkowe">
+				<p:panel header="Tagi">
+					<p:pickList id="plTags" value="#{newArticleController.articleTags}" var="tag" effect="fade" itemValue="#{tag}"
+						itemLabel="#{tag.name}" showSourceControls="true" responsive="true" showSourceFilter="true"
+						showTargetFilter="true" filterMatchMode="contains" converter="#{tagConverter}"
+					>
+						<f:facet name="sourceCaption">Dostępne</f:facet>
+						<f:facet name="targetCaption">Wybrane</f:facet>
+						<p:column>
+							<h:outputText value="#{tag.name}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{tag.description}" />
+						</p:column>
+					</p:pickList>
+				</p:panel>
+			</p:tab>
+			<p:tab id="article" title="Krok 3. Dodaj artykuł">
+				<p:fileUpload value="#{newArticleController.articleFile}"
+					fileUploadListener="#{newArticleController.handleFileUploadListener}" mode="advanced" dragDropSupport="true" auto="true"
+					update=":newArticle:otUploaded" sizeLimit="83886080" fileLimit="1" required="true" label="Wybierz" uploadLabel="Wyślij"
+					cancelLabel="Anuluj" 
+				/>
+				<h:outputText id="otUploaded" value="#{newArticleController.articleFileName}" />
+			</p:tab>
+		</p:wizard>
+		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false" />
 	</h:form>
-	</body>
+</body>
 </html>

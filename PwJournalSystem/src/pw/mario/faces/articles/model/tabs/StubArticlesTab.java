@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.Priority;
 import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;

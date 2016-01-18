@@ -3,6 +3,7 @@ package pw.mario.journal.service;
 import java.io.Serializable;
 import java.util.List;
 
+import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 
 public interface UserService extends Serializable {
@@ -19,4 +20,6 @@ public interface UserService extends Serializable {
 	User getUserByLogin(String login);
 	
 	void loadDetails(User u);
+	
+	List<User> getUsersFromDepartment(Department d);
 }

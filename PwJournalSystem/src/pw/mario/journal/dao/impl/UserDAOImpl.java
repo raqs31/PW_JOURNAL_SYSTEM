@@ -2,14 +2,13 @@ package pw.mario.journal.dao.impl;
 
 import java.util.List;
 
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.persistence.Query;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
+import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 
 @Default
@@ -24,19 +23,16 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addUser(User u) {
 		persist(u);
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void deleteUser(User u) {
 		delete(u);
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public User updateUser(User u) {
 		em.merge(u);
 		return getUser(u.getUserId());
@@ -69,6 +65,13 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	@Override
 	public User getUser(long id) {
 		return em.find(User.class, id);
+	}
+
+	@Override
+	public List<User> getUsersWithDepartment(Department d) {
+		if (d == null)
+			return getUsersList();
+		return createTypedQuery("select u from User u where u.userId = ?1").setParameter(1, d.getId()).getResultList();
 	}
 
 }

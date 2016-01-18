@@ -2,6 +2,7 @@ package pw.mario.journal.dao;
 
 import java.util.List;
 
+import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 
 public interface UserDAO {
@@ -22,4 +23,6 @@ public interface UserDAO {
 	User getUserByLogin(String login);
 
 	User getUser(long id);
+
+	List<User> getUsersWithDepartment(Department d);
 }
