@@ -13,12 +13,16 @@ import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.ext.IdTable;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="DICTIONARIES", schema="MARIO", indexes={
 		@Index(columnList="CODE,DICTIONARY_NAME", unique=true)

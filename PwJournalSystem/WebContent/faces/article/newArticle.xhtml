@@ -11,7 +11,9 @@
 	<h:form id="newArticle">
 		<p:messages autoUpdate="true" />
 		<p:growl id="gMsg" life="2000" showSummary="false" showDetail="false" autoUpdate="false" />
-		<p:wizard flowListener="#{newArticleController.onFlowProcess}" showStepStatus="true">
+		<p:wizard nextLabel="Dalej" 
+			backLabel="Wstecz"
+		>
 			<p:tab id="main" title="Krok 1. Opis">
 				<p:panel header="Podstawowe dane">
 					<h:panelGrid columns="3" columnClasses="label, value">
@@ -62,14 +64,21 @@
 				</p:panel>
 			</p:tab>
 			<p:tab id="article" title="Krok 3. Dodaj artykuł">
-				<p:fileUpload value="#{newArticleController.articleFile}"
-					fileUploadListener="#{newArticleController.handleFileUploadListener}" mode="advanced" dragDropSupport="true" auto="true"
-					update=":newArticle:otUploaded" sizeLimit="83886080" fileLimit="1" required="true" label="Wybierz" uploadLabel="Wyślij"
-					cancelLabel="Anuluj" 
-				/>
-				<h:outputText id="otUploaded" value="#{newArticleController.articleFileName}" />
+				<p:panel id="articleUploader" header="Wybierz plik z artykułem">
+					<p:fileUpload value="#{newArticleController.articleFile}"
+						fileUploadListener="#{newArticleController.handleFileUploadListener}" mode="advanced" dragDropSupport="true"
+						auto="true" update=":newArticle:itUploaded" sizeLimit="10485760" required="true" label="Wybierz"
+						uploadLabel="Wyślij" multiple="false" cancelLabel="Anuluj" invalidSizeMessage="Za duży rozmiar pliku"
+						invalidFileMessage="Wymagany jest plik tekstowy"
+					/>
+					<p:spacer width="100%" height="10px" />
+					<p:outputLabel for="itUploaded" value="Przesłano: " />
+					<p:outputLabel id="itUploaded" value="#{newArticleController.articleFileName}" />
+					<p:commandButton value="Utwórz artykuł" actionListener="#{newArticleController.save()}"/>
+				</p:panel>
 			</p:tab>
 		</p:wizard>
+		<p:separator />
 		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false" />
 	</h:form>
 </body>

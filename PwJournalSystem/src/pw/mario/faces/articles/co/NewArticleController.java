@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.Conversation;
+import javax.enterprise.context.ConversationScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -31,16 +33,21 @@ import pw.mario.journal.service.article.NewArticleService;
 @ViewScoped
 public class NewArticleController implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Inject NewArticleService articleService;
-	@Inject LoginService ctx;
+
+	private List<Tag> selectedTags;
+	private List<User> selectedUser;
+
+	@Inject private NewArticleService articleService;
+	@Inject private LoginService ctx;
+//	@Inject private Conversation conversation;
+	
 	@Getter @Setter private Article article;
 	@Getter @Setter private DualListModel<Tag> articleTags;
 	@Getter @Setter private DualListModel<User> articleAuthors;
 	@Getter @Setter private UploadedFile articleFile;
 	@Getter @Setter private String articleFileName;
-	private List<Tag> selectedTags;
-	private List<User> selectedUser;
-
+	
+	
 	@PostConstruct
 	private void init() {
 		article = articleService.initArticle();
@@ -48,6 +55,7 @@ public class NewArticleController implements Serializable {
 		selectedUser = new LinkedList<>();
 		articleTags = new DualListModel<>(articleService.getTags(), selectedTags);
 		articleAuthors = new DualListModel<>(articleService.getUsersFromDepartment(ctx.getCurrentUser().getDept()), selectedUser);
+//		conversation.begin();
 	}
 	
 	public String onFlowProcess(FlowEvent event) {
@@ -59,6 +67,15 @@ public class NewArticleController implements Serializable {
 		articleFileName = articleFile.getFileName();
 			Messages.addMessage("Przesłano artykuł " + articleFile.getFileName());
 	}
+	
+	public void save() {
+		System.out.println(article);
+		System.out.println(articleFile);
+		System.out.println(articleTags.getTarget());
+		System.out.println(articleAuthors.getTarget());
+//		conversation.end();
+	}
+	
 	private class UsersFromDepartment implements UserList {
 		@Getter @Setter List<User> users;
 		@Getter @Setter List<User> selectedUsers;

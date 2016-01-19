@@ -8,7 +8,7 @@ import pw.mario.journal.model.Dictionary;
 
 @Entity
 @NoArgsConstructor
-@DiscriminatorValue("ARTICLE_STATUS")
+@DiscriminatorValue(ArticleStatus.DICTIONARY_NAME)
 public class ArticleStatus  extends Dictionary {
 	public static final String DICTIONARY_NAME = "ARTICLE_STATUS";
 }
