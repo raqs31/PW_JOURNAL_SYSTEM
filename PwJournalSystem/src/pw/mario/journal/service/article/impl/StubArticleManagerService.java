@@ -36,7 +36,7 @@ public class StubArticleManagerService implements ArticleService {
 		
 		for (int i = 0; i < 25; i++) {
 			Article a = new Article();
-			a.setArticleId(i);
+			a.setArticleId(new Long(i));
 			a.setAuthors(new HashSet<>());
 			a.getAuthors().add(u);
 			a.setManagement(u);

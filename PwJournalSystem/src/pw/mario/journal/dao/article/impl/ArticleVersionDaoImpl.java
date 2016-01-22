@@ -1,23 +1,29 @@
 package pw.mario.journal.dao.article.impl;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 
 import org.hibernate.Hibernate;
+import org.hibernate.loader.plan.build.internal.LoadGraphLoadPlanBuildingStrategy;
 
+import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.ArticleVersion;
 
+@Log4j
 @Default
 @Dependent
 public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> implements ArticleVersionDao {
 
 	@Override
 	public ArticleVersion getLastVersion(Article a) {
+		if (a.getVersions() == null || a.getVersions().isEmpty())
+			return null;
 		if (Hibernate.isInitialized(a.getVersions())) {
 			Hibernate.initialize(a.getVersions());
 		}
@@ -31,7 +37,12 @@ public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> imple
 
 	@Override
 	public ArticleVersion createNewVersion(Article a) {
-		ArticleVersion last = getLastVersion(a);
+		ArticleVersion last = null;
+		try {
+			last = getLastVersion(a);
+		} catch (NoSuchElementException e) {
+			log.debug("Nie znaleziono ostatniej wersji dla artykułu");
+		}
 		ArticleVersion next = new ArticleVersion();
 		if (last != null) {
 			last.setLastVersion(false);

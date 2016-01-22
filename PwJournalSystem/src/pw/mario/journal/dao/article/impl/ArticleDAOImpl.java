@@ -17,6 +17,7 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	@Override
 	public Article addArticle(Article a) {
 		persist(a);
+		em.flush();
 		em.refresh(a);
 		return a;
 	}
@@ -30,13 +31,11 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 
 	@Override
 	public List<Article> getArticlesToAccept(User u) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Article> getArticlesToManagement(User u) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

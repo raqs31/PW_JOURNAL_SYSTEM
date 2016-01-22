@@ -3,6 +3,7 @@ package pw.mario.faces.articles.co;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -90,6 +91,10 @@ public class NewArticleController implements Serializable {
 	
 	public void save() {
 		try {
+			articleAuthors.getTarget().forEach(u -> System.out.println(u));
+			
+			article.setAuthors(new HashSet<>(articleAuthors.getTarget()));
+			article.setTagList(new HashSet<>(articleTags.getTarget()));
 			articleService.createArticle(article, fileHandler);
 			Messages.addMessage("Utworzono artykuł");
 		} catch (PerformActionException ex) {

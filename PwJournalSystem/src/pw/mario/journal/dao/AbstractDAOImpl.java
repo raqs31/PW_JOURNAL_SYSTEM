@@ -36,7 +36,6 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected void persist(T o) {
-		log.debug("Attempt to persis: " + o);
 		em.persist(o);
 	}
 	

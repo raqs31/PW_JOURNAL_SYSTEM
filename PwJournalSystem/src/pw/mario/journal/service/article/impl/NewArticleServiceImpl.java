@@ -18,6 +18,7 @@ import javax.inject.Inject;
 
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j;
+import oracle.net.aso.a;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.dao.UserDAO;
@@ -25,6 +26,7 @@ import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.dao.dictionary.DictionaryDAO;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.Dictionary;
 import pw.mario.journal.model.SystemRole;
@@ -33,9 +35,9 @@ import pw.mario.journal.model.User;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.qualifiers.DictionaryType;
 import pw.mario.journal.qualifiers.enums.DictType;
+import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.NewArticleService;
 import pw.mario.journal.util.files.FileHandler;
-import pw.mario.journal.util.files.FileUtils;
 
 @Log4j
 @Stateless
@@ -44,6 +46,7 @@ public class NewArticleServiceImpl implements NewArticleService {
 	@Inject UserDAO userDao;
 	@Inject ArticleDAO articleDao;
 	@Inject ArticleVersionDao versionDao;
+	@Inject FileManagerService fileManager;
 	@Inject @DictionaryType(DictType.ARTICLE_STATUS) DictionaryDAO<ArticleStatus> dictionary;
 	@Inject TagDAO tagDao;
 	
@@ -53,8 +56,13 @@ public class NewArticleServiceImpl implements NewArticleService {
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void createArticle(Article a, FileHandler tmp) throws PerformActionException {
-		saveFile(tmp, "TestHUHE");
+		log.debug("Create article " + a + " START");
+		ArticleVersion newVersion = versionDao.createNewVersion(a);
+		a.getVersions().add(newVersion);
+		newVersion.setAttachement(fileManager.saveFile(tmp));
+		a = articleDao.addArticle(a);
 	}
 	
 	@Override
@@ -71,31 +79,11 @@ public class NewArticleServiceImpl implements NewArticleService {
 	public Article initArticle() {
 		Calendar currentDate = Calendar.getInstance();
 		Article art = new Article();
-		art.setAuthors(new TreeSet<>());
-		art.setTagList(new TreeSet<>());
 		art.setVersions(new LinkedList<>());
 		art.setYear(currentDate.get(Calendar.YEAR));
 		art.setMonth(currentDate.get(Calendar.MONTH));
 		art.setDay(currentDate.get(Calendar.DAY_OF_MONTH));
 		
 		return art;
-	}
-	
-	private void saveFile(FileHandler file, String fileName) throws PerformActionException {
-		File toSave = new File("C:/Programy/" + file.getFullName()); 
-		log.debug("Save file: " + toSave.getAbsolutePath());
-		try {
-			if (!toSave.exists())
-				toSave.createNewFile();
-			@Cleanup InputStream input = new FileInputStream(file.getFile());
-			@Cleanup OutputStream output = new FileOutputStream(toSave);
-			FileUtils.copy(input, output);
-			
-		} catch (IOException e) {
-			log.error("Error in saveFile", e);
-			throw new PerformActionException(e.getMessage());
-		} finally {
-			file.getFile().delete();
-		}
 	}
 }
