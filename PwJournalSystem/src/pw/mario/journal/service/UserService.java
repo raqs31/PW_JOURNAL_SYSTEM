@@ -22,4 +22,6 @@ public interface UserService extends Serializable {
 	void loadDetails(User u);
 	
 	List<User> getUsersFromDepartment(Department d);
+	
+	List<User> getUsers(Department d, String systemRole);
 }

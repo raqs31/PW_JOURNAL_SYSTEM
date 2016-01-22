@@ -30,6 +30,7 @@ import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.DepartmentService;
+import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.SystemRolesService;
 import pw.mario.journal.service.UserService;
 
@@ -39,7 +40,8 @@ import pw.mario.journal.service.UserService;
 @Log4j
 public class EditUserController implements Serializable {
 	private static final long serialVersionUID = 4310678656945508259L;
-
+	@Inject
+	private LoginService ctx;
 	@Inject
 	private UserService userService;
 	@Inject
@@ -105,7 +107,8 @@ public class EditUserController implements Serializable {
 		try {
 			editUser.setSystemRoles(userRoles.getPickListSystemRoles().getTarget());
 			editUser = userService.updateUser(editUser);
-			
+			if (editUser.getUserId().compareTo(ctx.getCurrentUser().getUserId()) == 0)
+				ctx.reloadUser();
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Zaktualizowano użytkownika",
 					editUser.getLogin());
 			FacesContext.getCurrentInstance().addMessage(null, msg);

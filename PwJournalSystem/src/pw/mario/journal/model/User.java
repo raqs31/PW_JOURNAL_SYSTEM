@@ -43,18 +43,21 @@ import pw.mario.journal.model.ext.IdTable;
 	@NamedQuery(name=User.Queries.GET_BY_LOGIN, 
 			query = "select u from User u where u.login = ?1"),
 	@NamedQuery(name=User.Queries.GET_BY_EMAIL, 
-		query = "select u from User u where u.email = ?1")
+		query = "select u from User u where u.email = ?1"),
+	@NamedQuery(name=User.Queries.USERS_WITH_DEPARTMENT_ROLE,
+		query = "select u from User u join u.systemRoles sr where ((?1 is null and u.dept is null) or u.dept.deptId =  ?1) and sr.roleName = ?2")
 })
 public class User extends AuditTable implements IdTable {
 	public interface Queries {
 		String GET_BY_LOGIN = "User.getByLogin";
 		String GET_BY_EMAIL = "User.getByEmail";
+		String USERS_WITH_DEPARTMENT_ROLE = "User.getWithDeptAndRole";
 	}
 	@Id
 	@Column(name="USER_ID")
 	@SequenceGenerator(name="userSeq", sequenceName ="USERS_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="userSeq", strategy=GenerationType.SEQUENCE)
-	private long userId;
+	private Long userId;
 	
 	
 	@Column(name="LOGIN", length=25, unique=true, nullable=false)

@@ -65,7 +65,7 @@ public class Article extends AuditTable implements IdTable {
 	private Integer day;
 	
 	@ManyToOne
-	@JoinColumn(name="MANAGEMENT_USER_ID", referencedColumnName="USER_ID",  updatable=true, nullable=false)
+	@JoinColumn(name="MANAGEMENT_USER_ID", referencedColumnName="USER_ID",  updatable=true)
 	private User management;
 	
 	@ManyToMany(fetch=FetchType.LAZY)

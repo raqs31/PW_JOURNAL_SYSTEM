@@ -4,8 +4,8 @@ import java.util.List;
 
 import pw.mario.journal.model.Dictionary;
 
-public interface DictionaryDAO {
-	Dictionary getDictionary(String code);
-	Dictionary addDictionary(Dictionary d);
-	List<Dictionary> getDictionaries();
+public interface DictionaryDAO<T> {
+	T getDictionary(String code);
+	T addDictionary(T d);
+	List<T> getDictionaries();
 }

@@ -43,4 +43,10 @@ public class LoginContextServiceImpl implements LoginService {
 		}
 		return currentUser;
 	}
+
+	@Override
+	public void reloadUser() {
+		currentUser = userService.getUserByLogin(getLogin());
+		
+	}
 }

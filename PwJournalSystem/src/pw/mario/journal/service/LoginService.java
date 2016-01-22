@@ -11,5 +11,7 @@ public interface LoginService extends Serializable {
 	boolean isLogged();
 	
 	User getCurrentUser();
+	
+	void reloadUser();
 
 }

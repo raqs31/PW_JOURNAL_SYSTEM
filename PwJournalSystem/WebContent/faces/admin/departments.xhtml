@@ -8,7 +8,7 @@
 <h:body>
 	<my:mainMenuBar />
 	<h:form id="newDept" rendered="#{request.isUserInRole('ADMIN')}">
-		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+		<p:messages id="messages" showDetail="false" showSummary="true" autoUpdate="true" closable="true" />
 		<p:panelGrid columns="2">
 			<f:facet name="header">
 				#{deptRes.hNewDepartment}
@@ -27,7 +27,7 @@
 			<p:dataTable id="dtDataTable" resizableColumns="true" var="d" value="#{deptPaneCo.departmentsList}" border="1" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="10, 20, 30" filteredValue="#{deptPaneCo.filteredDepartments}" filterDelay="300" lazy="true" sortMode="multiple"
-				expandedRow="false" rowExpandMode="multiple" reflow="true" selection="#{deptPaneCo.selectedDepts}" rowKey="#{d.deptId}" 
+				reflow="true" selection="#{deptPaneCo.selectedDepts}" rowKey="#{d.deptId}" 
 			>
 				<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
 				<p:column style="width:16px">
@@ -35,7 +35,7 @@
 				</p:column>
 				<p:column id="cDeptName" resizable="true" sortBy="#{d.deptCode}" sortable="true" filterBy="#{d.deptCode}">
 					<f:facet name="header">#{deptRes.cDeptLabel}</f:facet>
-				#{d.deptCode}
+					#{d.deptCode}
 				</p:column>
 					<p:column id="cDeptFullName" resizable="true" sortBy="#{d.fullName}" sortable="true" filterBy="#{d.fullName}">
 						<f:facet name="header">#{deptRes.cDeptFulName}</f:facet>

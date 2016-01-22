@@ -56,4 +56,12 @@ public class SystemRole implements IdTable {
 	
 	@ManyToMany(fetch=FetchType.LAZY, mappedBy="systemRoles")
 	private List<User> users;
+
+	public interface Roles {
+		String AUTHOR = "AUTHOR";
+		String ADMIN = "ADMIN";
+		String USER = "USER";
+		String ACCEPTOR = "ACCEPTOR";
+		String MANAGER = "ARTICLE_MANAGER";
+	}
 }

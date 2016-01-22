@@ -10,6 +10,7 @@ import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
+import static pw.mario.journal.model.User.Queries.*;
 
 @Default
 @Dependent
@@ -50,14 +51,14 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
 	@Override
 	public User getUserByEmail(String email) {
-		return createNamedTypedQuery(User.Queries.GET_BY_EMAIL)
+		return createNamedTypedQuery(GET_BY_EMAIL)
 				.setParameter(1, email.toUpperCase())
 				.getSingleResult();
 	}
 
 	@Override
 	public User getUserByLogin(String login) {
-		return createNamedTypedQuery(User.Queries.GET_BY_LOGIN)
+		return createNamedTypedQuery(GET_BY_LOGIN)
 				.setParameter(1, login.toUpperCase())
 				.getSingleResult();
 	}
@@ -68,10 +69,15 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 	}
 
 	@Override
-	public List<User> getUsersWithDepartment(Department d) {
+	public List<User> getUsers(Department d) {
 		if (d == null)
 			return getUsersList();
-		return createTypedQuery("select u from User u where u.userId = ?1").setParameter(1, d.getId()).getResultList();
+		return createTypedQuery("select u from User u where u.userId = ?1").setParameter(1, d == null ? null : d.getId()).getResultList();
+	}
+
+	@Override
+	public List<User> getUsers(Department d, String sr) {
+		return createNamedTypedQuery(USERS_WITH_DEPARTMENT_ROLE).setParameter(1, d == null ? "" : d.getId()).setParameter(2, sr).getResultList();
 	}
 
 }

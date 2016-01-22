@@ -13,22 +13,22 @@ import pw.mario.journal.qualifiers.enums.DictType;
 
 @DictionaryType(DictType.ARTICLE_STATUS)
 @Dependent
-public class ArticleStatusDAO extends AbstractDAOImpl<ArticleStatus> implements DictionaryDAO {
+public class ArticleStatusDAO extends AbstractDAOImpl<ArticleStatus> implements DictionaryDAO<ArticleStatus> {
 
 	@Override
 	public ArticleStatus getDictionary(String code) {
-		//TODO
-		return null;
+		return find(code);
 	}
 
 	@Override
-	public ArticleStatus addDictionary(Dictionary d) {
+	public ArticleStatus addDictionary(ArticleStatus d) {
 		em.persist(d);
 		return getDictionary(d.getCode());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public List<Dictionary> getDictionaries() {
+	public List<ArticleStatus> getDictionaries() {
 		return em.createQuery("select a from ArticleStatus a").getResultList();
 	}
 

@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	@RolesAllowed("ADMIN")
 	public User updateUser(User u) {
 		return userDao.updateUser(u);
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	@RolesAllowed("ADMIN")
 	public void deleteUser(User u) {
 		userDao.deleteUser(u);
@@ -77,6 +77,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void loadDetails(User u) {
 		if (!Hibernate.isInitialized(u.getSystemRoles()))
 			u.setSystemRoles(systemRolesDao.getUserSystemRoles(u));
@@ -85,8 +86,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public List<User> getUsersFromDepartment(Department d) {
-		return userDao.getUsersWithDepartment(d);
+		return userDao.getUsers(d);
 	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	public List<User> getUsers(Department d, String systemRole) {
+		return userDao.getUsers(d, systemRole);
+	}
+	
+	
 
 
 }
