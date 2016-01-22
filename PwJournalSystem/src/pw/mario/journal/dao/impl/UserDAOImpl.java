@@ -1,5 +1,9 @@
 package pw.mario.journal.dao.impl;
 
+import static pw.mario.journal.model.User.Queries.GET_BY_EMAIL;
+import static pw.mario.journal.model.User.Queries.GET_BY_LOGIN;
+import static pw.mario.journal.model.User.Queries.USERS_WITH_DEPARTMENT_ROLE;
+
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
@@ -10,7 +14,6 @@ import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
-import static pw.mario.journal.model.User.Queries.*;
 
 @Default
 @Dependent

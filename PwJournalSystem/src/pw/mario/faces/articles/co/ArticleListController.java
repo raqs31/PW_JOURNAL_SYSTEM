@@ -2,7 +2,6 @@ package pw.mario.faces.articles.co;
 
 import java.io.Serializable;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;

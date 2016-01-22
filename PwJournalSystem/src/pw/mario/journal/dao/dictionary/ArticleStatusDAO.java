@@ -6,7 +6,6 @@ import javax.enterprise.context.Dependent;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.DictionaryDAO;
-import pw.mario.journal.model.Dictionary;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.qualifiers.DictionaryType;
 import pw.mario.journal.qualifiers.enums.DictType;

@@ -1,9 +1,6 @@
 package pw.mario.faces.articles.model.tabs;
 
 import java.io.Serializable;
-import java.security.Principal;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 

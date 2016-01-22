@@ -3,8 +3,6 @@ package pw.mario.journal.model.dictionaries;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.Dictionary;
 
