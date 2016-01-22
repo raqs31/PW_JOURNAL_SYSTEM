@@ -1,4 +1,4 @@
-package pw.mario.journal.service.article.action.list;
+package pw.mario.journal.action;
 
 
 import javax.enterprise.context.Dependent;
