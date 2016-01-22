@@ -1,4 +1,4 @@
-package pw.mario.journal.dao.impl;
+package pw.mario.journal.dao.article.impl;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
-import pw.mario.journal.dao.ArticleDAO;
+import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
 

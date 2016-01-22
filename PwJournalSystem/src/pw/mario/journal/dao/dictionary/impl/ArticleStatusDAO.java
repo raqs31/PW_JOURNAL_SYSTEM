@@ -1,11 +1,11 @@
-package pw.mario.journal.dao.dictionary;
+package pw.mario.journal.dao.dictionary.impl;
 
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
-import pw.mario.journal.dao.DictionaryDAO;
+import pw.mario.journal.dao.dictionary.DictionaryDAO;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.qualifiers.DictionaryType;
 import pw.mario.journal.qualifiers.enums.DictType;

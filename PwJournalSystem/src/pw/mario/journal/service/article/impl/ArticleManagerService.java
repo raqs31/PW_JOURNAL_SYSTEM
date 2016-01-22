@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import pw.mario.common.action.form.ButtonAction;
-import pw.mario.journal.dao.ArticleDAO;
+import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;

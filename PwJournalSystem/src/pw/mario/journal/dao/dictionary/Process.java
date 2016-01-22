@@ -1,4 +1,4 @@
-package pw.mario.journal.dao;
+package pw.mario.journal.dao.dictionary;
 
 import pw.mario.journal.model.User;
 
