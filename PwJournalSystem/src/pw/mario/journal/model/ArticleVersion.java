@@ -9,8 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -26,7 +29,14 @@ import pw.mario.journal.model.ext.IdTable;
 			@Index(columnList="ID_STATUS")
 	}
 )
+@NamedQueries({
+	@NamedQuery(name=ArticleVersion.Queries.ARTICLE_VERSION, 
+			query="select v from ArticleVersion v where v.article.articleId = ?1 order by v.versionNum desc")
+})
 public class ArticleVersion extends AuditTable implements IdTable {
+	public interface Queries {
+		String ARTICLE_VERSION = "Article.Version";
+	}
 	@Id
 	@SequenceGenerator(name="versionSeq", sequenceName="VERSIONS_SEQ", initialValue=1)
 	@GeneratedValue(generator="versionSeq", strategy=GenerationType.SEQUENCE)
