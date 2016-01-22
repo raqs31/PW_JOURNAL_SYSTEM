@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,6 +20,7 @@ import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.DualListModel;
 import org.primefaces.model.UploadedFile;
 
+import antlr.debug.Event;
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.api.UserList;
@@ -33,7 +35,7 @@ import pw.mario.journal.service.article.NewArticleService;
 @ViewScoped
 public class NewArticleController implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	private static final String lastStep = "article";
 	private List<Tag> selectedTags;
 	private List<User> selectedUser;
 
@@ -59,7 +61,11 @@ public class NewArticleController implements Serializable {
 	}
 	
 	public String onFlowProcess(FlowEvent event) {
-		return event.getNewStep();
+		String nextStep = event.getNewStep(); 
+		if (lastStep.equals(nextStep)) {
+			Messages.addMessage(FacesMessage.SEVERITY_INFO, "Wprowadzenie pliku artykułu jest opcjonalne", "Plik można zmienić po utworzeniu artykułu");
+		}
+		return nextStep;
 	}
 	
 	public void handleFileUploadListener(FileUploadEvent e) {

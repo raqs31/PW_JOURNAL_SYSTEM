@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Instance;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -25,16 +24,14 @@ import pw.mario.journal.qualifiers.ArticleTab;
 @ViewScoped
 public class ArticleListController implements Serializable {
 	private static final long serialVersionUID = 1L;
-	@Inject @ArticleTab private Instance<ArticlesTab> articleTabsModel;
-	@Getter @Setter List<ArticlesTab> articlesTabs;
-	@Getter @Setter Article articleDetail;
+	@Inject @ArticleTab @Getter @Setter private List<ArticlesTab> articlesTabs;
+	@Getter @Setter private Article articleDetail;
 	
 	@PostConstruct
 	private void init() {
-		articlesTabs = new LinkedList<>();
-		for (ArticlesTab t: articleTabsModel) {
+		for (ArticlesTab t: articlesTabs) {
 			log.debug("Instance of articleTab: " + t.getTittle());
-			articlesTabs.add(t);
+			t.refreshActions();
 		}
 		Collections.sort(articlesTabs, new ArticlesTab.ArticleTabComparator());
 	}

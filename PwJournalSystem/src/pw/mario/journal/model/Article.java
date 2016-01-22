@@ -30,7 +30,11 @@ import pw.mario.journal.model.ext.IdTable;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name="ARTICLES", schema="MARIO")
+@Table(name="ARTICLES", schema="MARIO", indexes={
+		@Index(columnList="YEAR", unique=false),
+		@Index(columnList="YEAR,MONTH,DAY", unique=false),
+		@Index(columnList="MANAGEMENT_USER_ID", unique=false)
+})
 @NamedQueries({
 	@NamedQuery(name=Article.Queries.USER_ARTICLES,
 		query="select a from Article a "
@@ -50,6 +54,15 @@ public class Article extends AuditTable implements IdTable {
 	
 	@Column(name="DESCRIPTION", length=1024)
 	private String description;
+	
+	@Column(name="YEAR", precision=0, nullable=false)
+	private Integer year;
+	
+	@Column(name="MONTH", precision=0, nullable=false)
+	private Integer month;
+	
+	@Column(name="DAY", precision=0, nullable=false)
+	private Integer day;
 	
 	@ManyToOne
 	@JoinColumn(name="MANAGEMENT_USER_ID", referencedColumnName="USER_ID",  updatable=true, nullable=false)
@@ -73,12 +86,9 @@ public class Article extends AuditTable implements IdTable {
 	)
 	private Set<Tag> tagList;
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleVersion> versions;
 
-	@ManyToOne
-	@JoinColumn(name="STATUS_ID", referencedColumnName="DICT_ID")
-	private ArticleStatus status;
 	
 	@Override
 	public Object getId() {

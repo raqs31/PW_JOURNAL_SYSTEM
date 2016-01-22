@@ -19,8 +19,12 @@ public interface ArticlesTab {
 	String getId();
 
 	String onEdit();
+
+	boolean tabAllowed();
 	
-	public class ArticleTabComparator implements Comparator<ArticlesTab> {
+	void refreshActions();
+	
+	class ArticleTabComparator implements Comparator<ArticlesTab> {
 
 		@Override
 		public int compare(ArticlesTab o1, ArticlesTab o2) {

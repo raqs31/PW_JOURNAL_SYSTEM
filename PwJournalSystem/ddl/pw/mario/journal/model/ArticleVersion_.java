@@ -3,15 +3,16 @@ package pw.mario.journal.model;
 import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
+import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.model.ext.AuditTable_;
 
-@Generated(value="Dali", date="2016-01-09T20:08:18.317+0100")
+@Generated(value="Dali", date="2016-01-22T10:55:42.022+0100")
 @StaticMetamodel(ArticleVersion.class)
 public class ArticleVersion_ extends AuditTable_ {
 	public static volatile SingularAttribute<ArticleVersion, Long> versionId;
 	public static volatile SingularAttribute<ArticleVersion, Long> versionNum;
 	public static volatile SingularAttribute<ArticleVersion, Boolean> lastVersion;
-	public static volatile SingularAttribute<ArticleVersion, String> status;
 	public static volatile SingularAttribute<ArticleVersion, String> attachement;
 	public static volatile SingularAttribute<ArticleVersion, Article> article;
+	public static volatile SingularAttribute<ArticleVersion, ArticleStatus> status;
 }

@@ -37,8 +37,10 @@ public class LoginContextServiceImpl implements LoginService {
 
 	@Override
 	public User getCurrentUser() {
-		if (currentUser == null)
+		if (currentUser == null) {
 			currentUser = userService.getUserByLogin(getLogin());
+			userService.loadDetails(currentUser);
+		}
 		return currentUser;
 	}
 }

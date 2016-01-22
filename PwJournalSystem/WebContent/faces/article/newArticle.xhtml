@@ -9,10 +9,10 @@
 <body>
 	<my:mainMenuBar />
 	<h:form id="newArticle">
-		<p:messages autoUpdate="true" />
+		<p:messages autoUpdate="true" showDetail="true"/>
 		<p:growl id="gMsg" life="2000" showSummary="false" showDetail="false" autoUpdate="false" />
 		<p:wizard nextLabel="Dalej" 
-			backLabel="Wstecz"
+			backLabel="Wstecz" flowListener="#{newArticleController.onFlowProcess}"
 		>
 			<p:tab id="main" title="Krok 1. Opis">
 				<p:panel header="Podstawowe dane">
@@ -74,8 +74,8 @@
 					<p:spacer width="100%" height="10px" />
 					<p:outputLabel for="itUploaded" value="Przesłano: " />
 					<p:outputLabel id="itUploaded" value="#{newArticleController.articleFileName}" />
-					<p:commandButton value="Utwórz artykuł" actionListener="#{newArticleController.save()}"/>
 				</p:panel>
+				<p:commandButton value="Utwórz artykuł" actionListener="#{newArticleController.save()}"/>
 			</p:tab>
 		</p:wizard>
 		<p:separator />

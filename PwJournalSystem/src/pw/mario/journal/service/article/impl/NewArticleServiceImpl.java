@@ -1,5 +1,6 @@
 package pw.mario.journal.service.article.impl;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.TreeSet;
@@ -53,10 +54,15 @@ public class NewArticleServiceImpl implements NewArticleService {
 
 	@Override
 	public Article initArticle() {
+		Calendar currentDate = Calendar.getInstance();
 		Article art = new Article();
 		art.setAuthors(new TreeSet<>());
 		art.setTagList(new TreeSet<>());
 		art.setVersions(new LinkedList<>());
+		art.setYear(currentDate.get(Calendar.YEAR));
+		art.setMonth(currentDate.get(Calendar.MONTH));
+		art.setDay(currentDate.get(Calendar.DAY_OF_MONTH));
+		
 		return art;
 	}
 	

@@ -1,11 +1,16 @@
 package pw.mario.faces.articles.model.tabs;
 
 import java.io.Serializable;
+import java.security.Principal;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.security.PermitAll;
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -35,8 +40,9 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	@Getter private List<ButtonAction<Article>> actions;
 	
 	@PostConstruct
+	@PermitAll
 	private void init() {
-		refreshAction();
+		actions = new LinkedList<>();
 	}
 	
 	@Override
@@ -54,8 +60,18 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 		// TODO Auto-generated method stub
 		return "articleDetail";
 	}
-	
-	private void refreshAction() {
+
+	@Override
+	public boolean tabAllowed() {
+		if (articleService.rolesAllowed() != null)
+			for (String s: articleService.rolesAllowed())
+				if (FacesContext.getCurrentInstance().getExternalContext().isUserInRole(s))
+					return true;
+		return false;
+	}
+
+	@Override
+	public void refreshActions() {
 		if (actions == null)
 			actions = new LinkedList<>();
 		else
@@ -64,4 +80,5 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 		for (ButtonAction<Article> b: articleService.getActions(selectedArticle, ctx.getCurrentUser()))
 			actions.add(b);
 	}
+
 }

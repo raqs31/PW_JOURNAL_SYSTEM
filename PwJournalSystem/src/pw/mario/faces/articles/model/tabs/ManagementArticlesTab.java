@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -54,6 +55,21 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	public String onEdit() {
 		// TODO Auto-generated method stub
 		return "articleDetail";
+	}
+	
+	@Override
+	public boolean tabAllowed() {
+		if (articleService.rolesAllowed() != null)
+			for (String s: articleService.rolesAllowed())
+				if (FacesContext.getCurrentInstance().getExternalContext().isUserInRole(s))
+					return true;
+		return false;
+	}
+
+	@Override
+	public void refreshActions() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

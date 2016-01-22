@@ -22,7 +22,7 @@ import pw.mario.journal.service.article.ArticleService;
 public class ArticleManagerService implements ArticleService, Serializable {
 	private static final long serialVersionUID = 1L;
 	@Inject private ArticleDAO articleDao;
-
+	private String[] rolesAllowed = {"ARTICLE_MANAGER"};
 	@Override
 	@PermitAll
 	public List<Article> getArticles(User u) {
@@ -32,8 +32,7 @@ public class ArticleManagerService implements ArticleService, Serializable {
 	@Override
 	@PermitAll
 	public String[] rolesAllowed() {
-		// TODO Auto-generated method stub
-		return null;
+		return rolesAllowed;
 	}
 
 	@Override

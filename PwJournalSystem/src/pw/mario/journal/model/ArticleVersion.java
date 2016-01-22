@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 
@@ -22,7 +23,7 @@ import pw.mario.journal.model.ext.IdTable;
 @Entity
 @Table(name="ARTICLE_VERSIONS", schema="MARIO", 
 	indexes={@Index(columnList="ARTICLE_ID, LAST_VERSION", unique=false),
-			@Index(columnList="STATUS")
+			@Index(columnList="ID_STATUS")
 	}
 )
 public class ArticleVersion extends AuditTable implements IdTable {
@@ -38,9 +39,6 @@ public class ArticleVersion extends AuditTable implements IdTable {
 	@Column(name="LAST_VERSION")
 	private Boolean lastVersion;
 	
-	@Column(name="STATUS", length=20, nullable=false)
-	private String status;
-	
 	@Column(name="ATTACHEMENT")
 	private String attachement;
 	
@@ -48,6 +46,10 @@ public class ArticleVersion extends AuditTable implements IdTable {
 	@JoinColumn(name="ARTICLE_ID", nullable=false, updatable=false)
 	private Article article;
 
+	@ManyToOne
+	@JoinColumn(name="ID_STATUS", referencedColumnName="DICT_ID")
+	private ArticleStatus status;
+	
 	@Override
 	public Object getId() {
 		return versionId;

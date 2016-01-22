@@ -53,4 +53,15 @@ public class StubArticlesTab implements ArticlesTab {
 		flash.put(ArticleFlow.ARTICLE_DETAIL, selectedArticle);
 		return "articleDetails?faces-redirect=true";
 	}
+	
+	@Override
+	public boolean tabAllowed() {
+		return true;
+	}
+
+	@Override
+	public void refreshActions() {
+		// TODO Auto-generated method stub
+		
+	}
 }
