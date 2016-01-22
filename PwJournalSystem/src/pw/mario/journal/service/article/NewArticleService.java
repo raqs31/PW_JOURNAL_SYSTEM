@@ -2,8 +2,6 @@ package pw.mario.journal.service.article;
 
 import java.util.List;
 
-import org.primefaces.model.UploadedFile;
-
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Department;

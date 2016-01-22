@@ -14,7 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import pw.mario.journal.model.dictionaries.ArticleStatus;

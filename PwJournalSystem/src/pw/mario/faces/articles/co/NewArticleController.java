@@ -1,5 +1,6 @@
 package pw.mario.faces.articles.co;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -27,7 +28,6 @@ import pw.mario.journal.model.User;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.NewArticleService;
 import pw.mario.journal.util.files.FileHandler;
-import pw.mario.journal.util.files.FileUtils;
 
 @Log4j
 @Named
@@ -37,7 +37,7 @@ public class NewArticleController implements Serializable {
 	private static final String lastStep = "article";
 	private List<Tag> selectedTags;
 	private List<User> selectedUser;
-	private FileHandler articleFile;
+	private FileHandler fileHandler;
 	
 	@Inject private NewArticleService articleService;
 	@Inject private LoginService ctx;
@@ -45,7 +45,7 @@ public class NewArticleController implements Serializable {
 	@Getter @Setter private Article article;
 	@Getter @Setter private DualListModel<Tag> articleTags;
 	@Getter @Setter private DualListModel<User> articleAuthors;
-	@Getter @Setter private String articleFileName = "test";
+	@Getter @Setter private String articleFileName;
 	
 	
 	@PostConstruct
@@ -55,6 +55,7 @@ public class NewArticleController implements Serializable {
 		selectedUser = new LinkedList<>();
 		articleTags = new DualListModel<>(articleService.getTags(), selectedTags);
 		articleAuthors = new DualListModel<>(articleService.getUsers(ctx.getCurrentUser().getDept()), selectedUser);
+		article.setName("TEST");
 	}
 	
 	public String onFlowProcess(FlowEvent event) {
@@ -67,29 +68,30 @@ public class NewArticleController implements Serializable {
 	
 	public void handleFileUploadListener(FileUploadEvent e) {
 		UploadedFile uploaded = e.getFile();
+		articleFileName = uploaded.getFileName();
+		
 		try {
-			articleFile = FileUtils.createTempFile(uploaded.getInputstream(), uploaded.getFileName());
-			articleFileName = articleFile.getFileName();
+			File tmp = File.createTempFile(ctx.getCurrentUser().getUserId() + "_" + articleFileName , "tmp");
+			uploaded.write(tmp.getAbsolutePath());
+			fileHandler = new FileHandler(tmp, articleFileName);
 			Messages.addMessage("Przesłano artykuł " + articleFileName);
-		} catch (IOException ex) {
+		} catch (Exception ex) {
 			log.error("Error while create tmpFile", ex);
 			Messages.addMessage(FacesMessage.SEVERITY_ERROR, "Nie udało się przesłać pliku " + articleFileName, ex.getMessage());
 		} finally {
 			try {
 				uploaded.getInputstream().close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				log.error("Cannot close uploaded file inputStream", e1);
 				e1.printStackTrace();
 			}
 		}
 	}
 	
 	public void save() {
-		System.out.println(article);
-		System.out.println(articleTags.getTarget());
-		System.out.println(articleAuthors.getTarget());
 		try {
-			articleService.createArticle(article, articleFile);
+			articleService.createArticle(article, fileHandler);
+			Messages.addMessage("Utworzono artykuł");
 		} catch (PerformActionException ex) {
 			Messages.addMessage(FacesMessage.SEVERITY_ERROR, "Coś nie pykło", ex.getMessage());
 		}

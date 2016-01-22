@@ -16,10 +16,6 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 
-import org.primefaces.model.UploadedFile;
-
-import com.google.common.io.Files;
-
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
@@ -29,7 +25,6 @@ import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.dao.dictionary.DictionaryDAO;
 import pw.mario.journal.model.Article;
-import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.Dictionary;
 import pw.mario.journal.model.SystemRole;
@@ -88,7 +83,7 @@ public class NewArticleServiceImpl implements NewArticleService {
 	
 	private void saveFile(FileHandler file, String fileName) throws PerformActionException {
 		File toSave = new File("C:/Programy/" + file.getFullName()); 
-
+		log.debug("Save file: " + toSave.getAbsolutePath());
 		try {
 			if (!toSave.exists())
 				toSave.createNewFile();
