@@ -1,5 +1,6 @@
 package pw.mario.faces.articles.co;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +18,7 @@ import org.primefaces.model.UploadedFile;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.model.Article;
@@ -24,7 +26,10 @@ import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.NewArticleService;
+import pw.mario.journal.util.files.FileHandler;
+import pw.mario.journal.util.files.FileUtils;
 
+@Log4j
 @Named
 @ViewScoped
 public class NewArticleController implements Serializable {
@@ -32,16 +37,16 @@ public class NewArticleController implements Serializable {
 	private static final String lastStep = "article";
 	private List<Tag> selectedTags;
 	private List<User> selectedUser;
-
+	private FileHandler articleFile;
+	
 	@Inject private NewArticleService articleService;
 	@Inject private LoginService ctx;
-//	@Inject private Conversation conversation;
 	
 	@Getter @Setter private Article article;
 	@Getter @Setter private DualListModel<Tag> articleTags;
 	@Getter @Setter private DualListModel<User> articleAuthors;
-	@Getter @Setter private String articleFileName;
-	private UploadedFile articleFile;
+	@Getter @Setter private String articleFileName = "test";
+	
 	
 	@PostConstruct
 	private void init() {
@@ -61,9 +66,22 @@ public class NewArticleController implements Serializable {
 	}
 	
 	public void handleFileUploadListener(FileUploadEvent e) {
-		articleFile = e.getFile();
-		articleFileName = articleFile.getFileName();
-		Messages.addMessage("Przesłano artykuł " + articleFileName);
+		UploadedFile uploaded = e.getFile();
+		try {
+			articleFile = FileUtils.createTempFile(uploaded.getInputstream(), uploaded.getFileName());
+			articleFileName = articleFile.getFileName();
+			Messages.addMessage("Przesłano artykuł " + articleFileName);
+		} catch (IOException ex) {
+			log.error("Error while create tmpFile", ex);
+			Messages.addMessage(FacesMessage.SEVERITY_ERROR, "Nie udało się przesłać pliku " + articleFileName, ex.getMessage());
+		} finally {
+			try {
+				uploaded.getInputstream().close();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
 	}
 	
 	public void save() {

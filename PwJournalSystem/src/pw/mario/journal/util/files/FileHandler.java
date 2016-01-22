@@ -2,22 +2,21 @@ package pw.mario.journal.util.files;
 
 import java.io.File;
 
+import com.google.common.io.Files;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 public class FileHandler {
 	@Getter private final File file;
-	@Getter @Setter(value=AccessLevel.PACKAGE) private String fileName;
-	@Getter @Setter(value=AccessLevel.PACKAGE) private String extension;
+	@Getter @Setter private String fileName;
+	@Getter private String extension;
 	
-	protected FileHandler(File file) {
+	public FileHandler(File file, String fileName) {
 		this.file = file;
-	}
-	
-	protected void extractFromName(String fileName) {
-		this.fileName = fileName.substring(0, fileName.lastIndexOf("."));
-		this.extension = fileName.substring(fileName.lastIndexOf("."));
+		this.fileName = Files.getNameWithoutExtension(fileName);
+		this.extension = Files.getFileExtension(fileName);
 	}
 	
 	public String getFullName() {

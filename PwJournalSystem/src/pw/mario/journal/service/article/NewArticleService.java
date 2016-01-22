@@ -17,8 +17,6 @@ public interface NewArticleService {
 	
 	void createArticle(Article a, FileHandler file) throws PerformActionException;
 	
-	void createArticle(Article a, UploadedFile file) throws PerformActionException;
-	
 	List<Dictionary> getArticlesStatuses();
 	
 	List<Tag> getTags();
