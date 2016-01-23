@@ -1,5 +1,7 @@
 package pw.mario.faces.admin.validator;
 
+import java.util.regex.Pattern;
+
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.enterprise.context.RequestScoped;
@@ -19,6 +21,8 @@ import pw.mario.journal.dao.UserDAO;
 @Named
 @RequestScoped
 public class MailValidator implements Validator {
+	private static final Pattern mailPattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+	
 	@Inject UserDAO userDao;
 	
 	@Override
@@ -27,6 +31,8 @@ public class MailValidator implements Validator {
 		String toVal = (String) value;
 		if (Strings.isNullOrEmpty(toVal)) {
 			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Należy podać email", null));
+		} else if (!mailPattern.matcher(toVal).matches()) { 
+			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Mail ma nieprawidłowy format", null));
 		} else {
 			try {
 				if (userDao.getUserByEmail(toVal) != null)

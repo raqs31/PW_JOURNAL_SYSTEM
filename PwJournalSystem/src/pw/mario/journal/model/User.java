@@ -43,7 +43,7 @@ import pw.mario.journal.model.ext.IdTable;
 	@NamedQuery(name=User.Queries.GET_BY_LOGIN, 
 			query = "select u from User u where u.login = ?1"),
 	@NamedQuery(name=User.Queries.GET_BY_EMAIL, 
-		query = "select u from User u where u.email = ?1"),
+		query = "select u from User u where upper(u.email) = ?1"),
 	@NamedQuery(name=User.Queries.USERS_WITH_DEPARTMENT_ROLE,
 		query = "select u from User u join u.systemRoles sr where ((?1 is null and u.dept is null) or u.dept.deptId =  ?1) and sr.roleName = ?2")
 })
