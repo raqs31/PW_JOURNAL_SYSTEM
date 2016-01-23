@@ -9,11 +9,9 @@
 <body>
 	<my:mainMenuBar />
 	<h:form id="newArticle">
-		<p:messages autoUpdate="true" showDetail="true"/>
+		<p:messages autoUpdate="true" showDetail="true" />
 		<p:growl id="gMsg" life="2000" showSummary="false" showDetail="false" autoUpdate="false" />
-		<p:wizard nextLabel="Dalej" 
-			backLabel="Wstecz" flowListener="#{newArticleController.onFlowProcess}"
-		>
+		<p:wizard nextLabel="Dalej" backLabel="Wstecz" flowListener="#{newArticleController.onFlowProcess}">
 			<p:tab id="main" title="Krok 1. Opis">
 				<p:panel header="Podstawowe dane">
 					<h:panelGrid columns="3" columnClasses="label, value">
@@ -29,36 +27,54 @@
 						<h:outputText id="charCount" />
 					</h:panelGrid>
 				</p:panel>
-				<p:panel header="Autorzy">
-					<p:pickList id="plAuthors" value="#{newArticleController.articleAuthors}" var="user" effect="fade"
-						itemValue="#{user}" itemLabel="#{user.login}" showSourceControls="true" showTargetControls="true"
-						showCheckbox="true" responsive="true" showSourceFilter="true" showTargetFilter="true"
-						converter="#{userLoginConverter}"
-					>
-						<f:facet name="sourceCaption">Dostępni</f:facet>
-						<f:facet name="targetCaption">Wybrani</f:facet>
-						<p:column>
-							<h:outputText value="#{user.name}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{user.secondName}" />
-						</p:column>
-					</p:pickList>
-				</p:panel>
+				<p:cache>
+					<p:panel header="Autorzy">
+						<p:pickList 
+							id="plAuthors" 
+							value="#{newArticleController.articleAuthors}" 
+							var="user" 
+							effect="fade"
+							itemValue="#{user}" 
+							itemLabel="#{user.userId}" 
+							showSourceControls="true" 
+							showTargetControls="true"
+							showCheckbox="true" responsive="true" showSourceFilter="true" showTargetFilter="true"
+							converter="pickListUserConverter"
+						>
+							<f:facet name="sourceCaption">Dostępni</f:facet>
+							<f:facet name="targetCaption">Wybrani</f:facet>
+							<p:column>
+								<h:outputText value="#{user.name}" /> 
+							</p:column>
+							<p:column>
+								<h:outputText value="#{user.secondName}" />
+							</p:column>
+						</p:pickList>
+					</p:panel>
+				</p:cache>
 			</p:tab>
 			<p:tab id="tags" title="Krok 2. Dodatkowe">
 				<p:panel header="Tagi">
-					<p:pickList id="plTags" value="#{newArticleController.articleTags}" var="tag" effect="fade" itemValue="#{tag}"
-						itemLabel="#{tag.name}" showSourceControls="true" responsive="true" showSourceFilter="true"
-						showTargetFilter="true" filterMatchMode="contains" converter="#{tagConverter}"
+					<p:pickList id="plTags" 
+						value="#{newArticleController.articleTags}" 
+						var="t"
+						effect="fade" 
+						itemValue="#{t}"
+						itemLabel="#{t.tagId}" 
+						showSourceControls="true" 
+						responsive="true" 
+						showSourceFilter="true"
+						showTargetFilter="true" 
+						filterMatchMode="contains" 
+						converter="pickListTagConverter"
 					>
 						<f:facet name="sourceCaption">Dostępne</f:facet>
 						<f:facet name="targetCaption">Wybrane</f:facet>
 						<p:column>
-							<h:outputText value="#{tag.name}" />
+							<h:outputText value="#{t.name}" />
 						</p:column>
 						<p:column>
-							<h:outputText value="#{tag.description}" />
+							<h:outputText value="#{t.description}" />
 						</p:column>
 					</p:pickList>
 				</p:panel>
@@ -75,11 +91,12 @@
 					<p:outputLabel for="itUploaded" value="Przesłano: " />
 					<p:outputLabel id="itUploaded" value="#{newArticleController.articleFileName}" />
 				</p:panel>
-				<p:commandButton value="Utwórz artykuł" actionListener="#{newArticleController.save()}"/>
+				<p:commandButton value="Utwórz artykuł" actionListener="#{newArticleController.save()}" />
 			</p:tab>
 		</p:wizard>
 		<p:separator />
 		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false" />
 	</h:form>
+	
 </body>
 </html>

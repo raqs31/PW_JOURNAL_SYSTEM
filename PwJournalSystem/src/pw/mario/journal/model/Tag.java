@@ -20,7 +20,7 @@ public class Tag implements IdTable {
 	@Column(name="TAG_ID")
 	@SequenceGenerator(name="tagIdSeq", sequenceName="TAGS_SEQ", initialValue=1)
 	@GeneratedValue(generator="tagIdSeq", strategy=GenerationType.SEQUENCE)
-	private long tagId;
+	private Long tagId;
 	
 	@Column(name="NAME", unique=true, length=20)
 	private String name;
