@@ -27,46 +27,27 @@
 						<h:outputText id="charCount" />
 					</h:panelGrid>
 				</p:panel>
-				<p:cache>
-					<p:panel header="Autorzy">
-						<p:pickList 
-							id="plAuthors" 
-							value="#{newArticleController.articleAuthors}" 
-							var="user" 
-							effect="fade"
-							itemValue="#{user}" 
-							itemLabel="#{user.userId}" 
-							showSourceControls="true" 
-							showTargetControls="true"
-							showCheckbox="true" responsive="true" showSourceFilter="true" showTargetFilter="true"
-							converter="pickListUserConverter"
-						>
-							<f:facet name="sourceCaption">Dostępni</f:facet>
-							<f:facet name="targetCaption">Wybrani</f:facet>
-							<p:column>
-								<h:outputText value="#{user.name}" /> 
-							</p:column>
-							<p:column>
-								<h:outputText value="#{user.secondName}" />
-							</p:column>
-						</p:pickList>
-					</p:panel>
-				</p:cache>
+				<p:panel header="Autorzy">
+					<p:pickList id="plAuthors" value="#{newArticleController.articleAuthors}" var="user" effect="fade"
+						itemValue="#{user}" itemLabel="#{user.userId}" showSourceControls="true" showTargetControls="true"
+						responsive="true" showSourceFilter="true" showTargetFilter="true" converter="pickListUserConverter"
+					>
+						<f:facet name="sourceCaption">Dostępni</f:facet>
+						<f:facet name="targetCaption">Wybrani</f:facet>
+						<p:column>
+							<h:outputText value="#{user.name}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{user.secondName}" />
+						</p:column>
+					</p:pickList>
+				</p:panel>
 			</p:tab>
 			<p:tab id="tags" title="Krok 2. Dodatkowe">
 				<p:panel header="Tagi">
-					<p:pickList id="plTags" 
-						value="#{newArticleController.articleTags}" 
-						var="t"
-						effect="fade" 
-						itemValue="#{t}"
-						itemLabel="#{t.tagId}" 
-						showSourceControls="true" 
-						responsive="true" 
-						showSourceFilter="true"
-						showTargetFilter="true" 
-						filterMatchMode="contains" 
-						converter="pickListTagConverter"
+					<p:pickList id="plTags" value="#{newArticleController.articleTags}" var="t" effect="fade" itemValue="#{t}"
+						itemLabel="#{t.tagId}" showSourceControls="true" responsive="true" showSourceFilter="true" showTargetFilter="true"
+						filterMatchMode="contains" converter="pickListTagConverter"
 					>
 						<f:facet name="sourceCaption">Dostępne</f:facet>
 						<f:facet name="targetCaption">Wybrane</f:facet>
@@ -97,6 +78,5 @@
 		<p:separator />
 		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false" />
 	</h:form>
-	
 </body>
 </html>

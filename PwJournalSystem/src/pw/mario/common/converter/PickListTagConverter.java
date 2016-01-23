@@ -16,12 +16,12 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.Tag;
 
 @Log4j
-@FacesConverter(value="pickListTagConverter", forClass=Tag.class)
+@FacesConverter(forClass=Tag.class, value="pickListTagConverter")
 public class PickListTagConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		PickList list = (PickList) component;
-		@SuppressWarnings("unchecked") DualListModel<Tag> source = (DualListModel<Tag>)list.getValue();
+		DualListModel<Tag> source = (DualListModel<Tag>)list.getValue();
 		Long id = Long.parseLong(value);
 		
 		Tag t = traverseList(source.getSource(), id);

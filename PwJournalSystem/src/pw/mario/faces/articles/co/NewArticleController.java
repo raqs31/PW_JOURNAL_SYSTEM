@@ -56,7 +56,6 @@ public class NewArticleController implements Serializable {
 		selectedUser = new LinkedList<>();
 		articleTags = new DualListModel<>(articleService.getTags(), selectedTags);
 		articleAuthors = new DualListModel<>(articleService.getUsers(ctx.getCurrentUser().getDept()), selectedUser);
-		article.setName("TEST");
 	}
 	
 	public String onFlowProcess(FlowEvent event) {

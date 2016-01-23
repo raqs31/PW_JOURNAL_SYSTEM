@@ -16,14 +16,14 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.User;
 
 @Log4j
-@FacesConverter(value="pickListUserConverter", forClass=User.class)
+@FacesConverter(forClass=User.class, value="pickListUserConverter")
 public class PickListUserConverter implements Converter {
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		PickList list = (PickList) component;
-		@SuppressWarnings("unchecked") DualListModel<User> source = (DualListModel<User>)list.getValue();
+		DualListModel<User> source = (DualListModel<User>)list.getValue();
 		Long id = Long.parseLong(value);
-		
+		System.out.println("TEEEEEEEEST");
 		User u = traverseList(source.getSource(), id);
 		if (u == null)
 			u = traverseList(source.getTarget(), id);
@@ -36,6 +36,7 @@ public class PickListUserConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		User u = (User)value;
+		System.out.println("TOSTRING");
 		return u.getUserId().toString();
 	}
 	

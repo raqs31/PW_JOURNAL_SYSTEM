@@ -54,8 +54,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 
 	@Override
 	public String onEdit() {
-		// TODO Auto-generated method stub
-		return "articleDetail";
+		return "articleDetails?faces-redirect=true";
 	}
 
 	@Override
