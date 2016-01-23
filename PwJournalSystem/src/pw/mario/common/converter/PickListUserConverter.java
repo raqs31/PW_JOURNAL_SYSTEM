@@ -4,21 +4,16 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
 import lombok.extern.log4j.Log4j;
-import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
-import pw.mario.journal.service.UserService;
 
 @Log4j
 @FacesConverter(value="pickListUserConverter", forClass=User.class)

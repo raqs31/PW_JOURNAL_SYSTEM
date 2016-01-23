@@ -15,4 +15,6 @@ public interface DepartmentService extends Serializable {
 	public List<Department> getActiveDepartmentsNonPersis();
 	
 	public void deleteDepartment(Department d);
+	
+	public Department getDepartment(String deptCode);
 }

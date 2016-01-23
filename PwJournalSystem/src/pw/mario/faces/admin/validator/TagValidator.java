@@ -1,23 +1,28 @@
 package pw.mario.faces.admin.validator;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.NoResultException;
 
 import com.google.common.base.Strings;
 
 import pw.mario.journal.dao.TagDAO;
 
-@ManagedBean(name="tagValidator", eager=true)
+@Named
+@RequestScoped
 public class TagValidator implements Validator {
 	@Inject TagDAO tagDao;
 	
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 		String toVal = (String) value;
 		if (Strings.isNullOrEmpty(toVal)) {

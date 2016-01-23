@@ -7,7 +7,6 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 
 import org.hibernate.Hibernate;
-import org.hibernate.loader.plan.build.internal.LoadGraphLoadPlanBuildingStrategy;
 
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;

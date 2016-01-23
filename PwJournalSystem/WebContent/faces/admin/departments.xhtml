@@ -9,18 +9,22 @@
 	<my:mainMenuBar />
 	<h:form id="newDept" rendered="#{request.isUserInRole('ADMIN')}">
 		<p:messages id="messages" showDetail="false" showSummary="true" autoUpdate="true" closable="true" />
-		<p:panelGrid columns="2">
-			<f:facet name="header">
-				#{deptRes.hNewDepartment}
-			</f:facet>
+		<p:panel header="#{deptRes.hNewDepartment}">
+		<h:panelGrid columns="3" cellpadding="5">
 			<p:outputLabel for="deptCode" value="#{deptRes.cDeptName}" />
-			<p:inputText id="deptCode" value="#{deptPaneCo.newDept.deptCode}" required="true" />
+			<p:inputText id="deptCode" value="#{deptPaneCo.newDept.deptCode}" required="true">
+				<f:validator binding="#{departmentValidator}"/>
+			</p:inputText> 
+			<p:message for="deptCode"/>
 			<p:outputLabel for="deptName" value="#{deptRes.cDeptLabel}" />
-			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" required="true" />
+			<p:inputText id="deptName" value="#{deptPaneCo.newDept.fullName}" required="true" requiredMessage="Należy wprowadzić pełną nazwę departamentu"/>
+			<p:message for="deptName"/>
 			<p:outputLabel for="deptFullName" value="#{deptRes.cDeptFulName}" />
 			<p:inputTextarea id="deptFullName" value="#{deptPaneCo.newDept.description}" />
+			<p:spacer />
 			<p:commandButton action="#{deptPaneCo.addDepartment}" value="#{deptRes.bAddDept}" update="newDept depts:dtDataTable" />
-		</p:panelGrid>
+		</h:panelGrid>
+		</p:panel>
 	</h:form>
 	<p:panel id="deptPanel" header="#{deptRes.deptTable}">
 		<h:form id="depts">
