@@ -49,6 +49,7 @@ public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> imple
 		} else {
 			next.setVersionNum(1L);
 		}
+		next.setLastVersion(true);
 		next.setArticle(a);
 		
 		return next;

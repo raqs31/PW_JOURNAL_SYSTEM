@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -94,6 +95,7 @@ public class Article extends AuditTable implements IdTable {
 	)
 	private Set<Tag> tagList;
 	
+	@OrderBy("versionNum DESC")
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleVersion> versions;
 
