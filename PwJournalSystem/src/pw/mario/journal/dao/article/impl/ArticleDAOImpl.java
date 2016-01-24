@@ -54,4 +54,9 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 				.getResultList();
 	}
 
+	@Override
+	public Article getArticle(Long id) {
+		return find(id);
+	}
+
 }

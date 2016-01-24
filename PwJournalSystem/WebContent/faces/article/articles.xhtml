@@ -37,8 +37,8 @@
 						/>
 					</p:column>
 					<p:column style="width:16px">
-						<p:commandLink styleClass="fa fa-pencil" action="#{articles.onEdit}" ajax="false">
-							<f:setPropertyActionListener value="#{article}" target="#{articles.selectedArticle}" />
+						<p:commandLink styleClass="fa fa-pencil" action="#{articles.onEdit()}" ajax="false">
+							<f:param name="articleId" value="#{article.articleId}" />
 						</p:commandLink>
 					</p:column>
 				</p:dataTable>

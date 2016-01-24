@@ -76,7 +76,10 @@
 			</p:tab>
 		</p:wizard>
 		<p:separator />
-		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false" />
 	</h:form>
+	<h:form>
+		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false" validateClient="false" />
+	</h:form>
+	
 </body>
 </html>

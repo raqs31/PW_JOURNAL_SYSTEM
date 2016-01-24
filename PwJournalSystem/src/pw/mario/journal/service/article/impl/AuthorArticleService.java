@@ -45,4 +45,9 @@ public class AuthorArticleService implements ArticleService {
 		return actions;
 	}
 
+	@Override
+	public Article getArticle(Long id, User u) {
+		return articleDao.getArticle(id);
+	}
+
 }

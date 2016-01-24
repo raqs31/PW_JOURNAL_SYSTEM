@@ -41,4 +41,9 @@ public class ArticleManagerService implements ArticleService, Serializable {
 		return null;
 	}
 
+	@Override
+	public Article getArticle(Long id, User u) {
+		return articleDao.getArticle(id);
+	}
+
 }

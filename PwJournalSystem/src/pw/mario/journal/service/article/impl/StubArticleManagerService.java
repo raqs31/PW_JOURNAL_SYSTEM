@@ -78,4 +78,9 @@ public class StubArticleManagerService implements ArticleService {
 		return null;
 	}
 
+	@Override
+	public Article getArticle(Long id, User u) {
+		return null;
+	}
+
 }

@@ -18,4 +18,6 @@ public interface ArticleDAO {
 	List<User> getArticleAuthors(Article a);
 	
 	List<Tag> getArticleTags(Article a);
+	
+	Article getArticle(Long id);
 }

@@ -13,4 +13,6 @@ public interface ArticleService extends Serializable {
 	String[] rolesAllowed();
 	
 	Iterable<ButtonAction<Article>> getActions(Article a, User u);
+	
+	Article getArticle(Long id, User u);
 }
