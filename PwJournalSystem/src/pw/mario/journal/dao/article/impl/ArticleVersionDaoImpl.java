@@ -8,7 +8,6 @@ import javax.enterprise.inject.Default;
 
 import org.hibernate.Hibernate;
 
-import antlr.Version;
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleVersionDao;

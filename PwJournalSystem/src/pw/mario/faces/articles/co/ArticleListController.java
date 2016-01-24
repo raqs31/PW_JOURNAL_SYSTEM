@@ -3,7 +3,6 @@ package pw.mario.faces.articles.co;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -20,8 +19,6 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import pw.mario.faces.articles.model.ArticlesTab;
 import pw.mario.journal.model.Article;
-import pw.mario.journal.model.Tag;
-import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleTab;
 import pw.mario.journal.service.article.ArticleLazyLoadingService;
 

@@ -51,7 +51,7 @@
 		</ui:define>
 		<ui:define name="east">
 			<f:facet name="header">Autorzy</f:facet>
-			<p:dataList value="#{article.authors}" var="author" paginator="true" rows="10" type="unordered"
+			<p:dataList value="#{article.authors}" var="author" paginator="true" rows="15" type="unordered"
 				styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom"
 			>
 				<p:column sortBy="#{author.name}">
@@ -60,7 +60,7 @@
 			</p:dataList>
 		</ui:define>
 		<ui:define name="south">
-			Footer
+			<my:articleAction actions="#{articleDetailsController.actions}" />
 		</ui:define>
 	</ui:composition>
 </body>

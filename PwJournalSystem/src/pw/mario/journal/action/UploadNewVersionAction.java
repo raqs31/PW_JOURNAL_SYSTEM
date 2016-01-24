@@ -1,14 +1,17 @@
 package pw.mario.journal.action;
 
+import java.util.HashMap;
+import java.util.Map;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.conditional.ConditionValidator;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
-import pw.mario.common.util.JSFUtil;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
@@ -16,9 +19,10 @@ import pw.mario.journal.qualifiers.enums.ArticleManager;
 
 @Button
 @Action(actionFor=ArticleManager.AUTHOR)
-@ApplicationScoped
-public class CreateArticle implements ButtonAction<Article> {
-	private static final long serialVersionUID = 1L;
+@Named
+@RequestScoped
+public class UploadNewVersionAction implements ButtonAction<Article> {
+	private static final long serialVersionUID = -4869406550164908694L;
 
 	@Override
 	public boolean allowed(ConditionValidator<Article> validator) {
@@ -27,31 +31,31 @@ public class CreateArticle implements ButtonAction<Article> {
 
 	@Override
 	public void doAction() throws PerformActionException {
-			JSFUtil.redirect("newArticle.xhtml");
+		Map<String,Object> options = new HashMap<String, Object>();
+        options.put("resizable", false);
+        options.put("draggable", false);
+        options.put("modal", true);
+        RequestContext.getCurrentInstance().openDialog("/resources/jsf/uploadNewVersion", options, null);		
 	}
 
 	@Override
 	public String getAction() {
-		return "newArticle";
+		return null;
 	}
 
 	@Override
 	public String getValue() {
-		return "Utwórz artykuł";
+		return "Nowa wersja";
 	}
 
 	@Override
 	public String getId() {
-		return "bCreaArticle";
+		return "bNewVersion";
 	}
 
 	@Override
 	public void onReturnEvent(SelectEvent e) {
+		System.out.println(e.getObject());
+		
 	}
-
-	@Override
-	public String ajax() {
-		return "false";
-	}
-
 }
