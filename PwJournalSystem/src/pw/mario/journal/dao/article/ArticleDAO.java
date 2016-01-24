@@ -20,4 +20,6 @@ public interface ArticleDAO {
 	List<Tag> getArticleTags(Article a);
 	
 	Article getArticle(Long id);
+	
+	void loadDetails(Article a);
 }

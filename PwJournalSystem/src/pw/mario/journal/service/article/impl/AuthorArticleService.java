@@ -5,6 +5,8 @@ import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
@@ -46,8 +48,11 @@ public class AuthorArticleService implements ArticleService {
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Article getArticle(Long id, User u) {
-		return articleDao.getArticle(id);
+		Article article = articleDao.getArticle(id);
+		articleDao.loadDetails(article);
+		return article;
 	}
 
 }

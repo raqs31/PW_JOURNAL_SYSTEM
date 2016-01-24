@@ -4,19 +4,28 @@
 	xmlns:my="http://java.sun.com/jsf/composite/jsf/components"
 >
 <h:head>
-	<title><ui:insert>Artykuł #{articleDetailsController.article.name}</ui:insert></title>
+	<title>#{articleDetailsController.article.name}</title>
 </h:head>
 <body>
 	<ui:composition template="/resources/jsf/template/articleTemplate.xhtml">
 		<ui:define name="content">
-			<h2>Id@#{articleDetailsController.article.articleId} - #{articleDetailsController.article.name}</h2>
-			<p:separator />			
+			<f:facet name="header">Artykuł: Id@#{articleDetailsController.article.articleId} - #{articleDetailsController.article.name}</f:facet>
+			<p:dataList value="#{articleDetailsController.article.tagList}" var="tag" paginator="false" type="none"
+				emptyMessage="Brak" lazy="false" 
+			>
+				<p:link value="##{tag.name}" style="font-style:italic;font-variant:small-caps;text-decoration:none;" /><p:spacer width="4"/>
+			</p:dataList>
 		</ui:define>
-		
 		<ui:define name="east">
-			Prawy Panel
+			<f:facet name="header">Autorzy</f:facet>
+			<p:dataList value="#{articleDetailsController.article.authors}" var="author" paginator="true" rows="10"
+				type="unordered" styleClass="paginated" emptyMessage="Brak" lazy="true"
+			>
+				<p:column sortBy="#{author.name}">
+					<h:outputText value="#{author.name} #{author.secondName}" />
+				</p:column>
+			</p:dataList>
 		</ui:define>
-		
 		<ui:define name="south">
 			Footer
 		</ui:define>

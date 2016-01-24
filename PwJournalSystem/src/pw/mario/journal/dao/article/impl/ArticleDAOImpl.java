@@ -59,4 +59,13 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		return find(id);
 	}
 
+	@Override
+	public void loadDetails(Article a) {
+		if (!em.contains(a))
+			reAttachEntity(a);
+		a.getAuthors().size();
+		a.getTagList().size();
+		a.getVersions().size();
+	}
+
 }

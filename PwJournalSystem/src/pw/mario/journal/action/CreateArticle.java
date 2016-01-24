@@ -1,6 +1,7 @@
 package pw.mario.journal.action;
 
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.Dependent;
 
 import pw.mario.common.action.conditional.ConditionValidator;
@@ -15,8 +16,7 @@ import pw.mario.journal.qualifiers.enums.ArticleManager;
 
 @Button
 @Action(actionFor=ArticleManager.AUTHOR)
-@ArticleTab
-@Dependent
+@ApplicationScoped
 public class CreateArticle implements ButtonAction<Article> {
 	private static final long serialVersionUID = 1L;
 
@@ -32,7 +32,6 @@ public class CreateArticle implements ButtonAction<Article> {
 
 	@Override
 	public String getAction() {
-		System.out.println("WTF!");
 		return "newArticle";
 	}
 

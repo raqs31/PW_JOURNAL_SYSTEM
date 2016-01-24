@@ -17,16 +17,16 @@
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" resizable="false" collapsible="false" visible="true" style="ui-layout-unit-content">
+		<p:layoutUnit position="north" resizable="false" collapsible="false" visible="true" style="ui-layout-unit-content" gutter="1">
 			<my:mainMenuBar />
 		</p:layoutUnit>
-		<p:layoutUnit position="south" size="100" resizable="true" collapsible="true">
+		<p:layoutUnit position="south" size="100" resizable="true" collapsible="true" maxSize="300" gutter="1">
 			<ui:insert name="south" />
 		</p:layoutUnit>
-		<p:layoutUnit position="east" size="200" resizable="true" closable="true" collapsible="true" effect="drop">
+		<p:layoutUnit position="east" size="300" resizable="true" collapsible="true" effect="drop" gutter="1">
 			<ui:insert name="east" />
 		</p:layoutUnit>
-		<p:layoutUnit position="center">
+		<p:layoutUnit position="center" gutter="1">
 			<ui:insert name="content" />
 		</p:layoutUnit>
 	</p:layout>

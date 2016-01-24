@@ -36,7 +36,7 @@ public class ArticleDetailsController implements Serializable {
 			if (flashArticle != null)
 				article = articleService.getArticle(flashArticle.getArticleId(), null);
 			else
-				article = articleService.getArticles(ctx.getCurrentUser()).get(0);
+				article = articleService.getArticle(251L, ctx.getCurrentUser());
 			
 		}
 	}
