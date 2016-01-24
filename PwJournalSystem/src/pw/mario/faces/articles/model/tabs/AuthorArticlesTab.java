@@ -36,6 +36,8 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	@Getter private final String id = "authors";
 	@Getter private List<ButtonAction<Article>> actions;
 	
+	private List<Article> articles;
+	
 	@PostConstruct
 	@PermitAll
 	private void init() {
@@ -44,7 +46,9 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	
 	@Override
 	public List<Article> getArticles() {
-		return articleService.getArticles(ctx.getCurrentUser());
+		if (articles == null)
+			articles =articleService.getArticles(ctx.getCurrentUser());
+		return articles;
 	}
 
 	@Override

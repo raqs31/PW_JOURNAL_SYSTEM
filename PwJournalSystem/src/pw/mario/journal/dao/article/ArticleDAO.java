@@ -3,6 +3,7 @@ package pw.mario.journal.dao.article;
 import java.util.List;
 
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 
 public interface ArticleDAO {
@@ -13,4 +14,8 @@ public interface ArticleDAO {
 	List<Article> getArticlesToAccept(User u);
 	
 	List<Article> getArticlesToManagement(User u);
+	
+	List<User> getArticleAuthors(Article a);
+	
+	List<Tag> getArticleTags(Article a);
 }

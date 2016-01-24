@@ -8,6 +8,7 @@ import javax.enterprise.inject.Default;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 
 @Default
@@ -37,6 +38,20 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	@Override
 	public List<Article> getArticlesToManagement(User u) {
 		return null;
+	}
+
+	@Override
+	public List<User> getArticleAuthors(Article a) {
+		return em.createNamedQuery(Article.Queries.ARTICLE_AUTHORS, User.class)
+					.setParameter(1, a.getArticleId())
+					.getResultList();
+	}
+
+	@Override
+	public List<Tag> getArticleTags(Article a) {
+		return em.createNamedQuery(Article.Queries.ARTICLE_TAGS, Tag.class)
+				.setParameter(1, a.getArticleId())
+				.getResultList();
 	}
 
 }
