@@ -10,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.action.form.ButtonAction;
@@ -52,7 +54,7 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	}
 
 	@Override
-	public String onEdit() {
+	public String onEdit(Article a) {
 		// TODO Auto-generated method stub
 		return "articleDetail";
 	}
@@ -68,6 +70,12 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 
 	@Override
 	public void refreshActions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRowSelect(SelectEvent e) {
 		// TODO Auto-generated method stub
 		
 	}

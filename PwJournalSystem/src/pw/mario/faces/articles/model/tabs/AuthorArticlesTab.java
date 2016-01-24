@@ -7,13 +7,18 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.annotation.security.PermitAll;
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.primefaces.event.SelectEvent;
 
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.faces.articles.co.ArticleDetailsController;
 import pw.mario.faces.articles.model.ArticlesTab;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
@@ -57,7 +62,11 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	}
 
 	@Override
-	public String onEdit() {
+	public String onEdit(Article a) {
+		FacesContext.getCurrentInstance()
+						.getExternalContext()
+						.getFlash()
+						.put(ArticleDetailsController.PARAM_ARTICLE_ID, a);
 		return "articleDetails?faces-redirect=true";
 	}
 
@@ -79,6 +88,12 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 		
 		for (ButtonAction<Article> b: articleService.getActions(selectedArticle, ctx.getCurrentUser()))
 			actions.add(b);
+	}
+
+	@Override
+	public void onRowSelect(SelectEvent e) {
+		FacesMessage msg = new FacesMessage("Selected " + e.getObject(), null);
+		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 }

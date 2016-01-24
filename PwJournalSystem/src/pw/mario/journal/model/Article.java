@@ -23,10 +23,12 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 
 @Data
+@ToString(exclude={"authors", "versions", "tagList"})
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="ARTICLES", schema="MARIO", indexes={

@@ -25,7 +25,7 @@ public class AuthorArticleService implements ArticleService {
 	private final String[] rolesAllowed = {"AUTHOR"};
 
 	@Inject private ArticleDAO articleDao;
-	@Inject @Action(actionFor=ArticleManager.AUTHOR) 
+	@Inject @Action(actionFor=ArticleManager.AUTHOR)
 	private Instance<ButtonAction<Article>> actions;
 	
 	@Override

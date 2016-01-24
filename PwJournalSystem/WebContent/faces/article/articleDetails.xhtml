@@ -7,21 +7,19 @@
 	<title><ui:insert>Artykuł #{articleDetailsController.article.name}</ui:insert></title>
 </h:head>
 <body>
-	<my:mainMenuBar />
-	<h:form>
-		<p:messages />
-		<div class="ui-grid ui-grid-responsive">
-			<div class="ui-grid-row">
-				<div class="ui-grid-col-8" style="border: 1px solid black">
-					<h1>#{articleDetailsController.article.description}</h1>
-				</div>
-			</div>
-			<div class="ui-grid-row">
-				
-			</div>
-		</div>
-		<div></div>
-		<p:commandButton value="Powrót do listy" action="articles?faces-redirect=true" ajax="false"/>
-	</h:form>
-	</body>
+	<ui:composition template="/resources/jsf/template/articleTemplate.xhtml">
+		<ui:define name="content">
+			<h2>Id@#{articleDetailsController.article.articleId} - #{articleDetailsController.article.name}</h2>
+			<p:separator />			
+		</ui:define>
+		
+		<ui:define name="east">
+			Prawy Panel
+		</ui:define>
+		
+		<ui:define name="south">
+			Footer
+		</ui:define>
+	</ui:composition>
+</body>
 </html>

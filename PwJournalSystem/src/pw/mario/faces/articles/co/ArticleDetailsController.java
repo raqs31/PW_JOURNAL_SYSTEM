@@ -3,6 +3,7 @@ package pw.mario.faces.articles.co;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import pw.mario.faces.articles.ArticleFlow;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
+import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleService;
 
 @Named
@@ -25,13 +27,17 @@ public class ArticleDetailsController implements Serializable {
 	public static final String PARAM_ARTICLE_ID = "articleId";
 
 	@Getter @Setter private Article article;
-	
 	@Inject @ArticleManagement(ArticleManager.AUTHOR) private ArticleService articleService;
-	
+	@Inject transient private LoginService ctx;
 	@PostConstruct
 	private void init() {
-		String articleId = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get(PARAM_ARTICLE_ID);
-		article = articleService.getArticle(Long.parseLong(articleId), null);
-		
+		if (article == null) {
+			Article flashArticle = (Article) FacesContext.getCurrentInstance().getExternalContext().getFlash().get(PARAM_ARTICLE_ID);
+			if (flashArticle != null)
+				article = articleService.getArticle(flashArticle.getArticleId(), null);
+			else
+				article = articleService.getArticles(ctx.getCurrentUser()).get(0);
+			
+		}
 	}
 }

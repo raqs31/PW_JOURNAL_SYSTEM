@@ -8,17 +8,19 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<h:form id="articleTabs">
-		<p:messages id="exceptionMsg" closable="true" autoUpdate="true" />
-		<p:tabView id="articleTabView" dynamic="true" cache="true" value="#{articleListController.articlesTabs}"
-			var="articles" orientation="left"
-		>
-			<p:tab id="t${articles.id}" title="#{articles.tittle}">
+	<p:messages id="msg" closable="true" autoUpdate="true" />
+	<p:tabView id="articleTabView" dynamic="true" cache="true" value="#{articleListController.articlesTabs}" var="articles"
+		orientation="left"
+	>
+		<p:tab id="t${articles.id}" title="#{articles.tittle}">
+			<h:form id="tabArticles">
 				<p:dataTable id="dt${articles.id}" var="article" value="#{articles.articles}" border="1" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
-					selectionMode="single" rowKey="#{article.articleId}" emptyMessage="Brak artykułów"
+					selectionMode="single" rowKey="#{article.articleId}" selection="#{articles.selectedArticle}"
+					emptyMessage="Brak artykułów"
 				>
+					<p:ajax event="rowSelect" listener="#{articles.onRowSelect}" update="msg" />
 					<p:column>
 						<f:facet name="header">ID</f:facet>
 						<h:outputText value="#{article.articleId}" />
@@ -32,32 +34,34 @@
 						<h:outputText value="#{empty article.management ? null : article.management.login}" />
 					</p:column>
 					<p:column style="width:16px">
-						<p:commandLink update=":articleTabs:articleDetail" oncomplete="PF('authorsDialog').show()" title="Szczegóły"
-							styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px" actionListener="#{articleListController.loadDetails(article)}"
+						<p:commandLink update=":detail:articleDetail" oncomplete="PF('authorsDialog').show()" title="Szczegóły"
+							styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px"
+							actionListener="#{articleListController.loadDetails(article)}"
 						/>
 					</p:column>
 					<p:column style="width:16px">
-						<p:commandLink styleClass="fa fa-pencil" action="#{articles.onEdit()}" ajax="false">
-							<f:param name="articleId" value="#{article.articleId}" />
-						</p:commandLink>
+						<p:commandLink styleClass="fa fa-pencil" action="#{articles.onEdit(article)}" ajax="false" />
 					</p:column>
 				</p:dataTable>
-				<p:spacer width="100%" height="5px" />
+			</h:form>
+			<p:spacer width="100%" height="5px" />
+			<h:form>
 				<p:dataList value="#{articles.actions}" var="b" rendered="#{not empty articles.actions}"
 					styleClass="display:inline;" lazy="true" type="none"
 				>
 					<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="false" />
 				</p:dataList>
-			</p:tab>
-		</p:tabView>
-		
+			</h:form>
+		</p:tab>
+	</p:tabView>
+	<h:form id="detail">
 		<p:dialog id="articleDetail" header="Autorzy" widgetVar="authorsDialog" modal="true" showEffect="fade"
 			hideEffect="fade" resizable="false" width="400" dynamic="true" closeOnEscape="true"
 		>
 			<p:outputLabel for="articleName" value="Artykuł: " />
 			<p:outputLabel id="articleName" value="#{articleListController.articleDetail.name}" />
 			<p:separator />
-			<p:outputLabel value="Autorzy"/>
+			<p:outputLabel value="Autorzy" />
 			<p:separator />
 			<p:dataList id="articleAuthors" var="user" type="ordered" value="#{articleListController.articleDetail.authors}"
 				lazy="true" emptyMessage="Artykuł nie ma przypisanych autorów"
@@ -65,13 +69,14 @@
 				<p>#{user.login} - #{user.name} #{user.secondName}</p>
 			</p:dataList>
 			<p:spacer width="100%" height="5px"></p:spacer>
-			<p:outputLabel value="Etykiety"/>
+			<p:outputLabel value="Etykiety" />
 			<p:separator />
-			<p:dataList id="articleTag" var="tag" value="#{articleListController.articleDetail.tagList}" lazy="true" emptyMessage="Brak etykiet">
+			<p:dataList id="articleTag" var="tag" value="#{articleListController.articleDetail.tagList}" lazy="true"
+				emptyMessage="Brak etykiet"
+			>
 				<p>#{tag.name}</p>
 			</p:dataList>
 		</p:dialog>
 	</h:form>
-		
 </h:body>
 </html>

@@ -10,6 +10,8 @@ import javax.faces.context.Flash;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.action.form.ButtonAction;
@@ -47,7 +49,7 @@ public class StubArticlesTab implements ArticlesTab {
 	}
 
 	@Override
-	public String onEdit() {
+	public String onEdit(Article a) {
 		Flash flash = FacesContext.getCurrentInstance().getExternalContext().getFlash();
 		flash.put(ArticleFlow.ARTICLE_DETAIL_MODE,ArticleDetailMode.STUB);
 		flash.put(ArticleFlow.ARTICLE_DETAIL, selectedArticle);
@@ -61,6 +63,12 @@ public class StubArticlesTab implements ArticlesTab {
 
 	@Override
 	public void refreshActions() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onRowSelect(SelectEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
