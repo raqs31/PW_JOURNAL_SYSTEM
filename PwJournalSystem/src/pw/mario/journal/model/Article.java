@@ -24,6 +24,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 
@@ -96,6 +97,9 @@ public class Article extends AuditTable implements IdTable {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleVersion> versions;
 
+	@ManyToOne
+	@JoinColumn(name="ID_STATUS", referencedColumnName="DICT_ID")
+	private ArticleStatus status;
 	
 	@Override
 	public Object getId() {

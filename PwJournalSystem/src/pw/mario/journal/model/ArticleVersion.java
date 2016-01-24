@@ -24,8 +24,8 @@ import pw.mario.journal.model.ext.IdTable;
 @EqualsAndHashCode(callSuper=false)
 @Entity
 @Table(name="ARTICLE_VERSIONS", schema="MARIO", 
-	indexes={@Index(columnList="ARTICLE_ID, LAST_VERSION", unique=false),
-			@Index(columnList="ID_STATUS")
+	indexes={
+		@Index(columnList="ARTICLE_ID, LAST_VERSION", unique=false)
 	}
 )
 @NamedQueries({
@@ -54,10 +54,6 @@ public class ArticleVersion extends AuditTable implements IdTable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ARTICLE_ID", nullable=false, updatable=false)
 	private Article article;
-
-	@ManyToOne
-	@JoinColumn(name="ID_STATUS", referencedColumnName="DICT_ID")
-	private ArticleStatus status;
 	
 	@Override
 	public Object getId() {
