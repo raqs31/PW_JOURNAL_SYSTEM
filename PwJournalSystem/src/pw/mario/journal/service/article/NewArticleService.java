@@ -13,7 +13,7 @@ import pw.mario.journal.util.files.FileHandler;
 public interface NewArticleService {
 	List<User> getUsers(Department d);
 	
-	void createArticle(Article a, FileHandler file) throws PerformActionException;
+	Article createArticle(Article a, FileHandler file) throws PerformActionException;
 	
 	List<Dictionary> getArticlesStatuses();
 	

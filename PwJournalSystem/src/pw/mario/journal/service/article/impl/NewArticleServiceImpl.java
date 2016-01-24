@@ -48,12 +48,16 @@ public class NewArticleServiceImpl implements NewArticleService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
-	public void createArticle(Article a, FileHandler tmp) throws PerformActionException {
+	public Article createArticle(Article a, FileHandler tmp) throws PerformActionException {
 		log.debug("Create article " + a + " START");
 		ArticleVersion newVersion = versionDao.createNewVersion(a);
 		a.getVersions().add(newVersion);
-		newVersion.setAttachement(fileManager.saveFile(tmp));
+		
+		if (tmp != null)
+			newVersion.setAttachement(fileManager.saveFile(tmp));
 		a = articleDao.addArticle(a);
+		
+		return a;
 	}
 	
 	@Override

@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -88,16 +89,25 @@ public class NewArticleController implements Serializable {
 		}
 	}
 	
-	public void save() {
+	public String save() {
 		try {
-			articleAuthors.getTarget().forEach(u -> System.out.println(u));
-			
 			article.setAuthors(new HashSet<>(articleAuthors.getTarget()));
+			article.getAuthors().add(ctx.getCurrentUser());
+			
 			article.setTagList(new HashSet<>(articleTags.getTarget()));
 			articleService.createArticle(article, fileHandler);
+			
+			Messages.keepMessages();
 			Messages.addMessage("Utworzono artykuł");
+
+			FacesContext.getCurrentInstance()
+				.getExternalContext()
+				.getFlash()
+				.put(ArticleDetailsController.PARAM_ARTICLE_ID, article);
+			return "articleDetails?faces-redirect=true";	
 		} catch (PerformActionException ex) {
 			Messages.addMessage(FacesMessage.SEVERITY_ERROR, "Coś nie pykło", ex.getMessage());
 		}
+		return null;
 	}
 }

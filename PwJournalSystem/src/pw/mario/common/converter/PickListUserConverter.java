@@ -23,7 +23,7 @@ public class PickListUserConverter implements Converter {
 		PickList list = (PickList) component;
 		DualListModel<User> source = (DualListModel<User>)list.getValue();
 		Long id = Long.parseLong(value);
-		System.out.println("TEEEEEEEEST");
+
 		User u = traverseList(source.getSource(), id);
 		if (u == null)
 			u = traverseList(source.getTarget(), id);
@@ -36,7 +36,6 @@ public class PickListUserConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		User u = (User)value;
-		System.out.println("TOSTRING");
 		return u.getUserId().toString();
 	}
 	

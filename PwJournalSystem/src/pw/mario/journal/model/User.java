@@ -1,3 +1,4 @@
+
 package pw.mario.journal.model;
 
 import java.util.List;
@@ -29,7 +30,7 @@ import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @ToString(exclude={"systemRoles"})
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper=false, of={"userId"})
 @NoArgsConstructor
 @Cacheable(true)
 @Entity
