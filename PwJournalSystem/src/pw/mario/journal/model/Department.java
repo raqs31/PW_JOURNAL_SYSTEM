@@ -23,7 +23,7 @@ import pw.mario.journal.model.ext.IdTable;
 public class Department extends AuditTable implements IdTable {
 	@Id
 	@Column(name="DEPT_ID")
-	@SequenceGenerator(name="deptIdSeq", sequenceName="DEOARTMENTS_SEQ", allocationSize=10,initialValue=1)
+	@SequenceGenerator(name="deptIdSeq", sequenceName="DEOARTMENTS_SEQ", allocationSize=1,initialValue=1)
 	@GeneratedValue(generator="deptIdSeq", strategy=GenerationType.SEQUENCE)
 	private long deptId;
 	

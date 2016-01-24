@@ -37,7 +37,7 @@ public class ArticleVersion extends AuditTable implements IdTable {
 		String ARTICLE_VERSION = "Article.Version";
 	}
 	@Id
-	@SequenceGenerator(name="versionSeq", sequenceName="VERSIONS_SEQ", initialValue=1)
+	@SequenceGenerator(name="versionSeq", sequenceName="VERSIONS_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="versionSeq", strategy=GenerationType.SEQUENCE)
 	@Column(name="VERSION_ID")
 	private long versionId;

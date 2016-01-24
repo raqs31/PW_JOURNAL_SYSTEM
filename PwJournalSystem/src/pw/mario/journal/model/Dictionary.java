@@ -31,7 +31,7 @@ import pw.mario.journal.model.ext.IdTable;
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="DICTIONARY_NAME")
 public class Dictionary implements IdTable{
 	@Id
-	@SequenceGenerator(name="dictSeq", sequenceName="DICTIONARY_SEQ", initialValue=1)
+	@SequenceGenerator(name="dictSeq", sequenceName="DICTIONARY_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="dictSeq", strategy=GenerationType.SEQUENCE)
 	@Column(name="DICT_ID")
 	private Long id;

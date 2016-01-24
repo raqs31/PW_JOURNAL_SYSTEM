@@ -36,7 +36,7 @@ indexes={
 public class SystemRole implements IdTable {
 	@Id
 	@Column(name="SYSTEM_ROLE_ID")
-	@SequenceGenerator(name="sysRoleSeq", initialValue=1, sequenceName="SYSTEM_ROLES_SEQ")
+	@SequenceGenerator(name="sysRoleSeq", initialValue=1, sequenceName="SYSTEM_ROLES_SEQ", allocationSize=1)
 	@GeneratedValue(generator="sysRoleSeq", strategy=GenerationType.SEQUENCE)
 	private long sysRoleId;
 	

@@ -18,7 +18,7 @@ import pw.mario.journal.model.ext.IdTable;
 public class Tag implements IdTable {
 	@Id
 	@Column(name="TAG_ID")
-	@SequenceGenerator(name="tagIdSeq", sequenceName="TAGS_SEQ", initialValue=1)
+	@SequenceGenerator(name="tagIdSeq", sequenceName="TAGS_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="tagIdSeq", strategy=GenerationType.SEQUENCE)
 	private Long tagId;
 	
