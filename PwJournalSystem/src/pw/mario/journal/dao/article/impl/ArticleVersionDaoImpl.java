@@ -8,6 +8,7 @@ import javax.enterprise.inject.Default;
 
 import org.hibernate.Hibernate;
 
+import antlr.Version;
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleVersionDao;
@@ -53,6 +54,17 @@ public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> imple
 		next.setArticle(a);
 		
 		return next;
+	}
+
+	@Override
+	public String createArticleName(ArticleVersion version) {
+		StringBuilder sb = new StringBuilder('@');
+		sb.append(version.getVersionNum())
+			.append('-')
+			.append(version.getArticle().getArticleId() == null ? "NEW" : version.getArticle().getArticleId())
+			.append('-')
+			.append(version.getArticle().getName());
+		return sb.toString();
 	}
 
 }

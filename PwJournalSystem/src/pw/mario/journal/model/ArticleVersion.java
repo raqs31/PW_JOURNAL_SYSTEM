@@ -40,10 +40,10 @@ public class ArticleVersion extends AuditTable implements IdTable {
 	@SequenceGenerator(name="versionSeq", sequenceName="VERSIONS_SEQ", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="versionSeq", strategy=GenerationType.SEQUENCE)
 	@Column(name="VERSION_ID")
-	private long versionId;
+	private Long versionId;
 	
 	@Column(name="VERSION_NUM", precision=0, nullable=false)
-	private long versionNum;
+	private Long versionNum;
 	
 	@Column(name="LAST_VERSION")
 	private Boolean lastVersion;

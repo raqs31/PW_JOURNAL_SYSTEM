@@ -50,12 +50,15 @@ public class NewArticleServiceImpl implements NewArticleService {
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Article createArticle(Article a, FileHandler tmp) throws PerformActionException {
 		log.debug("Create article " + a + " START");
+		
 		ArticleVersion newVersion = versionDao.createNewVersion(a);
 		a.getVersions().add(newVersion);
-		
+		tmp.setFileName(versionDao.createArticleName(newVersion));
 		if (tmp != null)
 			newVersion.setAttachement(fileManager.saveFile(tmp));
 		a = articleDao.addArticle(a);
+		
+		log.debug("Finish create article ID: " + a.getArticleId());
 		
 		return a;
 	}

@@ -16,6 +16,7 @@ begin
     Insert into USER_SYSTEM_ROLES (USER_ID,SYSTEM_ROLE_ID) values (l_admin_id,u.system_role_id);
   end loop;
   
-  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'NEW', 'Zarejestrowany');
+  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE1) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'NEW', 'Zarejestrowany', 'INITIAL');
+  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE2) values (DICTIONARY_SEQ.nextval, 'SYSTEM_PARAM', 'ARTICLE_DIR', 'Ścieżka zapisu artykułów', 'C:/Programy/');
   commit;
 end;

@@ -8,10 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
+import pw.mario.journal.dao.dictionary.SystemParameterDao;
+import pw.mario.journal.model.dictionaries.SystemParameter;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.util.files.FileHandler;
 import pw.mario.journal.util.files.FileUtils;
@@ -19,9 +22,12 @@ import pw.mario.journal.util.files.FileUtils;
 @Log4j
 @Stateless
 public class FileManagerServiceImpl implements FileManagerService {
+	@Inject private SystemParameterDao systemParameter;
+	
 	@Override
 	public String saveFile(FileHandler file) throws PerformActionException {
-		File toSave = new File("C:/Programy/" + file.getFullName()); 
+		String filePath = systemParameter.getParameter(SystemParameter.Parameters.ARTICLE_DIR).getPropertyValue();
+		File toSave = new File(filePath + file.getFullName()); 
 		log.debug("Save file: " + toSave.getAbsolutePath());
 		try {
 			if (!toSave.exists())
