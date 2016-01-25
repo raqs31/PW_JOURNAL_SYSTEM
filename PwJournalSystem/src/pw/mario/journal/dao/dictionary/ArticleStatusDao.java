@@ -12,5 +12,4 @@ public interface ArticleStatusDao<T> {
 	T addDictionary(T d);
 	List<T> getDictionaries();
 	ArticleStatus getInitialProcess();
-	List<Rule> getAvailableSteps(Article toProcess, User forUser);
 }

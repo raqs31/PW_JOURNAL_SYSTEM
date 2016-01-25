@@ -3,6 +3,7 @@ package pw.mario.journal.dao.article;
 import java.util.List;
 
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 

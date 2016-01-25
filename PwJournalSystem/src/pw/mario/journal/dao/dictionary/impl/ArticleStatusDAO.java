@@ -40,9 +40,5 @@ public class ArticleStatusDAO extends AbstractDAOImpl<ArticleStatus> implements 
 		return em.createNamedQuery(ArticleStatus.INITIAL_PROCESS, ArticleStatus.class).getSingleResult();
 	}
 
-	@Override
-	public List<Rule> getAvailableSteps(Article toProcess, User forUser) {
-		return null;
-	}
 
 }

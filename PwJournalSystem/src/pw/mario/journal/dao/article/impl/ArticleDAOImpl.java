@@ -8,6 +8,7 @@ import javax.enterprise.inject.Default;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 
@@ -67,5 +68,4 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		a.getTagList().size();
 		a.getVersions().size();
 	}
-
 }
