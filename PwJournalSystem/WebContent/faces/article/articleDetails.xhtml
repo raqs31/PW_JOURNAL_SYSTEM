@@ -15,46 +15,51 @@
 				<p:outputLabel value="##{tag.name}"
 					style="font-style:italic;font-variant:small-caps;text-decoration:none;font-size:16px;"
 				/>
-				<p:spacer width="4" />
 			</p:dataList>
-			<p:spacer width="100%" height="5" />
-			<p:outputLabel value="Opis artykułu" for="sDescr" />
-			<p:separator id="sDescr" />
-			<p:outputPanel deferred="true">
-				<p>
-					<h:outputText value="#{article.description}" style="word-wrap:break-word;" />
-				</p>
-			</p:outputPanel>
-			<p:outputLabel value="Wersje" for="sVersions" />
-			<p:separator id="sVersions" />
-			<h:form id="fVersions">
-				<p:dataTable id="dtVersions" var="ver" value="#{articleDetailsController.article.versions}" border="0" rows="10"
-					paginator="true" emptyMessage="Brak wersji"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-				>
-					<p:column sortable="false">
-						<f:facet name="header">Wersja</f:facet>
-						<h:outputText value="#{ver.versionNum}" />
-					</p:column>
-					<p:column sortable="false">
-						<f:facet name="header">Utworzył</f:facet>
-						<h:outputText value="#{ver.createdBy}" />
-					</p:column>
-					<p:column sortable="false">
-						<f:facet name="header">Data utworzenia</f:facet>
-						<h:outputText value="#{ver.creationDate}" />
-					</p:column>
-					<p:column sortable="false">
-						<f:facet name="header">Załącznik</f:facet>
-						<h:outputText value="#{ver.attachement}" />
-					</p:column>
-					<p:column sortable="false" style="width:10px" >
-						<p:commandLink styleClass="fa fa-download" ajax="false">
-							<p:fileDownload value="#{articleDetailsController.onDownload(ver.attachement)}"></p:fileDownload>
-						</p:commandLink>
-					</p:column>
-				</p:dataTable>
-			</h:form>
+			<h:panelGrid columns="1">
+				<p:spacer width="100%" height="5" />
+				<h:panelGrid columns="2">
+					<p:outputLabel for="olStatus" value="Status: " />
+					<p:outputLabel id="olStatus" value="#{article.status.desciption}" style="font-weight:bold;" />
+				</h:panelGrid>
+				<p:outputLabel value="Opis artykułu" for="sDescr" />
+				<p:separator id="sDescr" />
+				<p:outputPanel deferred="true">
+					<p>
+						<h:outputText value="#{article.description}" style="word-wrap:break-word;" />
+					</p>
+				</p:outputPanel>
+				<p:outputLabel value="Wersje" for="sVersions" />
+				<p:separator id="sVersions" />
+				<h:form id="fVersions">
+					<p:dataTable id="dtVersions" var="ver" value="#{articleDetailsController.article.versions}" border="0" rows="10"
+						paginator="true" emptyMessage="Brak wersji"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+					>
+						<p:column sortable="false">
+							<f:facet name="header">Wersja</f:facet>
+							<h:outputText value="#{ver.versionNum}" />
+						</p:column>
+						<p:column sortable="false">
+							<f:facet name="header">Utworzył</f:facet>
+							<h:outputText value="#{ver.createdBy}" />
+						</p:column>
+						<p:column sortable="false">
+							<f:facet name="header">Data utworzenia</f:facet>
+							<h:outputText value="#{ver.creationDate}" />
+						</p:column>
+						<p:column sortable="false">
+							<f:facet name="header">Załącznik</f:facet>
+							<h:outputText value="#{ver.attachement}" />
+						</p:column>
+						<p:column sortable="false" style="width:10px">
+							<p:commandLink styleClass="fa fa-download" ajax="false">
+								<p:fileDownload value="#{articleDetailsController.onDownload(ver.attachement)}"></p:fileDownload>
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+			</h:panelGrid>
 		</ui:define>
 		<ui:define name="east">
 			<f:facet name="header">Autorzy</f:facet>
