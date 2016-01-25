@@ -15,7 +15,7 @@ import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
-import pw.mario.journal.dao.dictionary.DictionaryDAO;
+import pw.mario.journal.dao.dictionary.ArticleStatusDao;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Department;
@@ -38,7 +38,7 @@ public class NewArticleServiceImpl implements NewArticleService {
 	@Inject ArticleDAO articleDao;
 	@Inject ArticleVersionDao versionDao;
 	@Inject FileManagerService fileManager;
-	@Inject @DictionaryType(DictType.ARTICLE_STATUS) DictionaryDAO<ArticleStatus> dictionary;
+	@Inject @DictionaryType(DictType.ARTICLE_STATUS) ArticleStatusDao<ArticleStatus> dictionary;
 	@Inject TagDAO tagDao;
 	
 	@Override
@@ -53,6 +53,8 @@ public class NewArticleServiceImpl implements NewArticleService {
 		
 		ArticleVersion newVersion = versionDao.createNewVersion(a);
 		a.getVersions().add(newVersion);
+		a.setStatus(dictionary.getInitialProcess());
+		
 		tmp.setFileName(versionDao.createArticleName(newVersion));
 		if (tmp != null)
 			newVersion.setAttachement(fileManager.saveFile(tmp));

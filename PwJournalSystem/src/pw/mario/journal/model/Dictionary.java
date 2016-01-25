@@ -25,7 +25,8 @@ import pw.mario.journal.model.ext.IdTable;
 @AllArgsConstructor
 @Entity
 @Table(name="DICTIONARIES", schema="MARIO", indexes={
-		@Index(columnList="CODE,DICTIONARY_NAME", unique=true)
+		@Index(columnList="CODE,DICTIONARY_NAME", unique=true),
+		@Index(columnList="ATTRIBUTE1", unique=false)
 })
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType=DiscriminatorType.STRING, name="DICTIONARY_NAME")
