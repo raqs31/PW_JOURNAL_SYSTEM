@@ -18,5 +18,6 @@ begin
   
   insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE1) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'NEW', 'Zarejestrowany', 'INITIAL');
   insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE2) values (DICTIONARY_SEQ.nextval, 'SYSTEM_PARAM', 'ARTICLE_DIR', 'Ścieżka zapisu artykułów', 'C:/Programy/');
+  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE2) values (DICTIONARY_SEQ.nextval, 'SYSTEM_PARAM', 'TMP_DIR', 'Ścieżka tymczasowego zapisu artykułów', 'C:/Programy/');
   commit;
 end;

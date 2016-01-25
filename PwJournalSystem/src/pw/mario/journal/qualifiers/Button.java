@@ -1,6 +1,7 @@
 package pw.mario.journal.qualifiers;
 
 import static java.lang.annotation.ElementType.FIELD;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.PARAMETER;
 import static java.lang.annotation.ElementType.TYPE;
 
@@ -12,5 +13,5 @@ import javax.inject.Qualifier;
 
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE,FIELD,PARAMETER})
+@Target({TYPE,FIELD,PARAMETER,METHOD})
 public @interface Button {}

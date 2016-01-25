@@ -39,7 +39,7 @@ public class StubArticlesTab implements ArticlesTab {
 	}
 
 	@Override
-	public Iterable<ButtonAction<Article>> getActions() {
+	public Iterable<ButtonAction> getActions() {
 		return Collections.emptyList();
 	}
 

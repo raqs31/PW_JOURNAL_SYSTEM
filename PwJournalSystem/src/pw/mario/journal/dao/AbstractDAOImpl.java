@@ -37,6 +37,7 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	
 	protected void persist(T o) {
 		em.persist(o);
+		em.flush();
 	}
 	
 	protected void delete(T o) {

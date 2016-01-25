@@ -21,6 +21,7 @@ public class SystemParameter extends Dictionary {
 	public static final String QUERY = "systemParameter";
 	public interface Parameters {
 		String ARTICLE_DIR = "ARTICLE_DIR";
+		String TMP_DIR = "TMP_DIR";
 	}
 	
 	

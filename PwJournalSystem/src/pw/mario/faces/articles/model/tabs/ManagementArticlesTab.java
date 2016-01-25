@@ -43,7 +43,7 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	}
 
 	@Override
-	public Iterable<ButtonAction<Article>> getActions() {
+	public Iterable<ButtonAction> getActions() {
 		// TODO Auto-generated method stub
 		return Collections.emptyList();
 	}

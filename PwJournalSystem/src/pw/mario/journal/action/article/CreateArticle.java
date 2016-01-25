@@ -1,28 +1,24 @@
-package pw.mario.journal.action;
+package pw.mario.journal.action.article;
 
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.Dependent;
 
 import org.primefaces.event.SelectEvent;
 
-import pw.mario.common.action.conditional.ConditionValidator;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.journal.model.Article;
-import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
-import pw.mario.journal.qualifiers.enums.ArticleManager;
 
 @Button
-@Action(actionFor=ArticleManager.AUTHOR)
-@ApplicationScoped
-public class CreateArticle implements ButtonAction<Article> {
+@Dependent
+public class CreateArticle implements ButtonAction {
 	private static final long serialVersionUID = 1L;
-
+	private boolean allowed = true;
 	@Override
-	public boolean allowed(ConditionValidator<Article> validator) {
-		return true;
+	public boolean allowed() {
+		return allowed;
 	}
 
 	@Override
@@ -52,6 +48,12 @@ public class CreateArticle implements ButtonAction<Article> {
 	@Override
 	public String ajax() {
 		return "false";
+	}
+
+	@Override
+	public void setArticle(Article a) {
+		if (a != null)
+			allowed = false;
 	}
 
 }

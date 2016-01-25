@@ -66,4 +66,11 @@ public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> imple
 		return sb.toString();
 	}
 
+	@Override
+	public ArticleVersion save(ArticleVersion v) {
+		persist(v);
+		em.refresh(v);
+		return v;
+	}
+
 }

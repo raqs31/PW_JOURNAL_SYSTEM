@@ -38,7 +38,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	
 	@Getter @Setter private Article selectedArticle;
 	@Getter private final String id = "authors";
-	@Getter private List<ButtonAction<Article>> actions;
+	@Getter private List<ButtonAction> actions;
 	
 	private List<Article> articles;
 	
@@ -85,7 +85,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 		else
 			actions.clear();
 		
-		for (ButtonAction<Article> b: articleService.getActions(selectedArticle, ctx.getCurrentUser()))
+		for (ButtonAction b: articleService.getActions(selectedArticle, ctx.getCurrentUser()))
 			actions.add(b);
 	}
 

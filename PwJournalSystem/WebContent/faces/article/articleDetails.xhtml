@@ -27,27 +27,34 @@
 			</p:outputPanel>
 			<p:outputLabel value="Wersje" for="sVersions" />
 			<p:separator id="sVersions" />
-			<p:dataTable id="dtVersions" var="ver" value="#{articleDetailsController.article.versions}" border="0" rows="10" paginator="true"
-				emptyMessage="Brak wersji"
-				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
-			>
-				<p:column sortable="false">
-					<f:facet name="header">Wersja</f:facet>
-					<h:outputText value="#{ver.versionNum}" />
-				</p:column>
-				<p:column sortable="false">
-					<f:facet name="header">Utworzył</f:facet>
-					<h:outputText value="#{ver.createdBy}" />
-				</p:column>
-				<p:column sortable="false">
-					<f:facet name="header">Data utworzenia</f:facet>
-					<h:outputText value="#{ver.creationDate}" />
-				</p:column>
-				<p:column sortable="false">
-					<f:facet name="header">Załącznik</f:facet>
-					<h:outputText value="#{ver.attachement}" />
-				</p:column>
-			</p:dataTable>
+			<h:form id="fVersions">
+				<p:dataTable id="dtVersions" var="ver" value="#{articleDetailsController.article.versions}" border="0" rows="10"
+					paginator="true" emptyMessage="Brak wersji"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				>
+					<p:column sortable="false">
+						<f:facet name="header">Wersja</f:facet>
+						<h:outputText value="#{ver.versionNum}" />
+					</p:column>
+					<p:column sortable="false">
+						<f:facet name="header">Utworzył</f:facet>
+						<h:outputText value="#{ver.createdBy}" />
+					</p:column>
+					<p:column sortable="false">
+						<f:facet name="header">Data utworzenia</f:facet>
+						<h:outputText value="#{ver.creationDate}" />
+					</p:column>
+					<p:column sortable="false">
+						<f:facet name="header">Załącznik</f:facet>
+						<h:outputText value="#{ver.attachement}" />
+					</p:column>
+					<p:column sortable="false" style="width:10px" >
+						<p:commandLink styleClass="fa fa-download" ajax="false">
+							<p:fileDownload value="#{articleDetailsController.onDownload(ver.attachement)}"></p:fileDownload>
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</ui:define>
 		<ui:define name="east">
 			<f:facet name="header">Autorzy</f:facet>
@@ -60,7 +67,7 @@
 			</p:dataList>
 		</ui:define>
 		<ui:define name="south">
-			<my:articleAction actions="#{articleDetailsController.actions}" />
+			<my:articleAction actions="#{articleDetailsController.actions}" update=":fVersions:dtVersions" />
 		</ui:define>
 	</ui:composition>
 </body>

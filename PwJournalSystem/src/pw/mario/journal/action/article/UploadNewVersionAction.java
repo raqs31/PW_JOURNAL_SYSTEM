@@ -1,32 +1,40 @@
-package pw.mario.journal.action;
+package pw.mario.journal.action.article;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.model.UploadedFile;
 
-import pw.mario.common.action.conditional.ConditionValidator;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
+import pw.mario.common.util.Messages;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
+import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.util.files.FileHandler;
 
 @Button
 @Action(actionFor=ArticleManager.AUTHOR)
 @Named
-@RequestScoped
-public class UploadNewVersionAction implements ButtonAction<Article> {
+@Dependent
+public class UploadNewVersionAction implements ButtonAction {
 	private static final long serialVersionUID = -4869406550164908694L;
-
+	
+	@Inject private ArticleOperationService operation;
+	private Article article;
+	
 	@Override
-	public boolean allowed(ConditionValidator<Article> validator) {
-		return true;
+	public boolean allowed() {
+		return article != null;
 	}
 
 	@Override
@@ -55,7 +63,19 @@ public class UploadNewVersionAction implements ButtonAction<Article> {
 
 	@Override
 	public void onReturnEvent(SelectEvent e) {
-		System.out.println(e.getObject());
-		
+		try {
+			Object o = e.getObject();
+			if (o == null)
+				throw new PerformActionException("Nie udało się przesłać pliku");
+			
+			operation.addNewVersion(article, (FileHandler)o);
+		} catch (PerformActionException e1) {
+			Messages.addMessage(FacesMessage.SEVERITY_ERROR, e1.getMessage());
+		}
+	}
+
+	@Override
+	public void setArticle(Article a) {
+		this.article=a;
 	}
 }

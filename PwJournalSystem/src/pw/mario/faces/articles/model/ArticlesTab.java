@@ -11,7 +11,7 @@ import pw.mario.journal.model.Article;
 public interface ArticlesTab {
 	List<Article> getArticles();
 	
-	Iterable<ButtonAction<Article>> getActions();
+	Iterable<ButtonAction> getActions();
 
 	String getTittle();
 	

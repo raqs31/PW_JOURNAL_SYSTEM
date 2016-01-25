@@ -73,7 +73,7 @@ public class StubArticleManagerService implements ArticleService {
 	}
 
 	@Override
-	public Iterable<ButtonAction<Article>> getActions(Article a, User u) {
+	public Iterable<ButtonAction> getActions(Article a, User u) {
 		// TODO Auto-generated method stub
 		return null;
 	}

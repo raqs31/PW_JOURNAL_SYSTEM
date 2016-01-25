@@ -5,14 +5,15 @@
 >
 	<cc:interface>
 		<cc:attribute name="actions" type="java.util.List" required="true" />
+		<cc:attribute name="update" required="false" />
 	</cc:interface>
 	<cc:implementation>
 		<h:form>
 			<p:dataList value="#{cc.attrs.actions}" var="b" rendered="#{not empty cc.attrs.actions}" styleClass="display:inline;"
 				lazy="true" type="none"
 			>
-				<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="#{b.ajax()}" >
-					<p:ajax event="dialogReturn" listener="#{b.onReturnEvent}" />
+				<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="#{b.ajax()}" update="#{cc.attrs.update}">
+					<p:ajax event="dialogReturn" listener="#{b.onReturnEvent}" update="#{cc.attrs.update}"/>
 				</p:commandButton>
 			</p:dataList>
 		</h:form>

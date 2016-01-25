@@ -10,4 +10,5 @@ public interface ArticleVersionDao {
 	List<ArticleVersion> getVersions(Article a);
 	ArticleVersion createNewVersion(Article a);
 	String createArticleName(ArticleVersion version);
+	ArticleVersion save(ArticleVersion v);
 }

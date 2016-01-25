@@ -4,9 +4,10 @@ import java.io.Serializable;
 
 import org.primefaces.event.SelectEvent;
 
-import pw.mario.common.action.conditional.ConditionalAction;
+import pw.mario.common.action.ConditionalAction;
+import pw.mario.journal.model.Article;
 
-public interface ButtonAction<T> extends ConditionalAction<T>, Serializable {
+public interface ButtonAction extends ConditionalAction, Serializable {
 	String getAction();
 	String getValue();
 	String getId();
@@ -15,4 +16,6 @@ public interface ButtonAction<T> extends ConditionalAction<T>, Serializable {
 	default String ajax() {
 		return "true";
 	}
+	
+	void setArticle(Article a);
 }

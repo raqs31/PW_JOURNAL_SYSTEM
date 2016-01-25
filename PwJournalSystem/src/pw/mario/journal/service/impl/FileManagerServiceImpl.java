@@ -8,7 +8,13 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.primefaces.model.UploadedFile;
+
+import com.google.common.io.Files;
 
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j;
@@ -20,7 +26,8 @@ import pw.mario.journal.util.files.FileHandler;
 import pw.mario.journal.util.files.FileUtils;
 
 @Log4j
-@Stateless
+@Named
+@ApplicationScoped
 public class FileManagerServiceImpl implements FileManagerService {
 	@Inject private SystemParameterDao systemParameter;
 	
@@ -41,6 +48,39 @@ public class FileManagerServiceImpl implements FileManagerService {
 			throw new PerformActionException(e.getMessage());
 		} finally {
 			file.getFile().delete();
+		}
+	}
+
+	@Override
+	public String saveFile(UploadedFile file, String fileName) throws PerformActionException {
+		StringBuilder filePath = new StringBuilder(systemParameter.getParameter(SystemParameter.Parameters.ARTICLE_DIR).getPropertyValue())
+					.append(fileName)
+					.append('.')
+					.append(Files.getFileExtension(Files.getFileExtension(file.getFileName())));
+		String path = filePath.toString();
+		try {
+			File newFile = new File(path);
+			newFile.createNewFile();
+			file.write(path);
+		} catch (IOException io) {
+			log.error("Error in create new file", io);
+			throw new PerformActionException(io.getMessage());
+		} catch (Exception e) {
+			log.error("Error in writeFile",e);
+			throw new PerformActionException(e.getMessage());
+		}
+		return path;
+	}
+
+	@Override
+	public FileHandler saveTmpFile(UploadedFile file) throws PerformActionException {
+		try {
+			File tmp = File.createTempFile(file.getFileName(), "atmp");
+			file.write(tmp.getAbsolutePath());
+			return new FileHandler(tmp, file.getFileName());
+		} catch (Exception e) {
+			log.error("Error in writeFile",e);
+			throw new PerformActionException(e.getMessage());
 		}
 	}
 }
