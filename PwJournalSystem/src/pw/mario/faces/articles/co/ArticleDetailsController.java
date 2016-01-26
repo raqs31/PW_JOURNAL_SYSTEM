@@ -27,9 +27,11 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.Rule;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
 import pw.mario.journal.service.LoginService;
+import pw.mario.journal.service.article.ArticleOperationService;
 import pw.mario.journal.service.article.ArticleService;
 
 @Log4j
@@ -41,8 +43,9 @@ public class ArticleDetailsController implements Serializable {
 
 	@Getter @Setter private Article article;
 	@Getter @Setter private List<ButtonAction> actions;
+	@Getter @Setter private List<Rule> rules;
 	
-	@Inject @ArticleManagement(ArticleManager.AUTHOR) private ArticleService articleService;
+	@Inject private ArticleOperationService articleService;
 	@Inject transient private LoginService ctx;
 	@PostConstruct
 	private void init() {
@@ -54,6 +57,8 @@ public class ArticleDetailsController implements Serializable {
 				article = articleService.getArticle(flashArticle.getArticleId(), null);
 				actions = new LinkedList<>();
 				articleService.getActions(article, ctx.getCurrentUser()).forEach(b -> actions.add(b));
+				rules = articleService.getAvailableSteps(article, ctx.getCurrentUser());
+				rules.forEach(r -> log.debug(article.getName() + ": " + r.getDescription()));
 			}
 			
 		}

@@ -22,7 +22,7 @@ import pw.mario.journal.model.ext.IdTable;
 	})
 @NamedQueries({
 	@NamedQuery(name=Rule.Queries.NEXT_STEPS,
-			query = "select r from Rule r join User u left join u.systemRoles sr on sr.roleName = r.forRole where u.userId = ?1 and r.fromStatus = ?2")
+			query = "select r from Rule r, User u, SystemRole sr where u = ?1 and r.fromStatus = ?2 and sr.roleName = r.forRole.roleName")
 })
 public class Rule implements Serializable, IdTable {
 	private static final long serialVersionUID = 1L;
@@ -53,6 +53,18 @@ public class Rule implements Serializable, IdTable {
 	@JoinColumn(name="FOR_ROLE_NAME", referencedColumnName="ROLE_NAME")
 	private SystemRole forRole;
 
+	@Column(name="FOR_AUTHOR",nullable=false)
+	private boolean forAuthor;
+	
+	@Column(name="FOR_MANAGER", nullable=false)
+	private boolean forManager;
+	
+	@Column(name="FOR_ACCEPTOR",nullable=false)
+	private boolean forAcceptor;
+	
+	@Column(name="PICK_ACCEPTORS",nullable=false)
+	private boolean pickAcceptors;
+	
 	@Override
 	public Object getId() {
 		return ruleId;
@@ -61,5 +73,4 @@ public class Rule implements Serializable, IdTable {
 	public interface Queries {
 		String NEXT_STEPS = "article.rule.next";
 	}
-   
 }

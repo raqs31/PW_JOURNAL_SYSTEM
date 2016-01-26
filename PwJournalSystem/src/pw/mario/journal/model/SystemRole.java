@@ -1,5 +1,6 @@
 package pw.mario.journal.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,7 +34,7 @@ indexes={
 		 		+ "where u.userId = :id and usr.sysRoleId = s.sysRoleId)" 
 		 		)
 })
-public class SystemRole implements IdTable {
+public class SystemRole implements IdTable, Serializable {
 	@Id
 	@Column(name="SYSTEM_ROLE_ID")
 	@SequenceGenerator(name="sysRoleSeq", initialValue=1, sequenceName="SYSTEM_ROLES_SEQ", allocationSize=1)

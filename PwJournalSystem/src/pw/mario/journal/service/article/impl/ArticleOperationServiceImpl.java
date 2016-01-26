@@ -1,24 +1,26 @@
 package pw.mario.journal.service.article.impl;
 
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.primefaces.model.UploadedFile;
 
 import lombok.extern.log4j.Log4j;
+import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.ArticleVersion;
+import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;
+import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.ArticleOperationService;
 import pw.mario.journal.util.files.FileHandler;
@@ -27,29 +29,13 @@ import pw.mario.journal.util.files.FileHandler;
 @Stateless
 public class ArticleOperationServiceImpl implements ArticleOperationService {
 
-	private static final long serialVersionUID = 1L;
 	@Inject private ArticleDAO articleDao;
 	@Inject private ArticleVersionDao versionDao;
 	@Inject private FileManagerService fileManager;
+	@Inject @Button AbstractActionFactory<ButtonAction, Article> actionFactory;
 	
 	@Override
-	public List<Article> getArticles(User u) {
-		List<Article> empty = Collections.emptyList();
-		return empty;
-	}
-
-	@Override
-	public String[] rolesAllowed() {
-		return null;
-	}
-
-	@Override
-	public Iterable<ButtonAction> getActions(Article a, User u) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Article getArticle(Long id, User u) {
 		Article article = articleDao.getArticle(id);
 		articleDao.loadDetails(article);
@@ -57,6 +43,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	}
 
 	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addNewVersion(Article a, UploadedFile newFile) throws PerformActionException {
 		
 		ArticleVersion newVersion = versionDao.createNewVersion(a);
@@ -74,7 +61,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addNewVersion(Article a, FileHandler handler) throws PerformActionException {
 		a.setVersions(versionDao.getVersions(a));
 		ArticleVersion newVersion = versionDao.createNewVersion(a);
@@ -89,6 +76,16 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 		a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
 		
 		log.debug("Finish create article ID: " + a.getArticleId());
+	}
+
+	@Override
+	public List<Rule> getAvailableSteps(Article a, User u) {
+		return articleDao.getAvailableRules(a, u);
+	}
+
+	@Override
+	public Collection<ButtonAction> getActions(Article a, User u) {
+		return actionFactory.getActions(a, u);
 	}
 
 }

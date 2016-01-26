@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
+import javax.persistence.Query;
 
+import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
@@ -12,6 +14,7 @@ import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 
+@Log4j
 @Default
 @Dependent
 public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleDAO {
@@ -67,5 +70,10 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		a.getAuthors().size();
 		a.getTagList().size();
 		a.getVersions().size();
+	}
+
+	@Override
+	public List<Rule> getAvailableRules(Article a, User u) {
+		return em.createNamedQuery(Rule.Queries.NEXT_STEPS, Rule.class).setParameter(1, u).setParameter(2, a.getStatus()).getResultList();
 	}
 }

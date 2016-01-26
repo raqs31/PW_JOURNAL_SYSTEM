@@ -23,4 +23,6 @@ public interface ArticleDAO {
 	Article getArticle(Long id);
 	
 	void loadDetails(Article a);
+	
+	List<Rule> getAvailableRules(Article a, User u);
 }
