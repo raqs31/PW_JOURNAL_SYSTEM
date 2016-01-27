@@ -3,8 +3,6 @@ package pw.mario.journal.service.article;
 import java.util.Collection;
 import java.util.List;
 
-import org.primefaces.model.UploadedFile;
-
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.file.FileHandler;

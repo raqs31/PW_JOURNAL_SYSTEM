@@ -10,7 +10,6 @@ import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.model.UploadedFile;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;

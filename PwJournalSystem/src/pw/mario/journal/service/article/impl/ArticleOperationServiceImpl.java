@@ -9,8 +9,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.OptimisticLockException;
 
-import org.primefaces.model.UploadedFile;
-
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;

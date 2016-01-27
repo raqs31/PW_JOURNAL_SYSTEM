@@ -3,13 +3,9 @@ package pw.mario.journal.dao.dictionary.impl;
 import java.util.List;
 
 import javax.enterprise.context.Dependent;
-import javax.persistence.TypedQuery;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.dictionary.ArticleStatusDao;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.Rule;
-import pw.mario.journal.model.User;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.qualifiers.DictionaryType;
 import pw.mario.journal.qualifiers.enums.DictType;

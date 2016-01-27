@@ -1,12 +1,23 @@
 package pw.mario.journal.model;
 
 import java.io.Serializable;
-import java.lang.Long;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OrderBy;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.model.ext.IdTable;
 

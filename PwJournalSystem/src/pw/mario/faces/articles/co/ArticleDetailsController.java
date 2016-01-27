@@ -15,7 +15,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.ServletContext;
 
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -28,11 +27,8 @@ import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Rule;
-import pw.mario.journal.qualifiers.ArticleManagement;
-import pw.mario.journal.qualifiers.enums.ArticleManager;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleOperationService;
-import pw.mario.journal.service.article.ArticleService;
 
 @Log4j
 @Named
