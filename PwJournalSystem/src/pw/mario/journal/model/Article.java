@@ -82,8 +82,7 @@ public class Article extends AuditTable implements IdTable {
 	@JoinTable(
 			name="AUTHORS",
 			joinColumns={@JoinColumn(name="ARTICLE_ID", referencedColumnName="ARTICLE_ID")},
-			inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")},
-			indexes={@Index(columnList="ARTICLE_ID"), @Index(columnList="USER_ID")}
+			inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")}
 	)
 	private Set<User> authors;
 	
@@ -91,18 +90,29 @@ public class Article extends AuditTable implements IdTable {
 	@JoinTable(
 			name="ARTICLE_TAGS",
 			joinColumns={@JoinColumn(name="ARTICLE_ID", referencedColumnName="ARTICLE_ID", nullable=false)},
-			inverseJoinColumns={@JoinColumn(name="TAG_ID", referencedColumnName="TAG_ID", nullable=false)},
-			indexes={@Index(columnList="ARTICLE_ID"), @Index(columnList="TAG_ID")}
+			inverseJoinColumns={@JoinColumn(name="TAG_ID", referencedColumnName="TAG_ID", nullable=false)}
 	)
 	private Set<Tag> tagList;
 	
 	@OrderBy("versionNum DESC")
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleVersion> versions;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="ARTICLE_ACCEPTORS",
+			joinColumns={@JoinColumn(name="ARTICLE_ID", referencedColumnName="ARTICLE_ID")},
+			inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")}
+	)
+	private Set<User> acceptors;
+	
 
 	@ManyToOne
 	@JoinColumn(name="ID_STATUS", referencedColumnName="DICT_ID")
 	private ArticleStatus status;
+	
+	@OneToMany(fetch=FetchType.LAZY, mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
+	private List<ArticleHistory> history;
 	
 	@Override
 	public Object getId() {

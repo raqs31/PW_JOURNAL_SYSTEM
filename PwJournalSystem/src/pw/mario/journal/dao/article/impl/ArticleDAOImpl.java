@@ -73,7 +73,7 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 
 	@Override
 	public List<Rule> getAvailableRules(Article a, User u) {
-		return em.createNamedQuery(Rule.Queries.NEXT_STEPS, Rule.class).setParameter(1, u).setParameter(2, a.getStatus()).getResultList();
+		return em.createNamedQuery(Rule.Queries.NEXT_STEPS, Rule.class).setParameter(1, u).setParameter(2, a).getResultList();
 	}
 
 	@Override
