@@ -31,6 +31,6 @@ public class ArticleHistory extends AuditTable implements IdTable {
 	private Article article;
 	
 	@ManyToOne(optional=true)
-	@JoinColumn(name="ROUTING_RULE_ID", referencedColumnName="ROUTING_RULE_ID")
+	@JoinColumn(name="RULE_ID", referencedColumnName="RULE_ID")
 	private Rule rule;
 }
