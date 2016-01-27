@@ -41,7 +41,6 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected void delete(T o) {
-		log.debug("Attempt to delete: " + o);
 		em.remove(reAttachEntity(o));
 	}
 	
@@ -68,7 +67,6 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected T merge(T o) {
-		log.debug("Attempt to merge: " + o);
 		return em.merge(o);
 	}
 	

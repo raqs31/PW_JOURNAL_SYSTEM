@@ -13,8 +13,6 @@ import pw.mario.journal.model.User;
 import pw.mario.journal.util.files.FileHandler;
 
 public interface ArticleOperationService {
-	void addNewVersion(Article a, UploadedFile newFile) throws PerformActionException;
-	
 	void addNewVersion(Article a, FileHandler handler) throws PerformActionException;
 	
 	Article getArticle(Long id, User u);

@@ -23,7 +23,7 @@ public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> imple
 	public ArticleVersion getLastVersion(Article a) {
 		if (a.getVersions() == null || a.getVersions().isEmpty())
 			return null;
-		if (Hibernate.isInitialized(a.getVersions())) {
+		if (!Hibernate.isInitialized(a.getVersions())) {
 			Hibernate.initialize(a.getVersions());
 		}
 		return a.getVersions().stream().filter(v -> v.getLastVersion() == true).findFirst().get();
@@ -68,9 +68,13 @@ public class ArticleVersionDaoImpl extends AbstractDAOImpl<ArticleVersion> imple
 
 	@Override
 	public ArticleVersion save(ArticleVersion v) {
-		persist(v);
-		em.refresh(v);
+		em.persist(v);
 		return v;
+	}
+
+	@Override
+	public void refresh(ArticleVersion v) {
+		em.refresh(v);
 	}
 
 }

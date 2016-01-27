@@ -7,6 +7,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.persistence.OptimisticLockException;
 
 import org.primefaces.model.UploadedFile;
 
@@ -44,38 +45,23 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void addNewVersion(Article a, UploadedFile newFile) throws PerformActionException {
-		
-		ArticleVersion newVersion = versionDao.createNewVersion(a);
-		String fileName = versionDao.createArticleName(newVersion);
-		
-		
-		try {
-			newVersion.setAttachement(fileManager.saveFile(newFile, fileName));
-		} catch (PerformActionException e) {
-			throw e;
-		}
-		versionDao.save(newVersion);
-		a.getVersions().add(newVersion);
-		log.debug("Finish create article ID: " + a.getArticleId());
-	}
-
-	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addNewVersion(Article a, FileHandler handler) throws PerformActionException {
-		a.setVersions(versionDao.getVersions(a));
-		ArticleVersion newVersion = versionDao.createNewVersion(a);
+		try {
+			ArticleVersion newVersion = versionDao.createNewVersion(a);
+			
+			handler.setFileName(versionDao.createArticleName(newVersion));
+			newVersion.setAttachement(fileManager.saveFile(handler));
+			handler.getFile().delete();
 		
-		handler.setFileName(versionDao.createArticleName(newVersion));
-		newVersion.setAttachement(fileManager.saveFile(handler));
-		handler.getFile().delete();
-
-		versionDao.save(newVersion);
-		
-		a.getVersions().add(newVersion);
-		a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
-		
-		log.debug("Finish create article ID: " + a.getArticleId());
+			a.getVersions().add(newVersion);
+			articleDao.save(a);
+			
+			a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
+			log.debug("Finish create article ID: " + a.getArticleId());
+		} catch (OptimisticLockException e) {
+			log.warn(e.getMessage(), e);
+			throw new PerformActionException("Zmienił się stan artykułu, nie można wykonać aktualizacji");
+		}
 	}
 
 	@Override

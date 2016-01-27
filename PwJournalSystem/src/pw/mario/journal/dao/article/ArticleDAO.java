@@ -25,4 +25,6 @@ public interface ArticleDAO {
 	void loadDetails(Article a);
 	
 	List<Rule> getAvailableRules(Article a, User u);
+	
+	Article save(Article a);
 }

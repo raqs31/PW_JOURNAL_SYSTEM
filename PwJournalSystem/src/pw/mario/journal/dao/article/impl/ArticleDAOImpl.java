@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
-import javax.persistence.Query;
 
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;
@@ -75,5 +74,13 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	@Override
 	public List<Rule> getAvailableRules(Article a, User u) {
 		return em.createNamedQuery(Rule.Queries.NEXT_STEPS, Rule.class).setParameter(1, u).setParameter(2, a.getStatus()).getResultList();
+	}
+
+	@Override
+	public Article save(Article a) {
+		a = merge(a);
+		em.flush();
+		em.refresh(a);
+		return a;
 	}
 }

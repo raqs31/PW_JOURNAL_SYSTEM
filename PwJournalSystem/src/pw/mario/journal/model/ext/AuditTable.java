@@ -30,7 +30,7 @@ public class AuditTable {
 
 	@Version
 	@Column(name = "OVN", nullable = false)
-	private long objectVersionNumber;
+	private Long objectVersionNumber;
 
 	@Column(name = "CREATED_BY", nullable = false)
 	private String createdBy;
