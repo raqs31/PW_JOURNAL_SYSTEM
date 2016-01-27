@@ -1,4 +1,4 @@
-package util;
+package pw.mario.common.util;
 
 import org.jboss.security.auth.spi.Util;
 

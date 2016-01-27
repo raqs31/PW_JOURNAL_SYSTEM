@@ -15,6 +15,7 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
+import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.model.Article;
@@ -24,7 +25,6 @@ import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.ArticleOperationService;
-import pw.mario.journal.util.files.FileHandler;
 
 @Log4j
 @Stateless
@@ -63,7 +63,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			throw new PerformActionException("Zmienił się stan artykułu, nie można wykonać aktualizacji");
 		}
 	}
-
+		
 	@Override
 	public List<Rule> getAvailableSteps(Article a, User u) {
 		return articleDao.getAvailableRules(a, u);

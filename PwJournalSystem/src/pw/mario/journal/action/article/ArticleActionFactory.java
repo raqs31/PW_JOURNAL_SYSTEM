@@ -30,5 +30,4 @@ public class ArticleActionFactory extends AbstractActionFactory<ButtonAction, Ar
 		
 		return toReturn;
 	}
-	
 }

@@ -19,11 +19,11 @@ import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
+import pw.mario.common.util.file.FileHandler;
+import pw.mario.common.util.file.FileUtils;
 import pw.mario.journal.dao.dictionary.SystemParameterDao;
 import pw.mario.journal.model.dictionaries.SystemParameter;
 import pw.mario.journal.service.FileManagerService;
-import pw.mario.journal.util.files.FileHandler;
-import pw.mario.journal.util.files.FileUtils;
 
 @Log4j
 @Named

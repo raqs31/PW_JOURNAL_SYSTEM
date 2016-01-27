@@ -15,12 +15,12 @@ import org.primefaces.model.UploadedFile;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.Messages;
+import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
 import pw.mario.journal.service.article.ArticleOperationService;
-import pw.mario.journal.util.files.FileHandler;
 
 @Button
 @Action(actionFor=ArticleManager.AUTHOR)

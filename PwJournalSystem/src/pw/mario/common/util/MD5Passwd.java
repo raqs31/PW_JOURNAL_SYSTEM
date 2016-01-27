@@ -1,4 +1,4 @@
-package pw.mario.journal.util;
+package pw.mario.common.util;
 
 import javax.enterprise.context.Dependent;
 

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
+import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.dao.article.ArticleDAO;
@@ -28,7 +29,6 @@ import pw.mario.journal.qualifiers.DictionaryType;
 import pw.mario.journal.qualifiers.enums.DictType;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.NewArticleService;
-import pw.mario.journal.util.files.FileHandler;
 
 @Log4j
 @Stateless

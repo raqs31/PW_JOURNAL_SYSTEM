@@ -3,7 +3,7 @@ package pw.mario.journal.service;
 import org.primefaces.model.UploadedFile;
 
 import pw.mario.common.exception.PerformActionException;
-import pw.mario.journal.util.files.FileHandler;
+import pw.mario.common.util.file.FileHandler;
 
 public interface FileManagerService {
 	String saveFile(FileHandler file) throws PerformActionException;

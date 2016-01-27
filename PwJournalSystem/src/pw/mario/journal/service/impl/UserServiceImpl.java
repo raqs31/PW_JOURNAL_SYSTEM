@@ -13,12 +13,12 @@ import org.hibernate.Hibernate;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import pw.mario.common.util.MD5Passwd;
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.UserService;
-import pw.mario.journal.util.MD5Passwd;
 
 @Log4j
 @NoArgsConstructor

@@ -1,4 +1,4 @@
-package pw.mario.journal.util.files;
+package pw.mario.common.util.file;
 
 import java.io.File;
 import java.io.FileOutputStream;
