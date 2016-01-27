@@ -53,18 +53,21 @@ public class Rule implements Serializable, IdTable {
 	@JoinColumn(name="FOR_ROLE_NAME", referencedColumnName="ROLE_NAME")
 	private SystemRole forRole;
 
-	@Column(name="FOR_AUTHOR",nullable=false)
-	private boolean forAuthor;
+	@Column(name="FOR_AUTHOR", nullable=false)
+	private Boolean forAuthor;
 	
 	@Column(name="FOR_MANAGER", nullable=false)
-	private boolean forManager;
+	private Boolean forManager;
 	
-	@Column(name="FOR_ACCEPTOR",nullable=false)
-	private boolean forAcceptor;
+	@Column(name="FOR_ACCEPTOR", nullable=false)
+	private Boolean forAcceptor;
 	
-	@Column(name="PICK_ACCEPTORS",nullable=false)
-	private boolean pickAcceptors;
+	@Column(name="PICK_ACCEPTORS", nullable=false)
+	private Boolean pickAcceptors;
 	
+	@Column(name="READY_TO_PRINT", nullable=false)
+	private Boolean readyToPrin;
+		
 	@Override
 	public Object getId() {
 		return ruleId;
