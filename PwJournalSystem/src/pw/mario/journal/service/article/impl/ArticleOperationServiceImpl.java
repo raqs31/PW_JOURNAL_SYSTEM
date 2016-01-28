@@ -1,6 +1,7 @@
 package pw.mario.journal.service.article.impl;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -13,6 +14,7 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
+import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
@@ -21,6 +23,7 @@ import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.Button;
+import pw.mario.journal.qualifiers.Rules;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.ArticleOperationService;
 
@@ -32,6 +35,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Inject private ArticleVersionDao versionDao;
 	@Inject private FileManagerService fileManager;
 	@Inject @Button AbstractActionFactory<ButtonAction, Article> actionFactory;
+	@Inject @Rules AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
 	
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -69,7 +73,37 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 
 	@Override
 	public Collection<ButtonAction> getActions(Article a, User u) {
-		return actionFactory.getActions(a, u);
+		Collection<ButtonAction> actions = actionFactory.getActions(a, u);
+		actions.addAll(ruleActionFactory.getActions(a, u));
+		
+		List<ButtonAction> toReturn = new LinkedList<>(actions);
+		toReturn.sort((b1, b2) -> b1.getValue().compareTo(b2.getValue()));
+		
+		return actions;
+	}
+
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void execute(ExecutionContext ctx) throws RouteActionException {
+		checkExecutionContext(ctx);
+		
+		ctx.getArticle().setStatus(ctx.getRule().getToStatus());
+		
+		try {
+			articleDao.save(ctx.getArticle());
+		} catch (OptimisticLockException e) {
+			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
+		}
+	}
+	
+	private void checkExecutionContext(ExecutionContext ctx) throws RouteActionException {
+		if (ctx == null || ctx.getArticle() == null || ctx.getRule() == null) {
+			
+			log.fatal("RouteActionException: ctx: " + ctx);
+			log.fatal("RouteActionException: article: " + ctx != null ? ctx.getArticle() : null);
+			log.fatal("RouteActionException: rule: " + ctx != null ? ctx.getUser() : null);
+			throw new RouteActionException("Nie udało się wykonać reguły", "Kontekst jest nieporawnie zainicjowany");
+		}
 	}
 
 }

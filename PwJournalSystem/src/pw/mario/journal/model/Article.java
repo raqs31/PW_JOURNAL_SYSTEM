@@ -30,7 +30,7 @@ import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 
 @Data
-@ToString(exclude={"authors", "versions", "tagList"})
+@ToString(exclude={"authors", "versions", "tagList", "acceptors", "history"})
 @EqualsAndHashCode(callSuper=false, of={"articleId"})
 @Entity
 @Table(name="ARTICLES", schema="MARIO", indexes={

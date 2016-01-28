@@ -6,13 +6,14 @@
 	<cc:interface>
 		<cc:attribute name="actions" type="java.util.List" required="true" />
 		<cc:attribute name="update" required="false" />
+		<cc:attribute name="toRefresh" type="pw.mario.common.api.Refreshable" required="false"></cc:attribute>
 	</cc:interface>
 	<cc:implementation>
-		<h:form>
-			<p:dataList value="#{cc.attrs.actions}" var="b" rendered="#{not empty cc.attrs.actions}" styleClass="display:inline;"
+		<h:form id="_ccActionForm">
+			<p:dataList id="_ccActionList" value="#{cc.attrs.actions}" var="b" rendered="#{not empty cc.attrs.actions}" styleClass="display:inline;"
 				lazy="true" type="none"
 			>
-				<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="#{b.ajax()}" update="#{cc.attrs.update}">
+				<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="#{b.ajax()}" update="#{cc.attrs.update}" oncomplete="#{cc.attrs.toRefresh.refresh()}">
 					<p:ajax event="dialogReturn" listener="#{b.onReturnEvent}" update="#{cc.attrs.update}"/>
 				</p:commandButton>
 			</p:dataList>

@@ -1,44 +1,47 @@
-package pw.mario.journal.action.article;
-
+package pw.mario.journal.action.article.plain;
 
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
+import pw.mario.faces.articles.co.ArticleDetailsController;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Button;
 
 @Button
 @Dependent
-public class CreateArticle implements ButtonAction {
+public class Refresh implements ButtonAction {
 	private static final long serialVersionUID = 1L;
-	private boolean allowed = true;
+	private Article article;
+
 	@Override
 	public boolean allowed() {
-		return allowed;
+		return article != null;
 	}
 
 	@Override
 	public void doAction() throws PerformActionException {
-			JSFUtil.redirect("newArticle.xhtml");
 	}
 
 	@Override
 	public String getAction() {
-		return "newArticle";
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().put(ArticleDetailsController.PARAM_ARTICLE_ID,
+				article);
+		return "articleDetails?faces-redirect=true";
 	}
 
 	@Override
 	public String getValue() {
-		return "Utwórz artykuł";
+		return "Odśwież";
 	}
 
 	@Override
 	public String getId() {
-		return "bCreaArticle";
+		return "bRefreshArticle";
 	}
 
 	@Override
@@ -52,8 +55,7 @@ public class CreateArticle implements ButtonAction {
 
 	@Override
 	public void setArticle(Article a) {
-		if (a != null)
-			allowed = false;
+		this.article = a;
 	}
 
 }

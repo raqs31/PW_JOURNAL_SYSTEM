@@ -60,7 +60,8 @@
 					</p:dataTable>
 				</h:form>
 				<p:dataList value="#{articleDetailsController.rules}" var="r" paginator="true" rows="15" type="unordered"
-				styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom">
+					styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom"
+				>
 					<p:column>
 						<h:outputText value="#{r.name} - #{r.fromStatus.code} -> #{r.toStatus.code}" />
 					</p:column>
@@ -78,7 +79,9 @@
 			</p:dataList>
 		</ui:define>
 		<ui:define name="south">
-			<my:articleAction actions="#{articleDetailsController.actions}" update=":fVersions:dtVersions" />
+			<my:articleAction actions="#{articleDetailsController.actions}" 
+				update=":fVersions:dtVersions olStatus @this" 
+				toRefresh="#{articleDetailsController}"/>
 		</ui:define>
 	</ui:composition>
 </body>

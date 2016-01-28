@@ -1,4 +1,4 @@
-package pw.mario.journal.action.article;
+package pw.mario.journal.action.article.plain;
 
 import java.util.HashMap;
 import java.util.Map;
