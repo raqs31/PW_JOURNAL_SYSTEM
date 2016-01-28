@@ -71,7 +71,7 @@ public class DeleteArticle implements ButtonAction {
 				operation.deleteArticle(article);
 				Messages.keepMessages();
 				Messages.addMessage("Usunięto artykuł");
-				JSFUtil.redirect("articles");
+				JSFUtil.redirect("articles.xhtml");
 			} else {
 				Messages.addMessage("Anulowano usuwanie");
 			}

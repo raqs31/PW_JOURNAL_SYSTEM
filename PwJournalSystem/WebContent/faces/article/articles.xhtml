@@ -33,6 +33,10 @@
 						<f:facet name="header">Zarządzający</f:facet>
 						<h:outputText value="#{empty article.management ? null : article.management.login}" />
 					</p:column>
+					<p:column>
+						<f:facet name="header">Status</f:facet>
+						<h:outputText value="#{article.status.desciption}" />
+					</p:column>
 					<p:column style="width:16px">
 						<p:commandLink update=":detail:articleDetail" oncomplete="PF('authorsDialog').show()" title="Szczegóły"
 							styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px"

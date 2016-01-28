@@ -6,7 +6,12 @@
 	<title>Potwierdź operację</title>
 </h:head>
 <h:body>
-		<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{areYouSureController.onYes}" ajax="false"/>
-        <p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" actionListener="#{areYouSureController.onNo}" ajax="false"/>
+	<h:form>
+		<p:dataList value="#{areYouSureController.actions}" var="v" type="unordered" styleClass="paginated">
+				 <p:column>
+                    <p:commandButton icon="#{v.icon}" actionListener="#{v.doAction()}" value="#{v.descr}" />
+                </p:column>
+		</p:dataList>
+	</h:form>
 </h:body>
 </html>
