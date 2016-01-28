@@ -59,6 +59,18 @@
 						</p:column>
 					</p:dataTable>
 				</h:form>
+				<p:dataList value="#{articleDetailsController.rules}" var="r" paginator="true" rows="15" type="unordered"
+				styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom">
+					<p:column>
+						<h:outputText value="#{r.name}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{r.fromStatus.code}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{r.toStatus.code}" />
+					</p:column>
+				</p:dataList>
 			</h:panelGrid>
 		</ui:define>
 		<ui:define name="east">

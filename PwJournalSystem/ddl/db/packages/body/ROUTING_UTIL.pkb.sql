@@ -16,19 +16,33 @@ BEGIN
     dictionary_name = 'ARTICLE_STATUS'
   AND code          = p_status;
   RETURN l_id;
-END get_status_id;
-
+END;
+FUNCTION is_empty(
+    p_str VARCHAR2)
+  RETURN NUMBER
+IS
+BEGIN
+  RETURN
+  CASE
+  WHEN p_str IS NULL THEN
+    0
+  WHEN p_str ='' THEN
+    0
+  ELSE
+    1
+  END;
+END;
 PROCEDURE insert_rule(
-    p_name           VARCHAR2 ,
-    p_description    VARCHAR2,
-    p_for_role       VARCHAR2,
-    p_from_Status    VARCHAR2,
-    p_to_status      VARCHAR2,
-    p_ready_to_print VARCHAR2,
-    p_for_acceptor   VARCHAR2,
-    p_for_author     VARCHAR2,
-    p_for_manager    VARCHAR2,
-    p_pick_acceptor  VARCHAR2)
+    P_NAME           VARCHAR2 ,
+    P_DESCRIPTION    VARCHAR2,
+    P_FOR_ROLE       VARCHAR2,
+    P_FROM_STATUS    VARCHAR2,
+    P_TO_STATUS      VARCHAR2,
+    P_READY_TO_PRINT VARCHAR2,
+    P_FOR_ACCEPTOR   VARCHAR2,
+    P_FOR_AUTHOR     VARCHAR2,
+    P_FOR_MANAGER    VARCHAR2,
+    P_PICK_ACCEPTOR  VARCHAR2)
 IS
 BEGIN
   INSERT
@@ -55,11 +69,11 @@ BEGIN
       p_for_role,
       get_status_id(p_from_status),
       get_status_id(p_to_status),
-      DECODE(NVL(p_ready_to_print, 'NULL'), 'NULL', 1,0),
-      DECODE(NVL(p_for_acceptor, 'NULL'), 'NULL', 1,0),
-      DECODE(NVL(p_for_author, 'NULL'), 'NULL', 1,0),
-      DECODE(NVL(p_for_manager, 'NULL'), 'NULL', 1,0),
-      DECODE(NVL(p_pick_acceptor, 'NULL'), 'NULL', 1,0)
+      is_empty(p_ready_to_print),
+      is_empty(p_for_acceptor),
+      is_empty(p_for_author),
+      is_empty(p_for_manager),
+      is_empty(p_pick_acceptor)
     );
-END insert_rule;
+END;
 END ROUTING_UTIL;

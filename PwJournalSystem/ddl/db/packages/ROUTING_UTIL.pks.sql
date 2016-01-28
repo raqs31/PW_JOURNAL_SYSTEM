@@ -1,19 +1,21 @@
 create or replace PACKAGE ROUTING_UTIL
 AS
   PROCEDURE insert_rule(
-      p_name           VARCHAR2 ,
-      p_description    VARCHAR2,
-      p_for_role       VARCHAR2,
-      p_from_Status    VARCHAR2,
-      p_to_status      VARCHAR2,
-      p_ready_to_print VARCHAR2,
-      p_for_acceptor   VARCHAR2,
-      p_for_author     VARCHAR2,
-      p_for_manager    VARCHAR2,
-      p_pick_acceptor  VARCHAR2
+      P_NAME           VARCHAR2 ,
+      P_DESCRIPTION    VARCHAR2,
+      P_FOR_ROLE       VARCHAR2,
+      P_FROM_STATUS    VARCHAR2,
+      P_TO_STATUS      VARCHAR2,
+      P_READY_TO_PRINT VARCHAR2,
+      P_FOR_ACCEPTOR   VARCHAR2,
+      P_FOR_AUTHOR     VARCHAR2,
+      P_FOR_MANAGER    VARCHAR2,
+      P_PICK_ACCEPTOR  VARCHAR2
     );
-    
   FUNCTION get_status_id(
       p_status VARCHAR2)
     RETURN NUMBER;
+  FUNCTION is_empty(
+    p_str VARCHAR2)
+  RETURN NUMBER;
 END ROUTING_UTIL;

@@ -23,7 +23,7 @@ public class ArticleHistory extends AuditTable implements IdTable {
 	@Column(name="HISTORY_ID")
 	private Long id;
 	
-	@Column(name="COMMENT", length=120, nullable=true)
+	@Column(name="USER_COMMENT", length=120, nullable=true)
 	private String comment;
 	
 	@ManyToOne(optional=false)
