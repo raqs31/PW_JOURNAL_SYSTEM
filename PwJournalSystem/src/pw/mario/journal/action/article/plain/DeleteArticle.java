@@ -40,9 +40,11 @@ public class DeleteArticle implements ButtonAction {
 	@Override
 	public void doAction() throws PerformActionException {
 		Map<String,Object> options = new HashMap<String, Object>();
-        options.put("resizable", false);
-        options.put("draggable", false);
+        options.put("resizable", true);
+        options.put("draggable", true);
         options.put("modal", true);
+        options.put("contentWidth", 240);
+        options.put("contentHeight", 60);
         RequestContext.getCurrentInstance().openDialog("/resources/jsf/areYouSure", options, null);		
 	}
 
