@@ -25,8 +25,6 @@ import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
-import pw.mario.journal.qualifiers.DictionaryType;
-import pw.mario.journal.qualifiers.enums.DictType;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.NewArticleService;
 
@@ -38,7 +36,7 @@ public class NewArticleServiceImpl implements NewArticleService {
 	@Inject ArticleDAO articleDao;
 	@Inject ArticleVersionDao versionDao;
 	@Inject FileManagerService fileManager;
-	@Inject @DictionaryType(DictType.ARTICLE_STATUS) ArticleStatusDao<ArticleStatus> dictionary;
+	@Inject ArticleStatusDao<ArticleStatus> dictionary;
 	@Inject TagDAO tagDao;
 	
 	@Override
