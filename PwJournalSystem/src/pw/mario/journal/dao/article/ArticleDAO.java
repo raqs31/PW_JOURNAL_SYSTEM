@@ -27,4 +27,6 @@ public interface ArticleDAO {
 	List<Rule> getAvailableRules(Article a, User u);
 	
 	Article save(Article a);
+	
+	void deleteArticle(Article a);
 }

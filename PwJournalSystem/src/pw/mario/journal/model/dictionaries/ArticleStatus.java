@@ -19,9 +19,13 @@ public class ArticleStatus  extends Dictionary {
 	public static final String DICTIONARY_NAME = "ARTICLE_STATUS";
 	public static final String INITIAL_PROCESS = "article.status.initial";
 	public static final String INITIAL = "INITIAL";
-	
+	public static final String DELETABLE = "DELETE";
 	
 	public boolean initial() {
 		return INITIAL.equals(getAttr1());
+	}
+	
+	public boolean canDelete() {
+		return DELETABLE.equals(getAttr2());
 	}
 }

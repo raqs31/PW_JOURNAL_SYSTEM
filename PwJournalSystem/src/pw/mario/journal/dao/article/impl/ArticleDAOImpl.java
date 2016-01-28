@@ -83,4 +83,9 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		em.refresh(a);
 		return a;
 	}
+	
+	@Override
+	public void deleteArticle(Article a) {
+		delete(a);
+	}
 }

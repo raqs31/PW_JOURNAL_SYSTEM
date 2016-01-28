@@ -51,7 +51,7 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 			if (flashArticle == null)
 				JSFUtil.redirect("articles.xhtml?faces-redirect=true");
 			else {
-				article = articleService.getArticle(flashArticle.getArticleId(), null);
+				article = flashArticle;
 				refresh();
 				
 				rules = articleService.getAvailableSteps(article, ctx.getCurrentUser());
@@ -78,6 +78,7 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 
 	@Override
 	public void refresh() {
+		article = articleService.getArticle(article.getArticleId(), null);
 		actions = articleService.getActions(article, ctx.getCurrentUser());
 	}
 }

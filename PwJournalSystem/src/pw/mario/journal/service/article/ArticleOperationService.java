@@ -18,6 +18,8 @@ import pw.mario.journal.model.User;
 public interface ArticleOperationService {
 	void addNewVersion(Article a, FileHandler handler) throws PerformActionException;
 	
+	void deleteArticle(Article a) throws PerformActionException;
+	
 	Article getArticle(Long id, User u);
 	
 	List<Rule> getAvailableSteps(Article a, User u);

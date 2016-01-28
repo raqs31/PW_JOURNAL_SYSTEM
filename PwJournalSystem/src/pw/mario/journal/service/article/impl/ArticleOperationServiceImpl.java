@@ -106,4 +106,10 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 		}
 	}
 
+	@Override
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteArticle(Article a) {
+		
+	}
+
 }

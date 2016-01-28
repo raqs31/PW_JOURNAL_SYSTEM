@@ -90,6 +90,9 @@ public class Rule implements Serializable, IdTable {
 	@Column(name="PICK_ACCEPTORS", nullable=false)
 	private Boolean pickAcceptors;
 	
+	@Column(name="PICK_MANAGER", nullable=false)
+	private Boolean pickManager;
+	
 	@Column(name="READY_TO_PRINT", nullable=false)
 	private Boolean readyToPrin;
 		

@@ -5,6 +5,7 @@ import java.io.Serializable;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.ConditionalAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.journal.model.Article;
 
 public interface ButtonAction extends ConditionalAction, Serializable {
@@ -18,4 +19,13 @@ public interface ButtonAction extends ConditionalAction, Serializable {
 	}
 	
 	void setArticle(Article a);
+	
+	default boolean refreshNeeded() {
+		return false;
+	}
+	
+	default void refresh(Refreshable toRefresh) {
+		if (refreshNeeded())
+			toRefresh.refresh();
+	}
 }

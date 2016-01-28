@@ -88,6 +88,11 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		public void setArticle(Article a) {
 			throw new RuntimeException("Operation not supported for this class");
 		}
+		
+		@Override
+		public boolean refreshNeeded() {
+			return true;
+		}
 
 	}
 }
