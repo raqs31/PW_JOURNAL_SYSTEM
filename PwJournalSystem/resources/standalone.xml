@@ -52,6 +52,11 @@
                     <properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
                 </authorization>
             </security-realm>
+            <security-realm name="EJBRealm">
+                <authentication>
+                    <jaas name="journal"/>
+                </authentication>
+            </security-realm>
         </security-realms>
         <audit-log>
             <formatters>
@@ -87,7 +92,7 @@
             <console-handler name="CONSOLE">
                 <level name="TRACE"/>
                 <formatter>
-                    <named-formatter name="COLOR-PATTERN"/>
+                    <named-formatter name="PATTERN"/>
                 </formatter>
             </console-handler>
             <periodic-rotating-file-handler name="FILE" autoflush="true">
@@ -127,7 +132,7 @@
                 </handlers>
             </root-logger>
             <formatter name="PATTERN">
-                <pattern-formatter pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"/>
+                <pattern-formatter pattern="%d{HH:mm:ss,SSS} %-5p [%c{1}] %s%E%n"/>
             </formatter>
             <formatter name="COLOR-PATTERN">
                 <pattern-formatter pattern="%K{level}%d{HH:mm:ss,SSS} %-5p [%c] (%t) %s%e%n"/>
@@ -153,6 +158,14 @@
                         <password>sa</password>
                     </security>
                 </datasource>
+                <datasource jndi-name="java:/TestSpy" pool-name="TestSpy" enabled="true" use-java-context="true">
+                    <connection-url>jdbc:p6spy:oracle:thin://@localhost:1521:xe</connection-url>
+                    <driver>p6spy</driver>
+                    <security>
+                        <user-name>MARIO</user-name>
+                        <password>mario</password>
+                    </security>
+                </datasource>
                 <datasource jndi-name="java:/OracleDS" pool-name="OracleDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:oracle:thin:@localhost:1521:xe</connection-url>
                     <driver>oracle</driver>
@@ -166,6 +179,9 @@
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
                     </driver>
                     <driver name="oracle" module="com.oracle"/>
+                    <driver name="p6spy" module="com.p6spy">
+                        <driver-class>com.p6spy.engine.spy.P6SpyDriver</driver-class>
+                    </driver>
                 </drivers>
             </datasources>
         </subsystem>
@@ -222,7 +238,7 @@
                 </thread-pool>
             </thread-pools>
             <default-security-domain value="journal"/>
-            <default-missing-method-permissions-deny-access value="true"/>
+            <default-missing-method-permissions-deny-access value="false"/>
             <log-system-exceptions value="true"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:io:1.1">
@@ -329,12 +345,7 @@
             <security-domains>
                 <security-domain name="other" cache-type="default">
                     <authentication>
-                        <login-module code="Remoting" flag="optional">
-                            <module-option name="password-stacking" value="useFirstPass"/>
-                        </login-module>
-                        <login-module code="RealmDirect" flag="required">
-                            <module-option name="password-stacking" value="useFirstPass"/>
-                        </login-module>
+                        <login-module code="journal" flag="required"/>
                     </authentication>
                 </security-domain>
                 <security-domain name="jboss-web-policy" cache-type="default">
@@ -430,5 +441,4 @@
             <remote-destination host="localhost" port="25"/>
         </outbound-socket-binding>
     </socket-binding-group>
-
 </server>
