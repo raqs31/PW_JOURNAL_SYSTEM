@@ -6,9 +6,10 @@ import java.util.List;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.journal.model.Article;
 
-public interface ArticlesTab {
+public interface ArticlesTab extends Refreshable {
 	List<Article> getArticles();
 	
 	Iterable<ButtonAction> getActions();
@@ -23,8 +24,6 @@ public interface ArticlesTab {
 	String onEdit(Article a);
 
 	boolean tabAllowed();
-	
-	void refreshActions();
 	
 	void onRowSelect(SelectEvent e);
 	

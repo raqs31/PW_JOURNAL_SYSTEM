@@ -17,6 +17,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
+import pw.mario.common.api.Refreshable;
 import pw.mario.faces.articles.model.ArticlesTab;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleTab;
@@ -36,7 +37,6 @@ public class ArticleListController implements Serializable {
 	private void init() {
 		for (ArticlesTab t: articlesTabs) {
 			log.debug("Instance of articleTab: " + t.getTittle());
-			t.refreshActions();
 		}
 		Collections.sort(articlesTabs, new ArticlesTab.ArticleTabComparator());
 	}

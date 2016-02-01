@@ -45,7 +45,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	@PostConstruct
 	@PermitAll
 	private void init() {
-		actions = new LinkedList<>();
+		refresh();
 	}
 	
 	@Override
@@ -79,7 +79,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	}
 
 	@Override
-	public void refreshActions() {
+	public void refresh() {
 		if (actions == null)
 			actions = new LinkedList<>();
 		else
@@ -93,6 +93,6 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	public void onRowSelect(SelectEvent e) {
 		FacesMessage msg = new FacesMessage("Selected " + e.getObject(), null);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		refresh();
 	}
-
 }

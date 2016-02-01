@@ -62,13 +62,13 @@ public class StubArticlesTab implements ArticlesTab {
 	}
 
 	@Override
-	public void refreshActions() {
+	public void onRowSelect(SelectEvent e) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onRowSelect(SelectEvent e) {
+	public void refresh() {
 		// TODO Auto-generated method stub
 		
 	}
