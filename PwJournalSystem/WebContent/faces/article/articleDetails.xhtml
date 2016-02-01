@@ -80,8 +80,9 @@
 		</ui:define>
 		<ui:define name="south">
 			<my:articleAction actions="#{articleDetailsController.actions}" 
-				update=":fVersions:dtVersions olStatus @this" 
-				toRefresh="#{articleDetailsController}"/>
+				update=":fVersions:dtVersions olStatus" 
+				toRefresh="#{articleDetailsController}"
+			/>
 		</ui:define>
 	</ui:composition>
 </body>
