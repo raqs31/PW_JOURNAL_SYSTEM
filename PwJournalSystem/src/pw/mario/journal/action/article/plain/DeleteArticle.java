@@ -15,7 +15,6 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
-import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
@@ -34,7 +33,7 @@ public class DeleteArticle implements ButtonAction {
 	
 	@Override
 	public boolean allowed() {
-		return article != null;
+		return article != null && article.getStatus().deletable();
 	}
 
 	@Override

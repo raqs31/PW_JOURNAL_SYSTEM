@@ -25,7 +25,7 @@ public class ArticleStatus  extends Dictionary {
 		return INITIAL.equals(getAttr1());
 	}
 	
-	public boolean canDelete() {
+	public boolean deletable() {
 		return DELETABLE.equals(getAttr2());
 	}
 }
