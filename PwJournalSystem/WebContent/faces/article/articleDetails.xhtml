@@ -10,12 +10,14 @@
 	<ui:composition template="/resources/jsf/template/articleTemplate.xhtml">
 		<ui:param name="article" value="#{articleDetailsController.article}" />
 		<ui:define name="content">
-			<f:facet name="header">Artykuł: Id@#{article.articleId} - #{article.name} wersja: #{article.objectVersionNumber}</f:facet>
+			<f:facet name="header">Artykuł: Id@#{article.articleId} - #{article.name} </f:facet>
 			<p:dataList value="#{article.tagList}" var="tag" paginator="false" type="none" emptyMessage="Brak" lazy="false">
 				<p:outputLabel value="##{tag.name}"
 					style="font-style:italic;font-variant:small-caps;text-decoration:none;font-size:16px;"
 				/>
 			</p:dataList>
+			<p:outputLabel value="Wersja:" for="olVersion" />
+			<p:outputLabel id="olVersion" value="#{article.objectVersionNumber}"/>
 			<h:panelGrid columns="1">
 				<p:spacer width="100%" height="5" />
 				<h:panelGrid columns="2">
@@ -73,7 +75,7 @@
 		</ui:define>
 		<ui:define name="south">
 			<my:articleAction actions="#{articleDetailsController.actions}" 
-				update=":fVersions:dtVersions olStatus" 
+				update=":fVersions:dtVersions :olVersion :olStatus" 
 				toRefresh="#{articleDetailsController}"
 				componentPath=""
 			/>

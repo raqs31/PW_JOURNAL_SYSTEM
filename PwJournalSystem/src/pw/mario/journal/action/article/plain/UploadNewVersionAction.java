@@ -71,6 +71,7 @@ public class UploadNewVersionAction implements ButtonAction {
 			
 			operation.addNewVersion(article, (FileHandler)o);
 			refreshNeeded = true;
+			Messages.addMessage("Dodano nową wersję");
 		} catch (LockException ex) { 
 			Messages.addMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage());
 		} catch (PerformActionException e1) {
