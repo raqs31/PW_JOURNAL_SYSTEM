@@ -57,4 +57,9 @@ public class Refresh implements ButtonAction {
 		this.article = a;
 	}
 
+	@Override
+	public boolean refreshNeeded() {
+		return false;
+	}
+
 }

@@ -71,4 +71,9 @@ public class TestMail implements ButtonAction {
 	public void setArticle(Article a) {
 	}
 
+	@Override
+	public boolean refreshNeeded() {
+		return false;
+	}
+
 }

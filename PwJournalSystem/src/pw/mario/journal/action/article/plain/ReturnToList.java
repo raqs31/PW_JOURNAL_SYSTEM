@@ -53,4 +53,9 @@ public class ReturnToList implements ButtonAction {
 	public void setArticle(Article a) {
 		this.article = a;
 	}
+
+	@Override
+	public boolean refreshNeeded() {
+		return false;
+	}
 }

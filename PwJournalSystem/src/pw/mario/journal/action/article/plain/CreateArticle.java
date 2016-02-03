@@ -55,4 +55,9 @@ public class CreateArticle implements ButtonAction {
 		this.article = a;
 	}
 
+	@Override
+	public boolean refreshNeeded() {
+		return false;
+	}
+
 }
