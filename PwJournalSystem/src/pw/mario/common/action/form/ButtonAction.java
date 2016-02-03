@@ -25,7 +25,7 @@ public interface ButtonAction extends ConditionalAction, Serializable {
 	}
 	
 	default void refresh(Refreshable toRefresh) {
-		if (refreshNeeded())
+		if (toRefresh != null && refreshNeeded())
 			toRefresh.refresh();
 	}
 }

@@ -2,14 +2,12 @@ package pw.mario.journal.action.article.plain;
 
 
 import javax.enterprise.context.Dependent;
-import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
-import pw.mario.faces.articles.co.ArticleDetailsController;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Button;
 

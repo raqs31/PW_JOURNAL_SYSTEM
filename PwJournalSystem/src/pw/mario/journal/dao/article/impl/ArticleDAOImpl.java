@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
+import javax.persistence.LockModeType;
 
 import lombok.extern.log4j.Log4j;
+import pw.mario.common.exception.LockException;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
@@ -59,7 +61,8 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 
 	@Override
 	public Article getArticle(Long id) {
-		return find(id);
+		Article a = find(id);
+		return a;
 	}
 
 	@Override
@@ -80,7 +83,6 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	public Article save(Article a) {
 		a = merge(a);
 		em.flush();
-		em.refresh(a);
 		return a;
 	}
 	
@@ -88,4 +90,28 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	public void deleteArticle(Article a) {
 		delete(a);
 	}
+
+	@Override
+	public Article getLockedArticle(Article a, LockModeType lockType) throws LockException {
+		Article toRet = getLockedArticle(a.getArticleId(), lockType);
+		
+		if (toRet.getObjectVersionNumber().compareTo(a.getObjectVersionNumber()) != 0)
+			throw new LockException("W międzyczasie zmienił się stan artykułu", a);
+		
+		return toRet;
+	}
+
+	@Override
+	public Article getLockedArticle(Long id, LockModeType lockType) {
+		Article toRet = getArticle(id);
+		em.refresh(toRet);
+		em.lock(toRet, lockType);
+		return toRet;
+	}
+
+	@Override
+	public void refresh(Article a) {
+		em.refresh(a);
+	}
+
 }

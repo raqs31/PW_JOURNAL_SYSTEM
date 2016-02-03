@@ -10,7 +10,7 @@
 	<ui:composition template="/resources/jsf/template/articleTemplate.xhtml">
 		<ui:param name="article" value="#{articleDetailsController.article}" />
 		<ui:define name="content">
-			<f:facet name="header">Artykuł: Id@#{articleDetailsController.article.articleId} - #{articleDetailsController.article.name}</f:facet>
+			<f:facet name="header">Artykuł: Id@#{article.articleId} - #{article.name} wersja: #{article.objectVersionNumber}</f:facet>
 			<p:dataList value="#{article.tagList}" var="tag" paginator="false" type="none" emptyMessage="Brak" lazy="false">
 				<p:outputLabel value="##{tag.name}"
 					style="font-style:italic;font-variant:small-caps;text-decoration:none;font-size:16px;"
@@ -32,7 +32,7 @@
 				<p:outputLabel value="Wersje" for="sVersions" />
 				<p:separator id="sVersions" />
 				<h:form id="fVersions">
-					<p:dataTable id="dtVersions" var="ver" value="#{articleDetailsController.article.versions}" border="0" rows="10"
+					<p:dataTable id="dtVersions" var="ver" value="#{article.versions}" border="0" rows="10"
 						paginator="true" emptyMessage="Brak wersji"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 					>
@@ -59,13 +59,6 @@
 						</p:column>
 					</p:dataTable>
 				</h:form>
-				<p:dataList value="#{articleDetailsController.rules}" var="r" paginator="true" rows="15" type="unordered"
-					styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom"
-				>
-					<p:column>
-						<h:outputText value="#{r.name} - #{r.fromStatus.code} -> #{r.toStatus.code}" />
-					</p:column>
-				</p:dataList>
 			</h:panelGrid>
 		</ui:define>
 		<ui:define name="east">

@@ -5,21 +5,22 @@
 >
 <h:head>
 	<style type="text/css">
-		.ui-layout-north {
-			z-index: 20 !important;
-			overflow: visible !important;
-		}
-		
-		.ui-layout-north .ui-layout-unit-content {
-			overflow: visible !important;
-		}
-	</style>
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+</style>
 </h:head>
 <h:body>
 	<p:layout fullPage="true">
-		<p:layoutUnit position="north" resizable="false" collapsible="false" visible="true" style="ui-layout-unit-content" gutter="1">
+		<p:layoutUnit position="north" resizable="false" collapsible="false" visible="true" style="ui-layout-unit-content"
+			gutter="1"
+		>
 			<my:mainMenuBar />
-			<p:messages autoUpdate="true" showDetail="true" showSummary="true" closable="true" globalOnly="true"/>
 		</p:layoutUnit>
 		<p:layoutUnit position="south" size="100" resizable="true" collapsible="true" maxSize="300" gutter="1">
 			<ui:insert name="south" />
@@ -28,6 +29,7 @@
 			<ui:insert name="east" />
 		</p:layoutUnit>
 		<p:layoutUnit position="center" gutter="1">
+			<p:messages autoUpdate="true" showDetail="true" showSummary="true" closable="true" globalOnly="true" />
 			<ui:insert name="content" />
 		</p:layoutUnit>
 	</p:layout>

@@ -15,7 +15,6 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.Messages;
-import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;

@@ -2,6 +2,9 @@ package pw.mario.journal.dao.article;
 
 import java.util.List;
 
+import javax.persistence.LockModeType;
+
+import pw.mario.common.exception.LockException;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
@@ -29,4 +32,10 @@ public interface ArticleDAO {
 	Article save(Article a);
 	
 	void deleteArticle(Article a);
+	
+	Article getLockedArticle(Article a, LockModeType lockType) throws LockException;
+	
+	Article getLockedArticle(Long id, LockModeType lockType);
+	
+	void refresh(Article a);
 }

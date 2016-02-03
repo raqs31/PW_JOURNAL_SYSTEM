@@ -19,7 +19,7 @@
 				
 				<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="#{b.ajax()}" update="#{cc.attrs.update} #{absolutePath}" >
 					<p:ajax event="dialogReturn" listener="#{b.onReturnEvent}" update="#{cc.attrs.update} #{absolutePath}" />
-					<f:actionListener binding="#{cc.attrs.toRefresh.refresh()}"/>
+					<f:actionListener binding="#{b.refresh(cc.attrs.toRefresh)}"/>
 				</p:commandButton>
 			</p:dataList>
 		</h:form>

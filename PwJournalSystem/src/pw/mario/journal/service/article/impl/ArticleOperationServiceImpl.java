@@ -5,14 +5,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.exception.LockException;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.file.FileHandler;
@@ -29,6 +31,7 @@ import pw.mario.journal.service.article.ArticleOperationService;
 
 @Log4j
 @Stateless
+@Transactional(value=TxType.REQUIRED, rollbackOn=Exception.class)
 public class ArticleOperationServiceImpl implements ArticleOperationService {
 
 	@Inject private ArticleDAO articleDao;
@@ -38,17 +41,18 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Inject @Rules AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
 	
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Article getArticle(Long id, User u) {
 		Article article = articleDao.getArticle(id);
+		articleDao.refresh(article);
 		articleDao.loadDetails(article);
 		return article;
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void addNewVersion(Article a, FileHandler handler) throws PerformActionException {
 		try {
+			log.debug(a.getObjectVersionNumber());
+			a = articleDao.getLockedArticle(a, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
 			ArticleVersion newVersion = versionDao.createNewVersion(a);
 			
 			handler.setFileName(versionDao.createArticleName(newVersion));
@@ -60,6 +64,9 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			
 			a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
 			log.debug("Finish create article ID: " + a.getArticleId());
+		} catch (LockException ex) { 
+			log.warn(ex.getMessage(), ex);
+			throw ex;
 		} catch (OptimisticLockException e) {
 			log.warn(e.getMessage(), e);
 			throw new PerformActionException("Zmienił się stan artykułu, nie można wykonać aktualizacji");
@@ -83,7 +90,6 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void execute(ExecutionContext ctx) throws RouteActionException {
 		checkExecutionContext(ctx);
 		
@@ -95,7 +101,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
 		}
 	}
-	
+	@Transactional(value=TxType.SUPPORTS)
 	private void checkExecutionContext(ExecutionContext ctx) throws RouteActionException {
 		if (ctx == null || ctx.getArticle() == null || ctx.getRule() == null) {
 			
@@ -107,9 +113,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void deleteArticle(Article a) {
 		articleDao.deleteArticle(a);
 	}
-
 }

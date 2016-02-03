@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -27,7 +26,6 @@ import pw.mario.common.api.Refreshable;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.model.Article;
-import pw.mario.journal.model.Rule;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleOperationService;
 
@@ -40,7 +38,6 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 
 	@Getter @Setter private Article article;
 	@Getter @Setter private Collection<ButtonAction> actions;
-	@Getter @Setter private List<Rule> rules;
 	
 	@Inject private ArticleOperationService articleService;
 	@Inject transient private LoginService ctx;
@@ -53,11 +50,7 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 			else {
 				article = flashArticle;
 				refresh();
-				
-				rules = articleService.getAvailableSteps(article, ctx.getCurrentUser());
-				rules.forEach(r -> log.debug(article.getId() + ": " + r.getDescription()));
 			}
-			
 		}
 	}
 	

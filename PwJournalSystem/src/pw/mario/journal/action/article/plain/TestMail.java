@@ -1,6 +1,7 @@
 package pw.mario.journal.action.article.plain;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
+import javax.enterprise.context.Dependent;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -8,8 +9,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.annotation.Resource;
-import javax.enterprise.context.Dependent;
 
 import org.primefaces.event.SelectEvent;
 
