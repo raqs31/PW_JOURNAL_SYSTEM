@@ -41,11 +41,13 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		private Article article;
 		private Rule rule;
 		private ArticleOperationService articleService;
+		private boolean refreshNeeded;
 		
 		protected RuleButtonAction(Article a, Rule r, ArticleOperationService service) {
 			this.article = a;
 			this.rule = r;
 			this.articleService = service;
+			this.refreshNeeded = false;
 		}
 		
 		@Override
@@ -63,6 +65,7 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 				log.error("Error in execute rule", e);
 				Messages.addMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getDetails());
 			}
+			refreshNeeded = true;
 		}
 
 		@Override
@@ -90,7 +93,7 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		
 		@Override
 		public boolean refreshNeeded() {
-			return true;
+			return refreshNeeded;
 		}
 
 	}
