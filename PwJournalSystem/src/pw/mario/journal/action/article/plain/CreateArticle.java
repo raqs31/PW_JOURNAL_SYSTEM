@@ -23,12 +23,12 @@ public class CreateArticle implements ButtonAction {
 
 	@Override
 	public void doAction() throws PerformActionException {
-			JSFUtil.redirect("newArticle.xhtml");
+//			JSFUtil.redirect("newArticle.xhtml");
 	}
 
 	@Override
 	public String getAction() {
-		return "articleDetails?faces-redirect=true";
+		return "newArticle?faces-redirect=true";
 	}
 
 	@Override

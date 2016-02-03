@@ -8,6 +8,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.DepartmentDAO;
@@ -33,7 +34,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@Transactional(value=TxType.REQUIRED)
 	@RolesAllowed("ADMIN")
 	public void saveDepartment(Department d) {
 		deptDao.addDepartment(d);
@@ -45,14 +46,13 @@ public class DepartmentServiceImpl implements DepartmentService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@Transactional(value=TxType.REQUIRED)
 	@RolesAllowed("ADMIN")
 	public void deleteDepartment(Department d) {
 		deptDao.removeDepartment(d);
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public Department getDepartment(String deptCode) {
 		return deptDao.getDepartment(deptCode);
 	}

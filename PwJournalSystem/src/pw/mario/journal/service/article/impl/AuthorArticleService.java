@@ -47,7 +47,6 @@ public class AuthorArticleService implements ArticleService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public Article getArticle(Long id, User u) {
 		Article article = articleDao.getArticle(id);
 		articleDao.loadDetails(article);

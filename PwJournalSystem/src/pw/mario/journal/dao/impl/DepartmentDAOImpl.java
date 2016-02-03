@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
@@ -43,7 +44,7 @@ public class DepartmentDAOImpl extends AbstractDAOImpl<Department> implements De
 
 	@Override
 	public Department getDepartment(String code) {
-		return em.createQuery("select d from Department d where d.deptCode = ?1", Department.class)
+			return em.createQuery("select d from Department d where d.deptCode = ?1", Department.class)
 					.setParameter(1, code)
 					.getSingleResult();
 	}

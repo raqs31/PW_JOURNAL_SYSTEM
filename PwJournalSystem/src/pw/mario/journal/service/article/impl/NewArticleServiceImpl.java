@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
@@ -30,7 +32,6 @@ import pw.mario.journal.service.article.NewArticleService;
 
 @Log4j
 @Stateless
-@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class NewArticleServiceImpl implements NewArticleService {
 	@Inject UserDAO userDao;
 	@Inject ArticleDAO articleDao;
@@ -45,7 +46,7 @@ public class NewArticleServiceImpl implements NewArticleService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@Transactional(value=TxType.REQUIRED, rollbackOn=Exception.class)
 	public Article createArticle(Article a, FileHandler tmp) throws PerformActionException {
 		log.debug("Create article " + a + " START");
 		

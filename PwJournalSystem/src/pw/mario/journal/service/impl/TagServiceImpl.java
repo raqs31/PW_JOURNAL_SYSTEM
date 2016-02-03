@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.TagDAO;
@@ -25,7 +27,7 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@Transactional(value=TxType.REQUIRED)
 	public Tag updateTag(Tag t) {
 		return tagDao.updateTag(t);
 	}
@@ -36,13 +38,13 @@ public class TagServiceImpl implements TagService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@Transactional(value=TxType.REQUIRED)
 	public void removeTag(Tag t) {
 		tagDao.removeTag(t);
 	}
 	
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@Transactional(value=TxType.REQUIRED)
 	public Tag addTag(Tag t) {
 		return tagDao.addTag(t);
 	}

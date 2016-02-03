@@ -8,6 +8,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.hibernate.Hibernate;
 
@@ -35,7 +37,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	@Transactional(value=TxType.REQUIRED)
 	@RolesAllowed("ADMIN")
 	public User createUser(User u) {
 		if (u == null)
@@ -48,7 +50,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+	@Transactional(value=TxType.REQUIRED)
 	@RolesAllowed("ADMIN")
 	public User updateUser(User u) {
 		return userDao.updateUser(u);
