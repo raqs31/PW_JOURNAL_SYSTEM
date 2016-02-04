@@ -1,6 +1,7 @@
 package pw.mario.journal.service.article;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import pw.mario.common.action.form.ButtonAction;
@@ -12,7 +13,7 @@ public interface ArticleService extends Serializable {
 	
 	String[] rolesAllowed();
 	
-	Iterable<ButtonAction> getActions(Article a, User u);
+	Collection<ButtonAction> getActions(Article a, User u);
 	
 	Article getArticle(Long id, User u);
 }

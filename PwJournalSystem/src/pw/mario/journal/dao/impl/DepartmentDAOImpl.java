@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import pw.mario.journal.dao.AbstractDAOImpl;

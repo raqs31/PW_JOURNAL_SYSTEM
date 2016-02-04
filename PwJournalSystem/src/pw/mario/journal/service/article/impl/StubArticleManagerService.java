@@ -1,5 +1,6 @@
 package pw.mario.journal.service.article.impl;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -73,7 +74,7 @@ public class StubArticleManagerService implements ArticleService {
 	}
 
 	@Override
-	public Iterable<ButtonAction> getActions(Article a, User u) {
+	public Collection<ButtonAction> getActions(Article a, User u) {
 		// TODO Auto-generated method stub
 		return null;
 	}

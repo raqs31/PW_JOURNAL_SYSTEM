@@ -1,6 +1,7 @@
 package pw.mario.journal.service.article.impl;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.security.PermitAll;
@@ -36,7 +37,7 @@ public class ArticleManagerService implements ArticleService, Serializable {
 	}
 
 	@Override
-	public Iterable<ButtonAction> getActions(Article a, User u) {
+	public Collection<ButtonAction> getActions(Article a, User u) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -14,7 +14,7 @@
 	>
 		<p:tab id="t${articles.id}" title="#{articles.tittle}">
 			<h:form id="tabArticles">
-				<p:dataTable id="dt${articles.id}" var="article" value="#{articles.articles}" border="1" rows="10" paginator="true"
+				<p:dataTable id="dt#{articles.id}" var="article" value="#{articles.articles}" border="1" rows="10" paginator="true"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="10, 20, 30" lazy="true" sortMode="multiple" expandedRow="false" reflow="true" rendered="true"
 					selectionMode="single" rowKey="#{article.articleId}" selection="#{articles.selectedArticle}"
@@ -49,7 +49,7 @@
 				</p:dataTable>
 			</h:form>
 			<p:spacer id="asdfg" width="100%" height="5px" />
-				<my:articleAction id="composite" actions="#{articles.actions}" componentPath=":articleTabView"/>
+				<my:articleAction id="composite" actions="#{articles.actions}" componentPath=":articleTabView" update=":articleTabView:tabArticles" toRefresh="#{articles}" />
 		</p:tab>
 	</p:tabView>
 	<h:form id="detail">

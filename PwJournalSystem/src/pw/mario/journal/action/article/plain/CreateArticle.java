@@ -7,7 +7,6 @@ import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
-import pw.mario.common.util.JSFUtil;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Button;
 

@@ -1,7 +1,7 @@
 package pw.mario.faces.articles.model.tabs;
 
 import java.io.Serializable;
-import java.util.LinkedList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -38,7 +38,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	
 	@Getter @Setter private Article selectedArticle;
 	@Getter private final String id = "authors";
-	@Getter private List<ButtonAction> actions;
+	@Getter private Collection<ButtonAction> actions;
 	
 	private List<Article> articles;
 	
@@ -80,19 +80,25 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 
 	@Override
 	public void refresh() {
-		if (actions == null)
-			actions = new LinkedList<>();
-		else
-			actions.clear();
-		
-		for (ButtonAction b: articleService.getActions(selectedArticle, ctx.getCurrentUser()))
-			actions.add(b);
+		if (selectedArticle != null) {
+			selectedArticle = articleService.getArticle(selectedArticle.getArticleId(), ctx.getCurrentUser());
+			int articleIndex = articles.indexOf(selectedArticle);
+			articles.remove(articleIndex);
+			articles.add(articleIndex, selectedArticle);
+		}
+		reloadActions();
 	}
 
 	@Override
 	public void onRowSelect(SelectEvent e) {
+		reloadActions();
 		FacesMessage msg = new FacesMessage("Selected " + e.getObject(), null);
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-		refresh();
+		
+	}
+	
+	private void reloadActions() {
+		actions = articleService.getActions(selectedArticle, ctx.getCurrentUser());
+			
 	}
 }

@@ -92,13 +92,19 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Override
 	public void execute(ExecutionContext ctx) throws RouteActionException {
 		checkExecutionContext(ctx);
-		
-		ctx.getArticle().setStatus(ctx.getRule().getToStatus());
-		
 		try {
-			articleDao.save(ctx.getArticle());
+			Article toProcess = articleDao.getLockedArticle(ctx.getArticle(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+			toProcess.setStatus(ctx.getRule().getToStatus());
+		
+		
+			articleDao.save(toProcess);
 		} catch (OptimisticLockException e) {
 			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
+		} catch (LockException e) {
+			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
+		} catch (Exception e) {
+			log.fatal("Unexpected error", e);
+			throw new RouteActionException("Wystąpił nieoczekiwany błąd podczas procesowania");
 		}
 	}
 	@Transactional(value=TxType.SUPPORTS)
