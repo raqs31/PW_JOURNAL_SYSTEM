@@ -16,20 +16,6 @@ begin
     Insert into USER_SYSTEM_ROLES (USER_ID,SYSTEM_ROLE_ID) values (l_admin_id,u.system_role_id);
   end loop;
   
-  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE1) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'NEW', 'Zarejestrowany', 'INITIAL');
-  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE1) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'CPL', 'Kompletny', null);
-  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE1) values (DICTIONARY_SEQ.nextval, 'ARTICLE_STATUS', 'RET', 'Cofnięty', null);
-  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE2) values (DICTIONARY_SEQ.nextval, 'SYSTEM_PARAM', 'ARTICLE_DIR', 'Ścieżka zapisu artykułów', 'C:/Programy/');
-  insert into dictionaries(DICT_ID, DICTIONARY_NAME, CODE, DESCRIPTION, ATTRIBUTE2) values (DICTIONARY_SEQ.nextval, 'SYSTEM_PARAM', 'TMP_DIR', 'Ścieżka tymczasowego zapisu artykułów', 'C:/Programy/');
-  
-  INSERT INTO routing_rules(RULE_ID,DESCRIPTION,NAME,FOR_ROLE_name,FROM_STATUS,TO_STATUS, READY_TO_PRINT)
-	VALUES (routing_rules_seq.nextval,
-	        'Kompletacja artykułu',
-	        'Kompletuj',
-	        'AUTHOR',
-	        1,
-	        4,
-	        1);
-	        
+	/* Konfiguracja słownikowa w excelu */
   commit;
 end;
