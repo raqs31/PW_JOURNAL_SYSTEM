@@ -104,4 +104,8 @@ public class Rule implements Serializable, IdTable {
 	public interface Queries {
 		String NEXT_STEPS = "article.rule.next";
 	}
+	
+	public boolean withUserAction() {
+		return pickAcceptors || pickManager;
+	}
 }

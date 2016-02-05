@@ -1,4 +1,4 @@
-package pw.mario.common.co;
+package pw.mario.journal.action.co;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

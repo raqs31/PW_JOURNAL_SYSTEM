@@ -1,12 +1,15 @@
 package pw.mario.journal.action.article;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import lombok.extern.log4j.Log4j;
@@ -15,12 +18,12 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.Messages;
+import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.Rules;
 import pw.mario.journal.service.article.ArticleOperationService;
-import pw.mario.journal.service.article.ArticleOperationService.ExecutionContext;
 
 @Rules
 @Dependent
@@ -30,18 +33,26 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 	@Override
 	public Collection<ButtonAction> getActions(Article a, User u ) {
 		Collection<ButtonAction> availRules = new LinkedList<>();
-		service.getAvailableSteps(a, u).forEach(r -> availRules.add(new RuleButtonAction(a, r, service)));
-
+		
+		
+		for (Rule r : service.getAvailableSteps(a, u)) {
+			ButtonAction action;
+			if (r.withUserAction())
+				action = new RuleWithAction(a, r, service);
+			else
+				action = new RuleButtonAction(a, r, service);
+			availRules.add(action);
+		}
 		return availRules;
 	}
 
 	@Log4j
 	private static class RuleButtonAction implements ButtonAction {
-		private static final long serialVersionUID = 1L;
-		private Article article;
-		private Rule rule;
-		private ArticleOperationService articleService;
-		private boolean refreshNeeded;
+		protected static final long serialVersionUID = 1L;
+		protected Article article;
+		protected Rule rule;
+		protected ArticleOperationService articleService;
+		protected boolean refreshNeeded;
 		
 		protected RuleButtonAction(Article a, Rule r, ArticleOperationService service) {
 			this.article = a;
@@ -95,6 +106,29 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		public boolean refreshNeeded() {
 			return refreshNeeded;
 		}
+
+	}
+	
+	@Log4j
+	private static class RuleWithAction extends RuleButtonAction {
+
+		protected RuleWithAction(Article a, Rule r, ArticleOperationService service) {
+			super(a, r, service);
+		}
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public void doAction() throws PerformActionException {
+			Map<String,Object> options = new HashMap<String, Object>();
+	        options.put("resizable", false);
+	        options.put("draggable", false);
+	        options.put("modal", true);
+	        RequestContext.getCurrentInstance().openDialog("/resources/jsf/ruleActions", options, null);		
+		}
+	
+		@Override
+		public void onReturnEvent(SelectEvent e) {}
 
 	}
 }
