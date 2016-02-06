@@ -27,21 +27,21 @@
 						<h:outputText value="#{m.dept.fullName}" />
 					</p:column>
 				</p:selectOneMenu>
-				
 			</p:panelGrid>
 			<p:dataTable value="#{ruleActions.availableAcceptors}" var="acc" border="1" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="10, 20, 30" reflowrendered="#{ruleActions.availableAcceptors}" rowKey="#{acc.userId}" selection="#{ruleActions.ctx.acceptors}"
+				rowsPerPageTemplate="10, 20, 30" reflowrendered="#{ruleActions.availableAcceptors}" rowKey="#{acc.userId}"
+				selection="#{ruleActions.ctx.acceptors}" rendered="#{ruleActions.pickManagementRendered}" paginatorPosition="bottom"
 			>
 				<f:facet name="header">Wybierz akceptujących</f:facet>
 				<p:column selectionMode="multiple" style="width:16px;text-align:center" />
-				<p:column>
+				<p:column headerText="Imię">
 					<h:outputText value="#{acc.name}" />
 				</p:column>
-				<p:column>
+				<p:column headerText="Nazwisko">
 					<h:outputText value="#{acc.secondName}" />
 				</p:column>
-				<p:column>
+				<p:column headerText="Departament">
 					<h:outputText value="#{acc.dept.fullName}" />
 				</p:column>
 			</p:dataTable>
