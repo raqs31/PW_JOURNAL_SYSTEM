@@ -19,6 +19,7 @@ import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.dao.RulesDao;
+import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.data.ExecutionContext;
@@ -40,6 +41,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Inject private ArticleVersionDao versionDao;
 	@Inject private FileManagerService fileManager;
 	@Inject private RulesDao ruleDao;
+	@Inject private UserDAO userDao;
 	@Inject @Button private AbstractActionFactory<ButtonAction, Article> actionFactory;
 	@Inject @Rules private AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
 	
@@ -128,14 +130,12 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 
 	@Override
 	public List<User> getAvailableManagements(Long articleId) {
-		// TODO Auto-generated method stub
-		return new LinkedList<>();
+		return userDao.getAvailableManagers(articleId);
 	}
 
 	@Override
 	public List<User> getAvailableAcceptors(Long articleId) {
-		// TODO Auto-generated method stub
-		return new LinkedList<>();
+		return userDao.getAvailableAcceptors(articleId);
 	}
 
 	@Override

@@ -13,7 +13,9 @@ import javax.persistence.Query;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Department;
+import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
+import pw.mario.journal.model.User.Queries;
 
 @Default
 @Dependent
@@ -83,4 +85,21 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 		return createNamedTypedQuery(USERS_WITH_DEPARTMENT_ROLE).setParameter(1, d == null ? "" : d.getId()).setParameter(2, sr).getResultList();
 	}
 
+	@Override
+	public List<User> getAvailableAcceptors(Long articleId) {
+		return getNotCrossedUsers(articleId, SystemRole.Roles.ACCEPTOR);
+	}
+
+	@Override
+	public List<User> getAvailableManagers(Long articleId) {
+		return getNotCrossedUsers(articleId, SystemRole.Roles.MANAGER);
+	}
+
+	
+	private List<User> getNotCrossedUsers(Long articleId, String roleName) {
+		return createNamedTypedQuery(Queries.USERS_NOT_CROSSED_AUTHORS)
+				.setParameter(1, articleId)
+				.setParameter(2, roleName)
+				.getResultList();
+	}
 }

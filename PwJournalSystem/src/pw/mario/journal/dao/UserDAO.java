@@ -27,4 +27,8 @@ public interface UserDAO {
 	List<User> getUsers(Department d);
 	
 	List<User> getUsers(Department d, String sr);
+
+	List<User> getAvailableAcceptors(Long articleId);
+	
+	List<User> getAvailableManagers(Long articleId);
 }
