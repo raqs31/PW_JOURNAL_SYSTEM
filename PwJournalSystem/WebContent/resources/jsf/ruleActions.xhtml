@@ -8,6 +8,13 @@
 <h:body>
 	<h:form>
 		<p:panel header="Dodatkowe czynności">Tu będą akcje dla dokumentu</p:panel>
+		<p:outputLabel value="#{ruleActions.rule.description}" /><br />
+		<p:outputLabel value="#{ruleActions.rule.ruleId}" /><br />
+		<p:outputLabel value="#{ruleActions.articleId}" /><br />
+		<p:outputLabel value="#{ruleActions.availableAcceptors}" /><br />
+		<p:outputLabel value="#{ruleActions.availableManagements}" /><br />
+		<p:commandButton value="#{ruleActions.rule.name}" actionListener="#{ruleActions.proceed()}"/>
+		<p:commandButton value="Anuluj" actionListener="#{ruleActions.cancel()}"/>
 	</h:form>
 </h:body>
 </html>

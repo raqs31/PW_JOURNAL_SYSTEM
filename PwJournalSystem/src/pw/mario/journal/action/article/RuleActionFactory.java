@@ -1,8 +1,10 @@
 package pw.mario.journal.action.article;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import javax.enterprise.context.Dependent;
@@ -15,6 +17,7 @@ import org.primefaces.event.SelectEvent;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.ContextConstants;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.Messages;
@@ -120,15 +123,40 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 
 		@Override
 		public void doAction() throws PerformActionException {
-			Map<String,Object> options = new HashMap<String, Object>();
+			Map<String,Object> options = new HashMap<>();
+			Map<String, List<String>> params = new HashMap<>();
+			
 	        options.put("resizable", false);
 	        options.put("draggable", false);
 	        options.put("modal", true);
-	        RequestContext.getCurrentInstance().openDialog("/resources/jsf/ruleActions", options, null);		
+	        
+	        List<String> articleParam = new ArrayList<String>(1);
+	        List<String> ruleParam = new ArrayList<String>(1);
+	        
+	        ruleParam.add(rule.getRuleId().toString());
+	        articleParam.add(article.getArticleId().toString());
+	        
+	        params.put(ContextConstants.PARAM_RULE_ID, ruleParam);
+	        params.put(ContextConstants.PARAM_ARTICLE_ID, articleParam);
+	        
+	        log.debug("Open ruleActions for: " + rule + "\nArticle: " + article.getArticleId());
+	        RequestContext.getCurrentInstance().openDialog("/resources/jsf/ruleActions", options, params);		
 		}
 	
 		@Override
-		public void onReturnEvent(SelectEvent e) {}
+		public void onReturnEvent(SelectEvent e) {
+			Object o = e.getObject();
+			
+			Messages.addMessage("Not implemented yet :)");
+			/* TODO
+			if (o == null) {
+				Messages.addMessage(null, "Przerwano proces:", rule.getName());
+			} else {
+				Messages.addMessage(null, "Wykonano akcję", rule.getName());
+			}
+			*/
+			
+		}
 
 	}
 }

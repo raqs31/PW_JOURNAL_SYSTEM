@@ -17,7 +17,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.model.ext.IdTable;
 
@@ -26,6 +28,8 @@ import pw.mario.journal.model.ext.IdTable;
  *
  */
 @Data
+@ToString(exclude={"forRole"})
+@EqualsAndHashCode(of={"ruleId"})
 @Entity
 @NoArgsConstructor
 @Table(name="ROUTING_RULES", indexes={

@@ -17,9 +17,13 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import pw.mario.journal.model.ext.IdTable;
 
 @Data
+@ToString(exclude="users")
+@EqualsAndHashCode(exclude={"users"})
 @Entity
 @Table(name="SYSTEM_ROLES", schema="MARIO",
 indexes={
@@ -35,6 +39,8 @@ indexes={
 		 		)
 })
 public class SystemRole implements IdTable, Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name="SYSTEM_ROLE_ID")
 	@SequenceGenerator(name="sysRoleSeq", initialValue=1, sequenceName="SYSTEM_ROLES_SEQ", allocationSize=1)

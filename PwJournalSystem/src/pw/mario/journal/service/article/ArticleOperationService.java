@@ -24,5 +24,10 @@ public interface ArticleOperationService {
 	Collection<ButtonAction> getActions(Article a, User u);
 	
 	void execute(ExecutionContext ctx) throws RouteActionException;
+	
+	List<User> getAvailableManagements(Long articleId);
+	
+	List<User> getAvailableAcceptors(Long articleId);
 
+	Rule getRule(Long ruleId);
 }

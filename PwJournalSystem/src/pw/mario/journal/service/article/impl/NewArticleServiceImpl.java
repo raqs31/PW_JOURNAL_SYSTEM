@@ -48,13 +48,14 @@ public class NewArticleServiceImpl implements NewArticleService {
 	public Article createArticle(Article a, FileHandler tmp) throws PerformActionException {
 		log.debug("Create article " + a + " START");
 		
-		ArticleVersion newVersion = versionDao.createNewVersion(a);
-		a.getVersions().add(newVersion);
-		a.setStatus(dictionary.getInitialProcess());
-		
-		tmp.setFileName(versionDao.createArticleName(newVersion));
-		if (tmp != null)
+		if (tmp != null) {
+			ArticleVersion newVersion = versionDao.createNewVersion(a);
+			a.getVersions().add(newVersion);
+			tmp.setFileName(versionDao.createArticleName(newVersion));
 			newVersion.setAttachement(fileManager.saveFile(tmp));
+		}
+
+		a.setStatus(dictionary.getInitialProcess());
 		a = articleDao.addArticle(a);
 		
 		log.debug("Finish create article ID: " + a.getArticleId());

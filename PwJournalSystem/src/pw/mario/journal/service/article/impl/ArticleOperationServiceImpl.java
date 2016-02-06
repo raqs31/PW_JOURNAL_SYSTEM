@@ -18,6 +18,7 @@ import pw.mario.common.exception.LockException;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.file.FileHandler;
+import pw.mario.journal.dao.RulesDao;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.data.ExecutionContext;
@@ -38,8 +39,9 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Inject private ArticleDAO articleDao;
 	@Inject private ArticleVersionDao versionDao;
 	@Inject private FileManagerService fileManager;
-	@Inject @Button AbstractActionFactory<ButtonAction, Article> actionFactory;
-	@Inject @Rules AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
+	@Inject private RulesDao ruleDao;
+	@Inject @Button private AbstractActionFactory<ButtonAction, Article> actionFactory;
+	@Inject @Rules private AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
 	
 	@Override
 	public Article getArticle(Long id, User u) {
@@ -122,5 +124,22 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Override
 	public void deleteArticle(Article a) {
 		articleDao.deleteArticle(a);
+	}
+
+	@Override
+	public List<User> getAvailableManagements(Long articleId) {
+		// TODO Auto-generated method stub
+		return new LinkedList<>();
+	}
+
+	@Override
+	public List<User> getAvailableAcceptors(Long articleId) {
+		// TODO Auto-generated method stub
+		return new LinkedList<>();
+	}
+
+	@Override
+	public Rule getRule(Long ruleId) {
+		return ruleDao.getRule(ruleId);
 	}
 }
