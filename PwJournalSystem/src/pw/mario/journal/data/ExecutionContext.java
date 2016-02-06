@@ -1,6 +1,6 @@
 package pw.mario.journal.data;
 
-import java.util.Collection;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +21,6 @@ public class ExecutionContext {
 	@Getter private Rule rule;
 	@Getter private User user;
 	@Getter @Setter private User choosenManagement;
-	@Getter @Setter private Collection<User> acceptors;
+	@Getter @Setter private List<User> acceptors;
 
 }

@@ -7,23 +7,47 @@
 </h:head>
 <h:body>
 	<h:form>
-		
-		<p:panelGrid columns="2" header="Akcja #{ruleActions.rule.name} wymaga dodatkowych czynności:">
-			<p:outputLabel value="Zarządzający" for="management"/>
-			<p:selectOneMenu id="management" value="#{ruleActions.ctx.choosenManagement}" var="m" rendered="#{ruleActions.pickManagementRendered}" converter="#{userOneMenuConverter}" effect="fade">
-				<f:selectItem itemLabel="Wybierz zarządzającego" itemValue=""/>
-				<f:selectItems value="#{ruleActions.availableManagements}" var="mng" itemLabel="#{mng.name} - #{mng.secondName}" itemValue="#{mng}"/>
+		<p:panel>
+			<p:panelGrid columns="2" header="Akcja #{ruleActions.rule.name} wymaga dodatkowych czynności:">
+				<p:outputLabel value="Zarządzający" for="management" />
+				<p:selectOneMenu id="management" value="#{ruleActions.ctx.choosenManagement}" var="m"
+					rendered="#{ruleActions.pickManagementRendered}" converter="#{userConverter}" effect="fade"
+				>
+					<f:selectItem itemLabel="Wybierz zarządzającego" itemValue="" />
+					<f:selectItems value="#{ruleActions.availableManagements}" var="mng" itemLabel="#{mng.name} - #{mng.secondName}"
+						itemValue="#{mng}"
+					/>
+					<p:column>
+						<h:outputText value="#{m.name}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{m.secondName}" />
+					</p:column>
+					<p:column>
+						<h:outputText value="#{m.dept.fullName}" />
+					</p:column>
+				</p:selectOneMenu>
+				
+			</p:panelGrid>
+			<p:dataTable value="#{ruleActions.availableAcceptors}" var="acc" border="1" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10, 20, 30" reflowrendered="#{ruleActions.availableAcceptors}" rowKey="#{acc.userId}" selection="#{ruleActions.ctx.acceptors}"
+			>
+				<f:facet name="header">Wybierz akceptujących</f:facet>
+				<p:column selectionMode="multiple" style="width:16px;text-align:center" />
 				<p:column>
-					<h:outputText value="#{m.name}" />
-				</p:column>			
-				<p:column>
-					<h:outputText value="#{m.secondName}" />
+					<h:outputText value="#{acc.name}" />
 				</p:column>
-			</p:selectOneMenu>
-		
-		</p:panelGrid> 
-		<p:commandButton value="#{ruleActions.rule.name}" actionListener="#{ruleActions.proceed()}"/>
-		<p:commandButton value="Anuluj" actionListener="#{ruleActions.cancel()}"/>
+				<p:column>
+					<h:outputText value="#{acc.secondName}" />
+				</p:column>
+				<p:column>
+					<h:outputText value="#{acc.dept.fullName}" />
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+		<p:commandButton value="#{ruleActions.rule.name}" actionListener="#{ruleActions.proceed()}" />
+		<p:commandButton value="Anuluj" actionListener="#{ruleActions.cancel()}" />
 	</h:form>
 </h:body>
 </html>

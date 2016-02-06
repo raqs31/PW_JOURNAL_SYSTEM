@@ -147,14 +147,11 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		public void onReturnEvent(SelectEvent e) {
 			Object o = e.getObject();
 			
-			Messages.addMessage("Not implemented yet :)");
-			/* TODO
 			if (o == null) {
 				Messages.addMessage(null, "Przerwano proces:", rule.getName());
 			} else {
-				Messages.addMessage(null, "Wykonano akcję", rule.getName());
+				Messages.addMessage(null, "Todo soon :)", rule.getName());
 			}
-			*/
 			
 		}
 

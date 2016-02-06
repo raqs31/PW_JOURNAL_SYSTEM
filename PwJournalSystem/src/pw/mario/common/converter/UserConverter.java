@@ -16,7 +16,7 @@ import pw.mario.journal.model.ext.IdTable;
 
 @Named
 @ApplicationScoped
-public class UserOneMenuConverter implements Converter {
+public class UserConverter implements Converter {
 	@Inject private UserDAO user;
 	
 	@Override
