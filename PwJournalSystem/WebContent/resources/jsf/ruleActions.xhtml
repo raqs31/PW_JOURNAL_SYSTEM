@@ -7,12 +7,18 @@
 </h:head>
 <h:body>
 	<h:form>
-		<p:panel header="Dodatkowe czynności">Tu będą akcje dla dokumentu</p:panel>
-		<p:outputLabel value="#{ruleActions.rule.description}" /><br />
-		<p:outputLabel value="#{ruleActions.rule.ruleId}" /><br />
-		<p:outputLabel value="#{ruleActions.articleId}" /><br />
-		<p:outputLabel value="#{ruleActions.availableAcceptors}" /><br />
-		<p:outputLabel value="#{ruleActions.availableManagements}" /><br />
+		
+		<p:panelGrid columns="2" header="Akcja #{ruleActions.rule.name} wymaga dodatkowych czynności:">
+			<p:outputLabel value="Zarządzający" for="management"/>
+			<p:selectOneMenu id="management" value="#{ruleActions.ctx.choosenManagement}" rendered="#{ruleActions.pickManagementRendered}">
+				<f:selectItem itemLabel="Wybierz zarządzającego" itemValue=""/>
+				<f:selectItems value="#{ruleActions.availableManagements}" var="mng" itemLabel="#{mng.userId}" itemValue="#{mng}"/>
+				<p:column>
+					<h:outputText value="#{mng.name}" />
+				</p:column>			
+			</p:selectOneMenu>
+		
+		</p:panelGrid> 
 		<p:commandButton value="#{ruleActions.rule.name}" actionListener="#{ruleActions.proceed()}"/>
 		<p:commandButton value="Anuluj" actionListener="#{ruleActions.cancel()}"/>
 	</h:form>

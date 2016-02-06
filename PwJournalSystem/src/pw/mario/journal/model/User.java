@@ -36,9 +36,9 @@ import pw.mario.journal.model.ext.IdTable;
 @Entity
 @Table(name="USERS", schema="MARIO",
 	indexes={
-			@Index(columnList="login", unique=true),
-			@Index(columnList="email", unique=true),
-			@Index(columnList="dept", unique=false)
+			@Index(columnList="LOGIN", unique=true),
+			@Index(columnList="EMAIL", unique=true),
+			@Index(columnList="DEPARTMENT_ID", unique=false)
 	}
 )
 @NamedQueries({
@@ -49,14 +49,7 @@ import pw.mario.journal.model.ext.IdTable;
 	@NamedQuery(name=User.Queries.USERS_WITH_DEPARTMENT_ROLE,
 		query = "select u from User u join u.systemRoles sr where ((?1 is null and u.dept is null) or u.dept.deptId =  ?1) and sr.roleName = ?2"),
 	@NamedQuery(name=User.Queries.USERS_NOT_CROSSED_AUTHORS,
-		query = "select u from User u, "
-				+ "Article a "
-				+ "join u.systemRoles sr "
-				+ "join a.authors au "
-				+ "where a.articleId = ?1 "
-				+ "and sr.roleName = ?2 "
-				+ "and u != au "
-				+ "and u.dept != au.dept")
+		query = "select u from User u, Article a join u.systemRoles sr join a.authors au where a.articleId = ?1 and sr.roleName = ?2 and u <> au and u.dept <> au.dept")
 
 })
 public class User extends AuditTable implements IdTable {

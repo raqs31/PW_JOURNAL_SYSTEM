@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -25,7 +26,7 @@ import pw.mario.journal.service.article.ArticleOperationService;
 
 @Log4j
 @Named
-@RequestScoped
+@ViewScoped
 public class RuleActions {
 	@Getter @Setter private List<User> availableManagements;
 	@Getter @Setter private List<User> availableAcceptors;
