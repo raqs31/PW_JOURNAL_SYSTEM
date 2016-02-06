@@ -10,12 +10,15 @@
 		
 		<p:panelGrid columns="2" header="Akcja #{ruleActions.rule.name} wymaga dodatkowych czynności:">
 			<p:outputLabel value="Zarządzający" for="management"/>
-			<p:selectOneMenu id="management" value="#{ruleActions.ctx.choosenManagement}" rendered="#{ruleActions.pickManagementRendered}">
+			<p:selectOneMenu id="management" value="#{ruleActions.ctx.choosenManagement}" var="m" rendered="#{ruleActions.pickManagementRendered}" converter="#{userOneMenuConverter}" effect="fade">
 				<f:selectItem itemLabel="Wybierz zarządzającego" itemValue=""/>
-				<f:selectItems value="#{ruleActions.availableManagements}" var="mng" itemLabel="#{mng.userId}" itemValue="#{mng}"/>
+				<f:selectItems value="#{ruleActions.availableManagements}" var="mng" itemLabel="#{mng.name} - #{mng.secondName}" itemValue="#{mng}"/>
 				<p:column>
-					<h:outputText value="#{mng.name}" />
+					<h:outputText value="#{m.name}" />
 				</p:column>			
+				<p:column>
+					<h:outputText value="#{m.secondName}" />
+				</p:column>
 			</p:selectOneMenu>
 		
 		</p:panelGrid> 

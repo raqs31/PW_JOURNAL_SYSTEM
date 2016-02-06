@@ -1,5 +1,6 @@
 package pw.mario.journal.action.co;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +28,8 @@ import pw.mario.journal.service.article.ArticleOperationService;
 @Log4j
 @Named
 @ViewScoped
-public class RuleActions {
+public class RuleActions implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@Getter @Setter private List<User> availableManagements;
 	@Getter @Setter private List<User> availableAcceptors;
 	@Getter @Setter private ExecutionContext ctx;
