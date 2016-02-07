@@ -50,6 +50,7 @@ import pw.mario.journal.model.ext.IdTable;
 					+ "and (r.forAuthor = false or (r.forAuthor = true and u member of a.authors)) "
 					+ "and (r.forAcceptor = false or (r.forAcceptor = true and u member of a.acceptors)) "
 					+ "and (r.forManager = false or (r.forManager = true and u = a.management)) "
+					+ "and r.isActive = true"
 			)
 })
 public class Rule implements Serializable, IdTable {
@@ -105,6 +106,9 @@ public class Rule implements Serializable, IdTable {
 	
 	@Column(name="CLEAR_ACCEPTORS", nullable=false)
 	private Boolean clearAcceptors;
+	
+	@Column(name="IS_ACTIVE", nullable=false)
+	private Boolean isActive;
 	
 	@Override
 	public Object getId() {

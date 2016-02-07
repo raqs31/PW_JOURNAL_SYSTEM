@@ -65,7 +65,8 @@ BEGIN
       pick_acceptors,
       pick_manager,
       CLEAR_MANAGER,
-      CLEAR_ACCEPTORS
+      CLEAR_ACCEPTORS,
+      IS_ACTIVE
     )
     VALUES
     (
@@ -82,7 +83,8 @@ BEGIN
       is_empty(p_pick_acceptor),
       is_empty(p_pick_manager),
       is_empty(P_CLEAR_MANAGER),
-      is_empty(P_CLEAR_ACC)
+      is_empty(P_CLEAR_ACC),
+      1
     );
 END;
 END ROUTING_UTIL;
