@@ -15,6 +15,7 @@ import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
+import pw.mario.journal.service.article.ArticleOperationService;
 import pw.mario.journal.service.article.ArticleService;
 
 @Stateless
@@ -24,6 +25,7 @@ public class ArticleManagerService implements ArticleService {
 	private static final long serialVersionUID = 1L;
 	
 	@Inject private ArticleDAO articleDao;
+	@Inject private ArticleOperationService articleOperation;
 	
 	private String[] rolesAllowed = {"ARTICLE_MANAGER"};
 	
@@ -40,8 +42,7 @@ public class ArticleManagerService implements ArticleService {
 
 	@Override
 	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh) {
-		// TODO Auto-generated method stub
-		return null;
+		return articleOperation.getActions(a, u, toRefresh);
 	}
 
 	@Override
