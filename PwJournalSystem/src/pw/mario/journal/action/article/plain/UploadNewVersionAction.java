@@ -7,6 +7,7 @@ import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.security.auth.login.LoginContext;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
@@ -21,6 +22,8 @@ import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
+import pw.mario.journal.service.LoginService;
+import pw.mario.journal.service.article.ArticleLazyLoadingService;
 import pw.mario.journal.service.article.ArticleOperationService;
 
 @Button
@@ -32,11 +35,18 @@ public class UploadNewVersionAction implements ButtonAction {
 	private Refreshable toRefresh;
 	
 	@Inject private ArticleOperationService operation;
+	@Inject private LoginService ctx;
+	@Inject private ArticleLazyLoadingService articleLazy;
+	
 	private Article article;
 	
 	@Override
 	public boolean allowed() {
-		return article != null && article.getStatus().addVersionEnabled();
+		if (article != null)
+			articleLazy.loadAuthors(article);
+		return article != null 
+				&& article.getStatus().addVersionEnabled()
+				&& article.getAuthors().contains(ctx.getCurrentUser());
 	}
 
 	@Override

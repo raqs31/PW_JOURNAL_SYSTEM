@@ -47,8 +47,7 @@ public class AuthorArticleService implements ArticleService {
 
 	@Override
 	public Article getArticle(Long id, User u) {
-		Article article = articleDao.getArticle(id);
-		articleDao.refresh(article);
+		Article article = articleDao.getRefreshedArticle(id);
 		articleDao.loadDetails(article);
 		return article;
 	}

@@ -119,4 +119,11 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		return createNamedTypedQuery(Article.Queries.PRINTABLE_ARTICLE).getResultList();
 	}
 
+	@Override
+	public Article getRefreshedArticle(Long id) {
+		Article toReturn = getArticle(id);
+		refresh(toReturn);
+		return toReturn;
+	}
+
 }

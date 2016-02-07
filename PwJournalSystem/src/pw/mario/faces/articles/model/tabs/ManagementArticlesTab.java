@@ -71,7 +71,7 @@ public class ManagementArticlesTab implements ArticlesTab {
 	@Override
 	public void refresh() {
 		if (selectedArticle != null) {
-			selectedArticle = articleService.getArticle(selectedArticle.getArticleId(), ctx.getCurrentUser());
+ 			selectedArticle = articleService.getArticle(selectedArticle.getArticleId(), ctx.getCurrentUser());
 			int articleIndex = 0;
 			
 			for (Article a: articles) {

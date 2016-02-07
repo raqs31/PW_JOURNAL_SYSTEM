@@ -46,7 +46,7 @@ public class ArticlePrinterService implements ArticleService {
 
 	@Override
 	public Article getArticle(Long id, User u) {
-		return articleDao.getArticle(id);
+		return articleDao.getRefreshedArticle(id);
 	}
 
 }
