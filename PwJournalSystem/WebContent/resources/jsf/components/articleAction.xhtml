@@ -22,5 +22,11 @@
 			</p:dataList>
 		</h:form>
 		</div>
+		<p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
+			showHeader="false"
+		>
+			<p:graphicImage name="ajax-loader.gif" />
+		</p:dialog>
 	</cc:implementation>
 </ui:component>

@@ -31,7 +31,7 @@ public interface ArticlesTab extends Refreshable {
 
 		@Override
 		public int compare(ArticlesTab o1, ArticlesTab o2) {
-			return o1.getId().compareTo(o2.getId());
+			return -o1.getId().compareTo(o2.getId());
 		}
 		
 	}

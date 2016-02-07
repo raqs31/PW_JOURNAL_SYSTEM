@@ -30,15 +30,15 @@ import pw.mario.journal.service.article.ArticleService;
 @Named
 @ArticleTab
 @Dependent
-public class AcceptorArticleTab implements Serializable, ArticlesTab {
+public class PrinterTab implements Serializable, ArticlesTab {
 	private static final long serialVersionUID = 1L;
-	private static final String TITTLE = "Artykuły do akceptacji";
+	private static final String TITTLE = "Artykuły do druku";
 	
-	@Inject @ArticleManagement(ArticleManager.ARTICLE_ACCEPTOR) private ArticleService articleService;
+	@Inject @ArticleManagement(ArticleManager.PRINTER) private ArticleService articleService;
 	@Inject private LoginService ctx;
 	
 	@Getter @Setter private Article selectedArticle;
-	@Getter private final String id = "acceptors";
+	@Getter private final String id = "Zprinter";
 	@Getter private Collection<ButtonAction> actions;
 	
 	private List<Article> articles;
