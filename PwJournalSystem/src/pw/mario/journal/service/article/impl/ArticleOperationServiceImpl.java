@@ -26,6 +26,7 @@ import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleHistory;
 import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;
@@ -67,6 +68,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			handler.getFile().delete();
 		
 			a.getVersions().add(newVersion);
+			addHistoryRecord(a, newVersion);
 			articleDao.save(a);
 			
 			a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
@@ -105,7 +107,8 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			
 			setExecutionParameter(toProcess, ctx);
 			toProcess.setStatus(ctx.getRule().getToStatus());
-
+			addHistoryRecord(toProcess, ctx);
+			
 			articleDao.save(toProcess);
 		} catch (OptimisticLockException e) {
 			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
@@ -160,5 +163,19 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			if (rule.getPickManager())
 				article.setManagement(ctx.getManager());
 		}
+	}
+	
+	private void addHistoryRecord(Article a, ArticleVersion v) {
+		ArticleHistory history = new ArticleHistory();
+		history.setArticle(a);
+		history.setVersion(v);
+		a.getHistory().add(history);
+	}
+	
+	private void addHistoryRecord(Article a, ExecutionContext ctx) {
+		ArticleHistory history = new ArticleHistory();
+		history.setArticle(a);
+		history.setRule(ctx.getRule());
+		a.getHistory().add(history);
 	}
 }
