@@ -1,8 +1,10 @@
 package pw.mario.faces.articles.model;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.ejb.EJBAccessException;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
@@ -18,11 +20,19 @@ public class ArticleTabFactory {
 	@ArticleTab
 	public List<ArticlesTab> getAllowedArticleTabs(@ArticleTab Instance<ArticlesTab> tabs, InjectionPoint ip) {
 		List<ArticlesTab> allowedTab = new LinkedList<>();
-		for (ArticlesTab t: tabs) {
-			if (t.tabAllowed()) {
-				allowedTab.add(t);
-				log.debug("DODAJĘ " + t);
-			}
+		Iterator<ArticlesTab> tabIterator = tabs.iterator();
+		
+		while (tabIterator.hasNext()) {
+			try {
+				ArticlesTab t = tabIterator.next();
+				
+				if (t.tabAllowed()) {
+					allowedTab.add(t);
+					log.debug("DODAJĘ " + t);
+				}
+			} catch (EJBAccessException e){
+				log.debug("AccesException", e);
+			} 
 		}
 		return allowedTab;
 	}

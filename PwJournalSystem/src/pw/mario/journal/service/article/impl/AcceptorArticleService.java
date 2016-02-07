@@ -1,5 +1,6 @@
 package pw.mario.journal.service.article.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,23 +16,19 @@ import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
-import pw.mario.journal.service.article.ArticleOperationService;
 import pw.mario.journal.service.article.ArticleService;
 
 @Stateless
-@ArticleManagement(value=ArticleManager.AUTHOR)
-@RolesAllowed("AUTHOR")
-public class AuthorArticleService implements ArticleService {
+@ArticleManagement(value=ArticleManager.ARTICLE_ACCEPTOR)
+@RolesAllowed("ACCEPTOR")
+public class AcceptorArticleService implements ArticleService, Serializable {
 	private static final long serialVersionUID = 1L;
-	private final String[] rolesAllowed = {"AUTHOR"};
-
 	@Inject private ArticleDAO articleDao;
-	@Inject private ArticleOperationService articleOperation;
-	
+	private String[] rolesAllowed = {"ACCEPTOR"};
 	@Override
 	@PermitAll
 	public List<Article> getArticles(User u) {
-		return articleDao.getUserArticles(u);
+		return articleDao.getArticlesToManagement(u);
 	}
 
 	@Override
@@ -42,15 +39,12 @@ public class AuthorArticleService implements ArticleService {
 
 	@Override
 	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh) {
-		return articleOperation.getActions(a, u, toRefresh);
+		return null;
 	}
 
 	@Override
 	public Article getArticle(Long id, User u) {
-		Article article = articleDao.getArticle(id);
-		articleDao.refresh(article);
-		articleDao.loadDetails(article);
-		return article;
+		return articleDao.getArticle(id);
 	}
-	
+
 }

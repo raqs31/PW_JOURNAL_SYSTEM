@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.file.FileHandler;
@@ -21,7 +22,7 @@ public interface ArticleOperationService {
 	
 	List<Rule> getAvailableSteps(Article a, User u);
 	
-	Collection<ButtonAction> getActions(Article a, User u);
+	Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh);
 	
 	void execute(ExecutionContext ctx) throws RouteActionException;
 	

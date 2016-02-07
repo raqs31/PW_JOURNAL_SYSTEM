@@ -12,6 +12,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
@@ -87,7 +88,5 @@ public class DeleteArticle implements ButtonAction {
 	}
 
 	@Override
-	public boolean refreshNeeded() {
-		return false;
-	}
+	public void setToRefresh(Refreshable toRefresh) {}
 }

@@ -12,6 +12,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.LockException;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.Messages;
@@ -28,7 +29,7 @@ import pw.mario.journal.service.article.ArticleOperationService;
 @Dependent
 public class UploadNewVersionAction implements ButtonAction {
 	private static final long serialVersionUID = -4869406550164908694L;
-	private boolean refreshNeeded = false;
+	private Refreshable toRefresh;
 	
 	@Inject private ArticleOperationService operation;
 	private Article article;
@@ -70,7 +71,8 @@ public class UploadNewVersionAction implements ButtonAction {
 				throw new PerformActionException("Nie udało się przesłać pliku");
 			
 			operation.addNewVersion(article, (FileHandler)o);
-			refreshNeeded = true;
+			if (toRefresh != null)
+				toRefresh.refresh();
 			Messages.addMessage("Dodano nową wersję");
 		} catch (LockException ex) { 
 			Messages.addMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage());
@@ -83,9 +85,9 @@ public class UploadNewVersionAction implements ButtonAction {
 	public void setArticle(Article a) {
 		this.article=a;
 	}
-	
+
 	@Override
-	public boolean refreshNeeded() {
-		return refreshNeeded;
+	public void setToRefresh(Refreshable toRefresh) {
+		this.toRefresh = toRefresh;
 	}
 }

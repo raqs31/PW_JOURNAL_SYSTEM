@@ -6,6 +6,7 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.faces.articles.co.ArticleDetailsController;
 import pw.mario.journal.model.Article;
@@ -58,8 +59,5 @@ public class Refresh implements ButtonAction {
 	}
 
 	@Override
-	public boolean refreshNeeded() {
-		return false;
-	}
-
+	public void setToRefresh(Refreshable toRefresh) {}
 }

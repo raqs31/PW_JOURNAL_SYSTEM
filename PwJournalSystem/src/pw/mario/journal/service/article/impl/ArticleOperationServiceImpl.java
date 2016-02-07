@@ -15,6 +15,7 @@ import javax.transaction.Transactional.TxType;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.LockException;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
@@ -85,9 +86,9 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	}
 
 	@Override
-	public Collection<ButtonAction> getActions(Article a, User u) {
-		Collection<ButtonAction> actions = actionFactory.getActions(a, u);
-		actions.addAll(ruleActionFactory.getActions(a, u));
+	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh) {
+		Collection<ButtonAction> actions = actionFactory.getActions(a, u, toRefresh);
+		actions.addAll(ruleActionFactory.getActions(a, u, toRefresh));
 		
 		List<ButtonAction> toReturn = new LinkedList<>(actions);
 		toReturn.sort((b1, b2) -> b1.getValue().compareTo(b2.getValue()));

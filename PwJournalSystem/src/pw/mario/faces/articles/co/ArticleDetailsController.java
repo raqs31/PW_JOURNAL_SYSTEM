@@ -72,6 +72,6 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 	@Override
 	public void refresh() {
 		article = articleService.getArticle(article.getArticleId(), null);
-		actions = articleService.getActions(article, ctx.getCurrentUser());
+		actions = articleService.getActions(article, ctx.getCurrentUser(), this);
 	}
 }

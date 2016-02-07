@@ -6,6 +6,7 @@ import javax.enterprise.context.Dependent;
 import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.Button;
@@ -22,7 +23,6 @@ public class CreateArticle implements ButtonAction {
 
 	@Override
 	public void doAction() throws PerformActionException {
-//			JSFUtil.redirect("newArticle.xhtml");
 	}
 
 	@Override
@@ -55,8 +55,6 @@ public class CreateArticle implements ButtonAction {
 	}
 
 	@Override
-	public boolean refreshNeeded() {
-		return false;
+	public void setToRefresh(Refreshable toRefresh) {
 	}
-
 }

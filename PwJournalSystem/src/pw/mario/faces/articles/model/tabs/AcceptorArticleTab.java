@@ -30,11 +30,11 @@ import pw.mario.journal.service.article.ArticleService;
 @Named
 @ArticleTab
 @Dependent
-public class AuthorArticlesTab implements Serializable, ArticlesTab {
+public class AcceptorArticleTab implements Serializable, ArticlesTab {
 	private static final long serialVersionUID = 1L;
 	private static final String TITTLE = "Artykuły autora";
 	
-	@Inject @ArticleManagement(ArticleManager.AUTHOR) private ArticleService articleService;
+	@Inject @ArticleManagement(ArticleManager.ARTICLE_ACCEPTOR) private ArticleService articleService;
 	@Inject private LoginService ctx;
 	
 	@Getter @Setter private Article selectedArticle;

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.Button;
@@ -19,11 +20,12 @@ public class ArticleActionFactory extends AbstractActionFactory<ButtonAction, Ar
 	@Inject @Button private Instance<ButtonAction> actions;
 	
 	@Override
-	public Collection<ButtonAction> getActions(Article a, User u ) {
+	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh ) {
 		Collection<ButtonAction> toReturn = new LinkedList<>();
 		
 		actions.forEach(b -> {  
 			b.setArticle(a);
+			b.setToRefresh(toRefresh);
 			if (b.allowed())
 				toReturn.add(b); 
 			});

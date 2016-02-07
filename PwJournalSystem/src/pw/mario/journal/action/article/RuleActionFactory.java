@@ -18,6 +18,7 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.ContextConstants;
+import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.exception.RouteActionException;
 import pw.mario.common.util.Messages;
@@ -34,16 +35,16 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 	@Inject ArticleOperationService service;
 	
 	@Override
-	public Collection<ButtonAction> getActions(Article a, User u ) {
+	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh ) {
 		Collection<ButtonAction> availRules = new LinkedList<>();
 		
 		
 		for (Rule r : service.getAvailableSteps(a, u)) {
 			ButtonAction action;
 			if (r.withUserAction())
-				action = new RuleWithAction(a, r, service);
+				action = new RuleWithAction(a, r, service, toRefresh);
 			else
-				action = new RuleButtonAction(a, r, service);
+				action = new RuleButtonAction(a, r, service, toRefresh);
 			availRules.add(action);
 		}
 		return availRules;
@@ -55,13 +56,13 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		protected Article article;
 		protected Rule rule;
 		protected ArticleOperationService articleService;
-		protected boolean refreshNeeded;
+		protected Refreshable toRefresh;
 		
-		protected RuleButtonAction(Article a, Rule r, ArticleOperationService service) {
+		protected RuleButtonAction(Article a, Rule r, ArticleOperationService service, Refreshable toRefresh) {
 			this.article = a;
 			this.rule = r;
 			this.articleService = service;
-			this.refreshNeeded = false;
+			this.toRefresh = toRefresh;
 		}
 		
 		@Override
@@ -74,12 +75,13 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 			ExecutionContext ctx = ExecutionContext.builder().article(article).rule(rule).build();
 			try {
 				articleService.execute(ctx);
+				if (toRefresh != null)
+					toRefresh.refresh();
 				Messages.addMessage("Wykonano akcję: " + rule.getName());
 			} catch (RouteActionException e) {
 				log.error("Error in execute rule", e);
 				Messages.addMessage(FacesMessage.SEVERITY_ERROR, e.getMessage(), e.getDetails());
 			}
-			refreshNeeded = true;
 		}
 
 		@Override
@@ -104,19 +106,18 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		public void setArticle(Article a) {
 			throw new RuntimeException("Operation not supported for this class");
 		}
-		
-		@Override
-		public boolean refreshNeeded() {
-			return refreshNeeded;
-		}
 
+		@Override
+		public void setToRefresh(Refreshable toRefresh) {
+			this.toRefresh = toRefresh;
+		}
 	}
 	
 	@Log4j
 	private static class RuleWithAction extends RuleButtonAction {
 
-		protected RuleWithAction(Article a, Rule r, ArticleOperationService service) {
-			super(a, r, service);
+		protected RuleWithAction(Article a, Rule r, ArticleOperationService service, Refreshable toRefresh) {
+			super(a, r, service, toRefresh);
 		}
 
 		private static final long serialVersionUID = 1L;
@@ -159,8 +160,9 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 						.build();
 				try {
 					articleService.execute(ctx);
-					refreshNeeded = true;
 					Messages.addMessage("Wykonano akcję: " + rule.getName());
+					if (toRefresh != null)
+						toRefresh.refresh();
 				} catch (RouteActionException e1) {
 					log.error("Error on execute", e1);
 					Messages.addMessage(FacesMessage.SEVERITY_ERROR, "Nie udało się wykonać akcji", e1.getMessage());

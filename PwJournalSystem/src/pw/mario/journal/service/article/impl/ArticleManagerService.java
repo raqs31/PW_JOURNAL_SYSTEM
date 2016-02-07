@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.common.api.Refreshable;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
@@ -37,7 +38,7 @@ public class ArticleManagerService implements ArticleService, Serializable {
 	}
 
 	@Override
-	public Collection<ButtonAction> getActions(Article a, User u) {
+	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh) {
 		// TODO Auto-generated method stub
 		return null;
 	}
