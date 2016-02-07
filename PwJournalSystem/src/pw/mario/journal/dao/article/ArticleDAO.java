@@ -19,6 +19,8 @@ public interface ArticleDAO {
 	
 	List<Article> getArticlesToManagement(User u);
 	
+	List<Article> getPrintableArticles(User u);
+	
 	List<User> getArticleAuthors(Article a);
 	
 	List<Tag> getArticleTags(Article a);

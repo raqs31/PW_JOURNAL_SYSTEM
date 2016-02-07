@@ -31,7 +31,7 @@
 			<p:dataTable value="#{ruleActions.availableAcceptors}" var="acc" border="1" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowsPerPageTemplate="10, 20, 30" reflowrendered="#{ruleActions.availableAcceptors}" rowKey="#{acc.userId}"
-				selection="#{ruleActions.ctx.acceptors}" rendered="#{ruleActions.pickManagementRendered}" paginatorPosition="bottom"
+				selection="#{ruleActions.ctx.acceptors}" rendered="#{ruleActions.pickAcceptorsRendered}" paginatorPosition="bottom"
 			>
 				<f:facet name="header">Wybierz akceptujących</f:facet>
 				<p:column selectionMode="multiple" style="width:16px;text-align:center" />

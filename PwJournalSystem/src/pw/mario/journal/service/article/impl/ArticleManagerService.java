@@ -1,6 +1,5 @@
 package pw.mario.journal.service.article.impl;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
@@ -21,12 +20,14 @@ import pw.mario.journal.service.article.ArticleService;
 @Stateless
 @ArticleManagement(value=ArticleManager.ARTICLE_MANAGER)
 @RolesAllowed("ARTICLE_MANAGER")
-public class ArticleManagerService implements ArticleService, Serializable {
+public class ArticleManagerService implements ArticleService {
 	private static final long serialVersionUID = 1L;
+	
 	@Inject private ArticleDAO articleDao;
+	
 	private String[] rolesAllowed = {"ARTICLE_MANAGER"};
+	
 	@Override
-	@PermitAll
 	public List<Article> getArticles(User u) {
 		return articleDao.getArticlesToManagement(u);
 	}

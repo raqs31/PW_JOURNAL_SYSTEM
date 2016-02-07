@@ -19,9 +19,9 @@ public class ArticleStatus  extends Dictionary {
 	public static final String DICTIONARY_NAME = "ARTICLE_STATUS";
 	public static final String INITIAL_PROCESS = "article.status.initial";
 	public static final String INITIAL = "INITIAL";
-	private static final String DELETABLE = "DELETE";
-	private static final String ADD_VERSION = "ADD_VER";
-	private static final String PRINTABLE = "FOR_PRINT";
+	public static final String DELETABLE = "DELETE";
+	public static final String ADD_VERSION = "ADD_VER";
+	public static final String PRINTABLE = "FOR_PRINT";
 	
 	public boolean initial() {
 		return INITIAL.equals(getAttr1());

@@ -21,14 +21,14 @@ import pw.mario.journal.service.article.ArticleService;
 @Stateless
 @ArticleManagement(value=ArticleManager.ARTICLE_ACCEPTOR)
 @RolesAllowed("ACCEPTOR")
-public class AcceptorArticleService implements ArticleService, Serializable {
+public class AcceptorArticleService implements ArticleService {
 	private static final long serialVersionUID = 1L;
 	@Inject private ArticleDAO articleDao;
 	private String[] rolesAllowed = {"ACCEPTOR"};
+
 	@Override
-	@PermitAll
 	public List<Article> getArticles(User u) {
-		return articleDao.getArticlesToManagement(u);
+		return articleDao.getArticlesToAccept(u);
 	}
 
 	@Override

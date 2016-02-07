@@ -15,6 +15,7 @@ import org.primefaces.event.SelectEvent;
 import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.action.form.ButtonAction;
+import pw.mario.faces.articles.co.ArticleDetailsController;
 import pw.mario.faces.articles.model.ArticlesTab;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
@@ -33,15 +34,18 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	@Inject @ArticleManagement(ArticleManager.ARTICLE_MANAGER) private ArticleService articleService;
 	@Inject private LoginService ctx;
 	
-	@Getter @Setter private List<Article> articles;
 	@Getter @Setter private Article selectedArticle;
 	@Getter private final String id = "articleMgmt";
 	
-	@PostConstruct
-	private void init() {
-		articles = articleService.getArticles(ctx.getCurrentUser());
-	}
+	private List<Article> articles;
 
+	@Override
+	public List<Article> getArticles() {
+		if (articles == null)
+			articles =articleService.getArticles(ctx.getCurrentUser());
+		return articles;
+	}
+	
 	@Override
 	public Iterable<ButtonAction> getActions() {
 		// TODO Auto-generated method stub
@@ -55,8 +59,11 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 
 	@Override
 	public String onEdit(Article a) {
-		// TODO Auto-generated method stub
-		return "articleDetail";
+		FacesContext.getCurrentInstance()
+			.getExternalContext()
+			.getFlash()
+			.put(ArticleDetailsController.PARAM_ARTICLE_ID, a);
+		return "articleDetails?faces-redirect=true";
 	}
 	
 	@Override

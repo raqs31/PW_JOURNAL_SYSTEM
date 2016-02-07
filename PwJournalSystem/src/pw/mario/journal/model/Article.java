@@ -49,6 +49,15 @@ import pw.mario.journal.model.ext.IdTable;
 	),
 	@NamedQuery(name=Article.Queries.ARTICLE_TAGS,
 		query="select t from Article a join a.tagList t where a.articleId = ?1"
+	),
+	@NamedQuery(name=Article.Queries.MANAGER_ARTICLE,
+		query="select a from Article a where a.management = ?1"
+	),
+	@NamedQuery(name=Article.Queries.ACCEPTOR_ARTICLE,
+		query="select a from Article a join a.acceptors acc where acc = ?1"
+	),
+	@NamedQuery(name=Article.Queries.PRINTABLE_ARTICLE,
+		query="select a from Article a where a.status.attr3 = '" + ArticleStatus.PRINTABLE + "'"
 	)
 })
 public class Article extends AuditTable implements IdTable {
@@ -122,8 +131,8 @@ public class Article extends AuditTable implements IdTable {
 		String USER_ARTICLES = "user.articles";
 		String ARTICLE_AUTHORS = "article.authors";
 		String ARTICLE_TAGS = "article.tags";
-		String ARTICLE_TO_ACCEPT = "article.acceptor";
-		String ARTICLE_MANAGEMENT = "article.manager";
-		String ARTICLE_PRINT = "article.print";
+		String ACCEPTOR_ARTICLE = "article.acceptor";
+		String MANAGER_ARTICLE = "article.manager";
+		String PRINTABLE_ARTICLE = "article.print";
 	}
 }

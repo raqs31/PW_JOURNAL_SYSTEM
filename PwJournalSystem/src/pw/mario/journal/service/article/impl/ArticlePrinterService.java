@@ -6,9 +6,11 @@ import java.util.List;
 import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.Refreshable;
+import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.ArticleManagement;
@@ -22,10 +24,11 @@ public class ArticlePrinterService implements ArticleService {
 	private static final long serialVersionUID = 1L;
 	private static final String[] rolesAllowed = {"PRINTER"};
 	
+	@Inject private ArticleDAO articleDao;
+	
 	@Override
 	public List<Article> getArticles(User u) {
-		// TODO Auto-generated method stub
-		return null;
+		return articleDao.getPrintableArticles(u);
 	}
 
 	@Override

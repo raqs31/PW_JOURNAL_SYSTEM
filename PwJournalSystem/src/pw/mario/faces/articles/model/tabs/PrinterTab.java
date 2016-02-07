@@ -41,12 +41,6 @@ public class PrinterTab implements Serializable, ArticlesTab {
 	
 	private List<Article> articles;
 	
-	@PostConstruct
-	@PermitAll
-	private void init() {
-		refresh();
-	}
-	
 	@Override
 	public List<Article> getArticles() {
 		if (articles == null)

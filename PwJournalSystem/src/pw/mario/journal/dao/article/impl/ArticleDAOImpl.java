@@ -37,12 +37,12 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 
 	@Override
 	public List<Article> getArticlesToAccept(User u) {
-		return null;
+		return createNamedTypedQuery(Article.Queries.ACCEPTOR_ARTICLE).setParameter(1, u).getResultList();
 	}
 
 	@Override
 	public List<Article> getArticlesToManagement(User u) {
-		return null;
+		return createNamedTypedQuery(Article.Queries.MANAGER_ARTICLE).setParameter(1, u).getResultList();
 	}
 
 	@Override
@@ -112,6 +112,11 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	@Override
 	public void refresh(Article a) {
 		em.refresh(a);
+	}
+
+	@Override
+	public List<Article> getPrintableArticles(User u) {
+		return createNamedTypedQuery(Article.Queries.PRINTABLE_ARTICLE).getResultList();
 	}
 
 }
