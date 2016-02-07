@@ -163,6 +163,11 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			if (rule.getPickManager())
 				article.setManagement(ctx.getManager());
 		}
+		
+		if (rule.getClearManager())
+			article.setManagement(null);
+		if (rule.getClearAcceptors())
+			article.getAcceptors().clear();
 	}
 	
 	private void addHistoryRecord(Article a, ArticleVersion v) {

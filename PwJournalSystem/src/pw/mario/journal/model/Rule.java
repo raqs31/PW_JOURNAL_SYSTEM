@@ -99,7 +99,13 @@ public class Rule implements Serializable, IdTable {
 	
 	@Column(name="READY_TO_PRINT", nullable=false)
 	private Boolean readyToPrin;
-		
+	
+	@Column(name="CLEAR_MANAGER", nullable=false)
+	private Boolean clearManager;
+	
+	@Column(name="CLEAR_ACCEPTORS", nullable=false)
+	private Boolean clearAcceptors;
+	
 	@Override
 	public Object getId() {
 		return ruleId;

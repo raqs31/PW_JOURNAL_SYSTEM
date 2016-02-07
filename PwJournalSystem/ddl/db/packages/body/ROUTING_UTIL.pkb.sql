@@ -43,7 +43,9 @@ PROCEDURE insert_rule(
     P_FOR_AUTHOR     VARCHAR2,
     P_FOR_MANAGER    VARCHAR2,
     P_PICK_ACCEPTOR  VARCHAR2,
-    P_PICK_MANAGER   VARCHAR2)
+    P_PICK_MANAGER   VARCHAR2,
+    P_CLEAR_MANAGER  VARCHAR2,
+    P_CLEAR_ACC	   VARCHAR2)
 IS
 BEGIN
   INSERT
@@ -61,7 +63,9 @@ BEGIN
       for_author,
       for_manager,
       pick_acceptors,
-      pick_manager
+      pick_manager,
+      CLEAR_MANAGER,
+      CLEAR_ACCEPTORS
     )
     VALUES
     (
@@ -76,7 +80,9 @@ BEGIN
       is_empty(p_for_author),
       is_empty(p_for_manager),
       is_empty(p_pick_acceptor),
-      is_empty(p_pick_manager)
+      is_empty(p_pick_manager),
+      is_empty(P_CLEAR_MANAGER),
+      is_empty(P_CLEAR_ACC)
     );
 END;
 END ROUTING_UTIL;

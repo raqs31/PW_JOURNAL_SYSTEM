@@ -22,7 +22,6 @@ import pw.mario.journal.model.Article;
 import pw.mario.journal.qualifiers.ArticleTab;
 import pw.mario.journal.service.article.ArticleLazyLoadingService;
 
-@Log4j
 @Named
 @NoArgsConstructor
 @ViewScoped
@@ -33,10 +32,8 @@ public class ArticleListController implements Serializable {
 	@Getter @Setter private Article articleDetail;
 	
 	@PostConstruct
-	private void init() {
-		for (ArticlesTab t: articlesTabs) {
-			log.debug("Instance of articleTab: " + t.getTittle());
-		}
+	private void init() { 
+		articlesTabs.forEach(t -> t.refresh());
 		Collections.sort(articlesTabs, new ArticlesTab.ArticleTabComparator());
 	}
 	
