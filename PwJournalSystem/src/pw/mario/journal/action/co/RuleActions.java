@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -21,7 +20,6 @@ import pw.mario.common.api.ContextConstants;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.Rule;
-import pw.mario.journal.model.Rule_;
 import pw.mario.journal.model.User;
 import pw.mario.journal.service.article.ArticleOperationService;
 

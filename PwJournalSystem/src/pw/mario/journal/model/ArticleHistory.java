@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
 import javax.persistence.SequenceGenerator;
@@ -30,6 +31,7 @@ public class ArticleHistory extends AuditTable implements IdTable {
 	@SequenceGenerator(sequenceName="ARTICLE_HISTORY_SEQ", name="articleHistorySeq", initialValue=1, allocationSize=1)
 	@GeneratedValue(generator="articleHistorySeq", strategy=GenerationType.SEQUENCE)
 	@Column(name="HISTORY_ID")
+	@OrderBy("id desc")
 	private Long id;
 	
 	@Column(name="USER_COMMENT", length=120, nullable=true)

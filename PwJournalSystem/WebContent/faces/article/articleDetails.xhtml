@@ -17,7 +17,7 @@
 				/>
 			</p:dataList>
 			<p:outputLabel value="Wersja:" for="olVersion" />
-			<p:outputLabel id="olVersion" value="#{article.objectVersionNumber}"/>
+			<p:outputLabel id="olVersion" value="#{article.objectVersionNumber}" />
 			<h:panelGrid columns="1">
 				<p:spacer width="100%" height="5" />
 				<h:panelGrid columns="2">
@@ -34,8 +34,8 @@
 				<p:outputLabel value="Wersje" for="sVersions" />
 				<p:separator id="sVersions" />
 				<h:form id="fVersions">
-					<p:dataTable id="dtVersions" var="ver" value="#{article.versions}" border="0" rows="10"
-						paginator="true" emptyMessage="Brak wersji"
+					<p:dataTable id="dtVersions" var="ver" value="#{article.versions}" border="0" rows="10" paginator="true"
+						emptyMessage="Brak wersji"
 						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
 					>
 						<p:column sortable="false">
@@ -62,7 +62,9 @@
 					</p:dataTable>
 				</h:form>
 				<p:separator />
-				<p:dataTable value="#{article.history}" var="h" rows="10" emptyMessage="Brak" lazy="true" paginatorPosition="bottom" >
+				<p:dataTable id="dtHistory" paginator="true" value="#{article.history}" var="h" rows="10" emptyMessage="Brak"
+					lazy="true" paginatorPosition="bottom"
+				>
 					<f:facet name="header">Historia</f:facet>
 					<p:column>
 						<f:facet name="header">Data operacji</f:facet>
@@ -90,9 +92,8 @@
 			</p:dataList>
 		</ui:define>
 		<ui:define name="south">
-			<my:articleAction actions="#{articleDetailsController.actions}" 
-				update=":fVersions:dtVersions :olVersion :olStatus" 
-				componentPath=""
+			<my:articleAction actions="#{articleDetailsController.actions}"
+				update=":fVersions:dtVersions :dtHistory :olVersion :olStatus" componentPath=""
 			/>
 		</ui:define>
 	</ui:composition>
