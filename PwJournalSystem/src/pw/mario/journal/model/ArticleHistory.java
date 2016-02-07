@@ -60,7 +60,7 @@ public class ArticleHistory extends AuditTable implements IdTable {
 				.append(' ');
 		if (version != null)
 			sb.append("Dodano plik: ")
-				.append(version.getAttachement());
+				.append( version.getAttachement().substring(version.getAttachement().lastIndexOf('\\') + 1));
 		description = sb.toString();
 	}
 }
