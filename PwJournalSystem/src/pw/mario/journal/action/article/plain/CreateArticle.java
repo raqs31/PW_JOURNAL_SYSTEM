@@ -2,6 +2,9 @@ package pw.mario.journal.action.article.plain;
 
 
 import javax.enterprise.context.Dependent;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.security.auth.login.LoginContext;
 
 import org.primefaces.event.SelectEvent;
 
@@ -15,10 +18,10 @@ import pw.mario.journal.qualifiers.Button;
 @Dependent
 public class CreateArticle implements ButtonAction {
 	private static final long serialVersionUID = 1L;
-	private Article article;
+	
 	@Override
 	public boolean allowed() {
-		return article == null;
+		return FacesContext.getCurrentInstance().getExternalContext().isUserInRole("AUTHOR");
 	}
 
 	@Override
@@ -51,7 +54,6 @@ public class CreateArticle implements ButtonAction {
 
 	@Override
 	public void setArticle(Article a) {
-		this.article = a;
 	}
 
 	@Override
