@@ -22,4 +22,7 @@ public interface ButtonAction extends ConditionalAction, Serializable {
 	
 	void setToRefresh(Refreshable toRefresh);
 	
+	default boolean availableOnList() {
+		return true;
+	}
 }

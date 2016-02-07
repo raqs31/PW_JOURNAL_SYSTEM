@@ -1,6 +1,5 @@
 package pw.mario.journal.service.article.impl;
 
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 

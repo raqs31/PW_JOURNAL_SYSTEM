@@ -57,4 +57,9 @@ public class ReturnToList implements ButtonAction {
 
 	@Override
 	public void setToRefresh(Refreshable toRefresh) {}
+	
+	@Override
+	public boolean availableOnList() {
+		return false;
+	}
 }

@@ -60,4 +60,9 @@ public class Refresh implements ButtonAction {
 
 	@Override
 	public void setToRefresh(Refreshable toRefresh) {}
+	
+	@Override
+	public boolean availableOnList() {
+		return false;
+	}
 }

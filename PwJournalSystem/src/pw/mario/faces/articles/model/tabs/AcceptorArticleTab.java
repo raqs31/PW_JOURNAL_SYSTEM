@@ -3,9 +3,8 @@ package pw.mario.faces.articles.model.tabs;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.security.PermitAll;
 import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -95,7 +94,9 @@ public class AcceptorArticleTab implements Serializable, ArticlesTab {
 	}
 	
 	private void reloadActions() {
-		actions = articleService.getActions(selectedArticle, ctx.getCurrentUser(), this);
-			
+		actions = articleService.getActions(selectedArticle, ctx.getCurrentUser(), this)
+			.stream()
+			.filter(b->b.availableOnList())
+			.collect(Collectors.toList());
 	}
 }

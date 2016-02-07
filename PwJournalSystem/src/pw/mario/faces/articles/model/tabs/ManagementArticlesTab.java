@@ -1,10 +1,9 @@
 package pw.mario.faces.articles.model.tabs;
 
-import java.io.Serializable;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -27,8 +26,7 @@ import pw.mario.journal.service.article.ArticleService;
 @Named
 @ArticleTab
 @Dependent
-public class ManagementArticlesTab implements Serializable, ArticlesTab {
-	private static final long serialVersionUID = 1L;
+public class ManagementArticlesTab implements ArticlesTab {
 	private static final String TITTLE = "Artykuły zarządzane";
 	
 	@Inject @ArticleManagement(ArticleManager.ARTICLE_MANAGER) private ArticleService articleService;
@@ -36,6 +34,7 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	
 	@Getter @Setter private Article selectedArticle;
 	@Getter private final String id = "articleMgmt";
+	@Getter private Collection<ButtonAction> actions;
 	
 	private List<Article> articles;
 
@@ -46,12 +45,6 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 		return articles;
 	}
 	
-	@Override
-	public Iterable<ButtonAction> getActions() {
-		// TODO Auto-generated method stub
-		return Collections.emptyList();
-	}
-
 	@Override
 	public String getTittle() {
 		return TITTLE;
@@ -76,15 +69,32 @@ public class ManagementArticlesTab implements Serializable, ArticlesTab {
 	}
 
 	@Override
-	public void onRowSelect(SelectEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void refresh() {
+		if (selectedArticle != null) {
+			selectedArticle = articleService.getArticle(selectedArticle.getArticleId(), ctx.getCurrentUser());
+			int articleIndex = 0;
+			
+			for (Article a: articles) {
+				if (a.getArticleId().compareTo(selectedArticle.getArticleId()) == 0) {
+					articles.remove(articleIndex);
+					articles.add(articleIndex, selectedArticle);
+					break;
+				}
+				articleIndex++;
+			}
+		}
+		reloadActions();
 	}
 
 	@Override
-	public void refresh() {
-		// TODO Auto-generated method stub
-		
+	public void onRowSelect(SelectEvent e) {
+		reloadActions();
 	}
-
+	
+	private void reloadActions() {
+		actions = articleService.getActions(selectedArticle, ctx.getCurrentUser(), this)
+			.stream()
+			.filter(b->b.availableOnList())
+			.collect(Collectors.toList());
+	}
 }
