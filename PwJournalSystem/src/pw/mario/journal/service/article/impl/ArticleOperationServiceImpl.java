@@ -1,6 +1,7 @@
 package pw.mario.journal.service.article.impl;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,11 +98,13 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Override
 	public void execute(ExecutionContext ctx) throws RouteActionException {
 		checkExecutionContext(ctx);
+		validate(ctx);
 		try {
 			Article toProcess = articleDao.getLockedArticle(ctx.getArticle(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+			
+			setExecutionParameter(toProcess, ctx);
 			toProcess.setStatus(ctx.getRule().getToStatus());
-		
-		
+
 			articleDao.save(toProcess);
 		} catch (OptimisticLockException e) {
 			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
@@ -141,5 +144,20 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Override
 	public Rule getRule(Long ruleId) {
 		return ruleDao.getRule(ruleId);
+	}
+	
+	private void validate(ExecutionContext ctx) throws RouteActionException {
+		//TODO
+	}
+	
+	private void setExecutionParameter(Article article, ExecutionContext ctx) {
+		Rule rule = ctx.getRule();
+		
+		if (rule.withUserAction()) {
+			if (rule.getPickAcceptors())
+				article.setAcceptors(new HashSet<>(ctx.getAcceptors()));
+			if (rule.getPickManager())
+				article.setManagement(ctx.getManager());
+		}
 	}
 }

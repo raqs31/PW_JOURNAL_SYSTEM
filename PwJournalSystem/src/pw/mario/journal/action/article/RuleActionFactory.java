@@ -150,10 +150,22 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 			if (o == null) {
 				Messages.addMessage(null, "Przerwano proces:", rule.getName());
 			} else {
-				Messages.addMessage(null, "Todo soon :)", rule.getName());
+				ExecutionContext tmp = (ExecutionContext) o;
+				ExecutionContext ctx = ExecutionContext.builder()
+						.article(article)
+						.rule(rule)
+						.manager(tmp.getManager())
+						.acceptors(tmp.getAcceptors())
+						.build();
+				try {
+					articleService.execute(ctx);
+					refreshNeeded = true;
+					Messages.addMessage("Wykonano akcję: " + rule.getName());
+				} catch (RouteActionException e1) {
+					log.error("Error on execute", e1);
+					Messages.addMessage(FacesMessage.SEVERITY_ERROR, "Nie udało się wykonać akcji", e1.getMessage());
+				}
 			}
-			
 		}
-
 	}
 }

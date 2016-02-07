@@ -49,7 +49,7 @@
 				</p:dataTable>
 			</h:form>
 			<p:spacer id="asdfg" width="100%" height="5px" />
-				<my:articleAction id="composite" actions="#{articles.actions}" componentPath=":articleTabView" update=":articleTabView:tabArticles" toRefresh="#{articles}" />
+				<my:articleAction id="composite" actions="#{articles.actions}" componentPath=":articleTabView" update=":articleTabView:tabArticles :msg" toRefresh="#{articles}" />
 		</p:tab>
 	</p:tabView>
 	<h:form id="detail">

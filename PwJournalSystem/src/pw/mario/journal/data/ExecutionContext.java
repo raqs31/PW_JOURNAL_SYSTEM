@@ -20,7 +20,7 @@ public class ExecutionContext {
 	@Getter private Article article;
 	@Getter private Rule rule;
 	@Getter private User user;
-	@Getter @Setter private User choosenManagement;
+	@Getter @Setter private User manager;
 	@Getter @Setter private List<User> acceptors;
 
 }

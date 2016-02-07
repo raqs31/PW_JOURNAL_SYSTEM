@@ -85,6 +85,7 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 			int articleIndex = articles.indexOf(selectedArticle);
 			articles.remove(articleIndex);
 			articles.add(articleIndex, selectedArticle);
+			selectedArticle = null;
 		}
 		reloadActions();
 	}
@@ -92,9 +93,6 @@ public class AuthorArticlesTab implements Serializable, ArticlesTab {
 	@Override
 	public void onRowSelect(SelectEvent e) {
 		reloadActions();
-		FacesMessage msg = new FacesMessage("Selected " + e.getObject(), null);
-		FacesContext.getCurrentInstance().addMessage(null, msg);
-		
 	}
 	
 	private void reloadActions() {
