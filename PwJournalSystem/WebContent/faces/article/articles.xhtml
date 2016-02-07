@@ -9,6 +9,7 @@
 <h:body>
 	<my:mainMenuBar />
 	<p:messages id="msg" closable="true" autoUpdate="true" showDetail="true" />
+	<my:status/>
 	<p:tabView id="articleTabView" dynamic="true" cache="true" value="#{articleListController.articlesTabs}" var="articles"
 		orientation="left"
 	>

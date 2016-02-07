@@ -122,5 +122,8 @@ public class Article extends AuditTable implements IdTable {
 		String USER_ARTICLES = "user.articles";
 		String ARTICLE_AUTHORS = "article.authors";
 		String ARTICLE_TAGS = "article.tags";
+		String ARTICLE_TO_ACCEPT = "article.acceptor";
+		String ARTICLE_MANAGEMENT = "article.manager";
+		String ARTICLE_PRINT = "article.print";
 	}
 }

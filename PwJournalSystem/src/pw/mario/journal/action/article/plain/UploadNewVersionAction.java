@@ -36,7 +36,7 @@ public class UploadNewVersionAction implements ButtonAction {
 	
 	@Override
 	public boolean allowed() {
-		return article != null;
+		return article != null && article.getStatus().addVersionEnabled();
 	}
 
 	@Override

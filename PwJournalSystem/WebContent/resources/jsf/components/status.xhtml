@@ -1,0 +1,15 @@
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+>
+	<cc:interface />
+	<cc:implementation>
+		<p:ajaxStatus onstart="PF('statusDialog').show()" oncomplete="PF('statusDialog').hide()" />
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false"
+			showHeader="false"
+		>
+			<p:graphicImage name="ajax-loader.gif" />
+		</p:dialog>
+	</cc:implementation>
+</ui:component>
