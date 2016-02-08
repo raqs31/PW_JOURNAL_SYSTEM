@@ -35,7 +35,7 @@ public class ArticleLazyLoadingServiceImpl implements ArticleLazyLoadingService 
 	@Override
 	public void loadAcceptors(Article a) {
 		if (!Hibernate.isInitialized(a.getAcceptors()))
-			a.setAcceptors(new HashSet<>(articleDao.getArticleAcceptors(a)));
+			a.setAcceptors(articleDao.getArticleAcceptors(a));
 	}
 
 }

@@ -2,6 +2,7 @@ package pw.mario.journal.action.article.plain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
@@ -52,8 +53,11 @@ public class UploadNewVersionAction implements ButtonAction {
 		
 		if (article.getStatus().acceptorAddVersionEnabled()) {
 			articleLazy.loadAcceptors(article);
-			if (article.getAcceptors().contains(ctx.getCurrentUser()))
+			try {
+				article.getAcceptors().stream().filter(acc->acc.getAcceptor().equals(ctx.getCurrentUser())).findAny().get();
 				return true;
+			} catch (NoSuchElementException e) {
+			}
 		}
 		return false;
 	}

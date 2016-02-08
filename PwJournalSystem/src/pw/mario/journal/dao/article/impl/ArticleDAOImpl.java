@@ -11,6 +11,7 @@ import pw.mario.common.exception.LockException;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleAcceptor;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
@@ -72,6 +73,7 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		a.getAuthors().size();
 		a.getTagList().size();
 		a.getVersions().size();
+		a.getHistory().size();
 	}
 
 	@Override
@@ -127,8 +129,8 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	}
 
 	@Override
-	public List<User> getArticleAcceptors(Article a) {
-		return em.createNamedQuery(Article.Queries.ARTICLE_ACCEPTORS, User.class).setParameter(1, a.getArticleId()).getResultList();
+	public List<ArticleAcceptor> getArticleAcceptors(Article a) {
+		return em.createNamedQuery(Article.Queries.ARTICLE_ACCEPTORS, ArticleAcceptor.class).setParameter(1, a).getResultList();
 	}
 
 }

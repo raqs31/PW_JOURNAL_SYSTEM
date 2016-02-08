@@ -6,6 +6,7 @@ import javax.persistence.LockModeType;
 
 import pw.mario.common.exception.LockException;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleAcceptor;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
@@ -23,7 +24,7 @@ public interface ArticleDAO {
 	
 	List<User> getArticleAuthors(Article a);
 	
-	List<User> getArticleAcceptors(Article a);
+	List<ArticleAcceptor> getArticleAcceptors(Article a);
 	
 	List<Tag> getArticleTags(Article a);
 	

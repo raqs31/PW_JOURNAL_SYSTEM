@@ -48,7 +48,7 @@ import pw.mario.journal.model.ext.IdTable;
 		query="select u from Article a join a.authors u where a.articleId = ?1"
 	),
 	@NamedQuery(name=Article.Queries.ARTICLE_ACCEPTORS,
-		query="select u from Article a join a.acceptors u where a.articleId = ?1"
+		query="select acc from ArticleAcceptor acc where acc.article = ?1"
 	),
 	@NamedQuery(name=Article.Queries.ARTICLE_TAGS,
 		query="select t from Article a join a.tagList t where a.articleId = ?1"
@@ -109,13 +109,8 @@ public class Article extends AuditTable implements IdTable {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleVersion> versions;
 	
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JoinTable(
-			name="ARTICLE_ACCEPTORS",
-			joinColumns={@JoinColumn(name="ARTICLE_ID", referencedColumnName="ARTICLE_ID")},
-			inverseJoinColumns={@JoinColumn(name="USER_ID", referencedColumnName="USER_ID")}
-	)
-	private Set<User> acceptors;
+	@OneToMany(mappedBy="article", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
+	private List<ArticleAcceptor> acceptors;
 	
 
 	@ManyToOne

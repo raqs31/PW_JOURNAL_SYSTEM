@@ -26,6 +26,7 @@ import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleAcceptor;
 import pw.mario.journal.model.ArticleHistory;
 import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Rule;
@@ -158,8 +159,19 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 		Rule rule = ctx.getRule();
 		
 		if (rule.withUserAction()) {
-			if (rule.getPickAcceptors())
-				article.setAcceptors(new HashSet<>(ctx.getAcceptors()));
+			if (rule.getPickAcceptors()) {
+				if (article.getAcceptors() == null)
+					article.setAcceptors(new LinkedList<>());
+				ctx.getAcceptors().forEach(
+						u-> {
+							ArticleAcceptor acc = new ArticleAcceptor();
+							acc.setAcceptor(u);
+							acc.setApply(false);
+							acc.setArticle(article);
+							article.getAcceptors().add(acc);
+						}
+				);
+			}
 			if (rule.getPickManager())
 				article.setManagement(ctx.getManager());
 		}

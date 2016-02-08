@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -53,6 +54,9 @@ public class ArticleVersion extends AuditTable implements IdTable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="ARTICLE_ID", nullable=false, updatable=false)
 	private Article article;
+	
+	@OneToOne(mappedBy="version", optional=true)
+	private ArticleAcceptor acceptor;
 	
 	@Override
 	public Object getId() {
