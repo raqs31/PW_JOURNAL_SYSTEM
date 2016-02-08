@@ -3,8 +3,6 @@ package pw.mario.journal.action.article.plain;
 
 import javax.enterprise.context.Dependent;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.security.auth.login.LoginContext;
 
 import org.primefaces.event.SelectEvent;
 
