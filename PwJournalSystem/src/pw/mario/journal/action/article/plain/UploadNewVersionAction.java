@@ -41,11 +41,21 @@ public class UploadNewVersionAction implements ButtonAction {
 	
 	@Override
 	public boolean allowed() {
-		if (article != null)
+		if (article == null)
+			return false;
+		
+		if (article.getStatus().addVersionEnabled()) {
 			articleLazy.loadAuthors(article);
-		return article != null 
-				&& article.getStatus().addVersionEnabled()
-				&& article.getAuthors().contains(ctx.getCurrentUser());
+			if (article.getAuthors().contains(ctx.getCurrentUser()))
+				return true;
+		}
+		
+		if (article.getStatus().acceptorAddVersionEnabled()) {
+			articleLazy.loadAcceptors(article);
+			if (article.getAcceptors().contains(ctx.getCurrentUser()))
+				return true;
+		}
+		return false;
 	}
 
 	@Override

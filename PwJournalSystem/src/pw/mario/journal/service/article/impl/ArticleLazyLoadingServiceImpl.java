@@ -32,4 +32,10 @@ public class ArticleLazyLoadingServiceImpl implements ArticleLazyLoadingService 
 			a.setTagList(new HashSet<>(articleDao.getArticleTags(a)));
 	}
 
+	@Override
+	public void loadAcceptors(Article a) {
+		if (!Hibernate.isInitialized(a.getAcceptors()))
+			a.setAcceptors(new HashSet<>(articleDao.getArticleAcceptors(a)));
+	}
+
 }

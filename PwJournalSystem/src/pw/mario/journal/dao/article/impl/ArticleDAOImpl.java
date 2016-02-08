@@ -126,4 +126,9 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		return toReturn;
 	}
 
+	@Override
+	public List<User> getArticleAcceptors(Article a) {
+		return em.createNamedQuery(Article.Queries.ARTICLE_ACCEPTORS, User.class).setParameter(1, a.getArticleId()).getResultList();
+	}
+
 }

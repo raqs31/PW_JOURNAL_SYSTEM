@@ -1,7 +1,6 @@
 package pw.mario.faces.articles.model.tabs;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 

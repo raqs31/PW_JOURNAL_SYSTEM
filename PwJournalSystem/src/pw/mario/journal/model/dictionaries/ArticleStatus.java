@@ -22,6 +22,7 @@ public class ArticleStatus  extends Dictionary {
 	public static final String DELETABLE = "DELETE";
 	public static final String ADD_VERSION = "ADD_VER";
 	public static final String PRINTABLE = "FOR_PRINT";
+	public static final String ADD_ACC_VERSION = "ADD_ACC_VER";
 	
 	public boolean initial() {
 		return INITIAL.equals(getAttr1());
@@ -33,6 +34,10 @@ public class ArticleStatus  extends Dictionary {
 	
 	public boolean addVersionEnabled() {
 		return ADD_VERSION.equals(getAttr4());
+	}
+	
+	public boolean acceptorAddVersionEnabled() {
+		return ADD_ACC_VERSION.equals(getAttr3());
 	}
 	
 	public boolean printable() {
