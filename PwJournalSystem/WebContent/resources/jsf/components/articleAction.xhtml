@@ -12,8 +12,8 @@
 	<div id="#{cc.clientId}">
 		<h:form id="_ccActionForm" prependId="false" >
 			<ui:param name="absolutePath" value="#{cc.attrs.componentPath}:#{cc.id}:_ccActionForm:_ccActionList" />
-			<p:dataList id="_ccActionList" value="#{cc.attrs.actions}" var="b" rendered="#{not empty cc.attrs.actions}" styleClass="display:inline;"
-				lazy="true" type="none"
+			<p:dataList id="_ccActionList" value="#{cc.attrs.actions}" var="b" styleClass="display:inline;"
+				lazy="true" type="none" emptyMessage="Brak dostępnych akcji"
 			>
 				
 				<p:commandButton value="#{b.value}" action="#{b.getAction()}" actionListener="#{b.doAction()}" ajax="#{b.ajax()}" update="#{cc.attrs.update} #{absolutePath}" >

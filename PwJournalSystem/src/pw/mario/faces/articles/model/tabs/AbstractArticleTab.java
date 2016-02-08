@@ -1,6 +1,7 @@
 package pw.mario.faces.articles.model.tabs;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,9 @@ public abstract class AbstractArticleTab implements ArticlesTab {
 	
 	protected void reloadActions() {
 		actions = getArticleService().getActions(selectedArticle, ctx.getCurrentUser(), this)
-			.stream()
-			.filter(b->b.availableOnList())
-			.collect(Collectors.toList());
+					.stream()
+					.filter(b -> b.availableOnList())
+					.collect(Collectors.toList());
 	}
 	
 	@Override
