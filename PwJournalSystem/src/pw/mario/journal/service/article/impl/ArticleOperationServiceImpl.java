@@ -186,6 +186,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			if (acceptor == null)
 				throw new RouteActionException("Użytkownik wykonujący akcję nie jest aktualnym recenzentem");
 			acceptor.setState(rule.getAcceptorStatus());
+			acceptor.setApply(true);
 		}
 		
 		if (rule.getApplyAcceptorsState()) {
