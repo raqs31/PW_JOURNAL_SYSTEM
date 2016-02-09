@@ -1,7 +1,6 @@
 package pw.mario.journal.service.article.impl;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -115,6 +114,8 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
 		} catch (LockException e) {
 			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
+		} catch (PerformActionException e) {
+			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), e.getMessage());
 		} catch (Exception e) {
 			log.fatal("Unexpected error", e);
 			throw new RouteActionException("Wystąpił nieoczekiwany błąd podczas procesowania");
@@ -155,7 +156,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 		//TODO
 	}
 	
-	private void setExecutionParameter(Article article, ExecutionContext ctx) {
+	private void setExecutionParameter(Article article, ExecutionContext ctx) throws RouteActionException {
 		Rule rule = ctx.getRule();
 		
 		if (rule.withUserAction()) {
@@ -180,6 +181,19 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			article.setManagement(null);
 		if (rule.getClearAcceptors())
 			article.getAcceptors().clear();
+		if (rule.getSetAcceptorStatus()) {
+			ArticleAcceptor acceptor = article.getArticleAcceptor(ctx.getUser());
+			if (acceptor == null)
+				throw new RouteActionException("Użytkownik wykonujący akcję nie jest aktualnym recenzentem");
+			acceptor.setState(rule.getAcceptorStatus());
+		}
+		
+		if (rule.getApplyAcceptorsState()) {
+			article.getAcceptors()
+				.stream()
+				.filter(acc -> acc.getApply() == false)
+				.forEach(acc-> acc.setApply(true));
+		}
 	}
 	
 	private void addHistoryRecord(Article a, ArticleVersion v) {

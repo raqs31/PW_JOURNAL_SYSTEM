@@ -34,7 +34,8 @@ import pw.mario.journal.model.ext.IdTable;
 @Entity
 @NoArgsConstructor
 @Table(name="ROUTING_RULES", indexes={
-		@Index(columnList="FROM_STATUS, FOR_ROLE_NAME")
+		@Index(columnList="FROM_STATUS, FOR_ROLE_NAME"),
+		@Index(columnList="IS_ACTIVE")
 	})
 @NamedQueries({
 	@NamedQuery(name=Rule.Queries.NEXT_STEPS,
@@ -49,9 +50,10 @@ import pw.mario.journal.model.ext.IdTable;
 					+ "and r.fromStatus = a.status "
 					+ "and r.forRole.roleName = sr.roleName "
 					+ "and (r.forAuthor = false or (r.forAuthor = true and u member of a.authors)) "
-					+ "and (r.forAcceptor = false or (r.forAcceptor = true and u member of a.acceptors)) "
+					+ "and (r.forAcceptor = false or (r.forAcceptor = true and exists (select 1 from a.acceptors acc where acc.apply = false and acc.acceptor = u and acc.state is null))) "
 					+ "and (r.forManager = false or (r.forManager = true and u = a.management)) "
-					+ "and r.isActive = true"
+					+ "and r.isActive = true "
+					+ "and (r.acceptorState = false or (r.acceptorState = true and not exists (select 1 from a.acceptors acc where acc.apply = false))) "
 			)
 })
 public class Rule implements Serializable, IdTable {
@@ -120,6 +122,9 @@ public class Rule implements Serializable, IdTable {
 	
 	@Column(name="FROM_ACCEPTORS_STATE", nullable=false)
 	private Boolean acceptorState;
+	
+	@Column(name="APPLY_ACCEPTORS_STATE", nullable=false)
+	private Boolean applyAcceptorsState;
 	
 	@Override
 	public Object getId() {

@@ -1,6 +1,7 @@
 package pw.mario.journal.model;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -57,7 +58,7 @@ import pw.mario.journal.model.ext.IdTable;
 		query="select a from Article a where a.management = ?1"
 	),
 	@NamedQuery(name=Article.Queries.ACCEPTOR_ARTICLE,
-		query="select acc.article from ArticleAcceptor acc where acc.acceptor = ?1"
+		query="select distinct acc.article from ArticleAcceptor acc where acc.acceptor = ?1"
 	),
 	@NamedQuery(name=Article.Queries.PRINTABLE_ARTICLE,
 		query="select a from Article a where a.status.attr3 = '" + ArticleStatus.PRINTABLE + "'"
@@ -133,5 +134,17 @@ public class Article extends AuditTable implements IdTable {
 		String MANAGER_ARTICLE = "article.manager";
 		String PRINTABLE_ARTICLE = "article.print";
 		String ARTICLE_ACCEPTORS = "article.acceptors";
+	}
+	
+	public ArticleAcceptor getArticleAcceptor(User u) {
+		try {
+			return acceptors.stream()
+				.filter(acc -> acc.getApply() == false && acc.getAcceptor().getUserId().compareTo(u.getUserId())==0)
+				.limit(1)
+				.findFirst()
+				.get();
+		} catch (NoSuchElementException e) {
+			return null;
+		}
 	}
 }

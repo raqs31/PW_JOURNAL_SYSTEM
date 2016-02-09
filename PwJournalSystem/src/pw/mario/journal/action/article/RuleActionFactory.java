@@ -27,12 +27,14 @@ import pw.mario.journal.model.Article;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;
 import pw.mario.journal.qualifiers.Rules;
+import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleOperationService;
 
 @Rules
 @Dependent
 public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Article>{
-	@Inject ArticleOperationService service;
+	@Inject private ArticleOperationService service;
+	@Inject private LoginService ctx;
 	
 	@Override
 	public Collection<ButtonAction> getActions(Article a, User u, Refreshable toRefresh ) {
@@ -42,9 +44,9 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		for (Rule r : service.getAvailableSteps(a, u)) {
 			ButtonAction action;
 			if (r.withUserAction())
-				action = new RuleWithAction(a, r, service, toRefresh);
+				action = new RuleWithAction(a, r, ctx.getCurrentUser(), service, toRefresh);
 			else
-				action = new RuleButtonAction(a, r, service, toRefresh);
+				action = new RuleButtonAction(a, r, ctx.getCurrentUser() ,service, toRefresh);
 			availRules.add(action);
 		}
 		return availRules;
@@ -55,14 +57,17 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 		protected static final long serialVersionUID = 1L;
 		protected Article article;
 		protected Rule rule;
+		protected User user;
 		protected ArticleOperationService articleService;
 		protected Refreshable toRefresh;
 		
-		protected RuleButtonAction(Article a, Rule r, ArticleOperationService service, Refreshable toRefresh) {
+		
+		protected RuleButtonAction(Article a, Rule r, User u, ArticleOperationService service, Refreshable toRefresh) {
 			this.article = a;
 			this.rule = r;
 			this.articleService = service;
 			this.toRefresh = toRefresh;
+			this.user = u;
 		}
 		
 		@Override
@@ -72,7 +77,7 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 
 		@Override
 		public void doAction() throws PerformActionException {
-			ExecutionContext ctx = ExecutionContext.builder().article(article).rule(rule).build();
+			ExecutionContext ctx = ExecutionContext.builder().article(article).rule(rule).user(user).build();
 			try {
 				articleService.execute(ctx);
 				if (toRefresh != null)
@@ -116,8 +121,8 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 	@Log4j
 	private static class RuleWithAction extends RuleButtonAction {
 
-		protected RuleWithAction(Article a, Rule r, ArticleOperationService service, Refreshable toRefresh) {
-			super(a, r, service, toRefresh);
+		protected RuleWithAction(Article a, Rule r, User u, ArticleOperationService service, Refreshable toRefresh) {
+			super(a, r, u, service, toRefresh);
 		}
 
 		private static final long serialVersionUID = 1L;

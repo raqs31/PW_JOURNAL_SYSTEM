@@ -70,7 +70,8 @@ PROCEDURE insert_rule(
     P_CLEAR_ACC	   VARCHAR2,
     P_ACC_STATE VARCHAR2,
       P_ACC_STATE_CODE VARCHAR2,
-      P_FROM_ACC_STATE VARCHAR2
+      P_FROM_ACC_STATE VARCHAR2,
+      P_APPLY_ACC VARCHAR2
     )
 IS
 BEGIN
@@ -95,7 +96,8 @@ BEGIN
       IS_ACTIVE,
       SET_ACCEPTOR_STATUS,
       ACCEPT_STATUS,
-      FROM_ACCEPTORS_STATE
+      FROM_ACCEPTORS_STATE,
+      APPLY_ACCEPTORS_STATE
     )
     VALUES
     (
@@ -116,7 +118,8 @@ BEGIN
       1,
       is_empty(P_ACC_STATE),
       get_acc_status_id(P_ACC_STATE_CODE),
-      is_empty(P_FROM_ACC_STATE)
+      is_empty(P_FROM_ACC_STATE),
+      is_empty(P_APPLY_ACC)
     );
 END;
 END ROUTING_UTIL;
