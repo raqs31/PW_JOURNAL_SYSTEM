@@ -57,7 +57,7 @@ import pw.mario.journal.model.ext.IdTable;
 		query="select a from Article a where a.management = ?1"
 	),
 	@NamedQuery(name=Article.Queries.ACCEPTOR_ARTICLE,
-		query="select a from Article a join a.acceptors acc where acc = ?1"
+		query="select acc.article from ArticleAcceptor acc where acc.acceptor = ?1"
 	),
 	@NamedQuery(name=Article.Queries.PRINTABLE_ARTICLE,
 		query="select a from Article a where a.status.attr3 = '" + ArticleStatus.PRINTABLE + "'"
