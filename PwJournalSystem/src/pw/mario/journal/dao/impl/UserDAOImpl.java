@@ -15,6 +15,7 @@ import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Department;
 import pw.mario.journal.model.SystemRole;
 import pw.mario.journal.model.User;
+import pw.mario.journal.model.SystemRole.Roles;
 import pw.mario.journal.model.User.Queries;
 
 @Default
@@ -87,12 +88,18 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 
 	@Override
 	public List<User> getAvailableAcceptors(Long articleId) {
-		return getNotCrossedUsers(articleId, SystemRole.Roles.ACCEPTOR);
+		return createNamedTypedQuery(Queries.USERS_NOT_CROSSED_AUTHORS_AND_MNG)
+				.setParameter(1, articleId)
+				.setParameter(2, Roles.ACCEPTOR)
+				.getResultList();
 	}
 
 	@Override
 	public List<User> getAvailableManagers(Long articleId) {
-		return getNotCrossedUsers(articleId, SystemRole.Roles.MANAGER);
+		return createNamedTypedQuery(Queries.USERS_NOT_CROSSED_AUTHORS)
+				.setParameter(1, articleId)
+				.setParameter(2, Roles.MANAGER)
+				.getResultList();
 	}
 
 	

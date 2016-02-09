@@ -48,8 +48,10 @@ import pw.mario.journal.model.ext.IdTable;
 		query = "select u from User u where upper(u.email) = ?1"),
 	@NamedQuery(name=User.Queries.USERS_WITH_DEPARTMENT_ROLE,
 		query = "select u from User u join u.systemRoles sr where ((?1 is null and u.dept is null) or u.dept.deptId =  ?1) and sr.roleName = ?2"),
+	@NamedQuery(name=User.Queries.USERS_NOT_CROSSED_AUTHORS_AND_MNG,
+		query = "select u from User u, Article a join u.systemRoles sr join a.authors au where a.articleId = ?1 and sr.roleName = ?2 and u <> a.management and u <> au and u.dept <> au.dept"),
 	@NamedQuery(name=User.Queries.USERS_NOT_CROSSED_AUTHORS,
-		query = "select u from User u, Article a join u.systemRoles sr join a.authors au where a.articleId = ?1 and sr.roleName = ?2 and u <> a.management and u <> au and u.dept <> au.dept")
+	query = "select u from User u, Article a join u.systemRoles sr join a.authors au where a.articleId = ?1 and sr.roleName = ?2 and u <> au and u.dept <> au.dept")
 
 })
 public class User extends AuditTable implements IdTable {
@@ -57,6 +59,7 @@ public class User extends AuditTable implements IdTable {
 		String GET_BY_LOGIN = "User.getByLogin";
 		String GET_BY_EMAIL = "User.getByEmail";
 		String USERS_WITH_DEPARTMENT_ROLE = "User.getWithDeptAndRole";
+		String USERS_NOT_CROSSED_AUTHORS_AND_MNG = "user.not.crossed.authors.mng";
 		String USERS_NOT_CROSSED_AUTHORS = "user.not.crossed.authors";
 	}
 	@Id
