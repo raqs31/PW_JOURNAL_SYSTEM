@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import pw.mario.journal.model.dictionaries.AcceptorState;
+import pw.mario.journal.model.dictionaries.AcceptorStatus;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 
@@ -32,7 +32,7 @@ public class ArticleAcceptor extends AuditTable implements IdTable {
 
 	@ManyToOne
 	@JoinColumn(name="ACCEPTOR_STATE_ID", referencedColumnName="DICT_ID", nullable=true)
-	private AcceptorState state;
+	private AcceptorStatus state;
 	
 	@ManyToOne
 	@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", nullable=false)

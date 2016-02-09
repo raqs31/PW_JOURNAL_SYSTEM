@@ -17,6 +17,28 @@ BEGIN
   AND code          = p_status;
   RETURN l_id;
 END;
+
+FUNCTION get_acc_status_id(
+    p_status VARCHAR2)
+  RETURN NUMBER
+IS
+  l_id NUMBER;
+BEGIN
+  SELECT
+    dict_id
+  INTO
+    l_id
+  FROM
+    dictionaries
+  WHERE
+    dictionary_name = 'ACCEPTOR_STATUS'
+  AND code          = p_status;
+  RETURN l_id;
+  exception
+    when no_data_Found 
+      then return null;
+END;
+
 FUNCTION is_empty(
     p_str VARCHAR2)
   RETURN NUMBER
@@ -45,7 +67,11 @@ PROCEDURE insert_rule(
     P_PICK_ACCEPTOR  VARCHAR2,
     P_PICK_MANAGER   VARCHAR2,
     P_CLEAR_MANAGER  VARCHAR2,
-    P_CLEAR_ACC	   VARCHAR2)
+    P_CLEAR_ACC	   VARCHAR2,
+    P_ACC_STATE VARCHAR2,
+      P_ACC_STATE_CODE VARCHAR2,
+      P_FROM_ACC_STATE VARCHAR2
+    )
 IS
 BEGIN
   INSERT
@@ -66,7 +92,10 @@ BEGIN
       pick_manager,
       CLEAR_MANAGER,
       CLEAR_ACCEPTORS,
-      IS_ACTIVE
+      IS_ACTIVE,
+      SET_ACCEPTOR_STATUS,
+      ACCEPT_STATUS,
+      FROM_ACCEPTORS_STATE
     )
     VALUES
     (
@@ -84,7 +113,10 @@ BEGIN
       is_empty(p_pick_manager),
       is_empty(P_CLEAR_MANAGER),
       is_empty(P_CLEAR_ACC),
-      1
+      1,
+      is_empty(P_ACC_STATE),
+      get_acc_status_id(P_ACC_STATE_CODE),
+      is_empty(P_FROM_ACC_STATE)
     );
 END;
 END ROUTING_UTIL;

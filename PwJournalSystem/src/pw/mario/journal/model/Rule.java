@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.journal.model.dictionaries.AcceptorStatus;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
 import pw.mario.journal.model.ext.IdTable;
 
@@ -109,6 +110,16 @@ public class Rule implements Serializable, IdTable {
 	
 	@Column(name="IS_ACTIVE", nullable=false)
 	private Boolean isActive;
+	
+	@Column(name="SET_ACCEPTOR_STATUS", nullable=false)
+	private Boolean setAcceptorStatus;
+	
+	@ManyToOne
+	@JoinColumn(name="ACCEPT_STATUS", nullable=true)
+	private AcceptorStatus acceptorStatus;
+	
+	@Column(name="FROM_ACCEPTORS_STATE", nullable=false)
+	private Boolean acceptorState;
 	
 	@Override
 	public Object getId() {
