@@ -69,6 +69,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 		
 			a.getVersions().add(newVersion);
 			a.getHistory().add(articleDao.addArticleHistory(a, newVersion));
+			
 			articleDao.save(a);
 			
 			a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
@@ -82,6 +83,36 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 		}
 	}
 		
+	@Override
+	public void addAcceptorVersion(Article a, User acceptor, FileHandler handler) throws PerformActionException {
+		try {
+			log.debug(a.getObjectVersionNumber());
+			a = articleDao.getLockedArticle(a, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+			ArticleVersion newVersion = versionDao.createNewVersion(a);
+			
+			handler.setFileName(versionDao.createArticleName(newVersion));
+			newVersion.setAttachement(fileManager.saveFile(handler));
+			handler.getFile().delete();
+		
+			a.getVersions().add(newVersion);
+			a.getHistory().add(articleDao.addArticleHistory(a, newVersion));
+
+			versionDao.save(newVersion);
+			
+			a.getArticleAcceptor(acceptor).setVersion(newVersion);
+			
+			articleDao.save(a);
+			
+			a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
+			log.debug("Finish create article ID: " + a.getArticleId());
+		} catch (LockException ex) { 
+			log.warn(ex.getMessage(), ex);
+			throw ex;
+		} catch (OptimisticLockException e) {
+			log.warn(e.getMessage(), e);
+			throw new PerformActionException("Zmienił się stan artykułu, nie można wykonać aktualizacji");
+		}
+	}
 	@Override
 	public List<Rule> getAvailableSteps(Article a, User u) {
 		return articleDao.getAvailableRules(a, u);

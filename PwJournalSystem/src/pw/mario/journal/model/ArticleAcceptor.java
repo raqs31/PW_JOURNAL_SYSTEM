@@ -1,5 +1,6 @@
 package pw.mario.journal.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +35,7 @@ public class ArticleAcceptor extends AuditTable implements IdTable {
 	@JoinColumn(name="ACCEPTOR_STATE_ID", referencedColumnName="DICT_ID", nullable=true)
 	private AcceptorStatus state;
 	
-	@ManyToOne
+	@ManyToOne(cascade={CascadeType.MERGE})
 	@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", nullable=false)
 	private User acceptor;
 	

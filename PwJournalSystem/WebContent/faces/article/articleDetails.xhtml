@@ -55,7 +55,7 @@
 							<h:outputText value="#{ver.attachement}" />
 						</p:column>
 						<p:column sortable="false" style="width:10px">
-							<p:commandLink styleClass="fa fa-download" ajax="false">
+							<p:commandLink styleClass="fa fa-download" ajax="false" rendered="#{ver.acceptor.apply}">
 								<p:fileDownload value="#{articleDetailsController.onDownload(ver.attachement)}"></p:fileDownload>
 							</p:commandLink>
 						</p:column>

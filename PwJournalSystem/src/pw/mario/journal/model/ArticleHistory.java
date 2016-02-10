@@ -46,7 +46,7 @@ public class ArticleHistory extends AuditTable implements IdTable {
 	@JoinColumn(name="RULE_ID", referencedColumnName="RULE_ID")
 	private Rule rule;
 	
-	@OneToOne(optional=true)
+	@OneToOne(optional=true, cascade={CascadeType.MERGE})
 	@JoinColumn(name="VERSION_ID", referencedColumnName="VERSION_ID")
 	private ArticleVersion version;
 	

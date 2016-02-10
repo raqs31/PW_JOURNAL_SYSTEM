@@ -32,13 +32,13 @@ import pw.mario.journal.service.article.ArticleOperationService;
 @Dependent
 public class UploadNewVersionAction implements ButtonAction {
 	private static final long serialVersionUID = -4869406550164908694L;
-	private Refreshable toRefresh;
+	protected Refreshable toRefresh;
 	
-	@Inject private ArticleOperationService operation;
-	@Inject private LoginService ctx;
-	@Inject private ArticleLazyLoadingService articleLazy;
+	@Inject protected ArticleOperationService operation;
+	@Inject protected LoginService ctx;
+	@Inject protected ArticleLazyLoadingService articleLazy;
 	
-	private Article article;
+	protected Article article;
 	
 	@Override
 	public boolean allowed() {
@@ -49,15 +49,6 @@ public class UploadNewVersionAction implements ButtonAction {
 			articleLazy.loadAuthors(article);
 			if (article.getAuthors().contains(ctx.getCurrentUser()))
 				return true;
-		}
-		
-		if (article.getStatus().acceptorAddVersionEnabled()) {
-			articleLazy.loadAcceptors(article);
-			try {
-				article.getAcceptors().stream().filter(acc->acc.getAcceptor().equals(ctx.getCurrentUser())).findAny().get();
-				return true;
-			} catch (NoSuchElementException e) {
-			}
 		}
 		return false;
 	}
@@ -93,7 +84,7 @@ public class UploadNewVersionAction implements ButtonAction {
 			if (o == null)
 				throw new PerformActionException("Nie udało się przesłać pliku");
 			
-			operation.addNewVersion(article, (FileHandler)o);
+			operation.addAcceptorVersion(article, ctx.getCurrentUser(), (FileHandler)o);
 			if (toRefresh != null)
 				toRefresh.refresh();
 			Messages.addMessage("Dodano nową wersję");

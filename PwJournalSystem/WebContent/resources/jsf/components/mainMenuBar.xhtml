@@ -7,14 +7,12 @@
 	<cc:implementation>
 		<h:form>
 			<p:menubar id="mainMenuBar">
-				<p:submenu label="Administracja" rendered="#{request.isUserInRole('USER')}">
+				<p:submenu label="Administracja" icon="fa fa-gears" rendered="#{request.isUserInRole('USER')}">
 					<p:menuitem id="miUsers" value="Użytkownicy" outcome="/faces/admin/users?faces-redirect=true" rendered="#{request.isUserInRole('ADMIN')}" />
 					<p:menuitem id="miDepartments" value="Departamenty" outcome="/faces/admin/departments?faces-redirect=true" />
 					<p:menuitem id="miTags" value="Etykiety" outcome="/faces/admin/tagEditor?faces-redirect=true" />
 				</p:submenu>
-				<p:submenu label="Artykuły">
-				<p:menuitem id="miArticles" value="Artykuły" outcome="/faces/article/articles?faces-redirect=true"/>
-				</p:submenu>
+				<p:menuitem id="miArticles" value=" Artykuły" icon="fa fa-leanpub" outcome="/faces/article/articles?faces-redirect=true"/>
 				<p:menuitem id="goToStart" value=" Home" icon="fa fa-home" outcome="/index?faces-redirect=true" />
 				<f:facet name="options">
 					<h:form method="POST" action="j_security_check">

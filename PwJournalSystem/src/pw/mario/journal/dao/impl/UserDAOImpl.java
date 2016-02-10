@@ -101,12 +101,4 @@ public class UserDAOImpl extends AbstractDAOImpl<User> implements UserDAO {
 				.setParameter(2, Roles.MANAGER)
 				.getResultList();
 	}
-
-	
-	private List<User> getNotCrossedUsers(Long articleId, String roleName) {
-		return createNamedTypedQuery(Queries.USERS_NOT_CROSSED_AUTHORS)
-				.setParameter(1, articleId)
-				.setParameter(2, roleName)
-				.getResultList();
-	}
 }
