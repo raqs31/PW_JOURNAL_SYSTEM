@@ -10,8 +10,11 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.LockException;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleDAO;
+import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.ArticleAcceptor;
+import pw.mario.journal.model.ArticleHistory;
+import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.Tag;
 import pw.mario.journal.model.User;
@@ -131,6 +134,24 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 	@Override
 	public List<ArticleAcceptor> getArticleAcceptors(Article a) {
 		return em.createNamedQuery(Article.Queries.ARTICLE_ACCEPTORS, ArticleAcceptor.class).setParameter(1, a).getResultList();
+	}
+
+	@Override
+	public ArticleHistory addArticleHistory(Article a, ArticleVersion v) {
+		ArticleHistory history = new ArticleHistory();
+		history.setArticle(a);
+		history.setVersion(v);
+		em.persist(history);
+		return history;
+	}
+
+	@Override
+	public ArticleHistory addArticleHistory(Article a, ExecutionContext ctx) {
+		ArticleHistory history = new ArticleHistory();
+		history.setArticle(a);
+		history.setRule(ctx.getRule());
+		em.persist(history);
+		return history;
 	}
 
 }

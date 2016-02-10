@@ -68,7 +68,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			handler.getFile().delete();
 		
 			a.getVersions().add(newVersion);
-			addHistoryRecord(a, newVersion);
+			a.getHistory().add(articleDao.addArticleHistory(a, newVersion));
 			articleDao.save(a);
 			
 			a.getVersions().sort(( v1, v2)-> v2.getVersionNum().compareTo(v1.getVersionNum()));
@@ -107,7 +107,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			
 			setExecutionParameter(toProcess, ctx);
 			toProcess.setStatus(ctx.getRule().getToStatus());
-			addHistoryRecord(toProcess, ctx);
+			toProcess.getHistory().add(articleDao.addArticleHistory(toProcess, ctx));
 			
 			articleDao.save(toProcess);
 		} catch (OptimisticLockException e) {
@@ -195,19 +195,5 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 				.filter(acc -> acc.getApply() == false)
 				.forEach(acc-> acc.setApply(true));
 		}
-	}
-	
-	private void addHistoryRecord(Article a, ArticleVersion v) {
-		ArticleHistory history = new ArticleHistory();
-		history.setArticle(a);
-		history.setVersion(v);
-		a.getHistory().add(history);
-	}
-	
-	private void addHistoryRecord(Article a, ExecutionContext ctx) {
-		ArticleHistory history = new ArticleHistory();
-		history.setArticle(a);
-		history.setRule(ctx.getRule());
-		a.getHistory().add(history);
 	}
 }
