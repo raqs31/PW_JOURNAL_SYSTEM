@@ -26,6 +26,9 @@ import pw.mario.common.api.Refreshable;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.model.Article;
+import pw.mario.journal.model.ArticleAcceptor;
+import pw.mario.journal.model.ArticleVersion;
+import pw.mario.journal.model.User;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleOperationService;
 
@@ -54,8 +57,16 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 		}
 	}
 	
-	public StreamedContent onDownload(String path) {
-		File file = new File(path);
+	public StreamedContent onDownload(ArticleVersion version) {
+		ArticleAcceptor acceptor = version.getAcceptor();
+		User current = ctx.getCurrentUser();
+		if (acceptor != null && !acceptor.getApply() && current.compareTo(acceptor.getAcceptor()) != 0 && current.compareTo(article.getManagement()) != 0) {
+			Messages.addMessage(FacesMessage.SEVERITY_WARN, "Artykuł nie jest w odpowiednim stanie", "Recenzja nie może zostać pobrana");
+			return null;
+		}
+		
+		
+		File file = new File(version.getAttachement());
 		InputStream input = null;
 		try {
 			input = new FileInputStream(file);

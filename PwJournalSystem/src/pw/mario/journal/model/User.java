@@ -54,7 +54,7 @@ import pw.mario.journal.model.ext.IdTable;
 	query = "select u from User u join u.systemRoles sr where sr.roleName = ?2 and not exists (select 1 from Article a join a.authors au where a.articleId = ?1 and (au = u or au.dept = u.dept))")
 
 })
-public class User extends AuditTable implements IdTable {
+public class User extends AuditTable implements IdTable, Comparable<User> {
 	public interface Queries {
 		String GET_BY_LOGIN = "User.getByLogin";
 		String GET_BY_EMAIL = "User.getByEmail";
@@ -106,5 +106,11 @@ public class User extends AuditTable implements IdTable {
 	@Override
 	public Object getId() {
 		return userId;
+	}
+	@Override
+	public int compareTo(User o) {
+		if (this.equals(o))
+			return 0;
+		return o.userId.compareTo(this.userId);
 	}
 }
