@@ -18,7 +18,7 @@
 					<h:form method="POST" action="j_security_check">
 						<p:outputLabel id="loggedAs" value="#{authBean.login}" />
 						<p:spacer width="5" />
-						<p:selectOneMenu id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade" converter="#{localeConverter}" onchange="submit()"
+						<p:selectOneMenu rendered="false" id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade" converter="#{localeConverter}" onchange="submit()"
 							valueChangeListener="#{authBean.changeLocale}"
 						>
 							<f:selectItems value="#{authBean.supportedLocales}" var="locale" itemLabel="#{locale.displayName}" itemValue="#{locale}" />
