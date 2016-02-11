@@ -77,7 +77,13 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 
 		@Override
 		public void doAction() throws PerformActionException {
-			ExecutionContext ctx = ExecutionContext.builder().article(article).rule(rule).user(user).build();
+			ExecutionContext ctx = ExecutionContext
+									.builder()
+									.article(article)
+									.rule(rule)
+									.user(user)
+									.isValid(true)
+									.build();
 			try {
 				articleService.execute(ctx);
 				if (toRefresh != null)
@@ -162,6 +168,7 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 						.rule(rule)
 						.manager(tmp.getManager())
 						.acceptors(tmp.getAcceptors())
+						.isValid(true)
 						.build();
 				try {
 					articleService.execute(ctx);

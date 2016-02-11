@@ -1,60 +1,60 @@
-create or replace PACKAGE BODY ROUTING_UTIL
+CREATE OR REPLACE PACKAGE BODY ROUTING_UTIL
 AS
-FUNCTION get_status_id(
-    p_status VARCHAR2)
+FUNCTION GET_STATUS_ID(
+    P_STATUS VARCHAR2)
   RETURN NUMBER
 IS
-  l_id NUMBER;
+  L_ID NUMBER;
 BEGIN
   SELECT
-    dict_id
+    DICT_ID
   INTO
-    l_id
+    L_ID
   FROM
-    dictionaries
+    DICTIONARIES
   WHERE
-    dictionary_name = 'ARTICLE_STATUS'
-  AND code          = p_status;
-  RETURN l_id;
+    DICTIONARY_NAME = 'ARTICLE_STATUS'
+  AND CODE          = P_STATUS;
+  RETURN L_ID;
 END;
 
-FUNCTION get_acc_status_id(
-    p_status VARCHAR2)
+FUNCTION GET_ACC_STATUS_ID(
+    P_STATUS VARCHAR2)
   RETURN NUMBER
 IS
-  l_id NUMBER;
+  L_ID NUMBER;
 BEGIN
   SELECT
-    dict_id
+    DICT_ID
   INTO
-    l_id
+    L_ID
   FROM
-    dictionaries
+    DICTIONARIES
   WHERE
-    dictionary_name = 'ACCEPTOR_STATUS'
-  AND code          = p_status;
-  RETURN l_id;
-  exception
-    when no_data_Found 
-      then return null;
+    DICTIONARY_NAME = 'ACCEPTOR_STATUS'
+  AND CODE          = P_STATUS;
+  RETURN L_ID;
+  EXCEPTION
+    WHEN NO_DATA_FOUND 
+      THEN RETURN NULL;
 END;
 
-FUNCTION is_empty(
-    p_str VARCHAR2)
+FUNCTION IS_EMPTY(
+    P_STR VARCHAR2)
   RETURN NUMBER
 IS
 BEGIN
   RETURN
   CASE
-  WHEN p_str IS NULL THEN
+  WHEN P_STR IS NULL THEN
     0
-  WHEN p_str ='' THEN
+  WHEN P_STR ='' THEN
     0
   ELSE
     1
   END;
 END;
-PROCEDURE insert_rule(
+PROCEDURE INSERT_RULE(
     P_NAME           VARCHAR2 ,
     P_DESCRIPTION    VARCHAR2,
     P_FOR_ROLE       VARCHAR2,
@@ -71,55 +71,70 @@ PROCEDURE insert_rule(
     P_ACC_STATE VARCHAR2,
       P_ACC_STATE_CODE VARCHAR2,
       P_FROM_ACC_STATE VARCHAR2,
-      P_APPLY_ACC VARCHAR2
+      P_APPLY_ACC VARCHAR2,
+      P_RULE_CODE VARCHAR2
     )
 IS
 BEGIN
   INSERT
   INTO
-    routing_rules
+    ROUTING_RULES
     (
-      rule_id,
-      name,
-      description,
-      for_role_name,
-      from_status,
-      to_status,
-      ready_to_print,
-      for_acceptor,
-      for_author,
-      for_manager,
-      pick_acceptors,
-      pick_manager,
+      RULE_ID,
+      NAME,
+      DESCRIPTION,
+      FOR_ROLE_NAME,
+      FROM_STATUS,
+      TO_STATUS,
+      READY_TO_PRINT,
+      FOR_ACCEPTOR,
+      FOR_AUTHOR,
+      FOR_MANAGER,
+      PICK_ACCEPTORS,
+      PICK_MANAGER,
       CLEAR_MANAGER,
       CLEAR_ACCEPTORS,
       IS_ACTIVE,
       SET_ACCEPTOR_STATUS,
       ACCEPT_STATUS,
       FROM_ACCEPTORS_STATE,
-      APPLY_ACCEPTORS_STATE
+      APPLY_ACCEPTORS_STATE,
+      RULE_CODE
     )
     VALUES
     (
-      routing_rules_seq.nextval,
-      p_name,
-      p_description,
-      p_for_role,
-      get_status_id(p_from_status),
-      get_status_id(p_to_status),
-      is_empty(p_ready_to_print),
-      is_empty(p_for_acceptor),
-      is_empty(p_for_author),
-      is_empty(p_for_manager),
-      is_empty(p_pick_acceptor),
-      is_empty(p_pick_manager),
-      is_empty(P_CLEAR_MANAGER),
-      is_empty(P_CLEAR_ACC),
+      ROUTING_RULES_SEQ.NEXTVAL,
+      P_NAME,
+      P_DESCRIPTION,
+      P_FOR_ROLE,
+      GET_STATUS_ID(P_FROM_STATUS),
+      GET_STATUS_ID(P_TO_STATUS),
+      IS_EMPTY(P_READY_TO_PRINT),
+      IS_EMPTY(P_FOR_ACCEPTOR),
+      IS_EMPTY(P_FOR_AUTHOR),
+      IS_EMPTY(P_FOR_MANAGER),
+      IS_EMPTY(P_PICK_ACCEPTOR),
+      IS_EMPTY(P_PICK_MANAGER),
+      IS_EMPTY(P_CLEAR_MANAGER),
+      IS_EMPTY(P_CLEAR_ACC),
       1,
-      is_empty(P_ACC_STATE),
-      get_acc_status_id(P_ACC_STATE_CODE),
-      is_empty(P_FROM_ACC_STATE),
-      is_empty(P_APPLY_ACC)
+      IS_EMPTY(P_ACC_STATE),
+      GET_ACC_STATUS_ID(P_ACC_STATE_CODE),
+      IS_EMPTY(P_FROM_ACC_STATE),
+      IS_EMPTY(P_APPLY_ACC),
+      P_RULE_CODE
     );
+END INSERT_RULE;
+
+PROCEDURE ADD_RULE_VALIDATION(
+    P_RULE_CODE VARCHAR2,
+    P_VALIDATION_CODE VARCHAR2
+  ) IS
+BEGIN
+  INSERT INTO RULES_VALIDATIONS(RULE_ID, DICT_ID)
+  VALUES (
+    (SELECT RULE_ID FROM ROUTING_RULES WHERE RULE_CODE = P_RULE_CODE),
+    (SELECT DICT_ID FROM DICTIONARIES WHERE CODE = P_VALIDATION_CODE AND DICTIONARY_NAME ='VALIDATION_RULE')
+  );
 END;
 END ROUTING_UTIL;

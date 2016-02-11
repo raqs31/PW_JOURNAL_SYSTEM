@@ -1,14 +1,18 @@
 package pw.mario.journal.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -22,6 +26,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import pw.mario.journal.model.dictionaries.AcceptorStatus;
 import pw.mario.journal.model.dictionaries.ArticleStatus;
+import pw.mario.journal.model.dictionaries.ValidationRule;
 import pw.mario.journal.model.ext.IdTable;
 
 /**
@@ -29,7 +34,7 @@ import pw.mario.journal.model.ext.IdTable;
  *
  */
 @Data
-@ToString(exclude={"forRole"})
+@ToString(exclude={"forRole", "validations"})
 @EqualsAndHashCode(of={"ruleId"})
 @Entity
 @NoArgsConstructor
@@ -64,6 +69,9 @@ public class Rule implements Serializable, IdTable {
 	@GeneratedValue(generator="routingRulesSeq", strategy=GenerationType.SEQUENCE)
 	@Column(name="RULE_ID")
 	private Long ruleId;
+	
+	@Column(name="RULE_CODE", unique=true, nullable=false)
+	private String code;
 	
 	@OrderBy("name asc")
 	@Column(name="NAME", length=64)
@@ -125,6 +133,14 @@ public class Rule implements Serializable, IdTable {
 	
 	@Column(name="APPLY_ACCEPTORS_STATE", nullable=false)
 	private Boolean applyAcceptorsState;
+	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(
+			name="RULES_VALIDATIONS",
+			joinColumns={@JoinColumn(name="RULE_ID", referencedColumnName="RULE_ID")},
+			inverseJoinColumns={@JoinColumn(name="DICT_ID", referencedColumnName="DICT_ID")}
+	)
+	private Set<ValidationRule> validations;
 	
 	@Override
 	public Object getId() {

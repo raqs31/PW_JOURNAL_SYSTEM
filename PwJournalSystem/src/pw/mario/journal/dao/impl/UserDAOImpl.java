@@ -13,9 +13,8 @@ import javax.persistence.Query;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.Department;
-import pw.mario.journal.model.SystemRole;
-import pw.mario.journal.model.User;
 import pw.mario.journal.model.SystemRole.Roles;
+import pw.mario.journal.model.User;
 import pw.mario.journal.model.User.Queries;
 
 @Default

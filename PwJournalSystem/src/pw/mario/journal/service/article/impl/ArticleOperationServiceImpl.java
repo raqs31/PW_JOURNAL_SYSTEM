@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.LockModeType;
 import javax.persistence.OptimisticLockException;
@@ -26,7 +27,6 @@ import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.Article;
 import pw.mario.journal.model.ArticleAcceptor;
-import pw.mario.journal.model.ArticleHistory;
 import pw.mario.journal.model.ArticleVersion;
 import pw.mario.journal.model.Rule;
 import pw.mario.journal.model.User;
@@ -34,6 +34,7 @@ import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.Rules;
 import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.validator.ValidationFactory;
 
 @Log4j
 @Stateless
@@ -47,6 +48,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Inject private UserDAO userDao;
 	@Inject @Button private AbstractActionFactory<ButtonAction, Article> actionFactory;
 	@Inject @Rules private AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
+	@Inject private ValidationFactory validationFactory;
 	
 	@Override
 	public Article getArticle(Long id, User u) {
@@ -132,9 +134,17 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Override
 	public void execute(ExecutionContext ctx) throws RouteActionException {
 		checkExecutionContext(ctx);
-		validate(ctx);
 		try {
 			Article toProcess = articleDao.getLockedArticle(ctx.getArticle(), LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+			ctx.setArticle(toProcess);
+			
+			validate(ctx);
+			if (!ctx.isValid()) {
+				if (ctx.getErrors() == null)
+					throw new RouteActionException("Kontekst jest nieprawidłowy a nie znalazło żadnego błędu", "Spróbuj ponownie lub zgłoś błąd");
+				ctx.getErrors().forEach(err -> FacesContext.getCurrentInstance().addMessage(null, err.convert()));
+				throw new RouteActionException("Z powodu błędów walidacji nie przeprocesowano artykułu");
+			}
 			
 			setExecutionParameter(toProcess, ctx);
 			toProcess.setStatus(ctx.getRule().getToStatus());
@@ -142,11 +152,11 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			
 			articleDao.save(toProcess);
 		} catch (OptimisticLockException e) {
-			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
+			throw new RouteActionException("W międzyczasie artykuł został zmodyfikowany");
 		} catch (LockException e) {
-			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), "W międzyczasie artykuł został zmodyfikowany");
+			throw new RouteActionException("W międzyczasie artykuł został zmodyfikowany");
 		} catch (PerformActionException e) {
-			throw new RouteActionException("Nie udało się przeprocesować artykułu " + ctx.getArticle().getName(), e.getMessage());
+			throw new RouteActionException(e.getMessage());
 		} catch (Exception e) {
 			log.fatal("Unexpected error", e);
 			throw new RouteActionException("Wystąpił nieoczekiwany błąd podczas procesowania");
@@ -184,7 +194,9 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	}
 	
 	private void validate(ExecutionContext ctx) throws RouteActionException {
-		//TODO
+		validationFactory
+			.getValidations(ctx.getRule())
+			.forEach(av -> av.validate(ctx));
 	}
 	
 	private void setExecutionParameter(Article article, ExecutionContext ctx) throws RouteActionException {

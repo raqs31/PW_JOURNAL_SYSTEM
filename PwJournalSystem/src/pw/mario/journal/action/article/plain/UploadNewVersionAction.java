@@ -2,7 +2,6 @@ package pw.mario.journal.action.article.plain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import javax.enterprise.context.Dependent;
 import javax.faces.application.FacesMessage;
@@ -84,7 +83,7 @@ public class UploadNewVersionAction implements ButtonAction {
 			if (o == null)
 				throw new PerformActionException("Nie udało się przesłać pliku");
 			
-			operation.addAcceptorVersion(article, ctx.getCurrentUser(), (FileHandler)o);
+			operation.addNewVersion(article, (FileHandler)o);
 			if (toRefresh != null)
 				toRefresh.refresh();
 			Messages.addMessage("Dodano nową wersję");
@@ -103,5 +102,10 @@ public class UploadNewVersionAction implements ButtonAction {
 	@Override
 	public void setToRefresh(Refreshable toRefresh) {
 		this.toRefresh = toRefresh;
+	}
+	
+	@Override
+	public String getIcon() {
+		return "fa fa-file-text";
 	}
 }

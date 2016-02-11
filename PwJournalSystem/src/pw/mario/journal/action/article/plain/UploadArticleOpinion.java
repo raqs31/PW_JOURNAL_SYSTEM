@@ -3,8 +3,15 @@ package pw.mario.journal.action.article.plain;
 import java.util.NoSuchElementException;
 
 import javax.enterprise.context.Dependent;
+import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 
+import org.primefaces.event.SelectEvent;
+
+import pw.mario.common.exception.LockException;
+import pw.mario.common.exception.PerformActionException;
+import pw.mario.common.util.Messages;
+import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
@@ -46,5 +53,22 @@ public class UploadArticleOpinion extends UploadNewVersionAction {
 		}
 		return false;
 	}
-
+	
+	@Override
+	public void onReturnEvent(SelectEvent e) {
+		try {
+			Object o = e.getObject();
+			if (o == null)
+				throw new PerformActionException("Nie udało się przesłać pliku");
+			
+			operation.addAcceptorVersion(article, ctx.getCurrentUser(), (FileHandler)o);
+			if (toRefresh != null)
+				toRefresh.refresh();
+			Messages.addMessage("Dodano nową wersję");
+		} catch (LockException ex) { 
+			Messages.addMessage(FacesMessage.SEVERITY_ERROR, ex.getMessage());
+		} catch (PerformActionException e1) {
+			Messages.addMessage(FacesMessage.SEVERITY_ERROR, e1.getMessage());
+		}
+	}
 }

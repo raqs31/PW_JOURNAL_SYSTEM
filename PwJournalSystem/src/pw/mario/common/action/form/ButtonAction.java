@@ -12,17 +12,20 @@ public interface ButtonAction extends ConditionalAction, Serializable {
 	String getAction();
 	String getValue();
 	String getId();
+
 	void onReturnEvent(SelectEvent e);
+	void setArticle(Article a);
+	void setToRefresh(Refreshable toRefresh);
 	
 	default String ajax() {
 		return "true";
 	}
 	
-	void setArticle(Article a);
-	
-	void setToRefresh(Refreshable toRefresh);
-	
 	default boolean availableOnList() {
 		return true;
+	}
+	
+	default String getIcon() {
+		return null;
 	}
 }
