@@ -79,6 +79,18 @@
 						<h:outputText value="#{h.description}" />
 					</p:column>
 				</p:dataTable>
+				<p:separator />
+				<p:dataList value="#{article.acceptors}" var="acc" paginator="true" rows="15" type="unordered"
+					styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom"
+				>
+					<p:column>
+						<h:outputText value="#{acc.acceptor.name} #{acc.acceptor.secondName}" />
+					</p:column>
+					
+					<p:column>
+						<h:outputText value="#{acc.state.desription}" />
+					</p:column>
+				</p:dataList>
 			</h:panelGrid>
 		</ui:define>
 		<ui:define name="east">

@@ -1,11 +1,11 @@
 package pw.mario.journal.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -23,7 +23,9 @@ import pw.mario.journal.model.ext.IdTable;
 @ToString(of="articleAcceptorId")
 @EqualsAndHashCode(callSuper=false, of="articleAcceptorId")
 @Entity
-@Table(name="ARTICLE_ACCEPTORS", schema="MARIO")
+@Table(name="ARTICLE_ACCEPTORS", schema="MARIO", indexes={
+		@Index(columnList="ARTICLE_ID, USER_ID", unique=false)
+})
 public class ArticleAcceptor extends AuditTable implements IdTable {
 	@Id
 	@Column(name="ARTICLE_ACCEPTOR_ID")
@@ -35,7 +37,7 @@ public class ArticleAcceptor extends AuditTable implements IdTable {
 	@JoinColumn(name="ACCEPTOR_STATE_ID", referencedColumnName="DICT_ID", nullable=true)
 	private AcceptorStatus state;
 	
-	@ManyToOne(cascade={CascadeType.MERGE})
+	@ManyToOne
 	@JoinColumn(name="USER_ID", referencedColumnName="USER_ID", nullable=false)
 	private User acceptor;
 	
