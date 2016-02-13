@@ -55,4 +55,8 @@ public class Element implements Modifiable {
 	public Element(Section s) {
 		section = s;
 	}
+
+	@Override
+	public void order() {
+	}
 }

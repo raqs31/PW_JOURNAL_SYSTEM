@@ -19,6 +19,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.w3c.dom.css.ElementCSSInlineStyle;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -73,5 +75,14 @@ public class Section implements Modifiable {
 	
 	public Section(Form f) {
 		form = f;
+	}
+
+	@Override
+	public void order() {
+		int i = 0;
+		if (elements != null)
+			for (Element e: elements) {
+				e.setOrder(i++);
+			}
 	}
 }

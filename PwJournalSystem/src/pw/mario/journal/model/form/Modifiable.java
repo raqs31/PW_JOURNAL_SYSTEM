@@ -4,4 +4,6 @@ public interface Modifiable {
 	void addChild();
 	
 	void delete();
+	
+	void order();
 }

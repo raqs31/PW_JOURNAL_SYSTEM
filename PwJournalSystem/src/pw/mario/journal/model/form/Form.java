@@ -23,34 +23,32 @@ import lombok.ToString;
 import pw.mario.journal.model.AuditTable;
 
 @Data
-@EqualsAndHashCode(of="formId", callSuper=false)
-@ToString(exclude="sections")
+@EqualsAndHashCode(of = "formId", callSuper = false)
+@ToString(exclude = "sections")
 @NoArgsConstructor
 @Entity
-@Table(name="FORMS", indexes={
-		@Index(columnList="PATTERN")
-})
+@Table(name = "FORMS", indexes = { @Index(columnList = "PATTERN") })
 public class Form extends AuditTable implements Modifiable {
 	@Id
-	@Column(name="FORM_ID")
+	@Column(name = "FORM_ID")
 	@SequenceGenerator(name = "formIdSeq", sequenceName = "FORMS_SEQ", initialValue = 1, allocationSize = 1)
-	@GeneratedValue(generator="formIdSeq", strategy=GenerationType.SEQUENCE)
+	@GeneratedValue(generator = "formIdSeq", strategy = GenerationType.SEQUENCE)
 	private Long formId;
-	
-	@Column(name="NAME", length=120)
+
+	@Column(name = "NAME", length = 120)
 	private String name;
-	
-	@Column(name="PATTERN", nullable=false)
+
+	@Column(name = "PATTERN", nullable = false)
 	private Boolean pattern;
-	
+
 	@OrderBy("order")
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="form")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "form")
 	private List<Section> sections;
-	
-	@Column(name="LONG_ATTR1", length=4000)
+
+	@Column(name = "LONG_ATTR1", length = 4000)
 	private String longAttr1;
-	
-	@Column(name="LONG_ATTR2", length=4000)
+
+	@Column(name = "LONG_ATTR2", length = 4000)
 	private String longAttr2;
 
 	@Override
@@ -58,12 +56,22 @@ public class Form extends AuditTable implements Modifiable {
 		if (sections == null)
 			sections = new ArrayList<>();
 		sections.add(new Section(this));
-		
+
 	}
 
 	@Override
 	public void delete() {
 		if (sections != null)
 			sections.clear();
+	}
+
+	@Override
+	public void order() {
+		int i = 0;
+		if (sections != null)
+			for (Section e : sections) {
+				e.setOrder(i++);
+			}
+
 	}
 }

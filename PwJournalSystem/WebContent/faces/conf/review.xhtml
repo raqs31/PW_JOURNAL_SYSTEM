@@ -6,10 +6,10 @@
 <h:head>
 	<title><ui:insert name="title">Formularz akceptujacych</ui:insert></title>
 	<style>
-		.topAligned {
-		   vertical-align: top;
-		}
-	</style>
+.topAligned {
+	vertical-align: top;
+}
+</style>
 </h:head>
 <h:body>
 	<my:mainMenuBar />
@@ -34,11 +34,14 @@
 						</p:inplace>
 						<p:separator />
 						<p:inplace editor="true" effect="fade" emptyLabel="Opis sekcji" effectSpeed="fast">
-							<p:inputTextarea value="#{section.description}" cols="40" rows="5" maxlength="4000" autoResize="true"/>
+							<p:inputTextarea value="#{section.description}" cols="40" rows="5" maxlength="4000" autoResize="true" />
 						</p:inplace>
 					</h:panelGrid>
-					<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{section.elements}" var="elem" emptyMessage="Brak elementów">
+					<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{section.elements}" var="elem"
+						emptyMessage="Brak elementów"
+					>
 						<f:facet name="header">Elementy:</f:facet>
+						<p:ajax event="rowReorder" listener="#{section.order()}" />
 						<p:column>
 							<p:inplace editor="true" effect="fade" emptyLabel="Opis sekcji" effectSpeed="fast">
 								<p:inputText value="#{elem.description}" />
@@ -49,7 +52,11 @@
 								<p:inputText value="#{elem.value}" />
 							</p:inplace>
 						</p:column>
+						<p:column style="width:32px;text-align: center">
+							<p:commandLink styleClass="fa fa-remove" actionListener="#{elem.delete()}" update="@form" />
+						</p:column>
 					</p:dataTable>
+					<p:commandButton value="Usuń sekcję" actionListener="#{section.delete()}" update=":rootForm" icon="fa fa-remove" />
 					<p:commandButton value="Dodaj element" actionListener="#{section.addChild()}" update="@form" icon="fa fa-plus" />
 				</p:panelGrid>
 			</h:form>
@@ -59,6 +66,17 @@
 			<p:commandButton value="Dodaj sekcję" actionListener="#{reviewConfigCO.root.addChild()}" update=":rootForm"
 				icon="fa fa-plus"
 			/>
+			<p:commandButton value="Wyczyść" actionListener="#{reviewConfigCO.root.delete()}" update=":rootForm"
+				icon="fa fa-refresh"
+			/>
+			<p:commandButton value="Zapisz" update=":rootForm" icon="fa fa-save" />
+			<p:commandButton value="Anuluj" update=":rootForm" icon="fa fa-recycle">
+				<p:confirm header="Potwierdzenie" message="Jesteś pewien?" icon="fa fa-bomb" />
+			</p:commandButton>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:form>
 	</p:panelGrid>
 </h:body>
