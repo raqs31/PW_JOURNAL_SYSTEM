@@ -38,7 +38,7 @@
 						</p:inplace>
 					</h:panelGrid>
 					<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{section.elements}" var="elem"
-						emptyMessage="Brak elementów"
+						emptyMessage="Brak elementów" draggableRows="true"
 					>
 						<f:facet name="header">Elementy:</f:facet>
 						<p:ajax event="rowReorder" listener="#{section.order()}" />
