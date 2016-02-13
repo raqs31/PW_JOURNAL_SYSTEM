@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.model.common.SystemRole;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.SystemRolesService;
+import pw.mario.journal.service.common.SystemRolesService;
 
 @NoArgsConstructor
 @Stateless

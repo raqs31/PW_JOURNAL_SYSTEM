@@ -25,8 +25,8 @@ import pw.mario.journal.model.common.Tag;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.model.dictionary.ArticleStatus;
 import pw.mario.journal.model.dictionary.Dictionary;
-import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.NewArticleService;
+import pw.mario.journal.service.common.FileManagerService;
 
 @Log4j
 @Stateless

@@ -24,15 +24,15 @@ import pw.mario.common.action.Action;
 import pw.mario.common.action.form.ConfirmWarning;
 import pw.mario.common.action.form.OnConfirmAction;
 import pw.mario.common.api.PickListRoles;
+import pw.mario.common.api.impl.EditableUserPickListRoles;
 import pw.mario.common.exception.PerformActionException;
-import pw.mario.faces.admin.api.impl.EditableUserPickListRoles;
 import pw.mario.journal.model.common.Department;
 import pw.mario.journal.model.common.SystemRole;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.DepartmentService;
-import pw.mario.journal.service.LoginService;
-import pw.mario.journal.service.SystemRolesService;
-import pw.mario.journal.service.UserService;
+import pw.mario.journal.service.common.DepartmentService;
+import pw.mario.journal.service.common.LoginService;
+import pw.mario.journal.service.common.SystemRolesService;
+import pw.mario.journal.service.common.UserService;
 
 @Named
 @ViewScoped

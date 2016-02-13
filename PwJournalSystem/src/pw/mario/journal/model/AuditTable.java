@@ -1,4 +1,4 @@
-package pw.mario.journal.model.ext;
+package pw.mario.journal.model;
 
 import java.security.Principal;
 import java.util.Calendar;

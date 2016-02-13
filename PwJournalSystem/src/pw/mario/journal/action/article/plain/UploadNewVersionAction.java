@@ -21,9 +21,9 @@ import pw.mario.journal.model.article.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
-import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleLazyLoadingService;
 import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.service.common.LoginService;
 
 @Button
 @Action(actionFor=ArticleManager.AUTHOR)

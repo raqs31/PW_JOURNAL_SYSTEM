@@ -24,7 +24,6 @@ import pw.mario.journal.dao.RulesDao;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
-import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.article.ArticleAcceptor;
 import pw.mario.journal.model.article.ArticleVersion;
@@ -32,8 +31,9 @@ import pw.mario.journal.model.article.Rule;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.Rules;
-import pw.mario.journal.service.FileManagerService;
 import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.service.article.ExecutionContext;
+import pw.mario.journal.service.common.FileManagerService;
 import pw.mario.journal.validator.ValidationFactory;
 
 @Log4j

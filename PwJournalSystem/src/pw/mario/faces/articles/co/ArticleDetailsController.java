@@ -29,8 +29,8 @@ import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.article.ArticleAcceptor;
 import pw.mario.journal.model.article.ArticleVersion;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.service.common.LoginService;
 
 @Log4j
 @Named

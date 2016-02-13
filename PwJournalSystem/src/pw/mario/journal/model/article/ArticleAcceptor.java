@@ -15,10 +15,10 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import pw.mario.journal.model.AuditTable;
+import pw.mario.journal.model.IdTable;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.model.dictionary.AcceptorStatus;
-import pw.mario.journal.model.ext.AuditTable;
-import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @ToString(of="articleAcceptorId")

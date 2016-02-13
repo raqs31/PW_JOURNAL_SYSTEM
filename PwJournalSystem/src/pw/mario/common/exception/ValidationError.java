@@ -2,10 +2,10 @@ package pw.mario.common.exception;
 
 import javax.faces.application.FacesMessage;
 
-import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.article.Rule;
 import pw.mario.journal.model.dictionary.ValidationRule;
+import pw.mario.journal.service.article.ExecutionContext;
 
 public class ValidationError {
 	private final Article article;

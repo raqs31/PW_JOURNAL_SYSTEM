@@ -20,7 +20,7 @@ import pw.mario.common.action.Action;
 import pw.mario.common.action.form.ConfirmWarning;
 import pw.mario.common.action.form.OnConfirmAction;
 import pw.mario.journal.model.common.Department;
-import pw.mario.journal.service.DepartmentService;
+import pw.mario.journal.service.common.DepartmentService;
 
 @Named("deptPaneCo")
 @ViewScoped

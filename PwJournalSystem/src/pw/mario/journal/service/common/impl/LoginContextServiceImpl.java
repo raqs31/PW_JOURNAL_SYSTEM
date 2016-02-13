@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 
 import javax.annotation.Resource;
@@ -10,8 +10,8 @@ import com.google.common.base.Strings;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.LoginService;
-import pw.mario.journal.service.UserService;
+import pw.mario.journal.service.common.LoginService;
+import pw.mario.journal.service.common.UserService;
 
 @NoArgsConstructor
 @SessionScoped

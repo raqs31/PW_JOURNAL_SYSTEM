@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import lombok.NoArgsConstructor;
-import pw.mario.journal.service.LocaleService;
+import pw.mario.journal.service.common.LocaleService;
 
 @NoArgsConstructor
 @SessionScoped

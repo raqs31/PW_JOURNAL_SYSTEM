@@ -18,10 +18,10 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.api.ContextConstants;
 import pw.mario.common.util.Messages;
-import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.article.Rule;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.service.article.ExecutionContext;
 
 @Log4j
 @Named

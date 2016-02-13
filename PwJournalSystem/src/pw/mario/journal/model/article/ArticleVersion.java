@@ -17,8 +17,8 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import pw.mario.journal.model.ext.AuditTable;
-import pw.mario.journal.model.ext.IdTable;
+import pw.mario.journal.model.AuditTable;
+import pw.mario.journal.model.IdTable;
 
 @Data
 @EqualsAndHashCode(callSuper=false)

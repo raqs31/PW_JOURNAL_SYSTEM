@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import javax.transaction.Transactional.TxType;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.DepartmentDAO;
 import pw.mario.journal.model.common.Department;
-import pw.mario.journal.service.DepartmentService;
+import pw.mario.journal.service.common.DepartmentService;
 
 @NoArgsConstructor
 @Stateless

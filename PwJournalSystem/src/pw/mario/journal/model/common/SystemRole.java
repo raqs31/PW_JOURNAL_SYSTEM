@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import pw.mario.journal.model.ext.IdTable;
+import pw.mario.journal.model.IdTable;
 
 @Data
 @ToString(exclude="users")

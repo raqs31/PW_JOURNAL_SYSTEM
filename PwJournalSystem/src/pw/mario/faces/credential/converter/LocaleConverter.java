@@ -8,7 +8,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Inject;
 
-import pw.mario.journal.service.LocaleService;
+import pw.mario.journal.service.common.LocaleService;
 
 @ManagedBean(name="localeConverter", eager=true)
 public class LocaleConverter implements Converter {

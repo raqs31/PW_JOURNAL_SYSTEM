@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import pw.mario.journal.dao.SystemRolesDAO;
 import pw.mario.journal.dao.UserDAO;
 import pw.mario.journal.model.common.Department;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.UserService;
+import pw.mario.journal.service.common.UserService;
 
 @Log4j
 @NoArgsConstructor

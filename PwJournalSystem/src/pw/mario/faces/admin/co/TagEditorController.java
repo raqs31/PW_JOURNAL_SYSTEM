@@ -14,7 +14,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pw.mario.journal.model.common.Tag;
-import pw.mario.journal.service.TagService;
+import pw.mario.journal.service.common.TagService;
 
 @NoArgsConstructor
 @Named

@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import javax.transaction.Transactional.TxType;
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.TagDAO;
 import pw.mario.journal.model.common.Tag;
-import pw.mario.journal.service.TagService;
+import pw.mario.journal.service.common.TagService;
 
 @NoArgsConstructor
 @Stateless

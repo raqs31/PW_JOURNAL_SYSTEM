@@ -1,4 +1,4 @@
-package pw.mario.journal.service.impl;
+package pw.mario.journal.service.common.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,7 +22,7 @@ import pw.mario.common.util.file.FileHandler;
 import pw.mario.common.util.file.FileUtils;
 import pw.mario.journal.dao.dictionary.SystemParameterDao;
 import pw.mario.journal.model.dictionary.SystemParameter;
-import pw.mario.journal.service.FileManagerService;
+import pw.mario.journal.service.common.FileManagerService;
 
 @Log4j
 @Named

@@ -3,9 +3,9 @@ package pw.mario.journal.validator.impl;
 import javax.enterprise.context.ApplicationScoped;
 
 import pw.mario.common.exception.ValidationError;
-import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.dictionary.ValidationRule;
 import pw.mario.journal.qualifiers.Validator;
+import pw.mario.journal.service.article.ExecutionContext;
 import pw.mario.journal.validator.ArticleValidator;
 import pw.mario.journal.validator.ArticleValidatorBuilder;
 

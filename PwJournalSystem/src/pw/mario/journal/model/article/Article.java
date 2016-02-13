@@ -26,11 +26,11 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import pw.mario.journal.model.AuditTable;
+import pw.mario.journal.model.IdTable;
 import pw.mario.journal.model.common.Tag;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.model.dictionary.ArticleStatus;
-import pw.mario.journal.model.ext.AuditTable;
-import pw.mario.journal.model.ext.IdTable;
 
 @Data
 @ToString(exclude={"authors", "versions", "tagList", "acceptors", "history"})

@@ -9,7 +9,7 @@ import org.primefaces.event.FileUploadEvent;
 
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
-import pw.mario.journal.service.FileManagerService;
+import pw.mario.journal.service.common.FileManagerService;
 
 @Log4j
 @Named

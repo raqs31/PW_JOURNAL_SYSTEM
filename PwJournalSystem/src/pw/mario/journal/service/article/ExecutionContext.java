@@ -1,4 +1,4 @@
-package pw.mario.journal.data;
+package pw.mario.journal.service.article;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -19,8 +19,8 @@ import org.apache.log4j.Logger;
 
 import lombok.Getter;
 import lombok.Setter;
-import pw.mario.journal.service.LocaleService;
-import pw.mario.journal.service.LoginService;
+import pw.mario.journal.service.common.LocaleService;
+import pw.mario.journal.service.common.LoginService;
 
 @Named("authBean")
 @SessionScoped

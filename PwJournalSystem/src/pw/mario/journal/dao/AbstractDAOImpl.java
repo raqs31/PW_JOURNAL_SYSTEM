@@ -10,7 +10,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 
 import lombok.extern.log4j.Log4j;
-import pw.mario.journal.model.ext.IdTable;
+import pw.mario.journal.model.IdTable;
 
 @Log4j
 public abstract class AbstractDAOImpl<T extends IdTable> {

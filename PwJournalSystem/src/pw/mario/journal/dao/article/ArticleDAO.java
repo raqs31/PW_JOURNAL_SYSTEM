@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.LockModeType;
 
 import pw.mario.common.exception.LockException;
-import pw.mario.journal.data.ExecutionContext;
 import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.article.ArticleAcceptor;
 import pw.mario.journal.model.article.ArticleHistory;
@@ -13,6 +12,7 @@ import pw.mario.journal.model.article.ArticleVersion;
 import pw.mario.journal.model.article.Rule;
 import pw.mario.journal.model.common.Tag;
 import pw.mario.journal.model.common.User;
+import pw.mario.journal.service.article.ExecutionContext;
 
 public interface ArticleDAO {
 	Article addArticle(Article a);

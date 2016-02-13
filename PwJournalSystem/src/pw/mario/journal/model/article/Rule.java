@@ -24,11 +24,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.journal.model.IdTable;
 import pw.mario.journal.model.common.SystemRole;
 import pw.mario.journal.model.dictionary.AcceptorStatus;
 import pw.mario.journal.model.dictionary.ArticleStatus;
 import pw.mario.journal.model.dictionary.ValidationRule;
-import pw.mario.journal.model.ext.IdTable;
 
 /**
  * Entity implementation class for Entity: Rule

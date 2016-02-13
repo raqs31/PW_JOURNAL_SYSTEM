@@ -1,4 +1,4 @@
-package pw.mario.journal.service;
+package pw.mario.journal.service.common;
 
 import org.primefaces.model.UploadedFile;
 

@@ -12,7 +12,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.google.common.base.Strings;
 
 import pw.mario.journal.dao.UserDAO;
-import pw.mario.journal.model.ext.IdTable;
+import pw.mario.journal.model.IdTable;
 
 @Named
 @ApplicationScoped

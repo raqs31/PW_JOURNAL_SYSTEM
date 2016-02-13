@@ -17,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import pw.mario.journal.model.ext.IdTable;
+import pw.mario.journal.model.IdTable;
 
 @Data
 @Builder

@@ -1,4 +1,4 @@
-package pw.mario.faces.admin.api.impl;
+package pw.mario.common.api.impl;
 
 import java.util.List;
 

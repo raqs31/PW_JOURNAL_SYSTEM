@@ -17,13 +17,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pw.mario.common.api.PickListRoles;
-import pw.mario.faces.admin.api.impl.EditableUserPickListRoles;
+import pw.mario.common.api.impl.EditableUserPickListRoles;
 import pw.mario.journal.model.common.Department;
 import pw.mario.journal.model.common.SystemRole;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.DepartmentService;
-import pw.mario.journal.service.SystemRolesService;
-import pw.mario.journal.service.UserService;
+import pw.mario.journal.service.common.DepartmentService;
+import pw.mario.journal.service.common.SystemRolesService;
+import pw.mario.journal.service.common.UserService;
 
 @Named
 @ViewScoped

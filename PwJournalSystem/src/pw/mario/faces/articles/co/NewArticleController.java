@@ -28,8 +28,8 @@ import pw.mario.common.util.file.FileHandler;
 import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.common.Tag;
 import pw.mario.journal.model.common.User;
-import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.NewArticleService;
+import pw.mario.journal.service.common.LoginService;
 
 @Log4j
 @Named
