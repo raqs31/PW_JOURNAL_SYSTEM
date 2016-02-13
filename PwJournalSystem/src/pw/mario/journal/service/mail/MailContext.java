@@ -1,4 +1,4 @@
-package pw.mario.common.api;
+package pw.mario.journal.service.mail;
 
 import java.util.Collection;
 import java.util.Date;
