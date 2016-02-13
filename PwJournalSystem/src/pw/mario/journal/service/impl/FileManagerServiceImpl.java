@@ -21,7 +21,7 @@ import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.file.FileHandler;
 import pw.mario.common.util.file.FileUtils;
 import pw.mario.journal.dao.dictionary.SystemParameterDao;
-import pw.mario.journal.model.dictionaries.SystemParameter;
+import pw.mario.journal.model.dictionary.SystemParameter;
 import pw.mario.journal.service.FileManagerService;
 
 @Log4j

@@ -1,4 +1,4 @@
-package pw.mario.journal.model.dictionaries;
+package pw.mario.journal.model.dictionary;
 
 import static javax.faces.application.FacesMessage.SEVERITY_ERROR;
 import static javax.faces.application.FacesMessage.SEVERITY_FATAL;
@@ -10,7 +10,6 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 import lombok.NoArgsConstructor;
-import pw.mario.journal.model.Dictionary;
 
 
 @Entity

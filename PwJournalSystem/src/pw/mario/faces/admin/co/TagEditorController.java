@@ -13,7 +13,7 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import pw.mario.journal.model.Tag;
+import pw.mario.journal.model.common.Tag;
 import pw.mario.journal.service.TagService;
 
 @NoArgsConstructor

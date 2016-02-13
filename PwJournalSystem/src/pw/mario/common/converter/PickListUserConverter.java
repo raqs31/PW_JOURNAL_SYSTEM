@@ -13,7 +13,7 @@ import org.primefaces.component.picklist.PickList;
 import org.primefaces.model.DualListModel;
 
 import lombok.extern.log4j.Log4j;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.User;
 
 @Log4j
 @FacesConverter(forClass=User.class, value="pickListUserConverter")

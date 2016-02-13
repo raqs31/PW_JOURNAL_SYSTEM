@@ -6,8 +6,8 @@ import java.util.List;
 
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.Refreshable;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.common.User;
 
 public interface ArticleService extends Serializable {
 	List<Article> getArticles(User u);

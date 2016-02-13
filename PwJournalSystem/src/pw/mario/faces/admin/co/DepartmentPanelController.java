@@ -19,7 +19,7 @@ import lombok.Setter;
 import pw.mario.common.action.Action;
 import pw.mario.common.action.form.ConfirmWarning;
 import pw.mario.common.action.form.OnConfirmAction;
-import pw.mario.journal.model.Department;
+import pw.mario.journal.model.common.Department;
 import pw.mario.journal.service.DepartmentService;
 
 @Named("deptPaneCo")

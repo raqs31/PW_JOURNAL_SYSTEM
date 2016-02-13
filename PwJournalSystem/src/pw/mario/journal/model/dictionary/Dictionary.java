@@ -1,4 +1,4 @@
-package pw.mario.journal.model;
+package pw.mario.journal.model.dictionary;
 
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;

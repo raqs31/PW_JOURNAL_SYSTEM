@@ -9,7 +9,7 @@ import javax.transaction.Transactional.TxType;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.TagDAO;
-import pw.mario.journal.model.Tag;
+import pw.mario.journal.model.common.Tag;
 import pw.mario.journal.service.TagService;
 
 @NoArgsConstructor

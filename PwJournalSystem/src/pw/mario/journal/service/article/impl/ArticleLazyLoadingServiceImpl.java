@@ -11,7 +11,7 @@ import javax.transaction.Transactional.TxType;
 import org.hibernate.Hibernate;
 
 import pw.mario.journal.dao.article.ArticleDAO;
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 import pw.mario.journal.service.article.ArticleLazyLoadingService;
 
 @Default

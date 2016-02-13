@@ -8,8 +8,8 @@ import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.RulesDao;
-import pw.mario.journal.model.Rule;
-import pw.mario.journal.model.dictionaries.ValidationRule;
+import pw.mario.journal.model.article.Rule;
+import pw.mario.journal.model.dictionary.ValidationRule;
 
 @Default
 @Dependent

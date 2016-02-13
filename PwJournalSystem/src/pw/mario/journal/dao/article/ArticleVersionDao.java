@@ -2,8 +2,8 @@ package pw.mario.journal.dao.article;
 
 import java.util.List;
 
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.ArticleVersion;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.article.ArticleVersion;
 
 public interface ArticleVersionDao {
 	ArticleVersion getLastVersion(Article a);

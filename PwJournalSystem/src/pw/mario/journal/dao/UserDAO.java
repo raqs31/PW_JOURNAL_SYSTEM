@@ -2,8 +2,8 @@ package pw.mario.journal.dao;
 
 import java.util.List;
 
-import pw.mario.journal.model.Department;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.Department;
+import pw.mario.journal.model.common.User;
 
 public interface UserDAO {
 	List<User> getUsersList();

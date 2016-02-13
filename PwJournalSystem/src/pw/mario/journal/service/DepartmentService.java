@@ -3,7 +3,7 @@ package pw.mario.journal.service;
 import java.io.Serializable;
 import java.util.List;
 
-import pw.mario.journal.model.Department;
+import pw.mario.journal.model.common.Department;
 
 public interface DepartmentService extends Serializable {
 	public List<Department> getDepartmentList();

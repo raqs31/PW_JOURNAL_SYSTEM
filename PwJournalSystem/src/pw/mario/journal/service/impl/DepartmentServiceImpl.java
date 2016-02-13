@@ -10,7 +10,7 @@ import javax.transaction.Transactional.TxType;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.DepartmentDAO;
-import pw.mario.journal.model.Department;
+import pw.mario.journal.model.common.Department;
 import pw.mario.journal.service.DepartmentService;
 
 @NoArgsConstructor

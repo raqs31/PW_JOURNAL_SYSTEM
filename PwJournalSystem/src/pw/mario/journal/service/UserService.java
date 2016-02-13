@@ -3,8 +3,8 @@ package pw.mario.journal.service;
 import java.io.Serializable;
 import java.util.List;
 
-import pw.mario.journal.model.Department;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.Department;
+import pw.mario.journal.model.common.User;
 
 public interface UserService extends Serializable {
 	List<User> getUserList();

@@ -25,10 +25,10 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.Refreshable;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.ArticleAcceptor;
-import pw.mario.journal.model.ArticleVersion;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.article.ArticleAcceptor;
+import pw.mario.journal.model.article.ArticleVersion;
+import pw.mario.journal.model.common.User;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleOperationService;
 

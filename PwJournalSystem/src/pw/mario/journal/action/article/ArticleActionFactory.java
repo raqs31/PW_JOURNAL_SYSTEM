@@ -10,8 +10,8 @@ import javax.inject.Inject;
 import pw.mario.common.action.AbstractActionFactory;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.Refreshable;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.common.User;
 import pw.mario.journal.qualifiers.Button;
 
 @Button

@@ -6,8 +6,8 @@ import javax.enterprise.context.Dependent;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.dictionary.ValidationRulesDao;
-import pw.mario.journal.model.Rule;
-import pw.mario.journal.model.dictionaries.ValidationRule;
+import pw.mario.journal.model.article.Rule;
+import pw.mario.journal.model.dictionary.ValidationRule;
 
 @Dependent
 public class ValidationRulesDaoImpl extends AbstractDAOImpl<ValidationRule> implements ValidationRulesDao {

@@ -1,4 +1,4 @@
-package pw.mario.journal.model;
+package pw.mario.journal.model.article;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -26,7 +26,9 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import pw.mario.journal.model.dictionaries.ArticleStatus;
+import pw.mario.journal.model.common.Tag;
+import pw.mario.journal.model.common.User;
+import pw.mario.journal.model.dictionary.ArticleStatus;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 

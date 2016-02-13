@@ -1,4 +1,4 @@
-package pw.mario.journal.model;
+package pw.mario.journal.model.article;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

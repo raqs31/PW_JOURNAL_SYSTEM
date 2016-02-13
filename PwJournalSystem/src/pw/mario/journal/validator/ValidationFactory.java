@@ -8,8 +8,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import pw.mario.journal.dao.dictionary.ValidationRulesDao;
-import pw.mario.journal.model.Rule;
-import pw.mario.journal.model.dictionaries.ValidationRule;
+import pw.mario.journal.model.article.Rule;
+import pw.mario.journal.model.dictionary.ValidationRule;
 import pw.mario.journal.qualifiers.Validator;
 
 @ApplicationScoped

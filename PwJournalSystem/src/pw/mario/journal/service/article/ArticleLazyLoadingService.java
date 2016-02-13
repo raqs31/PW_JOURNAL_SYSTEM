@@ -1,6 +1,6 @@
 package pw.mario.journal.service.article;
 
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 
 public interface ArticleLazyLoadingService {
 	void loadAuthors(Article a);

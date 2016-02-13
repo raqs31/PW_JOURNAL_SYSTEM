@@ -10,8 +10,8 @@ import org.hibernate.criterion.Restrictions;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.SystemRolesDAO;
-import pw.mario.journal.model.SystemRole;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.SystemRole;
+import pw.mario.journal.model.common.User;
 
 @Default
 @Dependent

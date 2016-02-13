@@ -1,5 +1,5 @@
 
-package pw.mario.journal.model;
+package pw.mario.journal.model.common;
 
 import java.util.List;
 

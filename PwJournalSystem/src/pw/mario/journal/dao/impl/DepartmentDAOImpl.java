@@ -8,7 +8,7 @@ import javax.persistence.Query;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.DepartmentDAO;
-import pw.mario.journal.model.Department;
+import pw.mario.journal.model.common.Department;
 
 @Default
 @Dependent

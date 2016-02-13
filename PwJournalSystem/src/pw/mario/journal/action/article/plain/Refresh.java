@@ -9,7 +9,7 @@ import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.faces.articles.co.ArticleDetailsController;
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 import pw.mario.journal.qualifiers.Button;
 
 @Button

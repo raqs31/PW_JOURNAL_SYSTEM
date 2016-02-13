@@ -20,8 +20,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
-import pw.mario.journal.model.Department;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.Department;
+import pw.mario.journal.model.common.User;
 import pw.mario.journal.service.DepartmentService;
 import pw.mario.journal.service.UserService;
 

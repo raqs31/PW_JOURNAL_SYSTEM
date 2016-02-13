@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import pw.mario.journal.dao.SystemRolesDAO;
-import pw.mario.journal.model.SystemRole;
+import pw.mario.journal.model.common.SystemRole;
 
 @Named("sysRoleConverter")
 @ApplicationScoped

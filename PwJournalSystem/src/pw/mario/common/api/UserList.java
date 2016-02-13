@@ -7,7 +7,7 @@ import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
 
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.User;
 
 /**
  * Interfejs dla elementu ui z listą użytkowników

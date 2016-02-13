@@ -6,7 +6,7 @@ import org.primefaces.event.SelectEvent;
 
 import pw.mario.common.action.ConditionalAction;
 import pw.mario.common.api.Refreshable;
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 
 public interface ButtonAction extends ConditionalAction, Serializable {
 	String getAction();

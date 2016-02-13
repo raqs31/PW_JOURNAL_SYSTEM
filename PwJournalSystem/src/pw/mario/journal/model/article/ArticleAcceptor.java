@@ -1,4 +1,4 @@
-package pw.mario.journal.model;
+package pw.mario.journal.model.article;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +15,8 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
-import pw.mario.journal.model.dictionaries.AcceptorStatus;
+import pw.mario.journal.model.common.User;
+import pw.mario.journal.model.dictionary.AcceptorStatus;
 import pw.mario.journal.model.ext.AuditTable;
 import pw.mario.journal.model.ext.IdTable;
 

@@ -16,7 +16,7 @@ import pw.mario.common.api.Refreshable;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;

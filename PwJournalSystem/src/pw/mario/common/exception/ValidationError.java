@@ -3,9 +3,9 @@ package pw.mario.common.exception;
 import javax.faces.application.FacesMessage;
 
 import pw.mario.journal.data.ExecutionContext;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.Rule;
-import pw.mario.journal.model.dictionaries.ValidationRule;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.article.Rule;
+import pw.mario.journal.model.dictionary.ValidationRule;
 
 public class ValidationError {
 	private final Article article;

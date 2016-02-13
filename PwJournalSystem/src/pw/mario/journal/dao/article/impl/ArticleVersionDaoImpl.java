@@ -11,8 +11,8 @@ import org.hibernate.Hibernate;
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.article.ArticleVersionDao;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.ArticleVersion;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.article.ArticleVersion;
 
 @Log4j
 @Default

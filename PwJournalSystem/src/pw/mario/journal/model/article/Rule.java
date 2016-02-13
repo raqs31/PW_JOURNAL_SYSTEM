@@ -1,4 +1,4 @@
-package pw.mario.journal.model;
+package pw.mario.journal.model.article;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -24,9 +24,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import pw.mario.journal.model.dictionaries.AcceptorStatus;
-import pw.mario.journal.model.dictionaries.ArticleStatus;
-import pw.mario.journal.model.dictionaries.ValidationRule;
+import pw.mario.journal.model.common.SystemRole;
+import pw.mario.journal.model.dictionary.AcceptorStatus;
+import pw.mario.journal.model.dictionary.ArticleStatus;
+import pw.mario.journal.model.dictionary.ValidationRule;
 import pw.mario.journal.model.ext.IdTable;
 
 /**

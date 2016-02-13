@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.faces.articles.model.ArticlesTab;
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.ArticleService;
 

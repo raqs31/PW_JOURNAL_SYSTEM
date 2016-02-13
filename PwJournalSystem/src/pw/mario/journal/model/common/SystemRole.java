@@ -1,4 +1,4 @@
-package pw.mario.journal.model;
+package pw.mario.journal.model.common;
 
 import java.io.Serializable;
 import java.util.List;

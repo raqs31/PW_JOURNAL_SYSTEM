@@ -7,8 +7,8 @@ import javax.inject.Inject;
 
 import lombok.NoArgsConstructor;
 import pw.mario.journal.dao.SystemRolesDAO;
-import pw.mario.journal.model.SystemRole;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.SystemRole;
+import pw.mario.journal.model.common.User;
 import pw.mario.journal.service.SystemRolesService;
 
 @NoArgsConstructor

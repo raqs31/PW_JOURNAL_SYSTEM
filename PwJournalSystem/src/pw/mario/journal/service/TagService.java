@@ -3,7 +3,7 @@ package pw.mario.journal.service;
 import java.io.Serializable;
 import java.util.List;
 
-import pw.mario.journal.model.Tag;
+import pw.mario.journal.model.common.Tag;
 
 public interface TagService extends Serializable {
 	List<Tag> getTags();

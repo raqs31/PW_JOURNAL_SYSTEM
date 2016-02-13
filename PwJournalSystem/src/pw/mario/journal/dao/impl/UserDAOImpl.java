@@ -1,8 +1,8 @@
 package pw.mario.journal.dao.impl;
 
-import static pw.mario.journal.model.User.Queries.GET_BY_EMAIL;
-import static pw.mario.journal.model.User.Queries.GET_BY_LOGIN;
-import static pw.mario.journal.model.User.Queries.USERS_WITH_DEPARTMENT_ROLE;
+import static pw.mario.journal.model.common.User.Queries.GET_BY_EMAIL;
+import static pw.mario.journal.model.common.User.Queries.GET_BY_LOGIN;
+import static pw.mario.journal.model.common.User.Queries.USERS_WITH_DEPARTMENT_ROLE;
 
 import java.util.List;
 
@@ -12,10 +12,10 @@ import javax.persistence.Query;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.UserDAO;
-import pw.mario.journal.model.Department;
-import pw.mario.journal.model.SystemRole.Roles;
-import pw.mario.journal.model.User;
-import pw.mario.journal.model.User.Queries;
+import pw.mario.journal.model.common.Department;
+import pw.mario.journal.model.common.User;
+import pw.mario.journal.model.common.SystemRole.Roles;
+import pw.mario.journal.model.common.User.Queries;
 
 @Default
 @Dependent

@@ -3,8 +3,8 @@ package pw.mario.journal.service;
 import java.io.Serializable;
 import java.util.List;
 
-import pw.mario.journal.model.SystemRole;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.SystemRole;
+import pw.mario.journal.model.common.User;
 
 public interface SystemRolesService extends Serializable {
 

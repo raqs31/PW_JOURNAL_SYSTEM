@@ -25,9 +25,9 @@ import lombok.extern.log4j.Log4j;
 import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.Messages;
 import pw.mario.common.util.file.FileHandler;
-import pw.mario.journal.model.Article;
-import pw.mario.journal.model.Tag;
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.article.Article;
+import pw.mario.journal.model.common.Tag;
+import pw.mario.journal.model.common.User;
 import pw.mario.journal.service.LoginService;
 import pw.mario.journal.service.article.NewArticleService;
 

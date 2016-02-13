@@ -1,4 +1,4 @@
-package pw.mario.journal.model.dictionaries;
+package pw.mario.journal.model.dictionary;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -6,7 +6,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 import lombok.NoArgsConstructor;
-import pw.mario.journal.model.Dictionary;
 
 @Entity
 @NoArgsConstructor

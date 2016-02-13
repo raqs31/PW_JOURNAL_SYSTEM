@@ -2,7 +2,7 @@ package pw.mario.journal.dao;
 
 import java.util.List;
 
-import pw.mario.journal.model.Department;
+import pw.mario.journal.model.common.Department;
 
 public interface DepartmentDAO {
 	List<Department> getAllDepartments();

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import org.primefaces.model.DualListModel;
 
-import pw.mario.journal.model.SystemRole;
+import pw.mario.journal.model.common.SystemRole;
 
 public interface PickListRoles extends Serializable {
 	boolean isEditable();

@@ -7,7 +7,7 @@ import org.primefaces.model.DualListModel;
 
 import lombok.Data;
 import pw.mario.common.api.PickListRoles;
-import pw.mario.journal.model.SystemRole;
+import pw.mario.journal.model.common.SystemRole;
 
 @Data
 public class EditableUserPickListRoles implements PickListRoles {

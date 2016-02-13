@@ -11,7 +11,7 @@ import javax.persistence.Query;
 import org.jboss.security.auth.spi.Util;
 import org.junit.Test;
 
-import pw.mario.journal.model.User;
+import pw.mario.journal.model.common.User;
 
 public class TestConnection {
 

@@ -9,7 +9,7 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import pw.mario.faces.articles.co.ArticleDetailsController;
-import pw.mario.journal.model.Article;
+import pw.mario.journal.model.article.Article;
 import pw.mario.journal.qualifiers.ArticleManagement;
 import pw.mario.journal.qualifiers.ArticleTab;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
