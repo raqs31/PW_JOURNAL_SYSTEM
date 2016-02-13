@@ -1,5 +1,6 @@
 package pw.mario.journal.model.form;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name="SECTIONS")
-public class Section {
+public class Section implements Modifiable {
 	@Id
 	@Column(name="SECTION_ID")
 	@SequenceGenerator(name = "sectionIdSeq", sequenceName = "SECTIONS_SEQ", initialValue = 1, allocationSize = 1)
@@ -57,5 +58,20 @@ public class Section {
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
 	@JoinColumn(name="FORM_ID", referencedColumnName="FORM_ID", nullable=false)
 	private Form form;
+
+	@Override
+	public void addChild() {
+		if (elements == null)
+			elements = new ArrayList<>();
+		elements.add(new Element(this));
+	}
+
+	@Override
+	public void delete() {
+		form.getSections().remove(this);
+	}
 	
+	public Section(Form f) {
+		form = f;
+	}
 }

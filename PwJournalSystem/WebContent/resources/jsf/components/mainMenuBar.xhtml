@@ -1,5 +1,6 @@
-<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:cc="http://java.sun.com/jsf/composite" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
+<ui:component xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html" xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions" xmlns:p="http://primefaces.org/ui"
 >
 	<cc:interface>
@@ -8,20 +9,29 @@
 		<h:form>
 			<p:menubar id="mainMenuBar">
 				<p:submenu label="Administracja" icon="fa fa-gears" rendered="#{request.isUserInRole('USER')}">
-					<p:menuitem id="miUsers" value="Użytkownicy" outcome="/faces/admin/users?faces-redirect=true" rendered="#{request.isUserInRole('ADMIN')}" />
+					<p:menuitem id="miUsers" value="Użytkownicy" outcome="/faces/admin/users?faces-redirect=true"
+						rendered="#{request.isUserInRole('ADMIN')}"
+					/>
 					<p:menuitem id="miDepartments" value="Departamenty" outcome="/faces/admin/departments?faces-redirect=true" />
 					<p:menuitem id="miTags" value="Etykiety" outcome="/faces/admin/tagEditor?faces-redirect=true" />
+					<p:submenu label="Konfiguracja" icon="fa fa-wrench" rendered="#{request.isUserInRole('ADMIN')}">
+						<p:menuitem id="miReview" value="Wzór recenzji" outcome="/faces/conf/review?faces-redirect=true" />
+					</p:submenu>
 				</p:submenu>
-				<p:menuitem id="miArticles" value=" Artykuły" icon="fa fa-leanpub" outcome="/faces/article/articles?faces-redirect=true"/>
+				<p:menuitem id="miArticles" value=" Artykuły" icon="fa fa-leanpub"
+					outcome="/faces/article/articles?faces-redirect=true"
+				/>
 				<p:menuitem id="goToStart" value=" Home" icon="fa fa-home" outcome="/index?faces-redirect=true" />
 				<f:facet name="options">
 					<h:form method="POST" action="j_security_check">
 						<p:outputLabel id="loggedAs" value="#{authBean.login}" />
 						<p:spacer width="5" />
-						<p:selectOneMenu rendered="true" id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade" converter="#{localeConverter}" onchange="submit()"
-							valueChangeListener="#{authBean.changeLocale}"
+						<p:selectOneMenu rendered="true" id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade"
+							converter="#{localeConverter}" onchange="submit()" valueChangeListener="#{authBean.changeLocale}"
 						>
-							<f:selectItems value="#{authBean.supportedLocales}" var="locale" itemLabel="#{locale.displayName}" itemValue="#{locale}" />
+							<f:selectItems value="#{authBean.supportedLocales}" var="locale" itemLabel="#{locale.displayName}"
+								itemValue="#{locale}"
+							/>
 							<p:column>
 								#{loc.displayName}
 							</p:column>

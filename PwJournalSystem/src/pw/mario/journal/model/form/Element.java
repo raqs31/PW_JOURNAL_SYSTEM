@@ -22,7 +22,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @Table(name="SECTION_ELEMENTS")
-public class Element {
+public class Element implements Modifiable {
 	
 	@Id
 	@Column(name="ELEM_ID")
@@ -42,5 +42,17 @@ public class Element {
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
 	@JoinColumn(name="SECTION_ID", referencedColumnName="SECTION_ID", nullable=false)
 	private Section section;
+
+	@Override
+	public void addChild() {
+	}
+
+	@Override
+	public void delete() {
+		getSection().getElements().remove(this);
+	}
 	
+	public Element(Section s) {
+		section = s;
+	}
 }

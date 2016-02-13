@@ -1,5 +1,6 @@
 package pw.mario.journal.model.form;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,7 @@ import pw.mario.journal.model.AuditTable;
 @Table(name="FORMS", indexes={
 		@Index(columnList="PATTERN")
 })
-public class Form extends AuditTable {
+public class Form extends AuditTable implements Modifiable {
 	@Id
 	@Column(name="FORM_ID")
 	@SequenceGenerator(name = "formIdSeq", sequenceName = "FORMS_SEQ", initialValue = 1, allocationSize = 1)
@@ -45,4 +46,24 @@ public class Form extends AuditTable {
 	@OrderBy("order")
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="form")
 	private List<Section> sections;
+	
+	@Column(name="LONG_ATTR1", length=4000)
+	private String longAttr1;
+	
+	@Column(name="LONG_ATTR2", length=4000)
+	private String longAttr2;
+
+	@Override
+	public void addChild() {
+		if (sections == null)
+			sections = new ArrayList<>();
+		sections.add(new Section(this));
+		
+	}
+
+	@Override
+	public void delete() {
+		if (sections != null)
+			sections.clear();
+	}
 }
