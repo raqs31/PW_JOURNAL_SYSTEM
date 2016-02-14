@@ -10,7 +10,6 @@ import javax.persistence.TypedQuery;
 
 import org.hibernate.Session;
 
-import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.IdTable;
 
 @SuppressWarnings("rawtypes")

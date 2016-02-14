@@ -91,7 +91,7 @@
 	</error-page>
 	 -->
 	<session-config>
-		<session-timeout>5</session-timeout>
+		<session-timeout>20</session-timeout>
 	</session-config>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>

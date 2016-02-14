@@ -12,7 +12,7 @@
 	<cc:implementation>
 		<ui:param name="root" value="#{cc.attrs.rootForm}" />
 		<ui:param name="edit" value="#{cc.attrs.editable}" />
-		<h:form>
+		<h:form id="_sectionForm">
 			<p:panel header="#{root.name}">
 				<h:panelGrid columns="3">
 					<p:outputLabel for="itaForAuthor" value="Dla autora" />
@@ -35,6 +35,8 @@
 				
 				Implementacja panelu	
 			</p:panel>
+			<p:commandButton value="test" actionListener="#{reviewConfigCO.addChildrenTest()}" update="@all"/>
+			<p:commandButton value="refresh" update="@all"/>
 		</h:form>
 	</cc:implementation>
 </ui:component>

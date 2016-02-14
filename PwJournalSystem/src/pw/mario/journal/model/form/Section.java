@@ -27,6 +27,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.common.api.Modifiable;
 
 @Data
 @EqualsAndHashCode(of="sectionId")

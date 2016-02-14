@@ -28,6 +28,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.common.api.Modifiable;
 import pw.mario.journal.model.AuditTable;
 import pw.mario.journal.model.IdTable;
 
@@ -134,4 +135,8 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 		return sb.toString();
 		
 	}
+	
+	public void setAllActiveIndex(String s) {}
+
+
 }

@@ -1,4 +1,4 @@
-package pw.mario.journal.model.form;
+package pw.mario.common.api;
 
 import java.util.List;
 
