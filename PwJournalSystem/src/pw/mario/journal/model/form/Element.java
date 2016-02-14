@@ -72,8 +72,6 @@ public class Element implements Modifiable {
 		List<FacesMessage> errors = new LinkedList<>();
 		if (Strings.isNullOrEmpty(description))
 			errors.add(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nie wprowadzono opisu", forDetail()));
-		if (Strings.isNullOrEmpty(value))
-			errors.add(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nie wprowadzono wartości", forDetail()));
 		return errors;
 	}
 	
