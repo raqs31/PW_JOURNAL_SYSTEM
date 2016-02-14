@@ -13,71 +13,77 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<p:messages id="msg" closable="true" autoUpdate="true" showDetail="true" />
-	<my:status />
-	<p:panelGrid columns="1" id="rootForm" style="width:75%;">
-		<f:facet name="header">#{reviewConfigCO.root.name}</f:facet>
+	<p:panel>
+		<p:messages id="msg" closable="true" autoUpdate="true" showDetail="true" />
+		<my:status />
 		<h:form>
-			<h:panelGrid columns="2">
-				<p:outputLabel for="itaForAuthor" value="Dla autora" />
-				<p:inputTextarea id="itaForAuthor" disabled="true" value="dla autora" cols="70" autoResize="true" addLine="true" />
-				<p:outputLabel for="itaForEditor" value="Dla autora" />
-				<p:inputTextarea id="itaForEditor" disabled="true" value="Dla edytora" cols="70" autoResize="true" addLine="true" />
-			</h:panelGrid>
+			<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź tytuł formularza" effectSpeed="fast">
+				<p:inputText value="#{reviewConfigCO.root.name}" maxlength="120" />
+			</p:inplace>
 		</h:form>
-		<ui:repeat var="section" value="#{reviewConfigCO.root.sections}">
+		<p:panelGrid columns="1" id="rootForm" style="width:75%;">
 			<h:form>
-				<p:panelGrid columns="2" width="70%">
-					<h:panelGrid width="600" columnClasses="topAligned">
-						<p:inplace editor="true" effect="fade" emptyLabel="Tytuł sekcji" effectSpeed="fast">
-							<p:inputText value="#{section.title}" />
-						</p:inplace>
-						<p:separator />
-						<p:inplace editor="true" effect="fade" emptyLabel="Opis sekcji" effectSpeed="fast">
-							<p:inputTextarea value="#{section.description}" cols="40" rows="5" maxlength="4000" autoResize="true" />
-						</p:inplace>
-					</h:panelGrid>
-					<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{section.elements}" var="elem"
-						emptyMessage="Brak elementów" draggableRows="true"
-					>
-						<f:facet name="header">Elementy:</f:facet>
-						<p:ajax event="rowReorder" listener="#{section.order()}" />
-						<p:column>
-							<p:inplace editor="true" effect="fade" emptyLabel="Opis sekcji" effectSpeed="fast">
-								<p:inputText value="#{elem.description}" />
-							</p:inplace>
-						</p:column>
-						<p:column>
-							<p:inplace editor="true" effect="fade" emptyLabel="Domyślna wartość" effectSpeed="fast">
-								<p:inputText value="#{elem.value}" />
-							</p:inplace>
-						</p:column>
-						<p:column style="width:32px;text-align: center">
-							<p:commandLink styleClass="fa fa-remove" actionListener="#{elem.delete()}" update="@form" />
-						</p:column>
-					</p:dataTable>
-					<p:commandButton value="Usuń sekcję" actionListener="#{section.delete()}" update=":rootForm" icon="fa fa-remove" />
-					<p:commandButton value="Dodaj element" actionListener="#{section.addChild()}" update="@form" icon="fa fa-plus" />
-				</p:panelGrid>
+				<h:panelGrid columns="2">
+					<p:outputLabel for="itaForAuthor" value="Dla autora" />
+					<p:inputTextarea id="itaForAuthor" disabled="true" value="dla autora" cols="70" autoResize="true" addLine="true" />
+					<p:outputLabel for="itaForEditor" value="Dla autora" />
+					<p:inputTextarea id="itaForEditor" disabled="true" value="Dla edytora" cols="70" autoResize="true" addLine="true" />
+				</h:panelGrid>
 			</h:form>
-			<p:spacer width="100%" height="10" />
-		</ui:repeat>
-		<h:form>
-			<p:commandButton value="Dodaj sekcję" actionListener="#{reviewConfigCO.root.addChild()}" update=":rootForm"
-				icon="fa fa-plus"
-			/>
-			<p:commandButton value="Wyczyść" actionListener="#{reviewConfigCO.root.delete()}" update=":rootForm"
-				icon="fa fa-refresh"
-			/>
-			<p:commandButton value="Zapisz" update=":rootForm" icon="fa fa-save" />
-			<p:commandButton value="Anuluj" update=":rootForm" icon="fa fa-recycle">
-				<p:confirm header="Potwierdzenie" message="Jesteś pewien?" icon="fa fa-bomb" />
-			</p:commandButton>
-			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-				<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-				<p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-			</p:confirmDialog>
-		</h:form>
-	</p:panelGrid>
+			<ui:repeat var="section" value="#{reviewConfigCO.root.sections}">
+				<h:form>
+					<p:panelGrid columns="1" width="70%">
+						<h:panelGrid width="600" columnClasses="topAligned">
+							<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź tytuł sekcji" effectSpeed="fast">
+								<p:inputText value="#{section.title}" />
+							</p:inplace>
+							<p:separator />
+							<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź opis sekcji" effectSpeed="fast">
+								<p:inputTextarea value="#{section.description}" cols="40" rows="5" maxlength="4000" autoResize="true" />
+							</p:inplace>
+							<p:commandButton value="Usuń sekcję" actionListener="#{section.delete()}" update=":rootForm" icon="fa fa-remove" />
+						</h:panelGrid>
+						<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{section.elements}" var="elem"
+							emptyMessage="Brak elementów" draggableRows="true"
+						>
+							<f:facet name="header">Elementy:</f:facet>
+							<p:ajax event="rowReorder" listener="#{section.order()}" />
+							<p:column>
+								<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź opis elementu" effectSpeed="fast">
+									<p:inputText value="#{elem.description}" />
+								</p:inplace>
+							</p:column>
+							<p:column>
+								<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź wartość wartość" effectSpeed="fast">
+									<p:inputText value="#{elem.value}" />
+								</p:inplace>
+							</p:column>
+							<p:column style="width:32px;text-align: center">
+								<p:commandLink styleClass="fa fa-remove" actionListener="#{elem.delete()}" update="@form" />
+							</p:column>
+						</p:dataTable>
+						<p:commandButton value="Dodaj element" actionListener="#{section.addChild()}" update="@form" icon="fa fa-plus" />
+					</p:panelGrid>
+				</h:form>
+				<p:spacer width="100%" height="10" />
+			</ui:repeat>
+			<h:form>
+				<p:commandButton value="Dodaj sekcję" actionListener="#{reviewConfigCO.root.addChild()}" update=":rootForm"
+					icon="fa fa-plus"
+				/>
+				<p:separator />
+				
+				<p:commandButton value="Zapisz" update=":rootForm" icon="fa fa-save" actionListener="#{reviewConfigCO.saveForm()}" />
+				<p:commandButton value="Wyczyść" actionListener="#{reviewConfigCO.root.delete()}" update=":rootForm" icon="fa fa-refresh" />
+				<p:commandButton value="Anuluj" update=":rootForm" icon="fa fa-recycle" actionListener="#{reviewConfigCO.cancel()}">
+					<p:confirm header="Potwierdzenie" message="Jesteś pewien?" icon="fa fa-bomb" />
+				</p:commandButton>
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+					<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					<p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+				</p:confirmDialog>
+			</h:form>
+		</p:panelGrid>
+	</p:panel>
 </h:body>
 </html>

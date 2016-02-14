@@ -1,4 +1,4 @@
-package pw.mario.journal.dao.impl;
+package pw.mario.journal.dao.common.impl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import javax.persistence.TypedQuery;
 import org.hibernate.criterion.Restrictions;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
-import pw.mario.journal.dao.SystemRolesDAO;
+import pw.mario.journal.dao.common.SystemRolesDAO;
 import pw.mario.journal.model.common.SystemRole;
 import pw.mario.journal.model.common.User;
 

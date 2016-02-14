@@ -10,7 +10,7 @@ import javax.persistence.NoResultException;
 
 import com.google.common.base.Strings;
 
-import pw.mario.journal.dao.DepartmentDAO;
+import pw.mario.journal.dao.common.DepartmentDAO;
 import pw.mario.journal.model.common.Department;
 
 @Named("deptConverter")

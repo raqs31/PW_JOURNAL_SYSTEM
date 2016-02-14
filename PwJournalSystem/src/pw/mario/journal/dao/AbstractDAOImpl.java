@@ -3,6 +3,7 @@ package pw.mario.journal.dao;
 import java.lang.reflect.ParameterizedType;
 
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
@@ -72,5 +73,9 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	
 	protected Session session() {
 		return em.unwrap(Session.class);
+	}
+	
+	protected T locked(Object id, LockModeType lock) {
+		return em.find(clazz, id, lock);
 	}
 }

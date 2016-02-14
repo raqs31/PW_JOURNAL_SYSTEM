@@ -14,7 +14,7 @@ import javax.persistence.NoResultException;
 
 import com.google.common.base.Strings;
 
-import pw.mario.journal.dao.TagDAO;
+import pw.mario.journal.dao.common.TagDAO;
 
 @Named
 @RequestScoped

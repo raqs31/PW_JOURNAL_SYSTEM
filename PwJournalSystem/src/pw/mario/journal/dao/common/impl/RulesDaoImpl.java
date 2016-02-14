@@ -1,4 +1,4 @@
-package pw.mario.journal.dao.impl;
+package pw.mario.journal.dao.common.impl;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
-import pw.mario.journal.dao.RulesDao;
+import pw.mario.journal.dao.common.RulesDao;
 import pw.mario.journal.model.article.Rule;
 import pw.mario.journal.model.dictionary.ValidationRule;
 

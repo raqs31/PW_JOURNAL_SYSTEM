@@ -6,7 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import lombok.NoArgsConstructor;
-import pw.mario.journal.dao.SystemRolesDAO;
+import pw.mario.journal.dao.common.SystemRolesDAO;
 import pw.mario.journal.model.common.SystemRole;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.service.common.SystemRolesService;

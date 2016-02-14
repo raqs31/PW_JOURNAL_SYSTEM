@@ -1,4 +1,4 @@
-package pw.mario.journal.dao.impl;
+package pw.mario.journal.dao.common.impl;
 
 import java.util.List;
 
@@ -7,7 +7,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.Query;
 
 import pw.mario.journal.dao.AbstractDAOImpl;
-import pw.mario.journal.dao.DepartmentDAO;
+import pw.mario.journal.dao.common.DepartmentDAO;
 import pw.mario.journal.model.common.Department;
 
 @Default

@@ -64,6 +64,11 @@
 		<role-name>USER</role-name>
 	</security-role>
 	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/index.xhtml</location>
+	</error-page>
+	<!-- 
+	<error-page>
 		<error-code>401</error-code>
 		<location>/errors/general-error.xhtml</location>
 	</error-page>
@@ -79,16 +84,14 @@
 		<error-code>500</error-code>
 		<location>/errors/general-error.xhtml</location>
 	</error-page>
-	<error-page>
-		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
-		<location>/index.xhtml</location>
-	</error-page>
+	
 	<error-page>
 		<error-code>503</error-code>
 		<location>/errors/general-error.xhtml</location>
 	</error-page>
+	 -->
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>5</session-timeout>
 	</session-config>
 	<context-param>
 		<param-name>primefaces.THEME</param-name>

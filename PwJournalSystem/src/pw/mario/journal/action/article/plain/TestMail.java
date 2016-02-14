@@ -3,7 +3,6 @@ package pw.mario.journal.action.article.plain;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.Dependent;
-import javax.faces.context.FacesContext;
 import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Session;
