@@ -122,4 +122,16 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 			sections.forEach(el -> errors.addAll(el.valid()));
 		return errors;
 	}
+	
+	public String getAllActiveIndex() {
+		StringBuilder sb = new StringBuilder();
+		int size = sections.size();
+		
+		for (int i = 0; i < size; i++)
+			sb.append(i).append(',');
+		if (size > 0)
+			sb.setLength(sb.length() -1);
+		return sb.toString();
+		
+	}
 }

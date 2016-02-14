@@ -70,8 +70,5 @@ public class ReviewConfigCO implements Serializable {
 	public List<SectionType> getSectionTypes() {
 		return SectionType.list;
 	}
-	
-	public void onChange(ValueChangeEvent e) {
-		Object object = e.getNewValue();
-	}
+
 }

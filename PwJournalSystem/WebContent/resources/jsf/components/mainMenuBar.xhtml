@@ -16,6 +16,7 @@
 					<p:menuitem id="miTags" value="Etykiety" outcome="/faces/admin/tagEditor?faces-redirect=true" />
 					<p:submenu label="Konfiguracja" icon="fa fa-wrench" rendered="#{request.isUserInRole('ADMIN')}">
 						<p:menuitem id="miReview" value="Wzór recenzji" outcome="/faces/conf/review?faces-redirect=true" />
+						<p:menuitem id="miPreview" value="Podgląd wzoru recenzji" icon="ui-icon ui-icon-pencil" outcome="/faces/conf/preview?faces-redirect=true"/>
 					</p:submenu>
 				</p:submenu>
 				<p:menuitem id="miArticles" value=" Artykuły" icon="fa fa-leanpub"
