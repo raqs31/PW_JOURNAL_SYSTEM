@@ -13,7 +13,7 @@ import org.hibernate.Session;
 import lombok.extern.log4j.Log4j;
 import pw.mario.journal.model.IdTable;
 
-@Log4j
+@SuppressWarnings("rawtypes")
 public abstract class AbstractDAOImpl<T extends IdTable> {
 	@PersistenceContext(type=PersistenceContextType.EXTENDED)
 	protected EntityManager em;
@@ -76,6 +76,9 @@ public abstract class AbstractDAOImpl<T extends IdTable> {
 	}
 	
 	protected T locked(Object id, LockModeType lock) {
-		return em.find(clazz, id, lock);
+		T obj = em.find(clazz, id);
+		em.refresh(obj);
+		em.lock(obj, lock);
+		return obj;
 	}
 }

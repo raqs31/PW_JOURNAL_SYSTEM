@@ -1,8 +1,10 @@
 package pw.mario.journal.model.form;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +20,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.google.common.base.Strings;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,7 +56,7 @@ public class Section implements Modifiable {
 	
 	
 	@OrderBy("order")
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="section")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy="section", orphanRemoval=true)
 	private List<Element> elements;
 	
 	@ManyToOne(optional=false, fetch=FetchType.LAZY)
@@ -63,7 +67,9 @@ public class Section implements Modifiable {
 	public void addChild() {
 		if (elements == null)
 			elements = new ArrayList<>();
-		elements.add(new Element(this));
+		Element e = new Element(this);
+		e.setOrder(elements.size());
+		elements.add(e);
 	}
 
 	@Override
@@ -82,5 +88,21 @@ public class Section implements Modifiable {
 			for (Element e: elements) {
 				e.setOrder(i++);
 			}
+	}
+
+	@Override
+	public List<FacesMessage> valid() {
+		List<FacesMessage> errors = new LinkedList<>();
+		if (Strings.isNullOrEmpty(title))
+			errors.add(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nie wprowadzono tytułu", forDetail()));
+		if (sectionType == null)
+			errors.add(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nie wybrano typu sekcji", forDetail()));
+		if (elements != null)
+			elements.forEach(el -> errors.addAll(el.valid()));
+		return errors;
+	}
+	
+	public String forDetail() {
+		return "Sekcja #" + order;
 	}
 }

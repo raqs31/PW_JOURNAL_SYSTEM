@@ -1,8 +1,10 @@
 package pw.mario.journal.model.form;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +21,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.google.common.base.Strings;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -54,7 +58,7 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 	private Boolean pattern;
 
 	@OrderBy("order")
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "form")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "form", orphanRemoval=true)
 	private List<Section> sections;
 
 	@Column(name = "LONG_ATTR1", length = 4000)
@@ -71,7 +75,10 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 	public void addChild() {
 		if (sections == null)
 			sections = new ArrayList<>();
-		sections.add(new Section(this));
+		Section s = new Section(this);
+		s.setOrder(sections.size());
+		
+		sections.add(s);
 
 	}
 
@@ -104,5 +111,15 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 	@Override
 	public Object getId() {
 		return formId;
+	}
+
+	@Override
+	public List<FacesMessage> valid() {
+		List<FacesMessage> errors = new LinkedList<>();
+		if (Strings.isNullOrEmpty(name))
+			errors.add(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Nie wprowadzono nazwy formularza", null));
+		if (sections != null)
+			sections.forEach(el -> errors.addAll(el.valid()));
+		return errors;
 	}
 }

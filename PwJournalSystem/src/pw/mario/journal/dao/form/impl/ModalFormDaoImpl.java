@@ -23,7 +23,9 @@ public class ModalFormDaoImpl extends AbstractDAOImpl<Form> implements ModalForm
 
 	@Override
 	public Form saveForm(Form form) {
-		return merge(form);
+		Form f = merge(form);
+		em.flush();
+		return f;
 	}
 
 	@Override

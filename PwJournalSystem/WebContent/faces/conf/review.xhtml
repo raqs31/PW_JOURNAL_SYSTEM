@@ -33,6 +33,11 @@
 			<ui:repeat var="section" value="#{reviewConfigCO.root.sections}">
 				<h:form>
 					<p:panelGrid columns="1" width="70%">
+						<p:outputLabel value="#{section.forDetail()}"/>
+						<p:selectOneButton value="#{section.sectionType}">
+							<f:selectItems value="#{reviewConfigCO.sectionTypes}" var="type" itemLabel="#{type.name}" itemValue="#{type}"/>
+							<f:ajax />
+						</p:selectOneButton>
 						<h:panelGrid width="600" columnClasses="topAligned">
 							<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź tytuł sekcji" effectSpeed="fast">
 								<p:inputText value="#{section.title}" />
@@ -48,6 +53,9 @@
 						>
 							<f:facet name="header">Elementy:</f:facet>
 							<p:ajax event="rowReorder" listener="#{section.order()}" />
+							<p:column>
+								<h:outputLabel value="#{elem.forDetail()}" />
+							</p:column>
 							<p:column>
 								<p:inplace editor="true" effect="fade" emptyLabel="Wprowadź opis elementu" effectSpeed="fast">
 									<p:inputText value="#{elem.description}" />
@@ -71,19 +79,22 @@
 				<p:commandButton value="Dodaj sekcję" actionListener="#{reviewConfigCO.root.addChild()}" update=":rootForm"
 					icon="fa fa-plus"
 				/>
-				<p:separator />
-				
-				<p:commandButton value="Zapisz" update=":rootForm" icon="fa fa-save" actionListener="#{reviewConfigCO.saveForm()}" />
-				<p:commandButton value="Wyczyść" actionListener="#{reviewConfigCO.root.delete()}" update=":rootForm" icon="fa fa-refresh" />
-				<p:commandButton value="Anuluj" update=":rootForm" icon="fa fa-recycle" actionListener="#{reviewConfigCO.cancel()}">
-					<p:confirm header="Potwierdzenie" message="Jesteś pewien?" icon="fa fa-bomb" />
-				</p:commandButton>
-				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-					<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					<p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-				</p:confirmDialog>
 			</h:form>
 		</p:panelGrid>
+		<p:separator />
+		<h:form>
+			<p:commandButton value="Zapisz" update=":rootForm" icon="fa fa-save" actionListener="#{reviewConfigCO.saveForm()}" />
+			<p:commandButton value="Wyczyść" actionListener="#{reviewConfigCO.root.delete()}" update=":rootForm"
+				icon="fa fa-refresh"
+			/>
+			<p:commandButton value="Anuluj" update=":rootForm" icon="fa fa-recycle" actionListener="#{reviewConfigCO.cancel()}">
+				<p:confirm header="Potwierdzenie" message="Jesteś pewien?" icon="fa fa-bomb" />
+			</p:commandButton>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Tak" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Nie" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
 	</p:panel>
 </h:body>
 </html>
