@@ -9,6 +9,7 @@
 <h:body>
 	<my:mainMenuBar />
 	<h:form id="testTEST">
+	<p:commandButton type="submit" value="submit" actionListener="#{reviewConfigCO.test()}"/>
 	
 	</h:form>
 	<p:commandButton value="test" actionListener="#{reviewConfigCO.addChildrenTest()}" update="@all"/>

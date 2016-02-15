@@ -9,11 +9,25 @@ import javax.faces.context.FacesContext;
 import org.primefaces.component.outputlabel.OutputLabel;
 
 public abstract class FormUtils {
-	public static ValueExpression creteValueExpression(final String exp, @SuppressWarnings("rawtypes") Class clazz) {
+	public static ValueExpression createValueExpression(final String exp, @SuppressWarnings("rawtypes") Class clazz) {
 		ExpressionFactory ef = FacesContext.getCurrentInstance().getApplication().getExpressionFactory();
 		ELContext el = FacesContext.getCurrentInstance().getELContext();
 		
-		return ef.createValueExpression(el, "#{"+ exp + "}", clazz);
+		return ef.createValueExpression(el, "#{" + exp + "}", clazz);
+	}
+	
+	public static ValueExpression createStrValueExpression(final String exp, @SuppressWarnings("rawtypes") Class clazz) {
+		ExpressionFactory ef = FacesContext.getCurrentInstance().getApplication().getExpressionFactory();
+		ELContext el = FacesContext.getCurrentInstance().getELContext();
+		
+		return ef.createValueExpression(el, exp, clazz);
+	}
+	
+	public static ValueExpression createValueExpression(final Object wrapped) {
+		ExpressionFactory ef = FacesContext.getCurrentInstance().getApplication().getExpressionFactory();
+		ELContext el = FacesContext.getCurrentInstance().getELContext();
+		
+		return ef.createValueExpression(wrapped, wrapped.getClass());
 	}
 	
 	public static UIComponent createLabel(Object label, String forItem) {
@@ -28,9 +42,4 @@ public abstract class FormUtils {
 		out.setId(id);
 		return out;
 	}
-	
-	public static void put(UIComponent container, UIComponent toAdd) {
-		container.getChildren().add(toAdd);
-	}
-	
 }

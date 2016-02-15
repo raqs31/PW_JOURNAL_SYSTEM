@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,8 +19,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.PostLoad;
+import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.google.common.base.Strings;
 
@@ -64,6 +68,12 @@ public class Section implements Modifiable {
 	@JoinColumn(name="FORM_ID", referencedColumnName="FORM_ID", nullable=false)
 	private Form form;
 
+	@Transient
+	private String selectedElementId;
+	
+	@Transient
+	private List<String> selectedElementsIds;
+	
 	@Override
 	public void addChild() {
 		if (elements == null)
@@ -105,5 +115,16 @@ public class Section implements Modifiable {
 	
 	public String forDetail() {
 		return "Sekcja #" + order;
+	}
+	
+	@PostLoad
+	private void init() {
+		selectedElementsIds = new ArrayList<>();
+		sectionType.fill(this);
+	}
+	
+	@PreUpdate
+	private void beforeUpdate() {
+		sectionType.propagate(this);
 	}
 }

@@ -93,4 +93,9 @@ public class ReviewConfigCO implements Serializable {
 			
 		);
 	}
+	
+	public void test() {
+		System.out.println("asdfgdsad");
+		System.out.println(root.getSections().get(0).getSelectedElementId());
+	}
 }
