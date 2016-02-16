@@ -75,27 +75,4 @@ public class ReviewConfigCO implements Serializable {
 	public List<SectionType> getSectionTypes() {
 		return SectionType.list;
 	}
-	
-	public void addChildrenTest() {
-		Set<VisitHint> hints = new HashSet<>();
-		hints.add(VisitHint.SKIP_UNRENDERED);
-		hints.add(VisitHint.SKIP_ITERATION);
-		FacesContext.getCurrentInstance().getViewRoot().visitTree(
-			VisitContext.createVisitContext(FacesContext.getCurrentInstance(), null, hints),
-			(ctx, comp) -> {
-				if (comp.getId().equals("testTEST")) {
-					ArticleFormBuilder bd = new ArticleFormBuilder(root, "reviewConfigCO.root");
-					comp.getChildren().add(bd.build(FacesContext.getCurrentInstance()));
-					return VisitResult.COMPLETE;
-				}
-				return VisitResult.ACCEPT;
-			}
-			
-		);
-	}
-	
-	public void test() {
-		System.out.println("asdfgdsad");
-		System.out.println(root.getSections().get(0).getSelectedElementId());
-	}
 }

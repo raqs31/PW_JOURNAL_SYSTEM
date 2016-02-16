@@ -77,9 +77,8 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 		if (sections == null)
 			sections = new ArrayList<>();
 		Section s = new Section(this);
-		s.setOrder(sections.size());
-		
 		sections.add(s);
+		order();
 
 	}
 

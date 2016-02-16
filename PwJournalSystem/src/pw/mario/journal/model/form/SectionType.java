@@ -64,7 +64,7 @@ public enum SectionType {
 				toFill.setSelectedElementId(
 						toFill.getElements()
 							.stream()
-							.filter(el -> el.getValue().equals(SingleBoxSection.SELECTED_VALUE))
+							.filter(el -> SingleBoxSection.SELECTED_VALUE.equals(el.getValue()))
 							.findFirst()
 							.get()
 							.getElemId()
@@ -95,7 +95,7 @@ public enum SectionType {
 		public void fill(Section toFill) {
 					toFill.getElements()
 						.stream()
-						.filter(el -> el.getValue().equals(MultiCheckboxSection.SELECTED_VALUE))
+						.filter(el -> MultiCheckboxSection.SELECTED_VALUE.equals(el.getValue()))
 						.collect(Collectors.toList())
 						.forEach(el -> toFill.getSelectedElementsIds().add(el.getElemId().toString()));
 		}
