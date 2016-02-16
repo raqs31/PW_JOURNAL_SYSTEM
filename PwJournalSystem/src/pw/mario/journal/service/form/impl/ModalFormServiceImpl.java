@@ -29,7 +29,7 @@ public class ModalFormServiceImpl implements ModalFormService {
 	@Transactional(value=TxType.REQUIRED, rollbackOn=Exception.class)
 	public Form saveForm(Form form) throws LockException{
 		Form checkVer = formDao.getLockedForm(form);
-		if (checkVer.getObjectVersionNumber().compareTo(form.getObjectVersionNumber()) != 0)
+		if (checkVer != null && checkVer.getObjectVersionNumber().compareTo(form.getObjectVersionNumber()) != 0)
 			throw new LockException("Nie udało się zapisać", form);
 		return formDao.saveForm(form);
 	}

@@ -10,7 +10,7 @@
 		<shared-cache-mode>DISABLE_SELECTIVE</shared-cache-mode>
 		<properties>
 			<property name="hibernate.connectionn.autocommit" value="false" />
-			<property name="hibernate.hbm2ddl.auto" value="auto" /> <!-- validate / update / create / create-drop / auto -->
+			<property name="hibernate.hbm2ddl.auto" value="update" /> <!-- validate / update / create / create-drop / auto -->
 			<property name="shared-cache-mode" value="ENABLE_SELECTIVE " />
 			<property name="javax.persistence.lock.timeout" value="100" />
 			<property name="javax.persistence.query.timeout" value="100" />

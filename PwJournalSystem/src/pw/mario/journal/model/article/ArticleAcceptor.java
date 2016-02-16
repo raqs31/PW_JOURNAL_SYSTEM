@@ -1,12 +1,15 @@
 package pw.mario.journal.model.article;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -19,6 +22,7 @@ import pw.mario.journal.model.AuditTable;
 import pw.mario.journal.model.IdTable;
 import pw.mario.journal.model.common.User;
 import pw.mario.journal.model.dictionary.AcceptorStatus;
+import pw.mario.journal.model.form.Form;
 
 @Data
 @ToString(of="articleAcceptorId")
@@ -49,6 +53,13 @@ public class ArticleAcceptor extends AuditTable implements IdTable {
 	@ManyToOne(optional=false)
 	@JoinColumn(name="ARTICLE_ID", referencedColumnName="ARTICLE_ID", nullable=false, unique=false)
 	private Article article;
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, optional=true, orphanRemoval=true)
+	@JoinTable(name="ACCEPTOR_FORM",
+			joinColumns={@JoinColumn(name="ARTICLE_ACCEPTOR_ID", referencedColumnName="ARTICLE_ACCEPTOR_ID", unique=true)},
+			inverseJoinColumns={@JoinColumn(name="FORM_ID", referencedColumnName="FORM_ID", unique=true)}
+			)
+	private Form acceptorForm;
 	
 	@Column(name="IS_APPLY", nullable=false)
 	private Boolean apply;
