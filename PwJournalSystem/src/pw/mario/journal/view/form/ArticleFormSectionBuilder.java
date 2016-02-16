@@ -4,6 +4,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIOutput;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.component.panel.Panel;
 import org.primefaces.component.separator.UISeparator;
 import org.primefaces.component.tabview.Tab;
 
@@ -14,8 +15,9 @@ public class ArticleFormSectionBuilder extends BaseBuilder<Section> {
 
 	public ArticleFormSectionBuilder(Section element, String path) {
 		super(element, path);
-		Tab tab = new Tab();
-		tab.setTitle(element.getTitle());
+		Panel tab = new Panel();
+		tab.setHeader(element.getTitle());
+		tab.setToggleable(true);
 		
 		setRoot(tab);
 		

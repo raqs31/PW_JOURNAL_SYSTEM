@@ -34,16 +34,17 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 		setRoot(panel);
 		put(buildTextAreas());
 		
-		AccordionPanel accord = new AccordionPanel();
-		accord.setMultiple(true);
+//		AccordionPanel accord = new AccordionPanel();
+//		accord.setMultiple(true);
 
 		int idx = 0;
 		for(Section s: element.getSections()) {
-			put(accord, new ArticleFormSectionBuilder(s, path + ".sections.get(" + idx + ")" ).build(ctx));
+//			put(accord, new ArticleFormSectionBuilder(s, path + ".sections.get(" + idx + ")" ).build(ctx));
+			put(new ArticleFormSectionBuilder(s, path + ".sections.get(" + idx + ")" ).build(ctx));
 			idx++;
 		}
 
-		put(panel, accord);
+//		put(panel, accord);
 		
 		return panel;
 	}
