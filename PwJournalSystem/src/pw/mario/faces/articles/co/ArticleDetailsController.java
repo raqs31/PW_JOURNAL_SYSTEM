@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.security.MessageDigestSpi;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,6 +34,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 import pw.mario.common.action.form.ButtonAction;
 import pw.mario.common.api.Refreshable;
+import pw.mario.common.exception.PerformActionException;
 import pw.mario.common.util.JSFUtil;
 import pw.mario.common.util.Messages;
 import pw.mario.journal.model.article.Article;
@@ -120,12 +122,23 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 			VisitContext.createVisitContext(FacesContext.getCurrentInstance(), null, hints),
 			(ctx, comp) -> {
 					if (comp instanceof HtmlForm && "articleAcceptorsReview".equals(comp.getId())) {
-						ArticleFormBuilder bd = new ArticleFormBuilder(acceptor.getAcceptorForm(), "articleDetailsController.visibleForms.get(" + form.getFormId() + ")" , true);
+						ArticleFormBuilder bd = new ArticleFormBuilder(acceptor.getAcceptorForm(), 
+																			"articleDetailsController.visibleForms.get(" + form.getFormId() + ")" ,
+																			acceptor.isEditable(this.ctx.getCurrentUser()));
 						comp.getChildren().add(bd.build(FacesContext.getCurrentInstance()));
 						return VisitResult.COMPLETE;
 					}
 					return VisitResult.ACCEPT;
 				}
 		);
+	}
+	
+	public void saveForms() {
+		try {
+			articleService.saveAcceptorsForms(article);
+			Messages.addMessage("Zapisano formularze");
+		} catch (PerformActionException e) {
+			Messages.addMessage(FacesMessage.SEVERITY_ERROR, e.getMessage());
+		}
 	}
 }

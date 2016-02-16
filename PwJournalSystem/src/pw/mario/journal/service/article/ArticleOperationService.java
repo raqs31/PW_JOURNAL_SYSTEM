@@ -32,4 +32,7 @@ public interface ArticleOperationService {
 	List<User> getAvailableAcceptors(Long articleId);
 
 	Rule getRule(Long ruleId);
+	
+	void saveAcceptorsForms(Article a) throws PerformActionException;
+	
 }

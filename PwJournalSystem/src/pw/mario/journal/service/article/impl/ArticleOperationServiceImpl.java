@@ -3,6 +3,7 @@ package pw.mario.journal.service.article.impl;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.Stateless;
 import javax.faces.context.FacesContext;
@@ -236,7 +237,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 			ArticleAcceptor acceptor = article.getArticleAcceptor(ctx.getUser());
 			
 			if (acceptor == null)
-				throw new RouteActionException("Użytkownik wykonujący akcję nie jest aktualnym recenzentem");
+				throw new RouteActionException("Użytkownik  wykonujący akcję nie jest aktualnym recenzentem");
 			acceptor.setState(rule.getAcceptorStatus());
 			acceptor.setApply(true);
 		}
@@ -246,6 +247,18 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 				.stream()
 				.filter(acc -> acc.getApply() == false)
 				.forEach(acc-> acc.setApply(true));
+		}
+	}
+
+	@Override
+	public void saveAcceptorsForms(Article a) throws PerformActionException {
+		try {
+			List<ArticleAcceptor> toSave = a.getAcceptors().stream().filter(acc -> !acc.getApply() && acc.getAcceptorForm() != null).collect(Collectors.toList());
+			for (ArticleAcceptor acc : toSave) 
+				formService.saveForm(acc.getAcceptorForm());
+		} catch (Exception e) {
+			log.error("Błąd podczas zapisu formularza", e);
+			throw new PerformActionException("Błąd podczas zapisu formularzy");
 		}
 	}
 }

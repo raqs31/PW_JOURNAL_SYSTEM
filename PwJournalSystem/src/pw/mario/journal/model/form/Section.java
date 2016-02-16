@@ -19,6 +19,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -123,9 +124,9 @@ public class Section implements Modifiable, Copyable<Section> {
 		sectionType.fill(this);
 	}
 	
-	@PreUpdate
-	private void beforeUpdate() {
-		sectionType.propagate(this);
+	@PrePersist
+	public void propagateValues() {
+ 		sectionType.propagate(this);
 	}
 
 	@Override

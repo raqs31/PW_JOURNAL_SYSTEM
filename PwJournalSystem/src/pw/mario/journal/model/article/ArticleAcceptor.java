@@ -69,4 +69,8 @@ public class ArticleAcceptor extends AuditTable implements IdTable {
 		return articleAcceptorId;
 	}
 	
+	public boolean isEditable(User u) {
+		return !apply && u != null && u.getUserId().compareTo(acceptor.getUserId()) == 0;
+	}
+	
 }

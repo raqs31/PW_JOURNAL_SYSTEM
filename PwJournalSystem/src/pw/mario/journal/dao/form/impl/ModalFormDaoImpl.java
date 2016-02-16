@@ -7,6 +7,8 @@ import javax.enterprise.inject.Default;
 import javax.persistence.LockModeType;
 import javax.persistence.NoResultException;
 
+import org.apache.commons.lang3.time.FastDateFormat;
+
 import pw.mario.journal.dao.AbstractDAOImpl;
 import pw.mario.journal.dao.form.ModalFormDao;
 import pw.mario.journal.model.form.Form;
@@ -23,6 +25,7 @@ public class ModalFormDaoImpl extends AbstractDAOImpl<Form> implements ModalForm
 
 	@Override
 	public Form saveForm(Form form) {
+		form.getSections().forEach(s -> s.propagateValues());
 		Form f = merge(form);
 		em.flush();
 		return f;
