@@ -8,10 +8,8 @@
 </h:head>
 <h:body>
 	<my:mainMenuBar />
-	<h:form id="testTEST">
-	<p:commandButton type="submit" value="submit" actionListener="#{reviewConfigCO.test()}"/>
-	
+	<p:commandButton value="Pokaż" actionListener="#{previewCO.init()}" update=":previewForm"/>
+	<h:form id="previewForm" >
 	</h:form>
-	<p:commandButton value="test" actionListener="#{reviewConfigCO.addChildrenTest()}" update="@all"/>
 </h:body>
 </html>
