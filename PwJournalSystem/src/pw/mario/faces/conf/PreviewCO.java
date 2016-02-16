@@ -43,7 +43,7 @@ public class PreviewCO implements Serializable {
 				@Override
 				public VisitResult visit(VisitContext ctx, UIComponent comp) {
 					if (comp instanceof HtmlForm && "previewForm".equals(comp.getId())) {
-						ArticleFormBuilder bd = new ArticleFormBuilder(root, "previewCO.root");
+						ArticleFormBuilder bd = new ArticleFormBuilder(root, "previewCO.root", false);
 						comp.getChildren().add(bd.build(FacesContext.getCurrentInstance()));
 						return VisitResult.COMPLETE;
 					}

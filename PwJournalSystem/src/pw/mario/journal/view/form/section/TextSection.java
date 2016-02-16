@@ -41,6 +41,8 @@ public class TextSection extends BaseBuilder<Section> {
 			textArea.setCols(70);
 			textArea.setRows(5);
 			textArea.setValueExpression("value", createValueExpression(path + ".elements.get(" + idx + ").value", String.class));
+			textArea.setReadonly(!editable);
+			
 			put(textArea);
 			idx++;
 		}

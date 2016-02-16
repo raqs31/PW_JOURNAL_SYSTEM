@@ -23,8 +23,8 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 	private static final String COUNTER_TEMPLATE = "Pozostało {0} znaków";
 	private static final int TEXT_AREA_COLS = 100;
 	
-	public ArticleFormBuilder(Form element, String path) {
-		super(element, path);
+	public ArticleFormBuilder(Form element, String path, boolean editable) {
+		super(element, path, editable);
 	}
 
 	@Override
@@ -33,19 +33,13 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 		panel.setHeader(element.getName());
 		setRoot(panel);
 		put(buildTextAreas());
-		
-//		AccordionPanel accord = new AccordionPanel();
-//		accord.setMultiple(true);
 
 		int idx = 0;
 		for(Section s: element.getSections()) {
-//			put(accord, new ArticleFormSectionBuilder(s, path + ".sections.get(" + idx + ")" ).build(ctx));
-			put(new ArticleFormSectionBuilder(s, path + ".sections.get(" + idx + ")" ).build(ctx));
+			put(new ArticleFormSectionBuilder(s, path + ".sections.get(" + idx + ")" , editable).build(ctx));
 			idx++;
 		}
 
-//		put(panel, accord);
-		
 		return panel;
 	}
 	
@@ -62,6 +56,7 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 		itaAuth.setCounter(ID_AUTHOR_TEXT_AREA + "counter");
 		itaAuth.setMaxlength(4000);
 		itaAuth.setValueExpression("value", createValueExpression(path + ".longAttr1", String.class));
+		itaAuth.setReadonly(!editable);
 		
 		put(grid, createLabel("Dla autora", ID_AUTHOR_TEXT_AREA));
 		put(grid, itaAuth);
@@ -76,6 +71,7 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 		itaEditor.setCounter(ID_EDITOR_TEXT_AREA + "counter");
 		itaEditor.setMaxlength(4000);
 		itaEditor.setValueExpression("value", createValueExpression(path + ".longAttr2", String.class));
+		itaEditor.setReadonly(!editable);
 		
 		put(grid, createLabel("Dla edytora", ID_AUTHOR_TEXT_AREA));
 		put(grid, itaEditor);

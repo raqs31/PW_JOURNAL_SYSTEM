@@ -10,6 +10,7 @@ import javax.faces.component.UISelectItems;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.component.selectmanycheckbox.SelectManyCheckbox;
+import org.primefaces.component.selectoneradio.SelectOneRadio;
 
 import pw.mario.journal.model.form.Section;
 import pw.mario.journal.view.form.BaseBuilder;
@@ -23,6 +24,7 @@ public class MultiCheckboxSection extends BaseBuilder<Section> {
 		selectMany.setLayout("grid");
 		selectMany.setColumns(1);
 		selectMany.setValueExpression("value", createValueExpression(path+".selectedElementsIds", List.class));
+		selectMany.setDisabled(!editable);
 		setRoot(selectMany);
 		
 	}
@@ -34,9 +36,13 @@ public class MultiCheckboxSection extends BaseBuilder<Section> {
 		items.setValueExpression("var", createStrValueExpression("el", String.class));
 		items.setValueExpression("itemLabel", createValueExpression("el.description", String.class));
 		items.setValueExpression("itemValue", createValueExpression("el.elemId", Long.class));
-		
+
 		put(items);
 		return getRoot();
 	}
-
+	@Override
+	public MultiCheckboxSection setEditable(boolean editable) {
+		((SelectManyCheckbox)getRoot()).setDisabled(!editable);
+		return this;
+	}
 }

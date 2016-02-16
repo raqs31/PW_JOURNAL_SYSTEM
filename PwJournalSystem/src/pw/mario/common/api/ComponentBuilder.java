@@ -5,4 +5,6 @@ import javax.faces.context.FacesContext;
 
 public interface ComponentBuilder{
 	UIComponent build(FacesContext ctx);
+	
+	ComponentBuilder setEditable(boolean isEditable);
 }

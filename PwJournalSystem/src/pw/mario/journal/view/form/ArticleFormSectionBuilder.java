@@ -13,8 +13,8 @@ import static pw.mario.journal.view.FormUtils.*;
 
 public class ArticleFormSectionBuilder extends BaseBuilder<Section> {
 
-	public ArticleFormSectionBuilder(Section element, String path) {
-		super(element, path);
+	public ArticleFormSectionBuilder(Section element, String path, boolean editable) {
+		super(element, path, editable);
 		Panel tab = new Panel();
 		tab.setHeader(element.getTitle());
 		tab.setToggleable(true);
@@ -30,7 +30,7 @@ public class ArticleFormSectionBuilder extends BaseBuilder<Section> {
 		
 		put(description);
 		put(new UISeparator());
-		put(element.getSectionType().builder(element, path).build(ctx));
+		put(element.getSectionType().builder(element, path).setEditable(editable).build(ctx));
 		
 		return getRoot();
 	}

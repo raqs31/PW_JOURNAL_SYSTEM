@@ -25,6 +25,7 @@
 				<p:menuitem id="goToStart" value=" Home" icon="fa fa-home" outcome="/index?faces-redirect=true" />
 				<f:facet name="options">
 					<h:form method="POST" action="j_security_check">
+						<p:outputLabel for="loggedAs" value="Zalogowany jako: "/>
 						<p:outputLabel id="loggedAs" value="#{authBean.login}" />
 						<p:spacer width="5" />
 						<p:selectOneMenu rendered="true" id="langs" value="#{authBean.currentLocale}" var="loc" effect="fade"

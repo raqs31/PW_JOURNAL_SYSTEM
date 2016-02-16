@@ -21,6 +21,7 @@ public class SingleBoxSection extends BaseBuilder<Section> {
 		oneRadio.setLayout("grid");
 		oneRadio.setColumns(1);
 		oneRadio.setValueExpression("value", createValueExpression(path+".selectedElementId", String.class));
+		oneRadio.setReadonly(!editable);
 		setRoot(oneRadio);
 	}
 
@@ -35,5 +36,11 @@ public class SingleBoxSection extends BaseBuilder<Section> {
 		put(items);
 		
 		return getRoot();
+	}
+	
+	@Override
+	public SingleBoxSection setEditable(boolean editable) {
+		((SelectOneRadio)getRoot()).setDisabled(!editable);
+		return this;
 	}
 }
