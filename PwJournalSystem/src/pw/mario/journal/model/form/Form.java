@@ -141,7 +141,7 @@ public class Form extends AuditTable implements Modifiable, IdTable, Copyable<Fo
 	@Override
 	public Form copy(Form copy) {
 		copy.name = this.name;
-		copy.pattern = this.pattern;
+		copy.pattern = false;
 		copy.longAttr1 = this.longAttr1;
 		copy.longAttr2 = this.longAttr2;
 		copy.patternCode = this.patternCode;

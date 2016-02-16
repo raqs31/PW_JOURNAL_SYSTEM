@@ -77,6 +77,7 @@ public class ArticleDAOImpl extends AbstractDAOImpl <Article>implements ArticleD
 		a.getTagList().size();
 		a.getVersions().size();
 		a.getHistory().size();
+		a.getAcceptors().size();
 	}
 
 	@Override

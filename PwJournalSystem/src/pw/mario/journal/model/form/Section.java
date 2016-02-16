@@ -133,7 +133,9 @@ public class Section implements Modifiable, Copyable<Section> {
 		copy.title = this.title;
 		copy.description = this.description;
 		copy.order = this.order;
+		copy.sectionType = this.sectionType;
 		copy.elements = new ArrayList<>();
+		
 		if (elements != null) {
 			elements.forEach(el -> copy.elements.add(el.copy(new Element(copy))));
 		}

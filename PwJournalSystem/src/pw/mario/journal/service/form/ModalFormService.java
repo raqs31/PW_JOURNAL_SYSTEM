@@ -9,4 +9,6 @@ public interface ModalFormService {
 	Form getArticleFormPattern();
 	
 	Form saveForm(Form form) throws LockException;
+	
+	Form getNewArticleForm();
 }

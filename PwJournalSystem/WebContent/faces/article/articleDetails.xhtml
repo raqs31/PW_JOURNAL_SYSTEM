@@ -80,17 +80,26 @@
 					</p:column>
 				</p:dataTable>
 				<p:separator />
-				<p:dataList value="#{article.acceptors}" var="acc" paginator="true" rows="15" type="unordered"
-					styleClass="paginated" emptyMessage="Brak" lazy="true" paginatorPosition="bottom"
-				>
-					<p:column>
-						<h:outputText value="#{acc.acceptor.name} #{acc.acceptor.secondName}" />
-					</p:column>
-					
-					<p:column>
-						<h:outputText value="#{acc.state.desription}" />
-					</p:column>
-				</p:dataList>
+				<h:form >
+					<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{article.acceptors}" var="acc"
+								emptyMessage="Brak elementów" draggableRows="true"
+							>
+						<p:column>
+							<h:outputText value="#{acc.acceptor.name} #{acc.acceptor.secondName}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{acc.state.desription}" />
+						</p:column>
+						<p:column>
+							<h:outputText value="#{acc.acceptorForm.formId}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Pokaż formularz recenzji" actionListener="#{articleDetailsController.showAcceptorReview(acc)}" update=":articleAcceptorsReview"/>
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<h:form id="articleAcceptorsReview">
+				</h:form>
 			</h:panelGrid>
 		</ui:define>
 		<ui:define name="east">

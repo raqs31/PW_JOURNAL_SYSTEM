@@ -33,6 +33,14 @@ public class ModalFormServiceImpl implements ModalFormService {
 			throw new LockException("Nie udało się zapisać", form);
 		return formDao.saveForm(form);
 	}
+
+	@Override
+	public Form getNewArticleForm() {
+		Form pattern = formDao.getFormPattern(Form.PatternCode.ARTICLE_ACCEPTOR);
+		if (pattern != null)
+			return pattern.copy(new Form());
+		return null;
+	}
 	
 	
 

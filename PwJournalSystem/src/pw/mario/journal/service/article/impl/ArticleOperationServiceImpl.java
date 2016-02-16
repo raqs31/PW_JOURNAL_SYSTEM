@@ -24,16 +24,19 @@ import pw.mario.journal.dao.article.ArticleDAO;
 import pw.mario.journal.dao.article.ArticleVersionDao;
 import pw.mario.journal.dao.common.RulesDao;
 import pw.mario.journal.dao.common.UserDAO;
+import pw.mario.journal.dao.form.ModalFormDao;
 import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.article.ArticleAcceptor;
 import pw.mario.journal.model.article.ArticleVersion;
 import pw.mario.journal.model.article.Rule;
 import pw.mario.journal.model.common.User;
+import pw.mario.journal.model.form.Form;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.Rules;
 import pw.mario.journal.service.article.ArticleOperationService;
 import pw.mario.journal.service.article.ExecutionContext;
 import pw.mario.journal.service.common.FileManagerService;
+import pw.mario.journal.service.form.ModalFormService;
 import pw.mario.journal.validator.ValidationFactory;
 
 @Log4j
@@ -49,6 +52,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 	@Inject @Button private AbstractActionFactory<ButtonAction, Article> actionFactory;
 	@Inject @Rules private AbstractActionFactory<ButtonAction, Article> ruleActionFactory;
 	@Inject private ValidationFactory validationFactory;
+	@Inject private ModalFormService formService;
 	
 	@Override
 	public Article getArticle(Long id, User u) {
@@ -212,6 +216,7 @@ public class ArticleOperationServiceImpl implements ArticleOperationService {
 							acc.setAcceptor(u);
 							acc.setApply(false);
 							acc.setArticle(article);
+							acc.setAcceptorForm(formService.getNewArticleForm());
 							article.getAcceptors().add(acc);
 						}
 				);

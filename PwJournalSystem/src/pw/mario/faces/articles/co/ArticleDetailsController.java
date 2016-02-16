@@ -6,9 +6,19 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.component.html.HtmlForm;
+import javax.faces.component.visit.VisitCallback;
+import javax.faces.component.visit.VisitContext;
+import javax.faces.component.visit.VisitHint;
+import javax.faces.component.visit.VisitResult;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -29,8 +39,11 @@ import pw.mario.journal.model.article.Article;
 import pw.mario.journal.model.article.ArticleAcceptor;
 import pw.mario.journal.model.article.ArticleVersion;
 import pw.mario.journal.model.common.User;
+import pw.mario.journal.model.form.Form;
 import pw.mario.journal.service.article.ArticleOperationService;
 import pw.mario.journal.service.common.LoginService;
+import pw.mario.journal.service.form.ModalFormService;
+import pw.mario.journal.view.form.ArticleFormBuilder;
 
 @Log4j
 @Named
@@ -41,9 +54,11 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 
 	@Getter @Setter private Article article;
 	@Getter @Setter private Collection<ButtonAction> actions;
+	@Getter @Setter private Map<Long, Form> visibleForms;
 	
 	@Inject private ArticleOperationService articleService;
 	@Inject transient private LoginService ctx;
+	
 	@PostConstruct
 	private void init() {
 		if (article == null) {
@@ -55,6 +70,7 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 				refresh();
 			}
 		}
+		visibleForms = new HashMap<>();
 	}
 	
 	public StreamedContent onDownload(ArticleVersion version) {
@@ -84,5 +100,32 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 	public void refresh() {
 		article = articleService.getArticle(article.getArticleId(), null);
 		actions = articleService.getActions(article, ctx.getCurrentUser(), this);
+	}
+	
+	public void showAcceptorReview(ArticleAcceptor acceptor) {
+		Form form = acceptor.getAcceptorForm();
+		
+		if (form == null) {
+			Messages.addAccessDeniedMessage("Recenzent nie ma utworzonego formularza recenzji");
+			return;
+		} else if (visibleForms.containsKey(form.getFormId()))
+			return;
+		
+		visibleForms.put(form.getFormId(), form);
+		
+		Set<VisitHint> hints = new HashSet<>();
+		hints.add(VisitHint.SKIP_UNRENDERED);
+		hints.add(VisitHint.SKIP_ITERATION);
+		FacesContext.getCurrentInstance().getViewRoot().visitTree(
+			VisitContext.createVisitContext(FacesContext.getCurrentInstance(), null, hints),
+			(ctx, comp) -> {
+					if (comp instanceof HtmlForm && "articleAcceptorsReview".equals(comp.getId())) {
+						ArticleFormBuilder bd = new ArticleFormBuilder(acceptor.getAcceptorForm(), "articleDetailsController.visibleForms.get(" + form.getFormId() + ")" , true);
+						comp.getChildren().add(bd.build(FacesContext.getCurrentInstance()));
+						return VisitResult.COMPLETE;
+					}
+					return VisitResult.ACCEPT;
+				}
+		);
 	}
 }
