@@ -169,6 +169,7 @@ public class RuleActionFactory extends AbstractActionFactory<ButtonAction, Artic
 						.manager(tmp.getManager())
 						.acceptors(tmp.getAcceptors())
 						.isValid(true)
+						.user(user)
 						.build();
 				try {
 					articleService.execute(ctx);

@@ -28,6 +28,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.common.api.Copyable;
 import pw.mario.common.api.Modifiable;
 import pw.mario.journal.model.AuditTable;
 import pw.mario.journal.model.IdTable;
@@ -45,7 +46,7 @@ import pw.mario.journal.model.IdTable;
 		query="select f from Form f where f.pattern = true and f.patternCode = ?1")
 })
 
-public class Form extends AuditTable implements Modifiable, IdTable {
+public class Form extends AuditTable implements Modifiable, IdTable, Copyable<Form> {
 	@Id
 	@Column(name = "FORM_ID")
 	@SequenceGenerator(name = "formIdSeq", sequenceName = "FORMS_SEQ", initialValue = 1, allocationSize = 1)
@@ -136,6 +137,21 @@ public class Form extends AuditTable implements Modifiable, IdTable {
 	}
 	
 	public void setAllActiveIndex(String s) {}
+
+	@Override
+	public Form copy(Form copy) {
+		copy.name = this.name;
+		copy.pattern = this.pattern;
+		copy.longAttr1 = this.longAttr1;
+		copy.longAttr2 = this.longAttr2;
+		copy.patternCode = this.patternCode;
+		copy.sections = new ArrayList<>();
+		
+		if (this.sections != null)
+			this.sections.forEach(s -> copy.sections.add(s.copy(new Section(copy))));
+		
+		return copy;
+	}
 
 
 }

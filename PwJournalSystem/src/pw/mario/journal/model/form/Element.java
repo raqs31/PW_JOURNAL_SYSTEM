@@ -21,6 +21,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.common.api.Copyable;
 import pw.mario.common.api.Modifiable;
 
 @Data
@@ -29,7 +30,7 @@ import pw.mario.common.api.Modifiable;
 @NoArgsConstructor
 @Entity
 @Table(name="SECTION_ELEMENTS")
-public class Element implements Modifiable {
+public class Element implements Modifiable, Copyable<Element> {
 	
 	@Id
 	@Column(name="ELEM_ID")
@@ -77,5 +78,14 @@ public class Element implements Modifiable {
 	
 	public String forDetail() {
 		return section.forDetail() + " -> element #" + order;
+	}
+
+	@Override
+	public Element copy(Element copy) {
+		copy.description = this.description;
+		copy.order = this.order;
+		copy.value = this.value;
+		
+		return copy;
 	}
 }

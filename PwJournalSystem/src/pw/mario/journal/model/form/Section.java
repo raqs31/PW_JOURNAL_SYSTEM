@@ -30,6 +30,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import pw.mario.common.api.Copyable;
 import pw.mario.common.api.Modifiable;
 
 @Data
@@ -38,7 +39,7 @@ import pw.mario.common.api.Modifiable;
 @NoArgsConstructor
 @Entity
 @Table(name="SECTIONS")
-public class Section implements Modifiable {
+public class Section implements Modifiable, Copyable<Section> {
 	@Id
 	@Column(name="SECTION_ID")
 	@SequenceGenerator(name = "sectionIdSeq", sequenceName = "SECTIONS_SEQ", initialValue = 1, allocationSize = 1)
@@ -125,5 +126,18 @@ public class Section implements Modifiable {
 	@PreUpdate
 	private void beforeUpdate() {
 		sectionType.propagate(this);
+	}
+
+	@Override
+	public Section copy(Section copy) {
+		copy.title = this.title;
+		copy.description = this.description;
+		copy.order = this.order;
+		copy.elements = new ArrayList<>();
+		if (elements != null) {
+			elements.forEach(el -> copy.elements.add(el.copy(new Element(copy))));
+		}
+		
+		return copy;
 	}
 }
