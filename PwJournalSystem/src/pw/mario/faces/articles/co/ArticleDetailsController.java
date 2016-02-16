@@ -112,6 +112,10 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 			return;
 		} else if (visibleForms.containsKey(form.getFormId()))
 			return;
+		else if (!article.isAuthorOrManager(ctx.getCurrentUser()) && !acceptor.isAcceptor(ctx.getCurrentUser())) {
+			Messages.addAccessDeniedMessage("Nie możesz przeglądać recenzji innego recenzenta");
+			return;
+		}
 		
 		visibleForms.put(form.getFormId(), form);
 		

@@ -102,6 +102,8 @@ public enum SectionType {
 
 		@Override
 		public void propagate(Section toPropagate) {
+			if (toPropagate.getElements() == null)
+				return;
 			if (toPropagate.getSelectedElementsIds() == null || toPropagate.getSelectedElementsIds().size() == 0)
 				toPropagate.getElements().forEach(el -> el.setValue(null));
 			else { 

@@ -155,4 +155,16 @@ public class Article extends AuditTable implements IdTable {
 			return false;
 		return authors.contains(u);
 	}
+	
+	public boolean isManager(User u) {
+		if (u == null)
+			return false;
+		else if (management == null)
+			return false;
+		return management.getUserId().compareTo(u.getUserId()) == 0;
+	}
+	
+	public boolean isAuthorOrManager(User u) {
+		return isAuthor(u) || isManager(u);
+	}
 }
