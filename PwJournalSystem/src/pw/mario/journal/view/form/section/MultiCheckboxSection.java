@@ -21,7 +21,7 @@ public class MultiCheckboxSection extends BaseBuilder<Section> {
 		super(element, path);
 		SelectManyCheckbox selectMany = new SelectManyCheckbox();
 		selectMany.setLayout("grid");
-		selectMany.setColumns(2);
+		selectMany.setColumns(1);
 		selectMany.setValueExpression("value", createValueExpression(path+".selectedElementsIds", List.class));
 		setRoot(selectMany);
 		
