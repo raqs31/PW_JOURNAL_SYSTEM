@@ -149,4 +149,10 @@ public class Article extends AuditTable implements IdTable {
 			return null;
 		}
 	}
+	
+	public boolean isAuthor(User u) {
+		if (u == null)
+			return false;
+		return authors.contains(u);
+	}
 }

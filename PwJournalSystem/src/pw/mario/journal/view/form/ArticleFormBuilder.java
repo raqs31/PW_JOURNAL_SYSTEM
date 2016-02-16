@@ -23,9 +23,16 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 	private static final String ID_EDITOR_TEXT_AREA = "itaForEditor";
 	private static final String COUNTER_TEMPLATE = "Pozostało {0} znaków";
 	private static final int TEXT_AREA_COLS = 100;
+	private boolean forAuthor;
 	
 	public ArticleFormBuilder(Form element, String path, boolean editable) {
 		super(element, path, editable);
+		forAuthor = false;
+	}
+	
+	public ArticleFormBuilder(Form element, String path, boolean editable, boolean forAuthor) {
+		super(element, path, editable);
+		this.forAuthor = forAuthor;
 	}
 
 	@Override
@@ -64,21 +71,23 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 		put(grid, itaAuth);
 		put(grid, createLabel(itaAuthId + "counter", null, null));
 		
-		String itaEditId= ID_EDITOR_TEXT_AREA + element.getFormId();
-		InputTextarea itaEditor = new InputTextarea();
-		itaEditor.setId(itaEditId);
-		itaEditor.setCols(TEXT_AREA_COLS);
-		itaEditor.setAutoResize(true);
-		itaEditor.setAddLine(true);
-		itaEditor.setCounterTemplate(COUNTER_TEMPLATE);
-		itaEditor.setCounter(itaEditId + "counter");
-		itaEditor.setMaxlength(4000);
-		itaEditor.setValueExpression("value", createValueExpression(path + ".longAttr2", String.class));
-		itaEditor.setReadonly(!editable);
-		
-		put(grid, createLabel("Dla edytora", itaEditId));
-		put(grid, itaEditor);
-		put(grid, createLabel(itaEditId + "counter", null, null));
+		if (!forAuthor) { 
+			String itaEditId= ID_EDITOR_TEXT_AREA + element.getFormId();
+			InputTextarea itaEditor = new InputTextarea();
+			itaEditor.setId(itaEditId);
+			itaEditor.setCols(TEXT_AREA_COLS);
+			itaEditor.setAutoResize(true);
+			itaEditor.setAddLine(true);
+			itaEditor.setCounterTemplate(COUNTER_TEMPLATE);
+			itaEditor.setCounter(itaEditId + "counter");
+			itaEditor.setMaxlength(4000);
+			itaEditor.setValueExpression("value", createValueExpression(path + ".longAttr2", String.class));
+			itaEditor.setReadonly(!editable);
+			
+			put(grid, createLabel("Dla edytora", itaEditId));
+			put(grid, itaEditor);
+			put(grid, createLabel(itaEditId + "counter", null, null));
+		}
 		
 		return grid;
 	}

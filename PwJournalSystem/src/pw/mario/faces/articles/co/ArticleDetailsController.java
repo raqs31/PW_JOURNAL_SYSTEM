@@ -124,7 +124,8 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 					if (comp instanceof HtmlForm && "articleAcceptorsReview".equals(comp.getId())) {
 						ArticleFormBuilder bd = new ArticleFormBuilder(acceptor.getAcceptorForm(), 
 																			"articleDetailsController.visibleForms.get(" + form.getFormId() + ")" ,
-																			acceptor.isEditable(this.ctx.getCurrentUser()));
+																			acceptor.isEditable(this.ctx.getCurrentUser()),
+																			article.isAuthor(this.ctx.getCurrentUser()));
 						comp.getChildren().add(bd.build(FacesContext.getCurrentInstance()));
 						return VisitResult.COMPLETE;
 					}
