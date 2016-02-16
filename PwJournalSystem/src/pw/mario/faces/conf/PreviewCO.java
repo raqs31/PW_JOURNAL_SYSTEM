@@ -31,9 +31,9 @@ public class PreviewCO implements Serializable {
 	@Inject private ModalFormService formService;
 	
 	public void init() {
-		if (root != null)
-			return;
-		root = formService.getArticleFormPattern();
+		if (root == null)
+			root = formService.getArticleFormPattern();
+		
 		Set<VisitHint> hints = new HashSet<>();
 		hints.add(VisitHint.SKIP_UNRENDERED);
 		hints.add(VisitHint.SKIP_ITERATION);

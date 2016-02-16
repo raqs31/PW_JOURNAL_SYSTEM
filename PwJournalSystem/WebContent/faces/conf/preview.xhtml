@@ -9,9 +9,7 @@
 <h:body>
 	<my:mainMenuBar />
 	<h:form id="previewForm">
-		<p:commandButton value="Pokaż" actionListener="#{previewCO.init()}" update=":previewForm @this"
-			rendered="#{previewCO.showButtonActive}"
-		/>
+		<p:commandButton value="Pokaż" actionListener="#{previewCO.init()}" update=":previewForm" rendered="#{previewCO.showButtonActive}"/>
 	</h:form>
 </h:body>
 </html>

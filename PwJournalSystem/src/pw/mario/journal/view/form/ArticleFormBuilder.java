@@ -1,4 +1,4 @@
-package pw.mario.journal.view.form;
+	package pw.mario.journal.view.form;
 
 import static pw.mario.journal.view.FormUtils.createLabel;
 import static pw.mario.journal.view.FormUtils.createValueExpression;
@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.lang.model.element.Element;
 
 import org.primefaces.component.accordionpanel.AccordionPanel;
 import org.primefaces.component.inputtextarea.InputTextarea;
@@ -47,35 +48,37 @@ public class ArticleFormBuilder extends BaseBuilder<Form>{
 		PanelGrid grid = new PanelGrid();
 		grid.setColumns(3);
 		
+		String itaAuthId= ID_AUTHOR_TEXT_AREA + element.getFormId();
 		InputTextarea itaAuth = new InputTextarea();
-		itaAuth.setId(ID_AUTHOR_TEXT_AREA);
+		itaAuth.setId(itaAuthId);
 		itaAuth.setCols(TEXT_AREA_COLS);
 		itaAuth.setAutoResize(true);
 		itaAuth.setAddLine(true);
 		itaAuth.setCounterTemplate(COUNTER_TEMPLATE);
-		itaAuth.setCounter(ID_AUTHOR_TEXT_AREA + "counter");
+		itaAuth.setCounter(itaAuthId + "counter");
 		itaAuth.setMaxlength(4000);
 		itaAuth.setValueExpression("value", createValueExpression(path + ".longAttr1", String.class));
 		itaAuth.setReadonly(!editable);
 		
-		put(grid, createLabel("Dla autora", ID_AUTHOR_TEXT_AREA));
+		put(grid, createLabel("Dla autora", itaAuthId));
 		put(grid, itaAuth);
-		put(grid, createLabel(ID_AUTHOR_TEXT_AREA + "counter", null, null));
+		put(grid, createLabel(itaAuthId + "counter", null, null));
 		
+		String itaEditId= ID_EDITOR_TEXT_AREA + element.getFormId();
 		InputTextarea itaEditor = new InputTextarea();
-		itaEditor.setId(ID_EDITOR_TEXT_AREA);
+		itaEditor.setId(itaEditId);
 		itaEditor.setCols(TEXT_AREA_COLS);
 		itaEditor.setAutoResize(true);
 		itaEditor.setAddLine(true);
 		itaEditor.setCounterTemplate(COUNTER_TEMPLATE);
-		itaEditor.setCounter(ID_EDITOR_TEXT_AREA + "counter");
+		itaEditor.setCounter(itaEditId + "counter");
 		itaEditor.setMaxlength(4000);
 		itaEditor.setValueExpression("value", createValueExpression(path + ".longAttr2", String.class));
 		itaEditor.setReadonly(!editable);
 		
-		put(grid, createLabel("Dla edytora", ID_AUTHOR_TEXT_AREA));
+		put(grid, createLabel("Dla edytora", itaEditId));
 		put(grid, itaEditor);
-		put(grid, createLabel(ID_EDITOR_TEXT_AREA + "counter", null, null));
+		put(grid, createLabel(itaEditId + "counter", null, null));
 		
 		return grid;
 	}
