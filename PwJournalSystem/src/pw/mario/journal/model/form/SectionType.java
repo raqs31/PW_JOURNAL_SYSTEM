@@ -75,7 +75,7 @@ public enum SectionType {
 
 		@Override
 		public void propagate(Section toPropagate) {
-			if (toPropagate.getSelectedElementId() == null)
+			if (toPropagate.getSelectedElementId() != null)
 				toPropagate.getElements().forEach(el -> el.setValue(null));
 			else { 
 				Long elemId = Long.parseLong(toPropagate.getSelectedElementId());

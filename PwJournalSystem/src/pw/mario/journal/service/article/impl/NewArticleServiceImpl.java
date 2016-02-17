@@ -27,6 +27,7 @@ import pw.mario.journal.model.dictionary.ArticleStatus;
 import pw.mario.journal.model.dictionary.Dictionary;
 import pw.mario.journal.service.article.NewArticleService;
 import pw.mario.journal.service.common.FileManagerService;
+import pw.mario.journal.service.mail.MailContext.MailContextBuilder;
 
 @Log4j
 @Stateless
@@ -57,6 +58,7 @@ public class NewArticleServiceImpl implements NewArticleService {
 
 		a.setStatus(dictionary.getInitialProcess());
 		a = articleDao.addArticle(a);
+		
 		
 		log.debug("Finish create article ID: " + a.getArticleId());
 		
