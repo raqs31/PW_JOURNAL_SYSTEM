@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+import com.google.common.cache.LoadingCache;
+
 import lombok.Getter;
 import pw.mario.common.api.ComponentBuilder;
 import pw.mario.common.api.Filler;
@@ -75,9 +77,9 @@ public enum SectionType {
 
 		@Override
 		public void propagate(Section toPropagate) {
-			if (toPropagate.getSelectedElementId() != null)
+			if (toPropagate.getSelectedElementId() == null  && toPropagate.getElements() != null)
 				toPropagate.getElements().forEach(el -> el.setValue(null));
-			else { 
+			else if (toPropagate.getSelectedElementId() != null){ 
 				Long elemId = Long.parseLong(toPropagate.getSelectedElementId());
 				toPropagate.getElements().forEach(el -> {
 					if (elemId.compareTo(el.getElemId()) == 0)
