@@ -7,6 +7,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/ddl"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
         <property name="java-output-path" value="/PwJournalSystem/build/classes"/>
-        <property name="context-root" value="JournalSystemTest"/>
+        <property name="context-root" value="PwJournalSystem"/>
     </wb-module>
 </project-modules>

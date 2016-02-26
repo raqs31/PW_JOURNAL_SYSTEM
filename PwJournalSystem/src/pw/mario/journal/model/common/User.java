@@ -34,7 +34,7 @@ import pw.mario.journal.model.IdTable;
 @NoArgsConstructor
 @Cacheable(true)
 @Entity
-@Table(name="USERS", schema="MARIO",
+@Table(name="USERS",
 	indexes={
 			@Index(columnList="LOGIN", unique=true),
 			@Index(columnList="EMAIL", unique=true),

@@ -28,7 +28,7 @@ import pw.mario.journal.model.form.Form;
 @ToString(of="articleAcceptorId")
 @EqualsAndHashCode(callSuper=false, of="articleAcceptorId")
 @Entity
-@Table(name="ARTICLE_ACCEPTORS", schema="MARIO", indexes={
+@Table(name="ARTICLE_ACCEPTORS", indexes={
 		@Index(columnList="ARTICLE_ID, USER_ID", unique=false)
 })
 public class ArticleAcceptor extends AuditTable implements IdTable {

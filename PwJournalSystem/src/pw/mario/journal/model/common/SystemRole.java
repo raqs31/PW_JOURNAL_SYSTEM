@@ -25,7 +25,7 @@ import pw.mario.journal.model.IdTable;
 @ToString(exclude="users")
 @EqualsAndHashCode(exclude={"users"})
 @Entity
-@Table(name="SYSTEM_ROLES", schema="MARIO",
+@Table(name="SYSTEM_ROLES",
 indexes={
 		@Index(columnList="ROLE_NAME", unique=true),
 		@Index(columnList="IS_ACTIVE", unique=false)

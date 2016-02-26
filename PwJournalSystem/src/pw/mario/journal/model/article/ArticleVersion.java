@@ -23,7 +23,7 @@ import pw.mario.journal.model.IdTable;
 @Data
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name="ARTICLE_VERSIONS", schema="MARIO", 
+@Table(name="ARTICLE_VERSIONS", 
 	indexes={
 		@Index(columnList="ARTICLE_ID, LAST_VERSION", unique=false)
 	}

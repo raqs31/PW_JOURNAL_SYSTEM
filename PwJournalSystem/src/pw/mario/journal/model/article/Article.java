@@ -36,7 +36,7 @@ import pw.mario.journal.model.dictionary.ArticleStatus;
 @ToString(exclude={"authors", "versions", "tagList", "acceptors", "history"})
 @EqualsAndHashCode(callSuper=false, of={"articleId"})
 @Entity
-@Table(name="ARTICLES", schema="MARIO", indexes={
+@Table(name="ARTICLES", indexes={
 		@Index(columnList="YEAR", unique=false),
 		@Index(columnList="YEAR,MONTH,DAY", unique=false),
 		@Index(columnList="MANAGEMENT_USER_ID", unique=false)

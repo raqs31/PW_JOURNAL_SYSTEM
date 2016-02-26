@@ -19,7 +19,7 @@ import pw.mario.journal.model.IdTable;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper=false)
 @Entity
-@Table(name="DEPARTMENTS", schema="MARIO")
+@Table(name="DEPARTMENTS")
 public class Department extends AuditTable implements IdTable {
 	@Id
 	@Column(name="DEPT_ID")

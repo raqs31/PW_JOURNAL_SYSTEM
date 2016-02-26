@@ -24,7 +24,7 @@ import pw.mario.journal.model.IdTable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="DICTIONARIES", schema="MARIO", indexes={
+@Table(name="DICTIONARIES", indexes={
 		@Index(columnList="CODE,DICTIONARY_NAME", unique=true),
 		@Index(columnList="ATTRIBUTE1", unique=false)
 })
