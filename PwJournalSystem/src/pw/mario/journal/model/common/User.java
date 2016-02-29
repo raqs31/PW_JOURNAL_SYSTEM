@@ -43,7 +43,7 @@ import pw.mario.journal.model.IdTable;
 )
 @NamedQueries({
 	@NamedQuery(name=User.Queries.GET_BY_LOGIN, 
-			query = "select u from User u where u.login = ?1"),
+			query = "select u from User u where upper(u.login) = ?1"),
 	@NamedQuery(name=User.Queries.GET_BY_EMAIL, 
 		query = "select u from User u where upper(u.email) = ?1"),
 	@NamedQuery(name=User.Queries.USERS_WITH_DEPARTMENT_ROLE,

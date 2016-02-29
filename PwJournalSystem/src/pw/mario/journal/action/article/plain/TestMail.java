@@ -18,8 +18,8 @@ import pw.mario.common.exception.PerformActionException;
 import pw.mario.journal.model.article.Article;
 import pw.mario.journal.qualifiers.Button;
 
-@Button
-@Dependent
+//@Button
+//@Dependent
 public class TestMail implements ButtonAction {
 	private static final long serialVersionUID = 1L;
 	

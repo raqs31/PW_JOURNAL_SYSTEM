@@ -22,19 +22,19 @@ public class ArticleLazyLoadingServiceImpl implements ArticleLazyLoadingService 
 	
 	@Override
 	public void loadAuthors(Article a) {
-		if (!Hibernate.isInitialized(a.getAuthors()))
-			a.setAuthors(new HashSet<>(articleDao.getArticleAuthors(a)));
+		if (a != null && !Hibernate.isInitialized(a.getAuthors()))
+			a.setAuthors(new HashSet<>(arttticleDao.getArticleAuthors(a)));
 	}
 
 	@Override
 	public void loadTags(Article a) {
-		if (!Hibernate.isInitialized(a.getTagList()))
+		if (a != null && !Hibernate.isInitialized(a.getTagList()))
 			a.setTagList(new HashSet<>(articleDao.getArticleTags(a)));
 	}
 
 	@Override
 	public void loadAcceptors(Article a) {
-		if (!Hibernate.isInitialized(a.getAcceptors()))
+		if (a != null && !Hibernate.isInitialized(a.getAcceptors()))
 			a.setAcceptors(articleDao.getArticleAcceptors(a));
 	}
 

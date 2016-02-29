@@ -20,7 +20,9 @@ import pw.mario.journal.model.article.Article;
 import pw.mario.journal.qualifiers.Action;
 import pw.mario.journal.qualifiers.Button;
 import pw.mario.journal.qualifiers.enums.ArticleManager;
+import pw.mario.journal.service.article.ArticleLazyLoadingService;
 import pw.mario.journal.service.article.ArticleOperationService;
+import pw.mario.journal.service.common.LoginService;
 
 @Button
 @Action(actionFor=ArticleManager.AUTHOR)
@@ -30,11 +32,14 @@ public class DeleteArticle implements ButtonAction {
 	private static final long serialVersionUID = -4869406550164908694L;
 	
 	@Inject private ArticleOperationService operation;
+	@Inject private ArticleLazyLoadingService lazyLoadService;
+	@Inject private LoginService ctx;
 	private Article article;
 	
 	@Override
 	public boolean allowed() {
-		return article != null && article.getStatus().deletable();
+		lazyLoadService.loadAuthors(article);
+		return article != null && article.getStatus().deletable() && article.getAuthors().contains(ctx.getCurrentUser());
 	}
 
 	@Override
