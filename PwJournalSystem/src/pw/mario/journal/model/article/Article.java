@@ -112,6 +112,7 @@ public class Article extends AuditTable implements IdTable {
 	@OneToMany(fetch=FetchType.LAZY,mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleVersion> versions;
 	
+	@OrderBy("creationDate DESC")
 	@OneToMany(mappedBy="article", fetch=FetchType.LAZY, orphanRemoval=true, cascade=CascadeType.ALL)
 	private List<ArticleAcceptor> acceptors;
 	
@@ -120,6 +121,7 @@ public class Article extends AuditTable implements IdTable {
 	@JoinColumn(name="ID_STATUS", referencedColumnName="DICT_ID")
 	private ArticleStatus status;
 	
+	@OrderBy("creationDate DESC")
 	@OneToMany(fetch=FetchType.LAZY, mappedBy="article", cascade=CascadeType.ALL, orphanRemoval=true)
 	private List<ArticleHistory> history;
 	

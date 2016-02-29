@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @DiscriminatorValue(AcceptorStatus.DICTIONARY_NAME)
 public class AcceptorStatus  extends Dictionary{
-	public static final String DICTIONARY_NAME = "ACCEPTOR_STATUSES";
+	public static final String DICTIONARY_NAME = "ACCEPTOR_STATUS";
 }

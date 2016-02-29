@@ -110,10 +110,13 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 		if (form == null) {
 			Messages.addAccessDeniedMessage("Recenzent nie ma utworzonego formularza recenzji");
 			return;
-		} else if (visibleForms.containsKey(form.getFormId()))
+		} else if (visibleForms.containsKey(form.getFormId())) {
 			return;
-		else if (!article.isAuthorOrManager(ctx.getCurrentUser()) && !acceptor.isAcceptor(ctx.getCurrentUser())) {
-			Messages.addAccessDeniedMessage("Nie możesz przeglądać recenzji innego recenzenta");
+		} else if (!article.isAuthorOrManager(ctx.getCurrentUser()) && !acceptor.isAcceptor(ctx.getCurrentUser())) {
+			Messages.addAccessDeniedMessage("Brak uprawnień do przeglądania recenzji");
+			return;
+		} else if (article.isAuthor(ctx.getCurrentUser()) && !acceptor.getApply()) {
+			Messages.addAccessDeniedMessage("Nie możesz przeglądać recenzji dopóki nie zostanie zatwierdzona przez edytora");
 			return;
 		}
 		
@@ -145,5 +148,9 @@ public class ArticleDetailsController implements Serializable, Refreshable {
 		} catch (PerformActionException e) {
 			Messages.addMessage(FacesMessage.SEVERITY_ERROR, e.getMessage());
 		}
+	}
+	
+	public boolean saveFormsRendered() {
+		return !visibleForms.isEmpty(); 
 	}
 }

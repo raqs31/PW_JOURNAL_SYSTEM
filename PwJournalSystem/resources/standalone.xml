@@ -162,16 +162,16 @@
                     <connection-url>jdbc:p6spy:oracle:thin://@localhost:1521:xe</connection-url>
                     <driver>p6spy</driver>
                     <security>
-                        <user-name>MARIO</user-name>
-                        <password>mario</password>
+                        <user-name>SYSTEM</user-name>
+                        <password>admin</password>
                     </security>
                 </datasource>
                 <datasource jndi-name="java:/OracleDS" pool-name="OracleDS" enabled="true" use-java-context="true">
                     <connection-url>jdbc:oracle:thin:@localhost:1521:xe</connection-url>
                     <driver>oracle</driver>
                     <security>
-                        <user-name>MARIO</user-name>
-                        <password>mario</password>
+                        <user-name>JOURNAL</user-name>
+                        <password>journal</password>
                     </security>
                 </datasource>
                 <drivers>
@@ -323,7 +323,7 @@
                 <smtp-server outbound-socket-binding-ref="mail-smtp"/>
             </mail-session>
             <mail-session name="gmail" jndi-name="java:jboss/mail/Gmail">
-                <smtp-server outbound-socket-binding-ref="gmail-smtp" ssl="true" username="raqs31" password="wprowadzHaslo"/>
+                <smtp-server outbound-socket-binding-ref="gmail-smtp" ssl="true" username="raqs31" password="K2VCv2fm"/>
             </mail-session>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:naming:2.0">

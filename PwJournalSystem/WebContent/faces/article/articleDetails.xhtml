@@ -80,26 +80,37 @@
 					</p:column>
 				</p:dataTable>
 				<p:separator />
-				<h:form >
+				<h:form id="hAcceptorList">
 					<p:dataTable paginator="false" scrollable="true" scrollHeight="200" value="#{article.acceptors}" var="acc"
-								emptyMessage="Brak elementów" draggableRows="true"
+								emptyMessage="Brak formularzy recenzji" draggableRows="true"
 							>
 						<p:column>
-							<h:outputText value="#{acc.acceptor.name} #{acc.acceptor.secondName}" />
+							<f:facet name="header">Użytkownik</f:facet>
+							<h:outputText value="#{acc.acceptor.login}" />
 						</p:column>
 						<p:column>
-							<h:outputText value="#{acc.state.desription}" />
+							<f:facet name="header">Status</f:facet>
+							<h:outputText value="#{acc.state.desciption}" />
 						</p:column>
 						<p:column>
-							<h:outputText value="#{acc.acceptorForm.formId}" />
+							<f:facet name="header">Czy zaakceptowano</f:facet>
+							<h:outputText value="#{acc.apply == true ? 'Tak' : 'Nie'}" />
 						</p:column>
 						<p:column>
-							<p:commandButton value="Pokaż formularz recenzji" actionListener="#{articleDetailsController.showAcceptorReview(acc)}" update=":articleAcceptorsReview"/>
+							<f:facet name="header">Data utworzenia</f:facet>
+							<h:outputText value="#{acc.acceptorForm.creationDate}" />
+						</p:column>
+						<p:column>
+							<f:facet name="header">Data ostatniej aktualizacji</f:facet>
+							<h:outputText value="#{acc.acceptorForm.lastUpdateDate}" />
+						</p:column>
+						<p:column>
+							<p:commandButton value="Wyświetl" actionListener="#{articleDetailsController.showAcceptorReview(acc)}" update=":articleAcceptorsReview"/>
 						</p:column>
 					</p:dataTable>
 				</h:form>
 				<h:form id="articleAcceptorsReview">
-					<p:commandButton value="Zapisz recenzje" actionListener="#{articleDetailsController.saveForms()}"/>
+					<p:commandButton value="Zapisz recenzje" actionListener="#{articleDetailsController.saveForms()}" rendered="#{articleDetailsController.saveFormsRendered()}"/>
 				</h:form>
 			</h:panelGrid>
 		</ui:define>
@@ -115,7 +126,7 @@
 		</ui:define>
 		<ui:define name="south">
 			<my:articleAction actions="#{articleDetailsController.actions}"
-				update=":fVersions:dtVersions :dtHistory :olVersion :olStatus" componentPath=""
+				update=":fVersions:dtVersions :dtHistory :olVersion :olStatus :hAcceptorList" componentPath=""
 			/>
 		</ui:define>
 	</ui:composition>
