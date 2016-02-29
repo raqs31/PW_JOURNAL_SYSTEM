@@ -36,10 +36,11 @@ public class MainMenuBarController implements Serializable {
 	@Getter @Setter private Locale currentLocale;
 	@Getter private List<Locale> supportedLocales;
 	
-	public void logout() throws IOException {
+	public String logout() throws IOException {
         HttpSession session = (HttpSession)FacesContext.getCurrentInstance().getExternalContext().getSession(false);
         Logger.getLogger(MainMenuBarController.class).debug("Trying to logout user");
         session.invalidate();
+        return "index";
     }
 	
 	@PostConstruct
