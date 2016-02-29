@@ -1,0 +1,16 @@
+Aby zainstalować aplikację należy:
+
+1. Zainstalować na dysku serwer JBoss / WildFly (W projekcie korzystałem z WildFly 9.1)
+2. Zainstalować bazę danych Oracle XE 11g
+3. Skorzystać z gotowego pliku war bądź skompilować projekt w IDE Eclipse
+4. Skopiować plik war do katalogu $JBOSS_HOME/standalone/configuration/deployments
+5. Utworzyć użytkownika na bazie danych 
+6. Skopiować plik standalone.xml z projektu do $JBOSS_HOME/standalone/configuration/
+7. w skopiowanym pliku ustawić dane połączenia (linie 169 - 176)
+8. dodać odpowiednie sterowniki do serwera (opis na https://docs.jboss.org/jbossas/docs/Server_Configuration_Guide/4/html/apbs02s01.html) w pakiecie com.oracle
+9. uruchomić serwer (przy pierwszym uruchomieniu Hibernate utworzy model danych)
+10. Jeśli chcesz zmienić tymczasowy katalog zapisu plików oraz docelowy katalog zapisu artykułów w pliku PwJournalSystem/ddl/toInstall.sql linie 214 i 215. (Domyślnie zapisuje w C:\)
+11. Wykonać skrypt z katalogu PwJournalSystem/ddl/toInstall.sql, który utworzy konto Administratora login ADMIN hasło test, oraz załaduje podstawową konfigurację 
+
+!!UWAGA!!
+12. Jeśli chcesz zmodyfikować / zmienić przed instalacją konfigurację można skorzystać z pliku PwJournalSystem/generatorRegul.ods (plik excel z generatorem konfiguracji), wtedy należy pominąć punkt 10 i 11 i instalować ręcznie pakiety z pliku PwJournalSystem/ddl (pakiety pomocnicze), skrypty z pliku generatorRegul.ods oraz plik admin.sql
